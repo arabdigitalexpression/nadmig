@@ -16,7 +16,7 @@
     <script src="{{ url( elixir('js/admin.js') ) }}" type="text/javascript"></script>
     <script src="{{ url( 'js/admin-custom.js' ) }}" type="text/javascript"></script>
 </head>
-<body class="skin-blue">
+<body class="skin-yellow">
 <div class="wrapper">
     @include('partials.admin.top')
     @include('partials.admin.sidebar')

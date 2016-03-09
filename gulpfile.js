@@ -12,7 +12,7 @@ var elixir = require('laravel-elixir'),
         'mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css',
         'datatables/media/css/dataTables.bootstrap.min.css',
         'morris.js/morris.css',
-        'admin-lte/dist/css/skins/skin-blue.min.css'
+        'admin-lte/dist/css/skins/skin-yellow.min.css'
     ],
     adminJs = [
         'jquery/dist/jquery.min.js',

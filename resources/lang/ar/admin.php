@@ -36,7 +36,7 @@ return [
     "elfinder"                      => "File Manager",
     "empty"                         => "There are not any saved records yet. Why don't you create a new one first?",
     "fields" => [
-        "created_at"                => "Created at",
+        "created_at"                => "أنشئ فى",
         "dashboard" => [
             'average_time'          => "Average time",
             'bounce_rate'           => "Bounce rate",
@@ -72,7 +72,7 @@ return [
             "language_id"           => "Language",
             "title"                 => "Title",
         ],
-        "published_at"              => "Published at",
+        "published_at"              => "نشر فى",
         "read_count"                => "Read Count",
         "reset"                     => "Reset",
         "save"                      => "Save",
@@ -84,17 +84,17 @@ return [
             "logo"                  => "Logo",
             "twitter"               => "Twitter"
         ],
-        "updated_at"                => "Updated at",
+        "updated_at"                => "عَدل فى",
         "uploaded"                  => "Uploaded file",
         "user" => [
-            "email"                 => "Email",
+            "email"                 => "الأيميل",
             "ip_address"            => "IP",
-            "logged_in_at"          => "Login At",
-            "logged_out_at"         => "Logout At",
-            "name"                  => "Name",
-            "password"              => "Password",
-            "password_confirmation" => "Password Confirmation",
-            "picture"               => "Avatar"
+            "logged_in_at"          => "سجل الدخول فى",
+            "logged_out_at"         => "سجل الخروج فى",
+            "name"                  => "الأسم",
+            "password"              => "كلمة المرور",
+            "password_confirmation" => "تأكيد كلموة المرور",
+            "picture"               => "صورة"
         ]
     ],
     "language" => [
@@ -134,14 +134,14 @@ return [
         ]
     ],
     "ops" => [
-        "confirmation"              => "Are you sure?",
-        "create"                    => "Create",
-        "delete"                    => "Delete",
-        "edit"                      => "Edit",
-        "modified"                  => "Modified on",
-        "name"                      => "Ops",
-        "order"                     => "Order",
-        "show"                      => "Show"
+        "confirmation"              => "هل أنت متأكد؟",
+        "create"                    => "إنشئ",
+        "delete"                    => "أزل",
+        "edit"                      => "تعيدل",
+        "modified"                  => "عًدل فى",
+        "name"                      => "أختيارات",
+        "order"                     => "ترتيب",
+        "show"                      => "أظهر"
     ],
     "page" => [
         "create"                    => "Create page",
@@ -155,7 +155,7 @@ return [
         "index"                     => "Settings"
     ],
     "submit"                        => "Submit",
-    "title"                         => "Control Panel",
+    "title"                         => "نـدمـج",
     "update" => [
         "fail"                      => "Update operation on resource has failed.",
         "success"                   => "Resource has been updated succesfully."
