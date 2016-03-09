@@ -1,0 +1,7 @@
+.env
+.phpstorm.meta.php
+composer.lock
+node_modules
+resources/assets/vendor
+vendor
+_ide_helper.php
