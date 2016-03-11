@@ -1,14 +1,10 @@
-<?php
-
-namespace App\Http\Requests\Admin;
+<?php namespace App\Modules\User\Requests\Admin;
 
 use App\Http\Requests\Request;
-use App\User;
 
-class UserRequest extends Request
-{
+class UserRequest extends Request {
 
-    /**
+     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool

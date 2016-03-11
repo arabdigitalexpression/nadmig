@@ -1,28 +1,26 @@
-<?php
-
-namespace App\Forms\Admin;
+<?php namespace App\Modules\User\Forms\Admin;
 
 use App\Base\Forms\AdminForm;
 
-class UsersForm extends AdminForm
+class usersForm extends AdminForm
 {
     public function buildForm()
     {
         $this
             ->add('name', 'text', [
-                'label' => trans('admin.fields.user.name')
+                'label' => trans('User::admin.fields.user.name')
             ])
             ->add('email', 'email', [
-                'label' => trans('admin.fields.user.email')
+                'label' => trans('User::admin.fields.user.email')
             ])
             ->add('password', 'password', [
-                'label' => trans('admin.fields.user.password')
+                'label' => trans('User::admin.fields.user.password')
             ])
             ->add('password_confirmation', 'password', [
-                'label' => trans('admin.fields.user.password_confirmation')
+                'label' => trans('User::admin.fields.user.password_confirmation')
             ])
             ->add('picture', 'file', [
-                'label' => trans('admin.fields.user.picture'),
+                'label' => trans('User::admin.fields.user.picture'),
                 'attr' => ['class' => '']
             ]);
         parent::buildForm();

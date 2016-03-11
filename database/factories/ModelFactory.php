@@ -1,6 +1,6 @@
 <?php
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Modules\User\Models\User::class, function (Faker\Generator $faker) {
     return [
         'email' => $faker->email,
         'name' => $faker->name,

@@ -1,14 +1,12 @@
-<?php
+<?php namespace App\Modules\User\Controllers\Admin;
 
-namespace App\Http\Controllers\Admin;
-
-use App\Base\Controllers\AdminController;
-use App\Http\Controllers\Api\DataTables\UserDataTable;
-use App\Http\Requests\Admin\UserRequest;
-use App\User;
+use App\Modules\User\Models\User;
+use App\Modules\User\Requests\Admin\UserRequest;
+use App\Modules\User\Base\Controllers\ModuleController;
+use App\Modules\User\Controllers\Api\DataTables\UserDataTable;
 use Auth;
 
-class UserController extends AdminController
+class UserController extends ModuleController
 {
     /**
      * Image column of the model

@@ -156,6 +156,7 @@ return [
         Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
         Thedgmbh\Modules\ModuleServiceProvider::class,
+        App\Modules\User\Providers\RouteServiceProvider::class,
         
 
     ],

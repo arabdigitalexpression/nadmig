@@ -2,7 +2,7 @@
 
 namespace App\Base\Controllers;
 
-use App\User;
+// use App\User;
 use FormBuilder;
 use App\Language;
 use Laracasts\Flash\Flash;

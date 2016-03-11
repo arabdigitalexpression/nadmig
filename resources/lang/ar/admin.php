@@ -86,16 +86,6 @@ return [
         ],
         "updated_at"                => "عَدل فى",
         "uploaded"                  => "Uploaded file",
-        "user" => [
-            "email"                 => "الأيميل",
-            "ip_address"            => "IP",
-            "logged_in_at"          => "سجل الدخول فى",
-            "logged_out_at"         => "سجل الخروج فى",
-            "name"                  => "الأسم",
-            "password"              => "كلمة المرور",
-            "password_confirmation" => "تأكيد كلموة المرور",
-            "picture"               => "صورة"
-        ]
     ],
     "language" => [
         "create"                    => "Create language",

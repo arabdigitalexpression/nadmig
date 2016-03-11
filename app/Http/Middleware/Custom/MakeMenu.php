@@ -4,7 +4,7 @@ namespace App\Http\Middleware\Custom;
 
 use Closure;
 use Menu;
-
+use App\Modules\User\Middlewares\Custom\usersMiddleware as User;
 class MakeMenu
 {
     /**
@@ -55,19 +55,7 @@ class MakeMenu
             $pages->add(trans('admin.menu.page.all'), ['route' => 'admin.page.index'])
                 ->icon($this->circle)
                 ->prependIcon();
-
-            $users = $menu->add(trans('admin.menu.user.root'), '#')
-                ->icon('users')
-                ->prependIcon();
-
-            $users->add(trans('admin.menu.user.add'), ['route' => 'admin.user.create'])
-                ->icon($this->circle)
-                ->prependIcon();
-
-            $users->add(trans('admin.menu.user.all'), ['route' => 'admin.user.index'])
-                ->icon($this->circle)
-                ->prependIcon();
-
+            User::AddMenus($menu);
             $settings = $menu->add(trans('admin.menu.setting'), ['route' => 'admin.setting.index'])
                 ->icon('gears')
                 ->prependIcon();

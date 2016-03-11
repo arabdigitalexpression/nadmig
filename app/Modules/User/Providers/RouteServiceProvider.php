@@ -1,14 +1,12 @@
-<?php
+<?php namespace App\Modules\User\Providers;
 
-namespace App\Providers;
-
-use App\Category;
-use App\Page;
 use Illuminate\Routing\Router;
+use App\Modules\User\Models\User;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
 {
+
     /**
      * This namespace is applied to the controller routes in your routes file.
      *
@@ -16,7 +14,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'App\Http\Controllers';
+    protected $namespace = 'App\Modules\User\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -27,13 +25,11 @@ class RouteServiceProvider extends ServiceProvider
     public function boot(Router $router)
     {
         parent::boot($router);
-        $router->model('language', 'App\Language');
-        $router->model('page', 'App\Page');
-        $router->bind('page_slug', function ($slug) {
-            return Page::findBySlugOrFail($slug);
-        });
-        $router->model('setting', 'App\Setting');
 
+        $router->model('user', 'App\Modules\User\Models\User');
+        $router->bind('user_slug', function ($slug) {
+            return User::findBySlugOrFail($slug);
+        });
     }
 
     /**
@@ -45,7 +41,7 @@ class RouteServiceProvider extends ServiceProvider
     public function map(Router $router)
     {
         $router->group(['namespace' => $this->namespace], function ($router) {
-            require app_path('Http/routes.php');
+            require app_path('Modules/User/routes.php');
         });
     }
 }

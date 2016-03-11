@@ -42,5 +42,4 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'admi
     // Resources
     Route::resource('language', 'LanguageController');
     Route::resource('page', 'PageController');
-    Route::resource('user', 'UserController');
 });

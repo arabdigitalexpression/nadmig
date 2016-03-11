@@ -1,13 +1,11 @@
-<?php
+<?php namespace App\Modules\User\Controllers\Api\DataTables;
 
-namespace App\Http\Controllers\Api\DataTables;
+use App\Modules\User\Models\User;
+use App\Modules\User\Base\Controllers\ModuleDataTableController;
 
-use App\Base\Controllers\DataTableController;
-use App\User;
+class UserDataTable extends ModuleDataTableController {
 
-class UserDataTable extends DataTableController
-{
-    /**
+   /**
      * Columns to show
      *
      * @var array
@@ -31,4 +29,5 @@ class UserDataTable extends DataTableController
         $users = User::query();
         return $this->applyScopes($users);
     }
+
 }
