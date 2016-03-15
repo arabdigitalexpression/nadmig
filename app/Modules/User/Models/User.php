@@ -6,13 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Zizaco\Entrust\Traits\EntrustUserTrait;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
-
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
-    use Authenticatable, CanResetPassword;
-
+    use Authenticatable, CanResetPassword, EntrustUserTrait;
     /**
      * The attributes that are mass assignable.
      *
@@ -25,7 +24,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = ['password'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -66,4 +65,5 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $ip ? inet_ntop($ip) : "";
     }
+
 }

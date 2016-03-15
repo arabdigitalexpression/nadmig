@@ -22,8 +22,10 @@ return [
             "name"                  => "الأسم",
             "password"              => "كلمة المرور",
             "password_confirmation" => "تأكيد كلموة المرور",
-            "picture"               => "صورة"
+            "picture"               => "صورة",
+            "role"                  => "Role"
         ]
+         
     ],
     "menu" => [
         "user" => [
@@ -31,5 +33,6 @@ return [
             "all"                   => "كل المستخدمين",
             "root"                  => "حسابات"
         ]
+        
     ]
 ];

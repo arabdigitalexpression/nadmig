@@ -1,14 +1,13 @@
-<?php
+<?php namespace App\Modules\Auth\Controllers\Application;
 
-namespace App\Http\Controllers\Auth;
-
-use App\Http\Controllers\Controller;
+use App\Base\Controllers\ApplicationController;
+use App\Modules\Auth\Models\Auth;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
-class AuthController extends Controller
-{
-    /*
+class AuthController extends ApplicationController {
+
+   /*
     |--------------------------------------------------------------------------
     | Registration & Login Controller
     |--------------------------------------------------------------------------

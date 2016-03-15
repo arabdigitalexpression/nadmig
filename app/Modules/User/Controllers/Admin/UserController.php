@@ -1,4 +1,5 @@
-<?php namespace App\Modules\User\Controllers\Admin;
+<?php 
+namespace App\Modules\User\Controllers\Admin;
 
 use App\Modules\User\Models\User;
 use App\Modules\User\Requests\Admin\UserRequest;
@@ -34,6 +35,7 @@ class UserController extends ModuleController
      */
     public function store(UserRequest $request)
     {
+
         return $this->createFlashRedirect(User::class, $request, $this->imageColumn);
     }
 
@@ -56,6 +58,7 @@ class UserController extends ModuleController
      */
     public function edit(User $user)
     {
+
         return $this->getForm($user);
     }
 
@@ -68,6 +71,8 @@ class UserController extends ModuleController
      */
     public function update(User $user, UserRequest $request)
     {
+        // update user roles
+        $user->roles()->sync($request['role']);
         return $this->saveFlashRedirect($user, $request, $this->imageColumn);
     }
 

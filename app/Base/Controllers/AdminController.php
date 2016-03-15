@@ -109,8 +109,12 @@ abstract class AdminController extends Controller
      */
     public function createFlashRedirect($class, $request, $imageColumn = false, $path = "index")
     {
+
         $model = $class::create($this->getData($request, $imageColumn));
         $model->id ? Flash::success(trans('admin.create.success')) : Flash::error(trans('admin.create.fail'));
+        if(class_basename($model) == "User"){
+            $model->roles()->sync($request['role']); 
+        }
         return $this->redirectRoutePath($path);
     }
 
@@ -125,6 +129,7 @@ abstract class AdminController extends Controller
      */
     public function saveFlashRedirect($model, $request, $imageColumn = false, $path = "index")
     {
+
         $model->fill($this->getData($request, $imageColumn));
         $model->save() ? Flash::success(trans('admin.update.success')) : Flash::error(trans('admin.update.fail'));
         return $this->redirectRoutePath($path);
@@ -207,7 +212,7 @@ abstract class AdminController extends Controller
      * @return \BladeView|bool|\Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
      */
     public function viewPath($path = "index", $object = false)
-    {
+    {   
         $path = 'admin.' . str_plural(snake_case($this->model))  . '.' . $path;
         if ($object !== false) {
             return view($path, compact('object'));

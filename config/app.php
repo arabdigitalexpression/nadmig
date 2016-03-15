@@ -156,8 +156,15 @@ return [
         Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
         Thedgmbh\Modules\ModuleServiceProvider::class,
+        Zizaco\Entrust\EntrustServiceProvider::class,
+
+
+        /*
+         * Modules
+         */
         App\Modules\User\Providers\RouteServiceProvider::class,
-        
+        App\Modules\Auth\Providers\RouteServiceProvider::class,
+        App\Modules\Role\Providers\RouteServiceProvider::class,
 
     ],
 
@@ -218,6 +225,7 @@ return [
         'LaravelAnalytics'  => Spatie\LaravelAnalytics\LaravelAnalyticsFacade::class,
         'Purifier'          => Mews\Purifier\Facades\Purifier::class,
         'Datatables'        => Yajra\Datatables\Datatables::class,
+        'Entrust'           => Zizaco\Entrust\EntrustFacade::class,
     ],
 
 ];
