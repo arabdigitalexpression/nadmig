@@ -87,7 +87,7 @@ class UserController extends ModuleController
         if ($user->id != Auth::user()->id) {
             return $this->destroyFlashRedirect($user);
         } else {
-            return $this->redirectRoutePath("index", "admin.delete.self");
+            return $this->redirectRoutePath("index", "dashboard.delete.self");
         }
     }
 }

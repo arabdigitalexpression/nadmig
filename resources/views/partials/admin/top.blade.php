@@ -1,5 +1,5 @@
 <header class="main-header">
-    <a href="{{ route('admin.root') }}" class="logo"> {{ trans('admin.title')  }}</a>
+    <a href="{{ route('dashboard.root') }}" class="logo"> {{ trans('dashboard.title')  }}</a>
     <nav class="navbar navbar-static-top" role="navigation">
         <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle</span>
@@ -15,7 +15,7 @@
                         <li class="user-header">
                             <img class="img-circle" src="{{ !empty($user->picture) ? $user->picture : 'https://ssl.gstatic.com/accounts/ui/avatar_2x.png' }}" alt="{{ Auth::user()->name  }}" />
                             <p>{{ Auth::user()->name  }}</p>
-                            @include('partials.common.languages', ['languages' => Config::get('languages'), 'route' => 'admin.language.change' ])
+                            @include('partials.common.languages', ['languages' => Config::get('languages'), 'route' => 'dashboard.language.change' ])
                         </li>
                         <li class="user-footer">
                             <div class="pull-left">

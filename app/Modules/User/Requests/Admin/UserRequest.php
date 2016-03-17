@@ -20,7 +20,7 @@ class UserRequest extends Request {
      * @return array
      */
     public function rules()
-    {
+    {   
         return [
             'email'     => 'required|email|min:6|unique:users,email,'.$this->segment(3),
             'name'      => 'required|min:3',

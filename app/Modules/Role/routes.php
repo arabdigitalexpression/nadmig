@@ -10,6 +10,6 @@ Route::group(['prefix' => 'api', 'module' => 'Role', 'namespace' => 'Api', 'midd
 });
 
 // Admin routes
-Route::group(['prefix' => 'admin', 'module' => 'Role', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
+Route::group(['prefix' => 'dashboard', 'module' => 'Role', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
 	Route::resource('role', 'RoleController');
 });

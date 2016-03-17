@@ -74,7 +74,7 @@ class DashboardController extends AdminController
             'regions' => $this->getRegions(),
             'averages' => $this->getAverages()
         ];
-        return view('admin.dashboard.index', compact('statistics'));
+        return view('dashboard.dashboard.index', compact('statistics'));
     }
 
     /**

@@ -10,22 +10,22 @@ class SettingsForm extends AdminForm
     {
         $this
             ->add('email', 'text', [
-                'label' => trans('admin.fields.setting.email')
+                'label' => trans('dashboard.fields.setting.email')
             ])
             ->add('facebook', 'text', [
-                'label' => trans('admin.fields.setting.facebook')
+                'label' => trans('dashboard.fields.setting.facebook')
             ])
             ->add('twitter', 'text', [
-                'label' => trans('admin.fields.setting.twitter')
+                'label' => trans('dashboard.fields.setting.twitter')
             ])
             ->add('analytics_id', 'text', [
-                'label' => trans('admin.fields.setting.analytics_id')
+                'label' => trans('dashboard.fields.setting.analytics_id')
             ])
             ->add('disqus_shortname', 'text', [
-                'label' => trans('admin.fields.setting.disqus_shortname')
+                'label' => trans('dashboard.fields.setting.disqus_shortname')
             ])
             ->add('logo', 'file', [
-                'label' => trans('admin.fields.setting.logo'),
+                'label' => trans('dashboard.fields.setting.logo'),
                 'attr' => ['class' => '']
             ]);
         parent::buildForm();

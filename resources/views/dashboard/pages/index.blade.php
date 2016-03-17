@@ -15,7 +15,7 @@
                     callback: function(){
                         $.ajax({
                             type: 'POST',
-                            url: '{{ route('admin.page.order') }}',
+                            url: '{{ route('dashboard.page.order') }}',
                             data: JSON.stringify($('.dd').nestable('asNestedSet')),
                             contentType: "json",
                             headers: {
@@ -31,6 +31,6 @@
             });
         </script>
     @else
-        {{ trans('admin.empty') }}
+        {{ trans('dashboard.empty') }}
     @endif
 @endsection

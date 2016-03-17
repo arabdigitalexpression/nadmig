@@ -8,13 +8,13 @@ class PermissionsForm extends AdminForm
     {
         $this
             ->add('name', 'text', [
-                'label' => trans('Permission::admin.fields.permission.name'),
+                'label' => trans('Permission::dashboard.fields.permission.name'),
             ])
             ->add('display_name', 'text', [
-                'label' => trans('Permission::admin.fields.permission.display_name')
+                'label' => trans('Permission::dashboard.fields.permission.display_name')
             ])
              ->add('description', 'textarea', [
-                'label' => trans('Permission::admin.fields.permission.description')
+                'label' => trans('Permission::dashboard.fields.permission.description')
             ]);
         parent::buildForm();
     }

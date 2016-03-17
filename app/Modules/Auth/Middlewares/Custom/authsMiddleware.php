@@ -12,15 +12,15 @@ class authsMiddleware extends AdminMiddlewareInterface
 		}
 
 		private static function moduleMenu($menu){
-			$module = $menu->add(trans('Auth::admin.menu.auth.root'), '#')
+			$module = $menu->add(trans('Auth::dashboard.menu.auth.root'), '#')
 		        ->icon('apple')
 		        ->prependIcon();
 
-		  $module->add(trans('Auth::admin.menu.auth.add'), ['route' => 'admin.auth.create'])
+		  $module->add(trans('Auth::dashboard.menu.auth.add'), ['route' => 'dashboard.auth.create'])
 		      ->icon("circle-o")
 		      ->prependIcon();
 
-		  $module->add(trans('Auth::admin.menu.auth.all'), ['route' => 'admin.auth.index'])
+		  $module->add(trans('Auth::dashboard.menu.auth.all'), ['route' => 'dashboard.auth.index'])
 		      ->icon("circle-o")
 		      ->prependIcon();
 		}

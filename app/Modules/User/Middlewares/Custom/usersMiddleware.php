@@ -12,15 +12,15 @@ class usersMiddleware extends MakeMenu
 	}
 
 	private static function moduleMenu($menu){
-		$module = $menu->add(trans('User::admin.menu.user.root'), '#')
+		$module = $menu->add(trans('User::dashboard.menu.user.root'), '#')
 	        ->icon('users')
 	        ->prependIcon();
 
-	  $module->add(trans('User::admin.menu.user.add'), ['route' => 'admin.user.create'])
+	  $module->add(trans('User::dashboard.menu.user.add'), ['route' => 'dashboard.user.create'])
 	      ->icon("plus")
 	      ->prependIcon();
 
-	  $module->add(trans('User::admin.menu.user.all'), ['route' => 'admin.user.index'])
+	  $module->add(trans('User::dashboard.menu.user.all'), ['route' => 'dashboard.user.index'])
 	      ->icon("list")
 	      ->prependIcon();
 	}

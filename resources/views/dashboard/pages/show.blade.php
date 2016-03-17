@@ -9,5 +9,5 @@
     <p>
         {!! $object->content !!}
     </p>
-    <h2> {{ trans('admin.fields.article.description') . ': ' . $object->description  }}</h2>
+    <h2> {{ trans('dashboard.fields.article.description') . ': ' . $object->description  }}</h2>
 @endsection

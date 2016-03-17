@@ -10,7 +10,7 @@ return [
     "permission" => [
         "create"                    => "Create permission",
         "edit"                      => "Edit permission",
-        "index"                     => "permission",
+        "index"                     => "الصلاحيات",
         "show"                      => "Show permission"
     ],
     "fields" => [

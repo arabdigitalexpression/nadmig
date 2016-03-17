@@ -12,15 +12,15 @@ class RoleMiddleware extends MakeMenu
 		}
 
 		private static function moduleMenu($menu){
-			$module = $menu->add(trans('Role::admin.menu.role.root'), '#')
+			$module = $menu->add(trans('Role::dashboard.menu.role.root'), '#')
 		        ->icon('apple')
 		        ->prependIcon();
 
-		  $module->add(trans('Role::admin.menu.role.add'), ['route' => 'admin.role.create'])
+		  $module->add(trans('Role::dashboard.menu.role.add'), ['route' => 'dashboard.role.create'])
 		      ->icon("circle-o")
 		      ->prependIcon();
 
-		  $module->add(trans('Role::admin.menu.role.all'), ['route' => 'admin.role.index'])
+		  $module->add(trans('Role::dashboard.menu.role.all'), ['route' => 'dashboard.role.index'])
 		      ->icon("circle-o")
 		      ->prependIcon();
 		}

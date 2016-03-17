@@ -7,6 +7,6 @@
         <a href="mailto:{{ $object->email }}">
             <h2> {{ $object->email  }}</h2>
         </a>
-        <h2> {{ trans('admin.fields.user.ip_address') . ': ' . $object->ip_address  }}</h2>
+        <h2> {{ trans('dashboard.fields.user.ip_address') . ': ' . $object->ip_address  }}</h2>
     </div>
 @endsection

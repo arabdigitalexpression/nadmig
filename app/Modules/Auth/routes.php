@@ -24,6 +24,6 @@ Route::group(['prefix' => 'api', 'module' => 'Auth', 'namespace' => 'Api', 'midd
 });
 
 // Admin routes
-Route::group(['prefix' => 'admin', 'module' => 'Auth', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
+Route::group(['prefix' => 'dashboard', 'module' => 'Auth', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
 	Route::resource('auth', 'AuthController');
 });

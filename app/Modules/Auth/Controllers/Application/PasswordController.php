@@ -23,7 +23,7 @@ class PasswordController extends Controller
     /**
      * @var string
      */
-    protected $redirectTo = '/admin';
+    protected $redirectTo = '/dashboard';
 
     /**
      * Create a new password controller instance.

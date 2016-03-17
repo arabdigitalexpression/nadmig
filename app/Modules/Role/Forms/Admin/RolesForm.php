@@ -10,18 +10,18 @@ class RolesForm extends AdminForm
     {
        $this
             ->add('name', 'text', [
-                'label' => trans('Role::admin.fields.role.name'),
+                'label' => trans('Role::dashboard.fields.role.name'),
             ])
             ->add('display_name', 'text', [
-                'label' => trans('Role::admin.fields.role.display_name')
+                'label' => trans('Role::dashboard.fields.role.display_name')
             ])
              ->add('description', 'textarea', [
-                'label' => trans('Role::admin.fields.role.description')
+                'label' => trans('Role::dashboard.fields.role.description')
             ])
             ->add('permission', 'choice', [
                 'choices' => $this->getPermissions(),
                 'selected' => $this->getRolePermission($this->model),
-                'label' => trans('Role::admin.fields.role.permission'),
+                'label' => trans('Role::dashboard.fields.role.permission'),
                 'expanded' => true,
                 'multiple' => true
             ]);

@@ -15,15 +15,15 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => 'api'], f
 });
 
 // Admin routes
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
+Route::group(['prefix' => 'dashboard', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
     // GET
-    Route::get('/', ['as' => 'admin.root', 'uses' => 'DashboardController@getIndex']);
-    Route::get('setting', ['as' => 'admin.setting.index', 'uses' => 'SettingController@getSettings']);
+    Route::get('/', ['as' => 'dashboard.root', 'uses' => 'DashboardController@getIndex']);
+    Route::get('setting', ['as' => 'dashboard.setting.index', 'uses' => 'SettingController@getSettings']);
     // POST
-    Route::post('language/change', ['as' => 'admin.language.change' , 'uses' => 'LanguageController@postChange']);
-    Route::post('page/order', ['as' => 'admin.page.order' , 'uses' => 'PageController@postOrder']);
+    Route::post('language/change', ['as' => 'dashboard.language.change' , 'uses' => 'LanguageController@postChange']);
+    Route::post('page/order', ['as' => 'dashboard.page.order' , 'uses' => 'PageController@postOrder']);
     // PATCH
-    Route::patch('setting/{setting}', ['as' => 'admin.setting.update', 'uses' => 'SettingController@patchSettings']);
+    Route::patch('setting/{setting}', ['as' => 'dashboard.setting.update', 'uses' => 'SettingController@patchSettings']);
     // Resources
     Route::resource('language', 'LanguageController');
     Route::resource('page', 'PageController');

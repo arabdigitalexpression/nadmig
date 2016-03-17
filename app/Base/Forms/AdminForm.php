@@ -15,11 +15,11 @@ abstract class AdminForm extends Form
     {
         $this
             ->add('save', 'submit', [
-                'label' => trans('admin.fields.save'),
+                'label' => trans('dashboard.fields.save'),
                 'attr' => ['class' => 'btn btn-primary']
             ])
             ->add('clear', 'reset', [
-                'label' => trans('admin.fields.reset'),
+                'label' => trans('dashboard.fields.reset'),
                 'attr' => ['class' => 'btn btn-warning']
             ]);
     }

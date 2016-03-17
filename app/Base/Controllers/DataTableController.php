@@ -135,15 +135,15 @@ abstract class DataTableController extends DataTable
         $columns = [];
         $base_columns = array_merge($this->image_columns, $this->columns);
         foreach (array_merge($base_columns, array_keys($this->pluck_columns)) as $column) {
-            $title = trans('admin.fields.' . $model . '.' . $column);
+            $title = trans('dashboard.fields.' . $model . '.' . $column);
             array_push($columns, ['data' => $column, 'name' => $column, 'title' => $title]);
         }
         foreach ($this->common_columns as $column) {
-            $title = trans('admin.fields.' . $column);
+            $title = trans('dashboard.fields.' . $column);
             array_push($columns, ['data' => $column, 'name' => $column, 'title' => $title]);
         }
         if ($this->ops === true) {
-            $title = trans('admin.ops.name');
+            $title = trans('dashboard.ops.name');
             array_push($columns, [
                 'data' => 'ops', 'name' => 'ops', 'title' => $title,
                 'orderable' => false, 'searchable' => false
@@ -159,6 +159,6 @@ abstract class DataTableController extends DataTable
      */
     protected function getParameters()
     {
-        return array_merge($this->parameters, ['oLanguage' => trans('admin.datatables')]);
+        return array_merge($this->parameters, ['oLanguage' => trans('dashboard.datatables')]);
     }
 }

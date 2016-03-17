@@ -111,7 +111,7 @@ abstract class AdminController extends Controller
     {
 
         $model = $class::create($this->getData($request, $imageColumn));
-        $model->id ? Flash::success(trans('admin.create.success')) : Flash::error(trans('admin.create.fail'));
+        $model->id ? Flash::success(trans('dashboard.create.success')) : Flash::error(trans('dashboard.create.fail'));
         if(class_basename($model) == "User"){
             $model->roles()->sync($request['role']); 
         }else if(class_basename($model) == "Role"){
@@ -131,9 +131,8 @@ abstract class AdminController extends Controller
      */
     public function saveFlashRedirect($model, $request, $imageColumn = false, $path = "index")
     {
-
         $model->fill($this->getData($request, $imageColumn));
-        $model->save() ? Flash::success(trans('admin.update.success')) : Flash::error(trans('admin.update.fail'));
+        $model->save() ? Flash::success(trans('dashboard.update.success')) : Flash::error(trans('dashboard.update.fail'));
         return $this->redirectRoutePath($path);
     }
 
@@ -159,8 +158,8 @@ abstract class AdminController extends Controller
     public function destroyFlashRedirect($model, $path = "index")
     {
         $model->delete() ?
-            Flash::success(trans('admin.delete.success')) :
-            Flash::error(trans('admin.delete.fail'));
+            Flash::success(trans('dashboard.delete.success')) :
+            Flash::error(trans('dashboard.delete.fail'));
         return $this->redirectRoutePath($path);
     }
 
@@ -203,7 +202,7 @@ abstract class AdminController extends Controller
      */
     public function routePath($path = "index")
     {
-        return 'admin.' . snake_case($this->model) . '.' . $path;
+        return 'dashboard.' . snake_case($this->model) . '.' . $path;
     }
 
     /**
@@ -215,7 +214,7 @@ abstract class AdminController extends Controller
      */
     public function viewPath($path = "index", $object = false)
     {   
-        $path = 'admin.' . str_plural(snake_case($this->model))  . '.' . $path;
+        $path = 'dashboard.' . str_plural(snake_case($this->model))  . '.' . $path;
         if ($object !== false) {
             return view($path, compact('object'));
         } else {
@@ -232,7 +231,7 @@ abstract class AdminController extends Controller
      */
     public function viewPathWithArrayObject($path = "index", $object = [])
     {
-        $path = 'admin.' . str_plural(snake_case($this->model))  . '.' . $path;
+        $path = 'dashboard.' . str_plural(snake_case($this->model))  . '.' . $path;
         if ($object !== false) {
             return view($path, compact('object'));
         } else {
@@ -249,7 +248,7 @@ abstract class AdminController extends Controller
 
 
         $page->fill($request->all());
-        $page->save() ? Flash::success(trans('admin.update.success')) : Flash::error(trans('admin.update.fail'));
+        $page->save() ? Flash::success(trans('dashboard.update.success')) : Flash::error(trans('dashboard.update.fail'));
         $page->frontMenu()->save($menu);
     }
 

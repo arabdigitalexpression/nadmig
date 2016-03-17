@@ -14,6 +14,6 @@ Route::group(['prefix' => 'api', 'module' => 'User', 'namespace' => 'Api', 'midd
 });
 
 // Admin routes
-Route::group(['prefix' => 'admin', 'module' => 'User', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
+Route::group(['prefix' => 'dashboard', 'module' => 'User', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
 	Route::resource('user', 'UserController');
 });

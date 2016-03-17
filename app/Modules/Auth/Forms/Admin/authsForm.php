@@ -9,13 +9,13 @@ class authsForm extends AdminForm
         $this
 		        ->add('language_id', 'choice', [
 		            'choices' => $this->data,
-		            'label' => trans('Auth::admin.fields.auth.language_id')
+		            'label' => trans('Auth::dashboard.fields.auth.language_id')
 		        ])
 		        ->add('title', 'text', [
-		            'label' => trans('Auth::admin.fields.auth.title')
+		            'label' => trans('Auth::dashboard.fields.auth.title')
 		        ])
             ->add('content', 'textarea', [
-                'label' => trans('Auth::admin.fields.auth.content')
+                'label' => trans('Auth::dashboard.fields.auth.content')
             ]);
         parent::buildForm();
     }

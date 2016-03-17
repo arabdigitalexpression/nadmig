@@ -30,37 +30,37 @@ class MakeMenu
     private function makeAdminMenu()
     {
         Menu::make('admin', function ($menu) {
-            $dashboard = $menu->add(trans('admin.menu.dashboard'), ['route' => 'admin.root'])
+            $dashboard = $menu->add(trans('dashboard.menu.dashboard'), ['route' => 'dashboard.root'])
                 ->icon('dashboard')
                 ->prependIcon();
 
-            $language  = $menu->add(trans('admin.menu.language.root'), '#')
+            $language  = $menu->add(trans('dashboard.menu.language.root'), '#')
                 ->icon('flag')
                 ->prependIcon();
 
-            $language->add(trans('admin.menu.language.add'), ['route' => 'admin.language.create'])
+            $language->add(trans('dashboard.menu.language.add'), ['route' => 'dashboard.language.create'])
                 ->icon($this->circle)
                 ->prependIcon();
 
-            $language->add(trans('admin.menu.language.all'), ['route' => 'admin.language.index'])
+            $language->add(trans('dashboard.menu.language.all'), ['route' => 'dashboard.language.index'])
                 ->icon($this->circle)
                 ->prependIcon();
 
-            $pages = $menu->add(trans('admin.menu.page.root'), '#')
+            $pages = $menu->add(trans('dashboard.menu.page.root'), '#')
                 ->icon('folder')
                 ->prependIcon();
 
-            $pages->add(trans('admin.menu.page.add'), ['route' => 'admin.page.create'])
+            $pages->add(trans('dashboard.menu.page.add'), ['route' => 'dashboard.page.create'])
                 ->icon($this->circle)
                 ->prependIcon();
 
-            $pages->add(trans('admin.menu.page.all'), ['route' => 'admin.page.index'])
+            $pages->add(trans('dashboard.menu.page.all'), ['route' => 'dashboard.page.index'])
                 ->icon($this->circle)
                 ->prependIcon();
             User::AddMenus($menu);
             Role::AddMenus($menu);
             Permission::AddMenus($menu);
-            $settings = $menu->add(trans('admin.menu.setting'), ['route' => 'admin.setting.index'])
+            $settings = $menu->add(trans('dashboard.menu.setting'), ['route' => 'dashboard.setting.index'])
                 ->icon('gears')
                 ->prependIcon();
         });

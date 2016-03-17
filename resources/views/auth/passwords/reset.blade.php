@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('title')
-    {{ trans('auth.password.title') }} | {{ trans('admin.title') }}
+    {{ trans('auth.password.title') }} | {{ trans('dashboard.title') }}
 @stop
 
 @section('content')

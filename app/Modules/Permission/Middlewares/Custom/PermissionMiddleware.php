@@ -12,15 +12,15 @@ class PermissionMiddleware extends MakeMenu
 		}
 
 		private static function moduleMenu($menu){
-			$module = $menu->add(trans('Permission::admin.menu.permission.root'), '#')
+			$module = $menu->add(trans('Permission::dashboard.menu.permission.root'), '#')
 		        ->icon('apple')
 		        ->prependIcon();
 
-		  $module->add(trans('Permission::admin.menu.permission.add'), ['route' => 'admin.permission.create'])
+		  $module->add(trans('Permission::dashboard.menu.permission.add'), ['route' => 'dashboard.permission.create'])
 		      ->icon("circle-o")
 		      ->prependIcon();
 
-		  $module->add(trans('Permission::admin.menu.permission.all'), ['route' => 'admin.permission.index'])
+		  $module->add(trans('Permission::dashboard.menu.permission.all'), ['route' => 'dashboard.permission.index'])
 		      ->icon("circle-o")
 		      ->prependIcon();
 		}

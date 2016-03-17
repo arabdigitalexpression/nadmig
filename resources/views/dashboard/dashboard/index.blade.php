@@ -4,13 +4,13 @@
     <section class="content">
         <div class="row">
             {!! dashboard_box("bg-aqua", "user-plus",
-                trans('admin.fields.dashboard.total_visits'), $statistics['total_visits']) !!}
+                trans('dashboard.fields.dashboard.total_visits'), $statistics['total_visits']) !!}
             {!! dashboard_box("bg-green", "user-times",
-                trans('admin.fields.dashboard.bounce_rate'), $statistics['averages']['bounce'] . "%") !!}
+                trans('dashboard.fields.dashboard.bounce_rate'), $statistics['averages']['bounce'] . "%") !!}
             {!! dashboard_box("bg-yellow", "clock-o",
-                trans('admin.fields.dashboard.average_time'), formatMilliseconds($statistics['averages']['time'])) !!}
+                trans('dashboard.fields.dashboard.average_time'), formatMilliseconds($statistics['averages']['time'])) !!}
             {!! dashboard_box("bg-red", "exchange",
-                trans('admin.fields.dashboard.page_visits'),  $statistics['averages']['visit']) !!}
+                trans('dashboard.fields.dashboard.page_visits'),  $statistics['averages']['visit']) !!}
         </div>
         <div class="row">
             <div class="col-md-8">
@@ -18,42 +18,42 @@
                     <ul class="nav nav-tabs">
                         <li class="active">
                             <a href="#pages" data-toggle="tab">
-                                <i class="fa fa-file"></i> {{ trans('admin.fields.dashboard.pages') }}
+                                <i class="fa fa-file"></i> {{ trans('dashboard.fields.dashboard.pages') }}
                             </a>
                         </li>
                         <li>
                             <a href="#keywords" data-toggle="tab">
-                                <i class="fa fa-key"></i> {{ trans('admin.fields.dashboard.keywords') }}
+                                <i class="fa fa-key"></i> {{ trans('dashboard.fields.dashboard.keywords') }}
                             </a>
                         </li>
                         <li>
                             <a href="#entrance-pages" data-toggle="tab">
-                                <i class="fa fa-building-o"></i> {{  trans('admin.fields.dashboard.entrance_pages') }}
+                                <i class="fa fa-building-o"></i> {{  trans('dashboard.fields.dashboard.entrance_pages') }}
                             </a>
                         </li>
                         <li>
                             <a href="#exit-pages" data-toggle="tab">
-                                <i class="fa fa-power-off"></i> {{ trans('admin.fields.dashboard.exit_pages') }}
+                                <i class="fa fa-power-off"></i> {{ trans('dashboard.fields.dashboard.exit_pages') }}
                             </a>
                         </li>
                         <li>
                             <a href="#time-pages" data-toggle="tab">
-                                <i class="fa fa-clock-o"></i> {{ trans('admin.fields.dashboard.time_pages') }}
+                                <i class="fa fa-clock-o"></i> {{ trans('dashboard.fields.dashboard.time_pages') }}
                             </a>
                         </li>
                         <li>
                             <a href="#traffic-sources" data-toggle="tab">
-                                <i class="fa fa-lightbulb-o"></i> {{ trans('admin.fields.dashboard.traffic_sources') }}
+                                <i class="fa fa-lightbulb-o"></i> {{ trans('dashboard.fields.dashboard.traffic_sources') }}
                             </a>
                         </li>
                         <li>
                             <a href="#browsers" data-toggle="tab">
-                                <i class="fa fa-android"></i> {{ trans('admin.fields.dashboard.browsers') }}
+                                <i class="fa fa-android"></i> {{ trans('dashboard.fields.dashboard.browsers') }}
                             </a>
                         </li>
                         <li>
                             <a href="#os" data-toggle="tab">
-                                <i class="fa fa-linux"></i> {{ trans('admin.fields.dashboard.os') }}
+                                <i class="fa fa-linux"></i> {{ trans('dashboard.fields.dashboard.os') }}
                             </a>
                         </li>
                     </ul>
@@ -137,7 +137,7 @@
                 <div class="box box-solid bg-dark-blue-gradient">
                     <div class="box-header">
                         <i class="fa fa-th"></i>
-                        <h3 class="box-title">{{ trans('admin.fields.dashboard.visits') }}</h3>
+                        <h3 class="box-title">{{ trans('dashboard.fields.dashboard.visits') }}</h3>
                     </div>
                     <div class="box-body border-radius-none">
                         <div class="chart right-charts" id="visitor-chart"></div>
@@ -146,7 +146,7 @@
                 <div class="box box-solid bg-blue-special">
                     <div class="box-header">
                         <i class="fa fa-location-arrow"></i>
-                        <h3 class="box-title">{{ trans('admin.fields.dashboard.region_visitors') }}</h3>
+                        <h3 class="box-title">{{ trans('dashboard.fields.dashboard.region_visitors') }}</h3>
                     </div>
                     <div class="box-body">
                         <div id="region-map"></div>
@@ -160,7 +160,7 @@
                 <div class="box bg-gray-white">
                     <div class="box-header">
                         <i class="fa fa-globe"></i>
-                        <h3 class="box-title">{{ trans('admin.fields.dashboard.world_visitors') }}</h3>
+                        <h3 class="box-title">{{ trans('dashboard.fields.dashboard.world_visitors') }}</h3>
                     </div>
                     <div class="box-body">
                         <div id="world-map"></div>
@@ -182,7 +182,7 @@
                 data: {!! $statistics['visits'] !!},
                 xkey: 'date',
                 ykeys: ['visits'],
-                labels: ['{{ trans('admin.fields.dashboard.visits') }}'],
+                labels: ['{{ trans('dashboard.fields.dashboard.visits') }}'],
                 lineColors: ['#3B525E'],
                 gridTextColor: ['#ebf4f9'],
                 hideHover: 'auto',
@@ -197,8 +197,8 @@
 
         function drawRegionsMap() {
             var data = new google.visualization.DataTable();
-            data.addColumn('string', '{{ trans('admin.fields.dashboard.chart_country') }}');
-            data.addColumn('number', '{{ trans('admin.fields.dashboard.chart_visitors') }}');
+            data.addColumn('string', '{{ trans('dashboard.fields.dashboard.chart_country') }}');
+            data.addColumn('number', '{{ trans('dashboard.fields.dashboard.chart_visitors') }}');
             data.addRows({!! $statistics['countries'] !!});
             var options = {
                 colors:['#c8e0ed','#24536e'],
@@ -212,8 +212,8 @@
 
         function drawLocalRegionsMap(){
             var data = new google.visualization.DataTable();
-            data.addColumn('string', '{{ trans('admin.fields.dashboard.chart_region') }}');
-            data.addColumn('number', '{{ trans('admin.fields.dashboard.chart_visitors') }}');
+            data.addColumn('string', '{{ trans('dashboard.fields.dashboard.chart_region') }}');
+            data.addColumn('number', '{{ trans('dashboard.fields.dashboard.chart_visitors') }}');
             data.addRows({!! $statistics['regions'] !!});
             var options = {
                 colorAxis: {colors: ['#92c1dc', '#2d688a']},

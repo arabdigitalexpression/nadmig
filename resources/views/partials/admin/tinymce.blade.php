@@ -18,7 +18,7 @@
 
     function elFinderBrowser(callback, value, meta) {
         tinymce.activeEditor.windowManager.open({
-            title: '{{  trans('admin.elfinder') }}',
+            title: '{{  trans('dashboard.elfinder') }}',
             url: '{{ route('elfinder.tinymce4') }}',
             width: 900,
             height: 450,

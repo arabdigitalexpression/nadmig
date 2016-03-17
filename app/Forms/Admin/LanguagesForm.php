@@ -10,19 +10,19 @@ class LanguagesForm extends AdminForm
     {
         $this
             ->add('title', 'text', [
-                'label' => trans('admin.fields.language.title')
+                'label' => trans('dashboard.fields.language.title')
             ])
             ->add('code', 'text', [
-                'label' => trans('admin.fields.language.code')
+                'label' => trans('dashboard.fields.language.code')
             ])
             ->add('site_title', 'text', [
-                'label' => trans('admin.fields.language.site_title')
+                'label' => trans('dashboard.fields.language.site_title')
             ])
             ->add('site_description', 'text', [
-                'label' => trans('admin.fields.language.site_description')
+                'label' => trans('dashboard.fields.language.site_description')
             ])
             ->add('flag', 'file', [
-                'label' => trans('admin.fields.language.flag'),
+                'label' => trans('dashboard.fields.language.flag'),
                 'attr' => ['class' => '']
             ]);
         parent::buildForm();

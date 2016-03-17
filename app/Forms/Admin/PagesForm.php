@@ -11,16 +11,16 @@ class PagesForm extends AdminForm
         $this
             ->add('language_id', 'choice', [
                 'choices' => $this->data,
-                'label' => trans('admin.fields.page.language_id')
+                'label' => trans('dashboard.fields.page.language_id')
             ])
             ->add('title', 'text', [
-                'label' => trans('admin.fields.page.title')
+                'label' => trans('dashboard.fields.page.title')
             ])
             ->add('content', 'textarea', [
-                'label' => trans('admin.fields.page.content')
+                'label' => trans('dashboard.fields.page.content')
             ])
             ->add('description', 'text', [
-                'label' => trans('admin.fields.page.description')
+                'label' => trans('dashboard.fields.page.description')
             ]);
         parent::buildForm();
     }

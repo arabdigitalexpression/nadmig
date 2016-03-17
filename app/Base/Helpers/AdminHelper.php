@@ -20,24 +20,24 @@ if (!function_exists('get_ops')) {
             $edit_class = "inline-edit";
             $delete_class = "inline-delete";
         }
-        $show_path = route('admin.'.$resource.'.show', ['id' => $id]);
-        $edit_path = route('admin.'.$resource.'.edit', ['id' => $id]);
-        $delete_path = route('admin.'.$resource.'.destroy', ['id' => $id]);
+        $show_path = route('dashboard.'.$resource.'.show', ['id' => $id]);
+        $edit_path = route('dashboard.'.$resource.'.edit', ['id' => $id]);
+        $delete_path = route('dashboard.'.$resource.'.destroy', ['id' => $id]);
         $ops  = '<ul class="list-inline no-margin-bottom">';
         // $ops .=  '<li>';
         // $ops .=  '<a class="'.$show_class.'" href="'.$show_path.'">
         //           <i class="fa fa-search"></i>
-        //           '.trans('admin.ops.show').'</a>';
+        //           '.trans('dashboard.ops.show').'</a>';
         // $ops .=  '</li>';
         $ops .=  '<li>';
         $ops .=  '<a class="'.$edit_class.'" href="'.$edit_path.'">
                  <i class="fa fa-pencil-square-o"></i>
-                  '.trans('admin.ops.edit').'</a>';
+                  '.trans('dashboard.ops.edit').'</a>';
         $ops .=  '</li>';
         $ops .=  '<li>';
         $ops .= Form::open(['method' => 'DELETE', 'url' => $delete_path]);
-        $ops .= Form::submit('&#xf1f8; ' .trans('admin.ops.delete'), [
-                'onclick' => "return confirm('".trans('admin.ops.confirmation')."');",
+        $ops .= Form::submit('&#xf1f8; ' .trans('dashboard.ops.delete'), [
+                'onclick' => "return confirm('".trans('dashboard.ops.confirmation')."');",
                 'class' => $delete_class
             ]);
         $ops .= Form::close();
@@ -61,9 +61,9 @@ if (!function_exists('breadcrumbs')) {
         // get after last dot
         $index = substr($route, 0, strrpos($route, '.') + 1) . 'index';
         $breadcrumbs  = '<ol class="breadcrumb">';
-        $breadcrumbs .= '<li><a href="'.route('admin.root').'">
+        $breadcrumbs .= '<li><a href="'.route('dashboard.root').'">
                         <i class="fa fa-dashboard"></i>
-                        '.trans('admin.menu.dashboard').'</a></li>';
+                        '.trans('dashboard.menu.dashboard').'</a></li>';
         // if not admin root
         if (strpos($route, 'root')  === false) {
             $parent_text   = strpos($route, 'index')  !== false ? trans( isModule().$route) : trans( isModule().$index);

@@ -14,6 +14,6 @@ Route::group(['prefix' => 'api', 'module' => 'Permission', 'namespace' => 'Api',
 });
 
 // Admin routes
-Route::group(['prefix' => 'admin', 'module' => 'Permission', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
+Route::group(['prefix' => 'dashboard', 'module' => 'Permission', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
 	Route::resource('permission', 'PermissionController');
 });
