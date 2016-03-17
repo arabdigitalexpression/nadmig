@@ -114,6 +114,8 @@ abstract class AdminController extends Controller
         $model->id ? Flash::success(trans('admin.create.success')) : Flash::error(trans('admin.create.fail'));
         if(class_basename($model) == "User"){
             $model->roles()->sync($request['role']); 
+        }else if(class_basename($model) == "Role"){
+            $model->perms()->sync($request['permission']);
         }
         return $this->redirectRoutePath($path);
     }

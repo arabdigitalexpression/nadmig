@@ -6,7 +6,7 @@ use Closure;
 use Menu;
 use App\Modules\User\Middlewares\Custom\usersMiddleware as User;
 use App\Modules\Role\Middlewares\Custom\RoleMiddleware as Role;
-
+use App\Modules\Permission\Middlewares\Custom\PermissionMiddleware as Permission;
 class MakeMenu
 {
     /**
@@ -59,6 +59,7 @@ class MakeMenu
                 ->prependIcon();
             User::AddMenus($menu);
             Role::AddMenus($menu);
+            Permission::AddMenus($menu);
             $settings = $menu->add(trans('admin.menu.setting'), ['route' => 'admin.setting.index'])
                 ->icon('gears')
                 ->prependIcon();

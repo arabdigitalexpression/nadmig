@@ -1,10 +1,9 @@
-<?php namespace App\Modules\Role\Controllers\Api\DataTables;
+<?php namespace App\Modules\Permission\Controllers\Api\DataTables;
 
+use App\Modules\Permission\Models\Permission;
+use App\Modules\Permission\Base\Controllers\ModuleDataTableController;
 
-use App\Modules\Role\Models\Role;
-use App\Modules\User\Base\Controllers\ModuleDataTableController;
-
-class RoleDataTable extends ModuleDataTableController {
+class PermissionDataTable extends ModuleDataTableController {
 
    /**
      * Columns to show
@@ -22,7 +21,7 @@ class RoleDataTable extends ModuleDataTableController {
      */
     public function query()
     {
-        $roles = Role::query();
+        $roles = Permission::query();
         return $this->applyScopes($roles);
     }
 

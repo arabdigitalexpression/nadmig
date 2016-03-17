@@ -17,7 +17,8 @@ return [
        "role" => [
             "display_name"               => "الأسم الظاهر",
             "description"           => "الوصف",
-            "name"                 => "الأسم"
+            "name"                 => "الأسم",
+            "permission"           => "صلاحيات"
         ]
     ],
     "menu" => [

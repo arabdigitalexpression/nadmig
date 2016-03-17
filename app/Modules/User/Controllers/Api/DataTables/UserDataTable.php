@@ -11,7 +11,7 @@ class UserDataTable extends ModuleDataTableController {
      * @var array
      */
     protected $columns = ['name', 'email', 'ip_address', 'logged_in_at', 'logged_out_at'];
-
+    protected $ops = true;
     /**
      * Image columns to show
      *

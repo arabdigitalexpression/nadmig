@@ -24,11 +24,13 @@ class RoleController extends ModuleController {
 
   public function edit(Role $role)
   {
+
       return $this->getForm($role);
   }
 
   public function update(Role $role, RoleRequest $request)
   {
+      $role->perms()->sync($request['permission']);
       return $this->saveFlashRedirect($role, $request);
   }
 

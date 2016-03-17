@@ -2,7 +2,7 @@
 
 use App\Base\Forms\AdminForm;
 use App\Modules\User\Models\User;
-use App\Role;
+use App\Modules\Role\Models\Role;
 class usersForm extends AdminForm
 {
     public function buildForm()
@@ -47,7 +47,7 @@ class usersForm extends AdminForm
         if($user == null){
             return $array;
         }else{
-            foreach (User::find($user['id'])->roles as $role)
+            foreach (User::findOrFail($user['id'])->roles as $role)
             {    
                array_push($array, $role['id']);   
             }
