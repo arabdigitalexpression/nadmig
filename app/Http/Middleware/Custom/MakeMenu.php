@@ -7,6 +7,7 @@ use Menu;
 use App\Modules\User\Middlewares\Custom\usersMiddleware as User;
 use App\Modules\Role\Middlewares\Custom\RoleMiddleware as Role;
 use App\Modules\Permission\Middlewares\Custom\PermissionMiddleware as Permission;
+use App\Modules\Organization\Middlewares\Custom\OrganizationMiddleware as Organization;
 class MakeMenu
 {
     /**
@@ -57,6 +58,7 @@ class MakeMenu
             $pages->add(trans('dashboard.menu.page.all'), ['route' => 'dashboard.page.index'])
                 ->icon($this->circle)
                 ->prependIcon();
+            Organization::AddMenus($menu);
             User::AddMenus($menu);
             Role::AddMenus($menu);
             Permission::AddMenus($menu);
