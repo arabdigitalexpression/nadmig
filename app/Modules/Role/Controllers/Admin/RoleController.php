@@ -30,7 +30,9 @@ class RoleController extends ModuleController {
 
   public function update(Role $role, RoleRequest $request)
   {
-      $role->perms()->sync($request['permission']);
+    if($request['permission']){
+        $role->perms()->sync($request['permission']);
+    }
       return $this->saveFlashRedirect($role, $request);
   }
 
