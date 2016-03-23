@@ -39,13 +39,23 @@ class Kernel extends HttpKernel
             'web',
             'auth',
             'throttle',
-            \App\Http\Middleware\Custom\MakeMenu::class
+            'role:admin',
+            \App\Http\Middleware\Custom\MakeMenu::class,
+        ],
+        'organization_manager' => [
+            'web',
+            'auth',
+            'throttle',
+            'role:orgnization_manager',
+            \App\Http\Middleware\Custom\MakeMenu::class,
         ],
         // Custom Ones
         'with_language' => [
             \App\Http\Middleware\Custom\SetConfiguration::class,
             \App\Http\Middleware\Custom\Locale::class
-        ]
+        ],
+
+
     ];
 
     /**

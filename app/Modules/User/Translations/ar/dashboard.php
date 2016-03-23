@@ -23,7 +23,13 @@ return [
             "password"              => "كلمة المرور",
             "password_confirmation" => "تأكيد كلموة المرور",
             "picture"               => "صورة",
-            "role"                  => "Role"
+            "role"                  => "Role",
+            "birthday"              => "تاريخ عيد ميلادك",
+            "governorate"           => "المحافظة",
+            "website"               => "موقعك الخاص ( إن وجد )",
+            "facebook"              => "فيس بوك",
+            "twitter"               => "تويتر",
+            "instagram"             => "انستجرام"
         ]
          
     ],

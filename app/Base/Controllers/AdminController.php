@@ -113,9 +113,13 @@ abstract class AdminController extends Controller
         $model = $class::create($this->getData($request, $imageColumn));
         $model->id ? Flash::success(trans('dashboard.create.success')) : Flash::error(trans('dashboard.create.fail'));
         if(class_basename($model) == "User"){
-            $model->roles()->sync($request['role']); 
+            if($request['role']){
+                $model->roles()->sync($request['role']);     
+            }
         }else if(class_basename($model) == "Role"){
-            $model->perms()->sync($request['permission']);
+            if($request['permission']){
+                $model->perms()->sync($request['permission']);    
+            }
         }
         return $this->redirectRoutePath($path);
     }

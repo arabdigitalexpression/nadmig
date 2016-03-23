@@ -5,13 +5,13 @@ use App\Modules\Organization\Base\Controllers\ModuleDataTableController;
 
 class OrganizationDataTable extends ModuleDataTableController {
 
-  protected $columns = ['title'];
+  protected $columns = ['name', 'excerpt'];
 
   protected $common_columns = ['created_at', 'updated_at'];
 
   public function query()
   {
-      $organization = Organization::whereLanguageId(session('current_lang')->id);
+      $organization = Organization::Query();
       return $this->applyScopes($organization);
   }
 

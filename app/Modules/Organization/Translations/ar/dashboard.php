@@ -10,15 +10,28 @@ return [
     "organization" => [
         "create"                    => "Create organization",
         "edit"                      => "Edit organization",
-        "index"                     => "organization",
-        "show"                      => "Show organization"
+        "index"                     => "منظمات",
+        "show"                      => "منظمة",
+        "mine"                      => [
+                                        "show"  => "منظمتى",
+                                        "edit"  => "تعديل"
+                                    ]
     ],
     "fields" => [
         "organization" => [
-            "language_id"           => "Language",
-            "content"               => "Content",
-            "description"           => "Description",
-            "title"                 => "Title"
+            "geo_location"          => "عنوان",
+            "email"                 => "الايميل",
+            "description"           => "وصف",
+            "name"                  => "الأسم",
+            "website"               => "موقعك الخاص ( إن وجد )",
+            "facebook"              => "فيس بوك",
+            "twitter"               => "تويتر",
+            "instagram"             => "انستجرام",
+            "phone_number"          => "رقم الهاتف",
+            "excerpt"               => "وصف مختصر",
+            "manager_id"            => "مدير حساب المنظمة"
+
+
         ]
     ],
     "menu" => [
@@ -26,6 +39,9 @@ return [
             "add"                   => "Add an organization",
             "all"                   => "All organization",
             "root"                  => "Organizations"
+        ], 
+        "my_organization" => [
+            "root"                  => "منظمتى"
         ]
     ]
 ];

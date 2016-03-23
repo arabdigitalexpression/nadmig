@@ -12,9 +12,17 @@ class OrganizationRequest extends Request {
     public function rules()
     {
         return [
-            'content' => 'required',
-            'language_id' => 'required|integer',
-            'title' => 'required|min:3'
+            'name' => 'required|min:3',
+            'geo_location' => 'required',
+            'email'     => 'required|email|min:6|unique:organizations,email,'.$this->segment(3),
+            'phone_number' => 'required',
+            'excerpt' => 'required',
+            'description' => 'required',
+            'website' => 'url',
+            'facebook' => 'url',
+            'twitter' => 'url',
+            'instagram' => 'url',
+            'manager_id' => 'required|integer|exists:users,id'
         ];
     }
 }

@@ -1,4 +1,6 @@
 <section class="content-header">
     {!! header_title() !!}
-    {!! breadcrumbs() !!}
+    @role('admin')
+    	{!! breadcrumbs() !!}
+    @endrole
 </section>

@@ -17,8 +17,28 @@ class usersForm extends AdminForm
             ->add('password', 'password', [
                 'label' => trans('User::dashboard.fields.user.password')
             ])
-            ->add('password_confirmation', 'password', [
+             ->add('password_confirmation', 'password', [
                 'label' => trans('User::dashboard.fields.user.password_confirmation')
+            ])
+            ->add('birthday', 'date', [
+                'label' => trans('User::dashboard.fields.user.birthday')
+            ])
+            ->add('governorate', 'choice', [
+                'choices' => $this->getGovernorates(),
+                'selected' => $this->governorate,
+                'label' => trans('User::dashboard.fields.user.governorate'),
+            ])
+            ->add('website', 'text', [
+                'label' => trans('User::dashboard.fields.user.website')
+            ])
+            ->add('facebook', 'text', [
+                'label' => trans('User::dashboard.fields.user.facebook')
+            ])
+            ->add('twitter', 'text', [
+                'label' => trans('User::dashboard.fields.user.twitter')
+            ])
+            ->add('instagram', 'text', [
+                'label' => trans('User::dashboard.fields.user.instagram')
             ])
             ->add('role', 'choice', [
                 'choices' => $this->getRoles(),

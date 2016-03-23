@@ -17,3 +17,7 @@ Route::group(['prefix' => 'api', 'module' => 'Organization', 'namespace' => 'Api
 Route::group(['prefix' => 'dashboard', 'module' => 'Organization', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
 	Route::resource('organization', 'OrganizationController');
 });
+Route::group(['prefix' => 'dashboard', 'module' => 'Organization', 'namespace' => 'Admin', 'middleware' => 'organization_manager'], function () {
+	Route::get('my_organization', ['as' => 'dashboard.organization.mine.show', 'uses' => 'OrganizationController@showMyOrg']);
+});
+

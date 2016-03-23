@@ -9,6 +9,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Config;
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
     use Authenticatable, CanResetPassword, EntrustUserTrait;
@@ -17,7 +18,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $fillable = ['email', 'name', 'password', 'picture'];
+    protected $fillable = ['email', 'name', 'password', 'picture', 'birthday', 'governorate', 'website', 'facebook', 'twitter', 'instagram'];
 
     /**
      * The attributes excluded from the model's JSON form.

@@ -14,11 +14,19 @@ class CreateOrganizationsTable extends Migration
     {
         Schema::create('organizations', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('language_id')->unsigned();
-            $table->foreign('language_id')->references('id')->on('languages');
-            $table->string('title');
+            $table->unsignedInteger('manager_id');
+            $table->foreign('manager_id')->references('id')->on('users');
+            $table->string('name');
             $table->string('slug')->unique();
-            $table->text('content');
+            $table->string('geo_location');
+            $table->string('email');
+            $table->string('phone_number');
+            $table->text('excerpt');
+            $table->text('description');
+            $table->string('website');
+            $table->string('facebook');
+            $table->string('twitter');
+            $table->string('instagram');
             $table->timestamps();
         });
     }
