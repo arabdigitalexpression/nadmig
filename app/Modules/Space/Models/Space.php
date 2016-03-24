@@ -9,16 +9,12 @@ class Space extends Model implements SluggableInterface {
 	use SluggableTrait;
 
 	protected $sluggable = array(
-	    'build_from' => 'title',
+	    'build_from' => 'name',
 	    'save_to'    => 'slug',
 	    'on_update'  => true
 	);
 
-	protected $fillable = ['content', 'language_id', 'title'];
+	protected $fillable = ['manager_id', 'name', 'geo_location', 'email', 'phone_number', 'excerpt', 'description', 'website', 'facebook', 'twitter', 'instagram', 'in_return_key', 'in_return', 'status', 'working_week_days', 'working_houre_days', 'space_type', 'space_equipment', 'agreement_text', 'capacity', 'smoking', 'organization'];
 
-	public function language()
-	{
-	    return $this->belongsTo('App\Language');
-	}
 
 }

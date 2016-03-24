@@ -4,3 +4,4 @@
     {!! form($form) !!}
     @include('partials.admin.tinymce')
 @endsection
+

@@ -12,7 +12,8 @@ var elixir = require('laravel-elixir'),
         'mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css',
         'datatables/media/css/dataTables.bootstrap.min.css',
         'morris.js/morris.css',
-        'admin-lte/dist/css/skins/skin-yellow.min.css'
+        'admin-lte/dist/css/skins/skin-yellow.min.css',
+        'chosen/chosen.css'
     ],
     adminJs = [
         'jquery/dist/jquery.min.js',
@@ -25,7 +26,8 @@ var elixir = require('laravel-elixir'),
         'datatables-buttons/js/dataTables.buttons.js',
         'datatables-buttons/js/buttons.bootstrap.js',
         'morris.js/morris.js',
-        'admin-lte/dist/js/app.min.js'
+        'admin-lte/dist/js/app.min.js',
+        'chosen/chosen.jquery.js'
     ],
     applicationLess  = [
         bowerDir + 'font-awesome/less'
@@ -50,6 +52,8 @@ elixir(function(mix) {
         .copy('resources/assets/datatables/buttons.server-side.js', 'public/js/buttons.server-side.js')
         .copy('resources/assets/js/admin.js', 'public/js/admin-custom.js')
         .copy(bowerDir + 'raphael/raphael-min.js', 'public/js/raphael.js')
+        .copy(bowerDir + 'chosen/chosen-sprite.png', 'public/build/img/chosen-sprite.png')
+        .copy(bowerDir + 'chosen/chosen-sprite@2x.png', 'public/build/img/chosen-sprite@2x.png')
         .copy(bowerDir + 'tinymce', 'public/packages/tinymce')
         .copy(bowerDir + 'tinymce-localautosave/localautosave', 'public/packages/tinymce/plugins/localautosave')
         .copy(bowerDir + 'font-awesome/fonts', 'public/build/fonts')

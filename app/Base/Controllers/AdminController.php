@@ -149,6 +149,12 @@ abstract class AdminController extends Controller
      */
     private function getData($request, $imageColumn)
     {
+        $data = $request->all();
+        if (isset($data['working_week_days']) && isset($data['space_equipment'])) {
+            $data['working_week_days'] = json_encode($data['working_week_days']);
+            $data['space_equipment'] = json_encode($data['space_equipment']);
+            $request->replace($data);
+        }
         return $imageColumn === false ? $request->all() : ImageService::uploadImage($request, $imageColumn);
     }
 

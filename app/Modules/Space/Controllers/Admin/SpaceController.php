@@ -14,6 +14,7 @@ class SpaceController extends ModuleController {
 
   public function store(SpaceRequest $request)
   {
+    // dd($request->toArray());
       return $this->createFlashRedirect(Space::class, $request);
   }
 

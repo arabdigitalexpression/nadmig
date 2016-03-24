@@ -54,4 +54,22 @@ abstract class AdminForm extends Form
                 'new_valley' => 'الوادي الجديد'
             );
     }
+    protected function getWeekdays(){
+        return array(
+            "sat" => "السبت",
+            "sun" => "الاحد",
+            "mon" => "الاثنين",
+            "tue" => "الثلاثاء",
+            "wed" => "الاربعاء",      
+            "thu" => "الخميس",
+            "fri" => "الجمعة"
+            );
+    }
+    protected function getYesOrNo(){
+        return array(
+            "yes" => "نعم",
+            "no" => "لا"
+            );
+    }
+
 }
