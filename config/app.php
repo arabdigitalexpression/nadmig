@@ -167,6 +167,7 @@ return [
         App\Modules\Role\Providers\RouteServiceProvider::class,
         App\Modules\Permission\Providers\RouteServiceProvider::class,
         App\Modules\Organization\Providers\RouteServiceProvider::class,
+        App\Modules\Space\Providers\RouteServiceProvider::class,
 
     ],
 

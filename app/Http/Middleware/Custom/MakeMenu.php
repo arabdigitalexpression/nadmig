@@ -10,6 +10,7 @@ use App\Modules\Role\Middlewares\Custom\RoleMiddleware as Role;
 use App\Modules\Permission\Middlewares\Custom\PermissionMiddleware as Permission;
 use App\Modules\Organization\Middlewares\Custom\OrganizationMiddleware as Organization;
 use App\Modules\Organization\Middlewares\Custom\MyOrganizationMiddleware as MyOrganization;
+use App\Modules\Space\Middlewares\Custom\SpaceMiddleware as Space;
 class MakeMenu
 {
     /**
@@ -61,6 +62,7 @@ class MakeMenu
                         ->icon($this->circle)
                         ->prependIcon();
                     Organization::AddMenus($menu);
+                    Space::AddMenus($menu);
                     User::AddMenus($menu);
                     Role::AddMenus($menu);
                     Permission::AddMenus($menu);
