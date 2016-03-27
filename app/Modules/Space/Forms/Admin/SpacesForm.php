@@ -56,7 +56,6 @@ class SpacesForm extends AdminForm
             ])
             ->add('in_return', 'hidden', [
                 'label' => trans('Space::dashboard.fields.space.in_return'), 
-                'value' => 0,
                 'attr' => ['id' => 'in_return']
             ])
             ->add('status', 'choice', [
@@ -112,39 +111,40 @@ class SpacesForm extends AdminForm
                 'tag' => 'div',
                 'attr' => ['class' => 'page-header'],
                 'value' => trans('Space::dashboard.fields.space.space_reservation')
-            ])
-            ->add('min_type_for_reservation', 'choice', [
-                'choices' => $this->getReservationType(),
-                'selected' => $this->min_type_for_reservation,
-                'label' => trans('Space::dashboard.fields.space.min_time_for_reservation')
-            ])
-            ->add('min_time_for_reservation', 'number', [
-                'label' => trans('Space::dashboard.fields.space.min_time_for_reservation'),
-                'value' => 1
-            ])
-            ->add('min_time_before_reservation', 'number', [
-                'label' => trans('Space::dashboard.fields.space.min_time_before_reservation'),
-                'value' => 1
-            ])
-            ->add('max_time_before_reservation', 'number', [
-                'label' => trans('Space::dashboard.fields.space.max_time_before_reservation'),
-                'value' => 1
-            ])
-            ->add('min_time_before_usage_to_edit', 'number', [
-                'label' => trans('Space::dashboard.fields.space.min_time_before_usage_to_edit'),
-                'value' => 1
-            ])
-            ->add('change_fees_key', 'choice', [
-                'choices' => $this->getChangeFeesKeys(),
-                'selected' => $this->change_fees_key,
-                'label' => trans('Space::dashboard.fields.space.change_fees'),
-                'attr' => ['id' => 'in_return_key']
-            ])
-            ->add('change_fees', 'hidden', [
-                'label' => trans('Space::dashboard.fields.space.change_fees'), 
-                'value' => 0,
-                'attr' => ['id' => 'change_fees']
             ]);
+            $this->OptionAndPeriod('min_type_for_reservation', trans('Space::dashboard.fields.space.min_time_for_reservation'), false);
+            $this->OptionAndPeriod('max_type_for_reservation', trans('Space::dashboard.fields.space.max_time_for_reservation'), false);
+            $this->OptionAndPeriod('min_time_before_reservation', trans('Space::dashboard.fields.space.min_time_before_reservation'));
+            $this->OptionAndPeriod('max_time_before_reservation', trans('Space::dashboard.fields.space.max_time_before_reservation'));
+            $this->OptionAndPeriod('min_time_before_usage_to_edit', trans('Space::dashboard.fields.space.min_time_before_usage_to_edit'));
+           $this
+                ->add('change_fees[type]', 'choice', [
+                    'choices' => $this->getChangeFeesKeys(),
+                    'selected' => $this->change_fees['type'],
+                    'label' => trans('Space::dashboard.fields.space.change_fees'),
+                    'expanded' => true,
+                    'attr' => ['id' => 'change_fees_key']
+                ])
+                ->add('change_fees[amount]', 'hidden', [
+                    'label' => trans('Space::dashboard.fields.space.change_fees'), 
+                    'attr' => ['id' => 'change_fees', 'class' => 'space_number']
+                ]);
+            $this->OptionAndPeriod('min_to_cancel', trans('Space::dashboard.fields.space.min_to_cancel'));
+            $this
+                ->add('cancel_fees[type]', 'choice', [
+                    'choices' => $this->getChangeFeesKeys(),
+                    'selected' => $this->cancel_fees['type'],
+                    'expanded' => true,
+                    'label' => trans('Space::dashboard.fields.space.cancel_fees'),
+                    'attr' => ['id' => 'cancel_fees_key']
+                ])
+                ->add('cancel_fees[amount]', 'hidden', [
+                    'label' => false, 
+                    'attr' => ['id' => 'cancel_fees', 'class' => 'space_number']
+                ]);
+            $this->OptionAndPeriod('max_to_confirm', trans('Space::dashboard.fields.space.max_to_confirm'), false);
+            $this->OptionAndPeriod('reset_time', trans('Space::dashboard.fields.space.reset_time'), false, true);
+            $this->OptionAndPeriod('max_event_per_time', trans('Space::dashboard.fields.space.max_event_per_time'));
         parent::buildForm();
     }
     protected function getInReturnKeys(){
@@ -206,11 +206,17 @@ class SpacesForm extends AdminForm
             "floor_sets" => "مجالس أرضية"
             );
     }
-    protected function getReservationType(){
-        return array(
-            "hours" => "ساعات",
-            "days" => "أيام"
-            );
+    protected function getReservationType($isNull, $isMin){
+        $array = array();
+        if ($isNull) {
+            $array['null'] = "لا يوجد";
+        };
+        if ($isMin) {
+            $array['mins'] = "دقائق";
+        };
+        $array['hours'] = "ساعات";
+        $array['days'] = "أيام";
+        return $array;
     }
     protected function getChangeFeesKeys(){
         return array(
@@ -219,4 +225,27 @@ class SpacesForm extends AdminForm
                 "value" => "قيمة"
             );
     }
+    protected function OptionAndPeriod($name, $title, $isNull = true, $isMin = false){
+        if ($isNull) {
+            $type = 'hidden';
+        }else{
+            $type = 'number';
+        }
+        $this
+            ->add($name . '[type]', 'choice', [
+                'choices' => $this->getReservationType($isNull, $isMin),
+                'selected' => $this->{$name},
+                'label' => $title,
+                'expanded' => true,
+                'attr' => ['id' => $name . '_type']
+            ])
+            ->add($name . '[period]', $type, [
+                'label' => false,
+                'value' => function ($name) {
+                    return $name;
+                },
+                'attr' => ['id' => $name . '_period', 'class' => 'space_number']
+            ]);
+    }
 }
+

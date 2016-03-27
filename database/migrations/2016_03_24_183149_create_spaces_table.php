@@ -40,6 +40,17 @@ class CreateSpacesTable extends Migration
             $table->text('agreement_text');
             $table->integer('capacity');
             $table->string('smoking');
+            $table->json('min_type_for_reservation');
+            $table->json('max_type_for_reservation');
+            $table->json('min_time_before_reservation');
+            $table->json('max_time_before_reservation');
+            $table->json('min_time_before_usage_to_edit');
+            $table->json('min_to_cancel');
+            $table->json('change_fees');
+            $table->json('cancel_fees');
+            $table->json('max_to_confirm');
+            $table->json('reset_time');
+            $table->json('max_event_per_time');
             $table->timestamps();
         });
     }

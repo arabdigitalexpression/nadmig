@@ -28,15 +28,24 @@ class SpaceRequest extends Request {
             'in_return' => 'required',
             'status' => 'required',
             'working_week_days' => 'required',
-            'working_houre_days' => 'required',
+            'working_hours_days' => 'required',
             'space_type' => 'required',
             'space_equipment' => 'required',
             'agreement_text' => 'required',
             'capacity' => 'required|integer',
             'smoking' => 'required',
             'organization' => 'required|exists:organizations,slug',
-
-
+            'min_type_for_reservation' => 'required',
+            'max_type_for_reservation' => 'required',
+            'min_time_before_reservation' => 'required',
+            'max_time_before_reservation' => 'required',
+            'min_time_before_usage_to_edit' => 'required',
+            'change_fees' => 'required',
+            'min_to_cancel' => 'required',
+            'cancel_fees' => 'required',
+            'max_to_confirm' => 'required',
+            'reset_time' => 'required',
+            'max_event_per_time' => 'required'
 
         ];
     }

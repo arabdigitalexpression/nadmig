@@ -5,13 +5,14 @@ use App\Modules\Space\Base\Controllers\ModuleDataTableController;
 
 class SpaceDataTable extends ModuleDataTableController {
 
-  protected $columns = ['title'];
+  protected $columns = ['name', 'organization'];
 
   protected $common_columns = ['created_at', 'updated_at'];
+  protected $image_columns = ['logo'];
 
   public function query()
   {
-      $space = Space::whereLanguageId(session('current_lang')->id);
+      $space = Space::query();
       return $this->applyScopes($space);
   }
 
