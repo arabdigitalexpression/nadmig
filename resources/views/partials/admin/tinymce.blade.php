@@ -13,6 +13,8 @@
         ],
         toolbar1: "localautosave | bold italic underline hr | link unlink image media | styleselect forecolor backcolor paste | bullist numlist outdent indent | code preview ",
         entity_encoding: "raw",
+        directionality : "rtl",
+        language: "ar",
         file_picker_callback : elFinderBrowser
     });
 
