@@ -70,7 +70,7 @@ class SpacesForm extends AdminForm
                 'expanded' => true,
                 'multiple' => true
             ])
-            ->add('working_hours_days', 'hidden', [
+            ->add('working_hours_days', 'text', [
                 'value' => 0,
             ])
             ->add('space_type', 'choice', [

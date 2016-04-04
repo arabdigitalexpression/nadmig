@@ -58,7 +58,7 @@ abstract class AdminController extends Controller
      * @param null $object
      * @return \BladeView|bool|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getForm($object = null)
+    public function getForm($object = null, $extra = null)
     {
         if ($object) {
             $url =  $this->urlRoutePath("update", $object);
@@ -69,9 +69,9 @@ abstract class AdminController extends Controller
             $method = 'POST';
             $path = $this->viewPath("create");
         }
-        $form = $this->createForm($url, $method, $object);
+        $form = $this->createForm($url, $method, $object, $extra);
 
-        return view($path, compact('form', 'object'));
+        return view($path, compact('form', 'object', 'extra'));
     }
 
     /**
@@ -82,7 +82,7 @@ abstract class AdminController extends Controller
      * @param $model
      * @return \Kris\LaravelFormBuilder\Form
      */
-    protected function createForm($url, $method, $model)
+    protected function createForm($url, $method, $model, $extra)
     {
         // if($path == null) {
         //     $path = $this->formPath;
@@ -93,8 +93,7 @@ abstract class AdminController extends Controller
                 'url' => $url,
                 'model' => $model
             ], [
-                $this->getSelectList(),
-                // $this->getPageTemplate()
+                $extra
             ]);
     }
 

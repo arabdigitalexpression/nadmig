@@ -11,6 +11,7 @@ use App\Modules\Permission\Middlewares\Custom\PermissionMiddleware as Permission
 use App\Modules\Organization\Middlewares\Custom\OrganizationMiddleware as Organization;
 use App\Modules\Organization\Middlewares\Custom\MyOrganizationMiddleware as MyOrganization;
 use App\Modules\Space\Middlewares\Custom\SpaceMiddleware as Space;
+use App\Modules\Reservation\Middlewares\Custom\ReservationMiddleware as Reservation;
 class MakeMenu
 {
     /**
@@ -63,6 +64,7 @@ class MakeMenu
                         ->prependIcon();
                     Organization::AddMenus($menu);
                     Space::AddMenus($menu);
+                    Reservation::AddMenus($menu);
                     User::AddMenus($menu);
                     Role::AddMenus($menu);
                     Permission::AddMenus($menu);

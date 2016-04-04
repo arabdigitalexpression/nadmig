@@ -13,7 +13,11 @@ var elixir = require('laravel-elixir'),
         'datatables/media/css/dataTables.bootstrap.min.css',
         'morris.js/morris.css',
         'admin-lte/dist/css/skins/skin-yellow.min.css',
-        'chosen/chosen.css'
+        'chosen/chosen.css',
+        'pickadate/lib/themes/default.css',
+        'pickadate/lib/themes/default.date.css',
+        'pickadate/lib/themes/default.time.css',
+        'pickadate/lib/themes/rtl.css'
     ],
     adminJs = [
         'jquery/dist/jquery.min.js',
@@ -27,20 +31,35 @@ var elixir = require('laravel-elixir'),
         'datatables-buttons/js/buttons.bootstrap.js',
         'morris.js/morris.js',
         'admin-lte/dist/js/app.min.js',
-        'chosen/chosen.jquery.js'
+        'chosen/chosen.jquery.js',
+        'moment/min/moment.min.js',
+        'pickadate/lib/picker.js',
+        'pickadate/lib/picker.date.js',
+        'pickadate/lib/picker.time.js',
+        'pickadate/lib/translations/ar.js'
+
     ],
     applicationLess  = [
-        bowerDir + 'font-awesome/less'
+        bowerDir + 'font-awesome/less',
     ],
     applicationCss = [
         'bootstrap/dist/css/bootstrap.min.css',
         'jquery-floating-social-share/dist/jquery.floating-social-share.min.css',
-        'application.css'
+        'application.css',
+        'pickadate/lib/themes/default.css',
+        'pickadate/lib/themes/default.date.css',
+        'pickadate/lib/themes/default.time.css',
+        'pickadate/lib/themes/rtl.css'
     ],
     applicationJs = [
         'jquery/dist/jquery.min.js',
         'jquery-floating-social-share/dist/jquery.floating-social-share.min.js',
-        'bootstrap/dist/js/bootstrap.min.js'
+        'bootstrap/dist/js/bootstrap.min.js',
+        'moment/min/moment.min.js',
+        'pickadate/lib/picker.js',
+        'pickadate/lib/picker.date.js',
+        'pickadate/lib/picker.time.js',
+        'pickadate/lib/translations/ar.js'
     ];
 
 elixir(function(mix) {

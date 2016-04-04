@@ -79,3 +79,28 @@ if (!function_exists('getDescription')) {
             Session::get('current_lang')->site_description;
     }
 }
+
+if (!function_exists('getNotWorkingWeekdays')) {
+    /**
+     * getWeekdays
+     *
+     * @param $object
+     * @return string
+     */
+    function getNotWorkingWeekdays($days = null)
+    {
+        $weekdays = array(
+            "sun" => 1,
+            "mon" => 2,
+            "tue" => 3,
+            "wed" => 4,      
+            "thu" => 5,
+            "fri" => 6,
+            "sat" => 7
+            );
+        foreach (json_decode($days) as $day) {
+            unset($weekdays[$day]);
+        };
+        return array_values($weekdays);
+    }
+}
