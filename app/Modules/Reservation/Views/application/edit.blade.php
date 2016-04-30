@@ -1,6 +1,6 @@
 @extends('layouts.application')
 
-
+@section('title'){{ getTitle($extra->name) }}@endsection
 @section('content')
     {!! form($form) !!}
     @include('partials.admin.tinymce')
