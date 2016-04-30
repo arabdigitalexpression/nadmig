@@ -1,5 +1,6 @@
 @extends('layouts.application')
 
+@section('title'){{ getTitle('الحجز '. $extra->name) }}@endsection
 
 @section('content')
 

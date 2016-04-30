@@ -49,7 +49,7 @@ var elixir = require('laravel-elixir'),
         'pickadate/lib/themes/default.css',
         'pickadate/lib/themes/default.date.css',
         'pickadate/lib/themes/default.time.css',
-        'pickadate/lib/themes/rtl.css'
+        'pickadate/lib/themes/rtl.css',
     ],
     applicationJs = [
         'jquery/dist/jquery.min.js',
@@ -80,7 +80,8 @@ elixir(function(mix) {
         .copy(bowerDir + 'mjolnic-bootstrap-colorpicker/dist/img/*', 'public/build/img')
         .less('application.less', bowerDir + 'application.css', { paths: applicationLess })
         .styles(applicationCss, 'public/css/application.css', bowerDir)
+        .styles('application.css', 'public/css/style.css')
         .scripts(applicationJs, 'public/js/application.js', bowerDir)
-        .copy('resources/assets/js/application.js', 'public/js/application-custom.js')
+        .copy('resources/assets/js/application.js', 'public/js/script.js')
         .version(['css/admin.css', 'css/application.css', 'js/admin.js', 'js/application.js']);
 });

@@ -7,7 +7,14 @@ return [
     | English Application Language Lines
     |--------------------------------------------------------------------------
     */
-
+    "menu" => [
+    	"home" => "الصفحة الرئيسية",
+    	"spaces" => "المساحات",
+    	"events" => "الأحداث",
+    	"logout" => "تسجيل الخروج",
+    	"dashboard" => "لوحة التحكم"
+    ],
+    "title" => "نـدمـج",
     "home"          => "Home",
     "read_more"     => "Read More"
 

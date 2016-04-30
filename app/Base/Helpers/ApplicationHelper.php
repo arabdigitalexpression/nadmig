@@ -59,8 +59,8 @@ if (!function_exists('getTitle')) {
      */
     function getTitle($object = null)
     {
-        return isset($object) && isset($object->title) ?
-            $object->title . ' | ' .  Session::get('current_lang')->site_title :
+        return isset($object) ?
+            $object . ' | ' .  Session::get('current_lang')->site_title :
             Session::get('current_lang')->site_title;
     }
 }

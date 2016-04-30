@@ -1,0 +1,130 @@
+@import url(http://fonts.googleapis.com/earlyaccess/droidarabicnaskh.css);
+@import url(http://fonts.googleapis.com/earlyaccess/droidarabickufi.css);
+body{
+	font-family: 'Droid Arabic Naskh', serif;
+	direction: rtl;
+}
+.btn-orange{
+	background: #ff924b;
+	color: #fff;
+	border: none;
+}
+.btn-orange:hover{
+	background: #ff924b;
+	color: #fff;
+	border: none;	
+}
+.panel-orange .panel-heading{
+	background: #ff924b;
+	color: #fff;
+	padding:10px;
+	border-color: #ff924b;  
+}
+.panel-orange .panel-body{
+	border-color: #ff924b;	
+}
+.inside{
+	width: 100%;	
+}
+.navbar{
+	background: none;
+	border: none;
+}
+.navbar-toggle{
+	float: left;
+}
+.navbar-brand{
+	font-family: 'Droid Arabic Kufi', sans-serif;
+	float: right;
+	font-size: 30px;
+    font-weight: bold;
+}
+.navbar-collapse{
+	border: none;
+}
+.navbar-collapse.in .menu li{
+	margin: 0 5px 0 5px;
+	width: 100%;
+}
+.menu li{
+	margin: 0 10px 0 10px;
+	display: inline;
+	float: right;
+	padding: 5px 10px 5px 10px;
+}
+.menu li a{
+	color: #ff8737 !important;
+	font-size: 16px;
+	text-decoration: none;
+}
+.menu li.active a{
+	background: #ff8737 !important;
+	border-radius: 3px;
+	color: #fff !important;
+}
+.user .dropdown{
+	display: inline;
+	width: 180px;
+}
+.user li{
+	float: right;
+}
+.user .break{
+	font-size: 20px;
+    margin-top: 10px;
+    float: right;
+}
+.user li a{
+	color: #363636;
+}
+.user .name{
+	padding-top: 10px;
+}
+.user .pp{
+	border-radius: 50%;
+	width: 35px;
+	float: right;
+	margin-top: -7px;
+	padding: 5px;
+}
+.user li.open a{
+	background: none;
+	border-radius: 3px 3px 0 0;
+}
+.user .dropdown .dropdown-menu{
+	text-align: right;
+	width: 100%;
+}
+.user .dropdown .dropdown-menu li a{
+	font-size: 14px;
+}
+
+/* Spaces */
+.spaces-list{
+	list-style: none;
+}
+.spaces-list li{
+	min-width: 250px;
+	width: 30%;
+	margin: 0  0 20px 20px;
+	float: right;
+}
+.spaces-list li a{
+	text-decoration: none;
+}
+.space-logo{
+	width: 300px;
+	float: right;
+	padding: 10px;
+}
+.space-name{
+	float: right;
+}
+.space-name i{
+	font-size: 10px;
+	margin: 0 5px 0 5px;
+}
+.space-reserve{
+	float: left;
+	margin-top: 15px;
+}
