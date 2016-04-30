@@ -169,6 +169,7 @@ return [
         App\Modules\Organization\Providers\RouteServiceProvider::class,
         App\Modules\Space\Providers\RouteServiceProvider::class,
         App\Modules\Reservation\Providers\RouteServiceProvider::class,
+        App\Modules\Session\Providers\RouteServiceProvider::class,
 
     ],
 

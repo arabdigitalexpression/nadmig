@@ -12,6 +12,7 @@ use App\Modules\Organization\Middlewares\Custom\OrganizationMiddleware as Organi
 use App\Modules\Organization\Middlewares\Custom\MyOrganizationMiddleware as MyOrganization;
 use App\Modules\Space\Middlewares\Custom\SpaceMiddleware as Space;
 use App\Modules\Reservation\Middlewares\Custom\ReservationMiddleware as Reservation;
+use App\Modules\Session\Middlewares\Custom\SessionMiddleware as Sessions;
 class MakeMenu
 {
     /**
@@ -65,6 +66,7 @@ class MakeMenu
                     Organization::AddMenus($menu);
                     Space::AddMenus($menu);
                     Reservation::AddMenus($menu);
+                    Sessions::AddMenus($menu);
                     User::AddMenus($menu);
                     Role::AddMenus($menu);
                     Permission::AddMenus($menu);
