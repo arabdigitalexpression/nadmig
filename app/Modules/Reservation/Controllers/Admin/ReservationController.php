@@ -14,6 +14,7 @@ class ReservationController extends ModuleController {
 
   public function store(ReservationRequest $request)
   {
+    
       return $this->createFlashRedirect(Reservation::class, $request);
   }
 

@@ -146,7 +146,9 @@ abstract class ApplicationController extends Controller
         }
         return $imageColumn === false ? $request->all() : ImageService::uploadImage($request, $imageColumn);
     }
-
+    public function getDataP($request, $imageColumn){
+        return $this->getData($request, $imageColumn);
+    }   
     /**
      * Delete and flash success or fail then redirect to path
      *

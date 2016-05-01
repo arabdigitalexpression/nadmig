@@ -1,4 +1,4 @@
-<?php namespace App\Modules\Session\Forms\Admin;
+<?php namespace App\Modules\Session\Forms\Application;
 
 use App\Base\Forms\AdminForm;
 
@@ -7,12 +7,6 @@ class SessionsForm extends AdminForm
     public function buildForm()
     {
         $this
-            ->add('space_info', 'static', [
-                'label' => false,
-                'tag' => 'div',
-                'attr' => ['class' => 'page-header'],
-                'value' => trans('Session::dashboard.fields.session.info')
-            ])
             ->add('where', 'text', [
                 'label' => trans('Session::dashboard.fields.session.where')
             ])
@@ -33,14 +27,15 @@ class SessionsForm extends AdminForm
                     return $start_time;
                 }
             ]);
-            $this->OptionAndPeriod('period', trans('Session::dashboard.fields.session.period'));
+            $this->OptionAndPeriod('period', trans('Session::dashboard.fields.session.period'), false);
             $this->add('excerpt', 'textarea', [
-                'label' => trans('Reservation::application.fields.reservation.excerpt')
+                'label' => trans('Reservation::application.fields.reservation.excerpt'),
+                'attr' => ['id' => 'excerpt']
             ])
             ->add('description', 'textarea', [
-                'label' => trans('Reservation::application.fields.reservation.description')
+                'label' => trans('Reservation::application.fields.reservation.description'),
+                'attr' => ['id' => 'description']
             ]);
-        parent::buildForm();
     }
     protected function getReservationType($isNull){
         $array = array();

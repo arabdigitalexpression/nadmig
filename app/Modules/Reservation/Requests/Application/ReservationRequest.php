@@ -13,10 +13,6 @@ class ReservationRequest extends Request {
     {
         return [
             'name' => 'required|min:3',
-            'start_time' => 'required',
-            'usage_period' => 'required|integer',
-            'excerpt' => 'required',
-            'description' => 'required',
             'facilitator_name' => 'required|min:3',
             'facilitator_email' => 'required|email|min:6',
             'facilitator_phone' => 'required|min:10',

@@ -7,37 +7,27 @@ class ReservationsForm extends AdminForm
     public function buildForm()
     {
         $this
+            ->add('name', 'text', [
+                'label' => trans('Reservation::application.fields.reservation.name')
+            ])
             ->add('space_info', 'static', [
                 'label' => false,
                 'tag' => 'div',
                 'attr' => ['class' => 'page-header'],
                 'value' => trans('Reservation::application.fields.reservation.info')
             ])
-            ->add('name', 'text', [
-                'label' => trans('Reservation::application.fields.reservation.name')
-            ])
-            ->add('start_time[date]', 'text', [
-                'label' => trans('Reservation::application.fields.reservation.start_time_date'),
-                'attr' => ['id' => 'start_date'],
-                'value' => function ($name) {
-                    return $name;
-                }
-            ])
-            ->add('start_time[time]', 'text', [
-                'label' => trans('Reservation::application.fields.reservation.start_time_time'),
-                'attr' => ['id' => 'start_time'],
-                'value' => function ($start_time) {
-                    return $start_time;
-                }
-            ])
-            ->add('usage_period', 'number', [
-                'label' => trans('Reservation::application.fields.reservation.usage_period')
-            ])
-            ->add('excerpt', 'textarea', [
-                'label' => trans('Reservation::application.fields.reservation.excerpt')
-            ])
-            ->add('description', 'textarea', [
-                'label' => trans('Reservation::application.fields.reservation.description')
+            ->add('session', 'collection', [
+                'type' => 'form',
+                'wrapper' => false,
+                'label'=> false,
+                'prototype' => true,            // Should prototype be generated. Default: true
+                'prototype_name' => '__NAME__',
+                'options' => [    // these are options for a single type
+                    'class' => 'App\Modules\Session\Forms\Application\SessionsForm',
+                    'label' => false,
+                    'is_child' => true
+                ],
+                'empty_row' => false // This was added
             ])
             ->add('facilitator_info', 'static', [
                 'label' => false,

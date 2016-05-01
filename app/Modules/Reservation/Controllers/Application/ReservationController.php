@@ -2,11 +2,15 @@
 
 use Auth;
 use Hash;
+use Laracasts\Flash\Flash;
 use App\Base\Controllers\ApplicationController;
 use App\Modules\Reservation\Models\Reservation;
 use App\Modules\Space\Models\Space;
+use App\Modules\Session\Models\Session;
 use App\Modules\Reservation\Requests\Application\ReservationRequest;
 class ReservationController extends ApplicationController {
+
+  private $imageColumn = "";
 
   public function list(Reservation $reservation)
   {
@@ -18,16 +22,35 @@ class ReservationController extends ApplicationController {
       return view('Reservation::application.index', compact('reservation'));
   }
   public function create($space_slug){
-  	return $this->getForm(null, ['space_slug' => $space_slug['slug']], $space_slug);
+    $url =  $this->urlRoutePath("store", null, ['space_slug' => $space_slug['slug']]);
+    $method = 'POST';
+    $path = $this->viewPath("create");
+    $extra = $space_slug;
+    $form = $this->createForm($url, $method, null, $extra);
+    return view($path, compact('form', 'extra'));
   }
   public function store(ReservationRequest $request, $space_slug)
   {	
-
-  	$request['space_id'] = $space_slug['id'];
-  	$request['user_id'] = Auth::user()->id;
-  	$request['status'] = "pending";
-  	$request['url_id'] = md5(Auth::user()->id . $request['name'] . time());
-    return $this->createFlashRedirect(Reservation::class, $request);
+    $sessions = $request['session'];
+    unset($request['session']);
+    $request['space_id'] = $space_slug['id'];
+    $request['user_id'] = Auth::user()->id;
+    $request['status'] = "pending";
+    $request['url_id'] = md5(Auth::user()->id . $request['name'] . time());
+    // dd($request->toArray());
+    $model = Reservation::create($this->getDataP($request, ""));
+    $model->id ? Flash::success(trans('application.create.success')) : Flash::error(trans('application.create.fail'));
+    // dd($model->id);
+    foreach ($sessions as $session) {
+      $session['reservation_id'] = $model->id;
+      foreach ($session as $key => $value) {
+          if (is_array($value)) {
+              $session[$key] = json_encode($value);
+          }
+      }
+      Session::create($session)->save();
+    }
+    return $this->redirectRoutePath("index", null, $model);
   }
   public function edit($reservation_url_id)
   {
