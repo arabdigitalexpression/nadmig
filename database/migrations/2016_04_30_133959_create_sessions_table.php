@@ -14,7 +14,6 @@ class CreateSessionsTable extends Migration
     {
         Schema::create('sessions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('url_id');
             $table->integer('reservation_id')->unsigned();
             $table->foreign('reservation_id')->references('id')->on('reservations');
             $table->string('where');

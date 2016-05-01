@@ -20,10 +20,6 @@ class CreateReservationsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('name');
-            $table->json('start_time');
-            $table->integer('usage_period');
-            $table->text('excerpt');
-            $table->text('description');
             $table->string('facilitator_name');
             $table->string('facilitator_email');
             $table->string('facilitator_phone');

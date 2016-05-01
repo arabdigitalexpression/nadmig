@@ -37,10 +37,8 @@ class ReservationController extends ApplicationController {
     $request['user_id'] = Auth::user()->id;
     $request['status'] = "pending";
     $request['url_id'] = md5(Auth::user()->id . $request['name'] . time());
-    // dd($request->toArray());
     $model = Reservation::create($this->getDataP($request, ""));
     $model->id ? Flash::success(trans('application.create.success')) : Flash::error(trans('application.create.fail'));
-    // dd($model->id);
     foreach ($sessions as $session) {
       $session['reservation_id'] = $model->id;
       foreach ($session as $key => $value) {
@@ -55,18 +53,66 @@ class ReservationController extends ApplicationController {
   public function edit($reservation_url_id)
   {
   	$reservation = Reservation::where('url_id', $reservation_url_id)->first();
+    $reservation->sessions;
   	foreach ($reservation->toArray() as $key => $value) {
-          if ($this->isJson($value)) {
+          if (is_array($value)) {
+              foreach ($value as $key_1 => $sessions) {
+                foreach ($sessions as $key_2 => $session) {
+                  if ($this->isJson($session)) {
+                      $reservation[$key][$key_1][$key_2] = json_decode($session);
+                  }     
+                }  
+              }
+          }
+          elseif ($this->isJson($value)) {
               $reservation[$key] = json_decode($value);
           }
-      }
+    }
   	$space = Space::findOrFail($reservation['space_id']);
-      return $this->getForm($reservation, ['reservation_url_id' => $reservation['url_id']], $space);
+    return $this->getForm($reservation, ['reservation_url_id' => $reservation['url_id']], $space);
   }
   public function update($reservation_url_id, ReservationRequest $request)
   {
+    $sessions = $request['session'];
+    unset($request['session']);
+    
   	$reservation = Reservation::where('url_id', $reservation_url_id)->first();
-      return $this->saveFlashRedirect($reservation, $request);
+    $reservation->sessions;
+    $reservation->fill($this->getDataP($request, ""));
+    foreach ($sessions as $session) {
+      foreach ($session as $key => $value) {
+          if (is_array($value)) {
+              $sessions[$key] = json_encode($value);
+          }
+      }
+      $reservation->sessions()->associate($session);
+      // Session::create($session)->save();
+    }
+    // dd($sessions);
+    // foreach ($reservation->sessions as $index => $session) {
+    //   foreach ($session as $key => $value) {
+    //       if (is_array($value)) {
+    //           $reservation->sessions[$index][$key] = json_encode($value);
+    //       }
+    //   }
+    //   // $reservation->sessions[$index] = $sessions[0];
+    //   // Session::findOrFail($session->id)->fill($session)->save;
+    // }
+    // $relations = $reservation->sessions;
+    // foreach ($relations as $models) {
+    //     // Make sure we pass an Array of models not just the model,
+    //     // otherwise we will get an EloquentCollection back
+    //     if ($models instanceof Model)
+    //         $models = array($models);
+    //     $models_collection = Collection::make($models);
+    //     foreach ($models_collection as $model) {
+    //         if ( ! $model->push()) return false;
+    //     }
+    // }
+    
+    // dd($reservation->sessions->toArray());
+    $reservation->push() ? Flash::success(trans('application.update.success')) : Flash::error(trans('application.update.fail'));
+    return $this->redirectRoutePath("index", null, $reservation);
   }
   protected function isJson($string) {
    json_decode($string);

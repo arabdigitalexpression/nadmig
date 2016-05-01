@@ -7,11 +7,16 @@ class SessionsForm extends AdminForm
     public function buildForm()
     {
         $this
+            ->add('id', 'hidden', [
+                'attr' => ['id' => 'id']
+            ])
             ->add('where', 'text', [
-                'label' => trans('Session::dashboard.fields.session.where')
+                'label' => trans('Session::dashboard.fields.session.where'),
+                'attr' => ['id' => 'where']
             ])
             ->add('address', 'text', [
-                'label' => trans('Session::dashboard.fields.session.address')
+                'label' => trans('Session::dashboard.fields.session.address'),
+                'attr' => ['id' => 'address']
             ])
             ->add('start_time[date]', 'text', [
                 'label' => trans('Session::application.fields.session.start_time_date'),
