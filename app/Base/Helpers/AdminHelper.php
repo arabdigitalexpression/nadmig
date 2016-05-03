@@ -24,11 +24,11 @@ if (!function_exists('get_ops')) {
         $edit_path = route('dashboard.'.$resource.'.edit', ['id' => $id]);
         $delete_path = route('dashboard.'.$resource.'.destroy', ['id' => $id]);
         $ops  = '<ul class="list-inline no-margin-bottom">';
-        // $ops .=  '<li>';
-        // $ops .=  '<a class="'.$show_class.'" href="'.$show_path.'">
-        //           <i class="fa fa-search"></i>
-        //           '.trans('dashboard.ops.show').'</a>';
-        // $ops .=  '</li>';
+        $ops .=  '<li>';
+        $ops .=  '<a class="'.$show_class.'" href="'.$show_path.'">
+                  <i class="fa fa-search"></i>
+                  '.trans('dashboard.ops.show').'</a>';
+        $ops .=  '</li>';
         $ops .=  '<li>';
         $ops .=  '<a class="'.$edit_class.'" href="'.$edit_path.'">
                  <i class="fa fa-pencil-square-o"></i>
