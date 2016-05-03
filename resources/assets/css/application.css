@@ -107,12 +107,32 @@ body{
 }
 .spaces-list li{
 	min-width: 250px;
-	width: 30%;
+	width: 20%;
 	margin: 0  0 20px 20px;
 	float: right;
 }
 .spaces-list li a{
 	text-decoration: none;
+}
+.spaces-list li a .panel-heading i{
+	font-size: 10px;
+}
+.spaces-list li .space-icon{
+	max-height: 220px;
+	width: 100%;
+}
+.spaces-list li .space-info{
+	list-style: none;
+	padding: 5px 10px 0;
+	float: right;
+}
+.spaces-list li .space-info li{
+	font-size: 14px;
+	color: #000;
+	margin: 5px;
+}
+.spaces-list li .space-info li a{
+	color: #000;
 }
 .space-logo{
 	width: 300px;

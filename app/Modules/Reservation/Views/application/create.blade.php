@@ -7,6 +7,7 @@
 	{{ $extra->name }}
     {!! form_start($form) !!}
     {!! form_row($form->name) !!}
+    {!! form_row($form->artwork) !!}
     {!! form_row($form->space_info) !!}
     <div class="panel-group" id="accordion" aria-multiselectable="true" data-prototype="{{ form_row($form->session->prototype()) }}">
         <div class="panel panel-default template" style="display: none;">
@@ -41,9 +42,15 @@
 			});
             var $template = $(".template");
             var hash = 0;
-            // add the first session
-            new_session();
-            date();
+            @if(old('session'))
+                @foreach(old('session') as $session)
+                    new_session({!! json_encode($session) !!});
+                    date();
+                @endforeach
+            @else
+                new_session();
+                date();
+            @endif
             editor_init("#apply_agreement");
             $(".btn-add-panel").on("click", function (e) {
                 e.preventDefault();
@@ -53,7 +60,7 @@
             $(document).on('click', '.glyphicon-remove-circle', function () {
                 $(this).parents('.panel').get(0).remove();
             });
-            function new_session(){
+            function new_session(data = null){
                 var $newPanel = $template.clone();
                 $newPanel.find(".collapse").removeClass("in");
                 $newPanel.find(".accordion-toggle").attr("href", "#" + (++hash)).text("الجلسة # " + hash);
@@ -65,12 +72,26 @@
                                 .replace(/\[period\[period\]\]/g, "[period][period]");
                 $newPanel.find(".panel-collapse").attr("id", hash);
                 $newPanel.find('.panel-body').empty().append(proto);
+                // replace sessions data
+                if(data){
+                    $.each(data, function(index, value){
+                        if(typeof value === 'object'){
+                            $.each(value, function(key, val){
+                                $newPanel.find("#start_" + key).val(val);
+                                $newPanel.find("#period_" + key).val(val);
+                            });
+                        }else{
+                            $newPanel.find("#" + index).val(value);    
+                        }
+                    })    
+                }
+                // rename the fields for the pickers
                 $newPanel.find("#start_date").attr("id", "start_date_" + hash);
                 $newPanel.find("#start_time").attr("id", "start_time_" + hash);
                 $newPanel.find("#description").attr("id", "description_" + hash);
-                $("#accordion").append($newPanel.fadeIn());   
+                $("#accordion").append($newPanel.fadeIn());
                 editor_init("#description_" + hash);
-            }   
+            }
             function date(){
                 $('#start_date_' + hash).pickadate({
                     firstDay: 0,
@@ -96,6 +117,7 @@
                     @endif
                 ]
             });
+
             function editor_init(selector){
                 tinymce.init({
                     selector: selector,

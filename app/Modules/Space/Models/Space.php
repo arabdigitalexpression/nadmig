@@ -19,5 +19,9 @@ class Space extends Model implements SluggableInterface {
     {
         return $this->hasMany('App\Modules\Reservation\Models\Reservation');
     }
+    public function organization()
+    {
+        return $this->belongsTo('App\Modules\Organization\Models\Organization');
+    }
 
 }
