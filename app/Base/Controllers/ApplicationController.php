@@ -135,6 +135,9 @@ abstract class ApplicationController extends Controller
      * @param $imageColumn
      * @return mixed
      */
+    public function getDataP($request, $imageColumn){
+        return $this->getData($request, $imageColumn);
+    }
     private function getData($request, $imageColumn)
     {
         $data = $request->all();
@@ -146,9 +149,21 @@ abstract class ApplicationController extends Controller
         }
         return $imageColumn === false ? $request->all() : ImageService::uploadImage($request, $imageColumn);
     }
-    public function getDataP($request, $imageColumn){
-        return $this->getData($request, $imageColumn);
-    }   
+     /**
+     * Get data, if image column is passed, upload it
+     *
+     * @param $request
+     * @param $imageColumn
+     * @return mixed
+     */
+    public function to_json($data){
+        foreach ($data as $key => $value) {
+          if (is_array($value)) {
+              $data[$key] = json_encode($value);
+          }
+        }
+        return $data;
+    }
     /**
      * Delete and flash success or fail then redirect to path
      *
@@ -270,5 +285,26 @@ abstract class ApplicationController extends Controller
     {
         $model =  title_case(str_plural($this->model));
         return 'App\Modules\\'.$this->model.'\Forms\Application\\' . $model . 'Form';
+    }
+    /**
+     * Returns if the value existe in array or not
+     *
+     * @return bool
+     */
+    public function in_array_field($value, $key, $array) {
+        foreach ($array as $item){
+            if (isset($item[$key]) && $item[$key] == $value)
+                return true;
+        }
+        return false;
+    } 
+    /**
+     * Returns if a string is json or not
+     *
+     * @return bool
+     */
+    protected function isJson($string) {
+        json_decode($string);
+        return (json_last_error() == JSON_ERROR_NONE);
     }
 }

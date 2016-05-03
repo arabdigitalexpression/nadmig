@@ -10,6 +10,10 @@ class ReservationsForm extends AdminForm
             ->add('name', 'text', [
                 'label' => trans('Reservation::application.fields.reservation.name')
             ])
+            ->add('artwork', 'file', [
+                'label' => trans('Reservation::application.fields.reservation.artwork'),
+                'attr' => ['class' => '']
+            ])
             ->add('space_info', 'static', [
                 'label' => false,
                 'tag' => 'div',

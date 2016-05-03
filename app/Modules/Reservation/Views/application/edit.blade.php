@@ -5,6 +5,7 @@
     {{ $extra->name }}
     {!! form_start($form) !!}
     {!! form_row($form->name) !!}
+    {!! form_row($form->artwork) !!}
     {!! form_row($form->space_info) !!}
     <div class="panel-group" id="accordion" aria-multiselectable="true" data-prototype="{{ form_row($form->session->prototype()) }}">
         <div class="panel panel-default template" style="display: none;">

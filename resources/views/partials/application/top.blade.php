@@ -35,5 +35,11 @@
               </ul>
             </div><!-- /.navbar-collapse -->
         </div>
-    </div>
+        @if (Session::has('flash_notification.message'))
+            <div class="alert alert-{{ Session::get('flash_notification.level') }}">
+                <button type="button" class="close pull-left" data-dismiss="alert" aria-hidden="true">&times;</button>
+
+                {{ Session::get('flash_notification.message') }}
+            </div>
+        @endif
 </nav>
