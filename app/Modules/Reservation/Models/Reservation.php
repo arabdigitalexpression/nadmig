@@ -30,6 +30,5 @@ class Reservation extends Model{
             $reservation->status = "pending";
             $reservation->url_id = md5(Auth::user()->id . $reservation->name . time());
         });
-
     }
 }

@@ -12,15 +12,23 @@ class ReservationController extends ApplicationController {
 
 private $imageColumn = "artwork";
 
-public function list(Reservation $reservation)
+public function list()
 {
-    $reservations = Auth::user()->reservations;
+    $reservations = Auth::user()->reservations()->where("status", "!=" ,"deleted")->get();
     return view('Reservation::application.list', compact('reservations'));
 }
 public function index($reservation_url_id)
 {
 	$reservation = Reservation::where('url_id', $reservation_url_id)->first();
     return view('Reservation::application.index', compact('reservation'));
+}
+public function delete($reservation_url_id)
+{
+    $reservation = Reservation::where('url_id', $reservation_url_id)->first();
+    $reservation['status'] = 'deleted';
+    $reservation->update();
+    $reservations = Auth::user()->reservations;
+    return redirect()->route('reservation');
 }
 public function create($space_slug){
     $url =  $this->urlRoutePath("store", null, ['space_slug' => $space_slug['slug']]);
