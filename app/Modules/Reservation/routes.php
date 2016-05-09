@@ -8,6 +8,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('space/{space_slug}/reservation/store', ['as' => 'application.reservation.store', 'uses' => 'ReservationController@store']);
         Route::get('reservation/{reservation_url_id}/edit', ['as' => 'application.reservation.edit', 'uses' => 'ReservationController@edit']);
         Route::patch('reservation/{reservation_url_id}/update', ['as' => 'application.reservation.update', 'uses' => 'ReservationController@update']);
+        Route::get('reservation/{reservation_url_id}/delete', ['as' => 'application.reservation.del', 'uses' => 'ReservationController@delete']);
         Route::get('reservation/{reservation_url_id}', ['as' => 'application.reservation.index', 'uses' => 'ReservationController@index']);
     });
 });

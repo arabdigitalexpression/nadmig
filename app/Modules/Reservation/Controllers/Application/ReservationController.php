@@ -14,7 +14,8 @@ private $imageColumn = "artwork";
 
 public function list(Reservation $reservation)
 {
-  return view('Reservation::application.index', compact('reservation'));
+    $reservations = Auth::user()->reservations;
+    return view('Reservation::application.list', compact('reservations'));
 }
 public function index($reservation_url_id)
 {

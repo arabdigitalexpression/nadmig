@@ -12,6 +12,10 @@ class SpaceController extends ApplicationController {
 	}
 	public function space(Space $space)
 	{
+		$space['reservations'] = $space->reservations()->where("status", "accepted")->take(4)->get();
+		foreach ($space['reservations'] as $reservation) {
+			$reservation['sessions'] = $reservation->sessions;
+		}
 		return view('Space::application.index', compact('space'));
 	}
 }

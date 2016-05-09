@@ -9,6 +9,7 @@ class SpacesForm extends AdminForm
     {
         $this
             ->add('space_info', 'static', [
+
                 'label' => false,
                 'tag' => 'div',
                 'attr' => ['class' => 'page-header'],
@@ -16,6 +17,9 @@ class SpacesForm extends AdminForm
             ])
 		    ->add('name', 'text', [
                 'label' => trans('Space::dashboard.fields.space.name')
+            ])
+            ->add('slug', 'text', [
+                'label' => trans('Space::dashboard.fields.space.slug')
             ])
             ->add('geo_location', 'text', [
                 'label' => trans('Space::dashboard.fields.space.geo_location')
@@ -69,10 +73,9 @@ class SpacesForm extends AdminForm
                 'label' => trans('Space::dashboard.fields.space.working_week_days'),
                 'expanded' => true,
                 'multiple' => true
-            ])
-            ->add('working_hours_days', 'text', [
-                'value' => 0,
-            ])
+            ]);
+            $this->WeekDaysForm();
+        $this
             ->add('space_type', 'choice', [
                 'choices' => $this->getSpaceType(),
                 'selected' => $this->space_type,
@@ -189,7 +192,7 @@ class SpacesForm extends AdminForm
         $array = array();
         foreach (Organization::all() as $org)
         {    
-            $array = array_add($array, $org['slug'], $org['name']);   
+            $array = array_add($array, $org['id'], $org['name']);   
         }
         return $array;
     }
@@ -240,6 +243,7 @@ class SpacesForm extends AdminForm
                 'attr' => ['id' => $name . '_type']
             ])
             ->add($name . '[period]', $type, [
+                'wrapper' => ['class' => 'period_val'],
                 'label' => false,
                 'value' => function ($name) {
                     return $name;
@@ -247,5 +251,35 @@ class SpacesForm extends AdminForm
                 'attr' => ['id' => $name . '_period', 'class' => 'space_number']
             ]);
     }
+    protected function WeekDaysForm()
+    {
+        $this->add('working_hours', 'static', [
+                'label' => false,
+                'tag' => 'div',
+                'value' => trans('Space::dashboard.fields.space.working_hours_days')
+        ]);
+        foreach ($this->getWeekdays() as $key => $value) {
+            $this
+                ->add('working_hours_days['.$key.']', 'static', [
+                        'wrapper' => ['class' => 'weekday_name'],
+                        'label' => false,
+                        'tag' => 'h4',
+                        'value' => $value
+                ])
+                ->add('working_hours_days['.$key.'][from]', 'text', [
+                    'wrapper' => ['class' => 'weekday_from'],
+                    'label' => trans('Space::dashboard.fields.space.from'),
+                    'tag' => 'span',
+                    'attr' => ['id' => $key.'_from', 'class' => '']
+                ])
+                ->add('working_hours_days['.$key.'][to]', 'text', [
+                    'wrapper' => ['class' => 'weekday_to'],
+                    'label' => trans('Space::dashboard.fields.space.to'),
+                    'tag' => 'span',
+                    'attr' => ['id' => $key.'_to', 'class' => '']
+                ]);
+        }
+    }
 }
+
 

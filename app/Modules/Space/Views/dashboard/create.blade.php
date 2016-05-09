@@ -29,6 +29,11 @@
 				}
 			});
 			$(".chosen-select").chosen({width: "100%", placeholder_text_multiple: "قم بأختيار تجهيزات المساحة"});
+			var weekdays = ['sat', 'sun', 'mon', 'tue', 'wed', 'thu', 'fri'];
+			$.each(weekdays, function(index, value){
+				$('#'+value+'_from').pickatime();
+				$('#'+value+'_to').pickatime();
+			});
 		});
 	</script>
 @endsection

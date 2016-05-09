@@ -12,6 +12,13 @@ class OrganizationsForm extends AdminForm
 		    ->add('name', 'text', [
 	            'label' => trans('Organization::dashboard.fields.organization.name')
 	        ])
+            ->add('slug', 'text', [
+                'label' => trans('Organization::dashboard.fields.organization.slug')
+            ])
+            ->add('logo', 'file', [
+                'label' => trans('Organization::dashboard.fields.organization.logo'),
+                'attr' => ['class' => '']
+            ])
             ->add('geo_location', 'text', [
                 'label' => trans('Organization::dashboard.fields.organization.geo_location')
             ])

@@ -17,6 +17,7 @@ class CreateOrganizationsTable extends Migration
             $table->unsignedInteger('manager_id');
             $table->foreign('manager_id')->references('id')->on('users');
             $table->string('name');
+            $table->string('logo');
             $table->string('slug')->unique();
             $table->string('geo_location');
             $table->string('email');

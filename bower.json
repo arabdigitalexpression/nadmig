@@ -19,6 +19,7 @@
     "tinymce-localautosave": "~0.4.2",
     "chosen": "~1.5.1",
     "eonasdan-bootstrap-datetimepicker": "~4.17.37",
-    "pickadate": "~3.5.6"
+    "pickadate": "~3.5.6",
+    "jquery-timepicker-jt": "~1.10.0"
   }
 }

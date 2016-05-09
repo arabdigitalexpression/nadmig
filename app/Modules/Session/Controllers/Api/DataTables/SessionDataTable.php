@@ -5,13 +5,13 @@ use App\Modules\Session\Base\Controllers\ModuleDataTableController;
 
 class SessionDataTable extends ModuleDataTableController {
 
-  protected $columns = ['title'];
+  protected $columns = ['where'];
 
   protected $common_columns = ['created_at', 'updated_at'];
 
   public function query()
   {
-      $session = Session::whereLanguageId(session('current_lang')->id);
+      $session = Session::query();
       return $this->applyScopes($session);
   }
 

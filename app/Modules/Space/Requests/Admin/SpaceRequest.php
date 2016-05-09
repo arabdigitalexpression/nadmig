@@ -34,7 +34,7 @@ class SpaceRequest extends Request {
             'agreement_text' => 'required',
             'capacity' => 'required|integer',
             'smoking' => 'required',
-            'organization' => 'required|exists:organizations,slug',
+            'organization' => 'required|exists:organizations,id',
             'min_type_for_reservation' => 'required',
             'max_type_for_reservation' => 'required',
             'min_time_before_reservation' => 'required',

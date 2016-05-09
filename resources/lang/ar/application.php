@@ -12,7 +12,8 @@ return [
     	"spaces" => "المساحات",
     	"events" => "الأحداث",
     	"logout" => "تسجيل الخروج",
-    	"dashboard" => "لوحة التحكم"
+    	"dashboard" => "لوحة التحكم",
+        "reservation" => "الحجوزات"
     ],
     "title" => "نـدمـج",
     "home"          => "Home",

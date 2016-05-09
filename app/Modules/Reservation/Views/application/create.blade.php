@@ -92,6 +92,9 @@
                 $("#accordion").append($newPanel.fadeIn());
                 editor_init("#description_" + hash);
             }
+            var week_days = ["sat", "sun", "mon", "tue", "wed", "thu", "fri"];
+            var working_hours = JSON.parse({!! json_encode($extra->working_hours_days) !!});
+            // console.log();
             function date(){
                 $('#start_date_' + hash).pickadate({
                     firstDay: 0,
@@ -102,11 +105,29 @@
                         @if ($extra->working_week_days)
                             {!! implode(",",getNotWorkingWeekdays($extra->working_week_days)); !!}
                         @endif
-                    ]
-                });
-                $('#start_time_' + hash).pickatime();                
+                    ],
+                  onSet: function(context) {
+                    var day = 0;
+                    if(moment(context.select).weekday() < 6){
+                        day = moment(context.select).weekday() + 1;
+                    }
+                    eval("$('#start_time_" + hash + "').pickatime({disable:[{ from: [00, 0], to: [23, 30] },{ from: getTime(working_hours[week_days[day]]['from']), to: getTime(working_hours[week_days[day]]['to']), inverted: true }]});");
+                  }
+                });           
             }
-            var $deadline = $('#apply_deadline').pickadate({
+            function getTime(time){
+                var hour = time.split(":")[0];
+                var mins = time.split(":")[1].split(" ")[0];
+                var type = time.split(":")[1].split(" ")[1];
+                if( type == 'PM' ){
+                    hour = parseInt(hour) + 12;
+                }
+                if( parseInt(hour) == 24 ){
+                    hour = 00
+                }
+                return [hour, mins];
+            }
+            $('#apply_deadline').pickadate({
                 firstDay: 0,
                 format: 'dd/mm/yyyy',
                 min: new Date(2016,3,1),

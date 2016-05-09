@@ -15,11 +15,6 @@ class SessionMiddleware extends MakeMenu
 			$module = $menu->add(trans('Session::dashboard.menu.session.root'), '#')
 		        ->icon('apple')
 		        ->prependIcon();
-
-		  $module->add(trans('Session::dashboard.menu.session.add'), ['route' => 'dashboard.session.create'])
-		      ->icon("circle-o")
-		      ->prependIcon();
-
 		  $module->add(trans('Session::dashboard.menu.session.all'), ['route' => 'dashboard.session.index'])
 		      ->icon("circle-o")
 		      ->prependIcon();

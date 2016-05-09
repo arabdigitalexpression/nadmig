@@ -66,5 +66,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $ip ? inet_ntop($ip) : "";
     }
+    public function reservations()
+    {
+        return $this->hasMany('App\Modules\Reservation\Models\Reservation');
+    }
 
 }

@@ -15,9 +15,9 @@ class CreateSpacesTable extends Migration
         Schema::create('spaces', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('manager_id');
-            $table->string('organization');
+            $table->unsignedInteger('organization');
             $table->foreign('manager_id')->references('id')->on('users');
-            $table->foreign('organization')->references('slug')->on('organizations');
+            $table->foreign('organization')->references('id')->on('organizations');
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('geo_location');
@@ -34,7 +34,7 @@ class CreateSpacesTable extends Migration
             $table->integer('in_return');
             $table->string('status');
             $table->json('working_week_days');
-            $table->string('working_hours_days');
+            $table->json('working_hours_days');
             $table->string('space_type');
             $table->json('space_equipment');
             $table->text('agreement_text');

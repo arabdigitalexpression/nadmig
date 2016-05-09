@@ -8,7 +8,8 @@ class OrganizationDataTable extends ModuleDataTableController {
   protected $columns = ['name', 'excerpt'];
 
   protected $common_columns = ['created_at', 'updated_at'];
-
+  protected $image_columns = ['logo'];
+  
   public function query()
   {
       $organization = Organization::Query();

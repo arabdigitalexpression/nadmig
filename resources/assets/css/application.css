@@ -104,6 +104,8 @@ body{
 /* Spaces */
 .spaces-list{
 	list-style: none;
+	float: right;
+	padding: 0;
 }
 .spaces-list li{
 	min-width: 250px;
@@ -134,6 +136,29 @@ body{
 .spaces-list li .space-info li a{
 	color: #000;
 }
+/* space page */
+.space-page h3{
+	width: 100%;
+	display: block;
+	float: right;
+}
+.space-page .space-info{
+	width: 100%;
+}
+.space-page .space-info li{
+	font-size: 12px;
+}
+.space-page .space-info li i{
+	font-size: 12px;
+}
+.space-page .time{
+	width: 100%;
+	float: right;
+	border-radius: 0 0 4px 4px;
+}
+.space-page .time i{
+	font-size: 14px;
+}
 .space-logo{
 	width: 300px;
 	float: right;
@@ -144,9 +169,59 @@ body{
 }
 .space-name i{
 	font-size: 10px;
-	margin: 0 5px 0 5px;
+	margin: 0 0 0 5px;
+}
+.space-name .space-info{
+	list-style: none;
+	padding: 5px 0 0;
+	float: right;
+}
+.space-name .space-info li{
+	font-size: 16px;
+	color: #000;
+	margin: 5px;
+}
+.space-name .space-info li i{
+	font-size: 14px;
+}
+.space-name .space-info li a{
+	color: #000;
 }
 .space-reserve{
 	float: left;
 	margin-top: 15px;
+}
+
+.post-excerpt{
+	width: 100%;
+	float: right;
+	margin: 5px 0 0 5px;
+}
+.post-description{
+	width: 100%;
+	float: right;
+	display: none;
+	margin: 10px 0 0 5px;
+}
+.more{
+	float: left;
+}
+
+/*reservations*/
+.reservations{
+	direction: rtl;
+}
+.reservations thead,
+.reservations tbody{
+	text-align: right;
+	direction: rtl;
+}
+.reservations thead tr th{
+	text-align: right;
+}
+.reservations tbody tr td .edit,
+.reservations tbody tr td .del{
+	font-size: 16px;
+    margin: 0 0 0 15px;
+	color: #363636;
 }
