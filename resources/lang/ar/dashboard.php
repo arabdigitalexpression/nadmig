@@ -82,10 +82,22 @@ return [
             "email"                 => "Email",
             "facebook"              => "Facebook",
             "logo"                  => "Logo",
-            "twitter"               => "Twitter"
+            "twitter"               => "Twitter", 
+            "space"                 => "بيانات إدارة المساحات",
+            "space_equipment"       => "تجهيزات المساحة"
         ],
         "updated_at"                => "عَدل فى",
         "uploaded"                  => "Uploaded file",
+        "link"                      => [
+                                        "type"  => [
+                                            "title" => "النوع",
+                                            "website" => "موقع إلكترونى",
+                                            "facebook" => "فيس بوك",
+                                            "twitter" => "توييتر",
+                                            "instagram" => "انستاجرام",
+                                        ],
+                                        "title" => "الرابط"
+                                    ]
     ],
     "language" => [
         "create"                    => "Create language",

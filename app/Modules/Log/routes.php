@@ -14,6 +14,6 @@ Route::group(['prefix' => 'api', 'module' => 'Log', 'namespace' => 'Api', 'middl
 });
 
 // Admin routes
-Route::group(['prefix' => 'admin', 'module' => 'Log', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
+Route::group(['prefix' => 'dashboard', 'module' => 'Log', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
 	Route::resource('log', 'LogController');
 });

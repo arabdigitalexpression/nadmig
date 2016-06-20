@@ -24,10 +24,7 @@ class CreateOrganizationsTable extends Migration
             $table->string('phone_number');
             $table->text('excerpt');
             $table->text('description');
-            $table->string('website');
-            $table->string('facebook');
-            $table->string('twitter');
-            $table->string('instagram');
+            $table->json('links');
             $table->timestamps();
         });
     }

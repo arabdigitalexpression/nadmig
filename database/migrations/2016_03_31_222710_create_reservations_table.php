@@ -15,8 +15,8 @@ class CreateReservationsTable extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->increments('id');
             $table->string('url_id');
-            $table->integer('space_id')->unsigned();
-            $table->foreign('space_id')->references('id')->on('spaces');
+            $table->integer('organization_id')->unsigned();
+            $table->foreign('organization_id')->references('id')->on('organizations');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('name');
@@ -34,7 +34,7 @@ class CreateReservationsTable extends Migration
             $table->json('dooropen_time');
             $table->json('dooropen_period');
             $table->json('links');
-            $table->string('fees');
+            $table->string('apply');
             $table->string('apply_cost');
             $table->string('apply_deadline');
             $table->string('status');

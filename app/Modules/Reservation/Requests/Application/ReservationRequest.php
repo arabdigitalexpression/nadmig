@@ -18,7 +18,6 @@ class ReservationRequest extends Request {
             'facilitator_email' => 'required|email|min:6',
             'facilitator_phone' => 'required|min:10',
             'group_name' => 'sometimes|min:3',
-            'apply_agreement' => 'sometimes',
             'group_age' => 'required',
             'max_attendees' => 'required|integer|max:'.$this->get('capacity'),
             'expected_attendees' => 'required|integer|max:'.$this->get('max_attendees'),
@@ -27,9 +26,10 @@ class ReservationRequest extends Request {
             'dooropen_time' => 'required',
             'dooropen_period' => 'required',
             'links' => 'sometimes',
-            'fees' => 'required',
-            'apply_cost' => 'required',
-            'apply_deadline' => 'required|date_format:d/m/Y'
+            'apply' => 'required',
+            'apply_cost' => 'sometimes',
+            'apply_deadline' => 'sometimes|date_format:d/m/Y',
+            'apply_agreement' => 'sometimes'
         ];
     }
 }

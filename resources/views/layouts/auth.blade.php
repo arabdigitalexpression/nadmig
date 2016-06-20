@@ -12,11 +12,11 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script src="{{ url( elixir('js/application.js') ) }}" type="text/javascript"></script>
 </head>
-<body class="bg-black-50">
+<body>
 <div class="wrapper">
     @yield('content')
 </div>
-<script src="{{ url( elixir('js/admin.js') ) }}" type="text/javascript"></script>
 </body>
 </html>

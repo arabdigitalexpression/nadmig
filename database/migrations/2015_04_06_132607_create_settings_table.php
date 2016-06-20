@@ -20,6 +20,7 @@ class CreateSettingsTable extends Migration
             $table->string('twitter');
             $table->string('disqus_shortname');
             $table->string('analytics_id');
+            $table->text('space_equipment');
             $table->timestamps();
         });
     }

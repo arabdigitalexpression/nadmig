@@ -15,9 +15,9 @@ class CreateSpacesTable extends Migration
         Schema::create('spaces', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('manager_id');
-            $table->unsignedInteger('organization');
+            $table->unsignedInteger('organization_id');
             $table->foreign('manager_id')->references('id')->on('users');
-            $table->foreign('organization')->references('id')->on('organizations');
+            $table->foreign('organization_id')->references('id')->on('organizations');
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('geo_location');
@@ -26,10 +26,7 @@ class CreateSpacesTable extends Migration
             $table->string('logo');
             $table->text('excerpt');
             $table->text('description');
-            $table->string('website');
-            $table->string('facebook');
-            $table->string('twitter');
-            $table->string('instagram');
+            $table->json('links');
             $table->string('in_return_key');
             $table->integer('in_return');
             $table->string('status');

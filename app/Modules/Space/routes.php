@@ -10,10 +10,12 @@ Route::group(['middleware' => 'web'], function () {
 
 // API routes
 Route::group(['prefix' => 'api', 'module' => 'Space', 'namespace' => 'Api', 'middleware' => 'api'], function () {
-    //
+    // get fees and time for the space
+     Route::get('space/{space}', ['as' => 'space.fees_time', 'uses' => 'SpaceController@fees_time']);
 });
 
 // Admin routes
-Route::group(['prefix' => 'dashboard', 'module' => 'Space', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
+Route::group(['prefix' => 'dashboard', 'module' => 'Space', 'namespace' => 'Admin', 'middleware' => 'space_manager'], function () {
 	Route::resource('space', 'SpaceController');
+
 });

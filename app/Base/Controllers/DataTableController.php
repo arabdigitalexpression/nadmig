@@ -86,6 +86,7 @@ abstract class DataTableController extends DataTable
                 return get_ops($model, $data->id);
             });
         }
+
         return $datatables->make(true);
     }
 

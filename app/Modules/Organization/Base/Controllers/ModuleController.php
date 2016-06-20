@@ -55,4 +55,5 @@ abstract class ModuleController extends AdminController
         $model =  title_case(str_plural($this->model));
         return 'App\Modules\Organization\Forms\Admin\\' . $model . 'Form';
     }
+    
 }

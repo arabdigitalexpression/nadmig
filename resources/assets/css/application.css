@@ -120,7 +120,7 @@ body{
 	font-size: 10px;
 }
 .spaces-list li .space-icon{
-	max-height: 220px;
+	max-height: 175px;
 	width: 100%;
 }
 .spaces-list li .space-info{
@@ -137,57 +137,61 @@ body{
 	color: #000;
 }
 /* space page */
-.space-page h3{
+.page h3{
 	width: 100%;
 	display: block;
 	float: right;
 }
-.space-page .space-info{
+.page .info{
 	width: 100%;
 }
-.space-page .space-info li{
+.page .info li{
 	font-size: 12px;
 }
-.space-page .space-info li i{
+.page .info li i{
 	font-size: 12px;
 }
-.space-page .time{
+.page .time{
 	width: 100%;
 	float: right;
 	border-radius: 0 0 4px 4px;
 }
-.space-page .time i{
+.page .time i{
 	font-size: 14px;
 }
-.space-logo{
+.page .logo{
 	width: 300px;
 	float: right;
 	padding: 10px;
 }
-.space-name{
+.page .name{
 	float: right;
 }
-.space-name i{
+.page .name i{
 	font-size: 10px;
 	margin: 0 0 0 5px;
 }
-.space-name .space-info{
+.page .name .info{
 	list-style: none;
 	padding: 5px 0 0;
 	float: right;
 }
-.space-name .space-info li{
+.page .name .info li{
 	font-size: 16px;
 	color: #000;
 	margin: 5px;
 }
-.space-name .space-info li i{
+.page .name .info li i{
 	font-size: 14px;
 }
-.space-name .space-info li a{
+.page .link{
+	color:#000;
+	text-decoration: none;
+}
+.name .info li a{
 	color: #000;
 }
-.space-reserve{
+.page .reserve{
 	float: left;
 	margin-top: 15px;
 }

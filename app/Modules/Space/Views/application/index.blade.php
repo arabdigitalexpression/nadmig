@@ -5,35 +5,40 @@
 
 @section('content')
     @if(count($space))
-        <div class="space-page">
+        <div class="page">
             <header class="post-header">
-                <img class="space-logo" src="{{ url($space->logo) }}">
-                <div class="space-name">
+                <img class="logo" src="{{ url($space->logo) }}">
+                <div class="name">
                     <h3>{{ $space->name }}<i style="
                         @if($space->status == 'working')
                             color: #3cb878;
+                        @elseif($space->status == 'stoped')
+                            color: #ed1c24;
+                        @elseif($space->status == 'closed')
+                            color: #898989;
                         @endif
                         " class="fa fa-circle" aria-hidden="true"></i>
                     </h3>
-                    <ul class="space-info">
+                    <ul class="info">
+                        <li><i class="fa fa-building" aria-hidden="true"></i><a href="{{ route('organization.page', ['organization_slug' => $space->organization->slug ])}}">{{ $space->organization->name }}</a></li>
                         <li><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $space->geo_location }}</li>
                         <li><i class="fa fa-phone" aria-hidden="true"></i> {{ $space->phone_number }}</li>
                         <li><i class="fa fa-envelope" aria-hidden="true"></i><a href="mailto:{{ $space->email }}"> {{ $space->email }}</a></li>
-                        <li><i class="fa fa-globe" aria-hidden="true"></i> <a href="{{ $space->website }}">{{ $space->website }}</a></li>
+                        @foreach($space->links as $link)
+                                @if($link->type == 'website')
+                                <li><i class="fa fa-globe" aria-hidden="true"></i> <a href="{{ $link->link }}">{{ $link->link }}</a></li>
+                                @endif
+                        @endforeach
                         <li>
-                            @if($space->facebook)
-                                <a href="{{ $space->facebook }}"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
-                            @endif
-                            @if($space->twitter)
-                                <a href="{{ $space->twitter }}"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>
-                            @endif
-                            @if($space->instagram)
-                                <a href="{{ $space->instagram }}"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                            @endif
+                            @foreach($space->links as $link)
+                                @if($link->type != 'website')
+                                 <a href="{{ $link->link }}"><i class="fa fa-{{ $link->type }}" aria-hidden="true"></i></a>
+                                @endif
+                            @endforeach
                         </li>
                     </ul>
                 </div>
-                <a class="btn btn-default btn-orange space-reserve" href="{{ route('reservation.create', ['space_slug' => $space->slug])}}" role="button">{{ trans('Space::application.reserve') }}</a>
+                <a class="btn btn-default btn-orange reserve" href="{{ route('reservation.create', ['organization_slug' => $space->organization['slug']])}}" role="button">{{ trans('Space::application.reserve') }}</a>
             </header>
             <div class="post-excerpt">
                 {!! $space->excerpt !!}
@@ -41,7 +46,7 @@
             <div class="post-description">
                 {!! $space->description !!}
             </div>
-            <button type="button" class="btn btn-default more"><i class="fa fa-caret-down" aria-hidden="true"></i>إعرف أكتر</button>
+            <button type="button" class="btn btn-default more"><i class="fa fa-caret-down" aria-hidden="true"></i>{{trans('application.button.know_more')}}</button>
             <h3>{{ trans('Space::application.page.events') }}</h3>
             <ul class="spaces-list">
             @foreach($space->reservations as $reservation)
@@ -67,10 +72,10 @@
         $(function(){
             $('.more').on("click", function(){
                 if( $('.post-description').css("display") == "none" ){
-                    $( this ).html('<i class="fa fa-caret-up" aria-hidden="true"></i>'+"إعرف أقل");
+                    $( this ).html('<i class="fa fa-caret-up" aria-hidden="true"></i>'+"{{trans('application.button.know_less')}}");
                     $('.post-description').show();
                 }else{
-                    $( this ).html('<i class="fa fa-caret-down" aria-hidden="true"></i>'+"إعرف أكتر");
+                    $( this ).html('<i class="fa fa-caret-down" aria-hidden="true"></i>'+"{{trans('application.button.know_more')}}");
                     $('.post-description').hide();
                 }
                  

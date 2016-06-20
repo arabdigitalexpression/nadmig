@@ -30,21 +30,25 @@ public function delete($reservation_url_id)
     $reservations = Auth::user()->reservations;
     return redirect()->route('reservation');
 }
-public function create($space_slug){
-    $url =  $this->urlRoutePath("store", null, ['space_slug' => $space_slug['slug']]);
+public function create($organization_slug){
+    $url =  $this->urlRoutePath("store", null, ['organization_slug' => $organization_slug['slug']]);
     $method = 'POST';
     $path = $this->viewPath("create");
-    $extra = $space_slug;
+    $extra = $organization_slug;
     $form = $this->createForm($url, $method, null, $extra);
     return view($path, compact('form', 'extra'));
 }
-public function store(ReservationRequest $request, $space_slug)
+public function store(ReservationRequest $request, $organization_slug)
 {	
+
     $sessions = $request['session'];
+
     $reservation = new Reservation($this->getDataP($request, $this->imageColumn));
-    $space_slug->reservations()->save($reservation) ? Flash::success(trans('application.create.success')) : Flash::error(trans('application.create.fail'));
+    $organization_slug->reservations()->save($reservation) ? Flash::success(trans('application.create.success')) : Flash::error(trans('application.create.fail'));
+
     foreach ($sessions as $session) {
         $session = new Session($this->to_json($session));
+        
         $reservation->sessions()->save($session);
     }
     return $this->redirectRoutePath("index", null, $reservation);
@@ -67,7 +71,7 @@ public function edit($reservation_url_id)
             $reservation[$key] = json_decode($value);
         }
     }
-    return $this->getForm($reservation, ['reservation_url_id' => $reservation['url_id']], $reservation->space);
+    return $this->getForm($reservation, ['reservation_url_id' => $reservation['url_id']], $reservation->organization);
 }
 public function update($reservation_url_id, ReservationRequest $request)
 {

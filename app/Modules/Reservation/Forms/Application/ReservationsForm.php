@@ -63,26 +63,26 @@ class ReservationsForm extends AdminForm
             ->add('group_name', 'text', [
                 'label' => trans('Reservation::application.fields.reservation.group_name')
             ])
+
             ->add('extra_info', 'static', [
                 'label' => false,
                 'tag' => 'div',
                 'attr' => ['class' => 'page-header'],
                 'value' => trans('Reservation::application.fields.reservation.extra')
             ])
-            ->add('apply_agreement', 'textarea', [
-                'label' => trans('Reservation::application.fields.reservation.apply_agreement')
-            ])
             ->add('group_age', 'choice', [
                 'choices' => $this->getGroupAge(),
                 'selected' => $this->group_age,
                 'label' => trans('Reservation::application.fields.reservation.group_age')
-            ])
-             ->add('capacity', 'hidden', [
+            ]);
+            $spaces = $this->data[0]->spaces->toArray();
+            $this->sortBy('capacity',   $spaces);
+            $this->add('capacity', 'hidden', [
                 'label' => false,
-                'value' => $this->data[0]['capacity']
+                'value' => $spaces[0]['capacity']
             ])
             ->add('max_attendees', 'number', [
-                'label' => trans('Reservation::application.fields.reservation.max_attendees') . $this->getHelpMassage($this->data[0]['capacity'] . " بالاقصى")
+                'label' => trans('Reservation::application.fields.reservation.max_attendees') . $this->getHelpMassage($spaces[0]['capacity'] . " بالاقصى")
             ])
             ->add('expected_attendees', 'number', [
                 'label' => trans('Reservation::application.fields.reservation.expected_attendees')
@@ -97,14 +97,16 @@ class ReservationsForm extends AdminForm
             ]);
             $this->OptionAndPeriod('dooropen_time', trans('Reservation::application.fields.reservation.dooropen_time'));
             $this->OptionAndPeriod('dooropen_period', trans('Reservation::application.fields.reservation.dooropen_period'));
-            $this->add('fees_info', 'static', [
+            $this->add('apply_info', 'static', [
                 'label' => false,
                 'tag' => 'div',
-                'attr' => [],
-                'value' => $this->getFees()
+                'attr' => ['class' => 'page-header'],
+                'value' => trans('Reservation::application.fields.reservation.apply_info')
             ])
-            ->add('fees', 'number', [
-                'label' => trans('Reservation::application.fields.reservation.fees')
+            ->add('apply', 'checkbox', [
+                'value' => 1,
+                'label' => trans('Reservation::application.fields.reservation.apply'),
+                'attr' => ['id' => 'apply']
             ])
             ->add('apply_cost', 'number', [
                 'label' => trans('Reservation::application.fields.reservation.apply_cost'),
@@ -115,6 +117,9 @@ class ReservationsForm extends AdminForm
             ->add('apply_deadline', 'text', [
                 'label' => trans('Reservation::application.fields.reservation.apply_deadline'),
                 'attr' => ['id' => 'apply_deadline']
+            ])
+            ->add('apply_agreement', 'textarea', [
+                'label' => trans('Reservation::application.fields.reservation.apply_agreement')
             ]);
         parent::buildForm();
     }
@@ -132,21 +137,6 @@ class ReservationsForm extends AdminForm
             'private' => 'خاص',
             'public' => 'عام'
             );
-    }
-    protected function getFees(){
-        $space = $this->data[0];
-        if($space['in_return_key'] == 'free'){
-            return trans('Reservation::application.fields.reservation.free');
-
-        }else if($space['in_return_key'] == 'min'){
-            return trans('Reservation::application.fields.reservation.min') .  $this->data[0]['in_return'];
-        }
-        else if($space['in_return_key'] == 'max'){
-            return trans('Reservation::application.fields.reservation.max') .  $this->data[0]['in_return'];
-        }
-        else if($space['in_return_key'] == 'any'){
-            return trans('Reservation::application.fields.reservation.any') .  $this->data[0]['in_return'];
-        }
     }
     protected function getReservationType($isNull){
         $array = array();
@@ -177,5 +167,21 @@ class ReservationsForm extends AdminForm
                 },
                 'attr' => ['id' => $name . '_period']
             ]);
+    }
+    protected function sortBy($field, &$array, $direction = 'asc')
+    {
+        usort($array, create_function('$a, $b', '
+            $a = $a["' . $field . '"];
+            $b = $b["' . $field . '"];
+
+            if ($a == $b)
+            {
+                return 0;
+            }
+
+            return ($a ' . ($direction == 'desc' ? '>' : '<') .' $b) ? -1 : 1;
+        '));
+
+        return true;
     }
 }

@@ -13,7 +13,7 @@ class MyOrganizationMiddleware extends MakeMenu
 
 		private static function moduleMenu($menu){
 			$module = $menu->add(trans('Organization::dashboard.menu.my_organization.root'), ['route' => 'dashboard.organization.mine.show'])
-		        ->icon('apple')
+		        ->icon('building')
 		        ->prependIcon();
 		}
 }

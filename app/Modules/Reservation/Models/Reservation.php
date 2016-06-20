@@ -8,15 +8,15 @@ class Reservation extends Model{
 
 
 
-	protected $fillable = ['url_id', 'space_id', 'name','artwork', 'user_id', 'facilitator_name', 'facilitator_email', 'facilitator_phone', 'group_name', 'apply_agreement', 'group_age', 'max_attendees', 'expected_attendees', 'reserved_attendees', 'event_type', 'dooropen_time', 'dooropen_period', 'links', 'fees','apply_cost', 'apply_deadline', 'status'];
+	protected $fillable = ['url_id', 'space_id', 'name','artwork', 'user_id', 'facilitator_name', 'facilitator_email', 'facilitator_phone', 'group_name', 'apply_agreement', 'group_age', 'max_attendees', 'expected_attendees', 'reserved_attendees', 'event_type', 'dooropen_time', 'dooropen_period', 'links', 'apply','apply_cost', 'apply_deadline', 'status'];
 
 	public function sessions()
     {
         return $this->hasMany('App\Modules\Session\Models\Session');
     }
-    public function space()
+    public function organization()
     {
-        return $this->belongsTo('App\Modules\Space\Models\Space');
+        return $this->belongsTo('App\Modules\Organization\Models\Organization');
     }
     public function user()
     {

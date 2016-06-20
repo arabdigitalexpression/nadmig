@@ -27,6 +27,15 @@ class SettingsForm extends AdminForm
             ->add('logo', 'file', [
                 'label' => trans('dashboard.fields.setting.logo'),
                 'attr' => ['class' => '']
+            ])
+            ->add('space', 'static', [
+                'label' => false,
+                'tag' => 'div',
+                'attr' => ['class' => 'page-header'],
+                'value' => trans('dashboard.fields.setting.space')
+            ])
+            ->add('space_equipment', 'textarea', [
+                'label' => trans('dashboard.fields.setting.space_equipment')
             ]);
         parent::buildForm();
     }

@@ -151,7 +151,11 @@ abstract class AdminController extends Controller
         $data = $request->all();
         foreach ($data as $key => $value) {
             if (is_array($value)) {
-                $data[$key] = json_encode($value);
+                if($key == 'links'){
+                    $data[$key] = json_encode(array_values($value));
+                }else{
+                    $data[$key] = json_encode($value);
+                }
                 $request->replace($data);
             }
         }

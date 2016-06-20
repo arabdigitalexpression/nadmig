@@ -11,6 +11,10 @@
                     <div class="panel-heading">{{ $space->name }} <i style="
                         @if($space->status == 'working')
                             color: #3cb878;
+                        @elseif($space->status == 'stoped')
+                            color: #ed1c24;
+                        @elseif($space->status == 'closed')
+                            color: #898989;
                         @endif
                         " class="fa fa-circle" aria-hidden="true"></i></div>
                 </a>   

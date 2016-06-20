@@ -46,7 +46,14 @@ class Kernel extends HttpKernel
             'web',
             'auth',
             'throttle',
-            'role:orgnization_manager',
+            'role:organization_manager|admin',
+            \App\Http\Middleware\Custom\MakeMenu::class,
+        ],
+        'space_manager' => [
+            'web',
+            'auth',
+            'throttle',
+            'role:space_manager|organization_manager|admin',
             \App\Http\Middleware\Custom\MakeMenu::class,
         ],
         // Custom Ones

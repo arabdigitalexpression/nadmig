@@ -20,12 +20,12 @@
                 @if (Auth::guest())
                     <li><a href="{{ url('/auth/login') }}">تسجيل الدخول</a></li>
                     <span class="break">|</span>
-                    <li><a href="{{ url('/auth/register') }}">تسجيل مستخدم جديد</a></li>
+                    <li><a href="{{ url('/user/register') }}">تسجيل مستخدم جديد</a></li>
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img class="pp" src="{{ url(Auth::user()->picture)}}"><span class="name">{{ Auth::user()->name }}</span> <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            @role('admin')
+                            @role(['admin','organization_manager'])
                                 <li><a href="{{ url('/dashboard') }}">{{ trans('application.menu.dashboard') }}</a>
                             @endrole
                             <li><a href="{{ route('reservation') }}">{{ trans('application.menu.reservation') }}</a></li>

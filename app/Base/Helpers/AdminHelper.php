@@ -231,3 +231,27 @@ if (!function_exists('dashboard_box')) {
         return $str;
     }
 }
+if (!function_exists('getWeekdays')) {
+    function getWeekdays($key){
+        $days = array(
+            "sat" => "السبت",
+            "sun" => "الاحد",
+            "mon" => "الاثنين",
+            "tue" => "الثلاثاء",
+            "wed" => "الاربعاء",      
+            "thu" => "الخميس",
+            "fri" => "الجمعة"
+            );
+        return $days[$key];
+    }
+}
+if (!function_exists('getSpaceEquipment')) {
+    function getSpaceEquipment($equipment){
+        $space_equipment = array();
+        $setting = \App\Setting::firstOrFail();
+        foreach (json_decode($setting->space_equipment) as $key => $value) {
+            $space_equipment = array_add($space_equipment, $key, $value);
+        }
+        return $space_equipment[$equipment];
+    }
+}

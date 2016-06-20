@@ -3,6 +3,8 @@
 use App\Base\Forms\AdminForm;
 use App\Modules\Organization\Models\Organization;
 use App\Modules\Role\Models\Role;
+use Auth;
+use App\Setting;
 class SpacesForm extends AdminForm
 {
     public function buildForm()
@@ -40,17 +42,17 @@ class SpacesForm extends AdminForm
             ->add('description', 'textarea', [
                 'label' => trans('Space::dashboard.fields.space.description')
             ])
-            ->add('website', 'text', [
-                'label' => trans('Space::dashboard.fields.space.website')
-            ])
-            ->add('facebook', 'text', [
-                'label' => trans('Space::dashboard.fields.space.facebook')
-            ])
-            ->add('twitter', 'text', [
-                'label' => trans('Space::dashboard.fields.space.twitter')
-            ])
-            ->add('instagram', 'text', [
-                'label' => trans('Space::dashboard.fields.space.instagram')
+            ->add('links', 'collection', [
+                'type' => 'form',
+                'wrapper' => false,
+                'label'=> false,
+                'prototype' => true,            // Should prototype be generated. Default: true
+                'prototype_name' => '__NAME__',
+                'options' => [    // these are options for a single type
+                    'class' => 'App\Forms\Admin\LinksForm',
+                    'label' => false,
+                    'is_child' => true
+                ]
             ])
             ->add('in_return_key', 'choice', [
                 'choices' => $this->getInReturnKeys(),
@@ -98,13 +100,20 @@ class SpacesForm extends AdminForm
                 'choices' => $this->getSmoking(),
                 'selected' => $this->smoking,
                 'label' => trans('Space::dashboard.fields.space.smoking')
-            ])
-            ->add('organization', 'choice', [
-                'choices' => $this->getOrgnizations(),
-                'selected' => $this->organization,
-                'label' => trans('Space::dashboard.fields.space.organization')
-            ])
-            ->add('manager_id', 'choice', [
+            ]);
+            if(Auth::user()->hasRole('admin')){
+                $this->add('organization_id', 'choice', [
+                    'choices' => $this->getOrgnizations(),
+                    'selected' => $this->organization,
+                    'label' => trans('Space::dashboard.fields.space.organization')
+                ]);
+            }else if(Auth::user()->hasRole('organization_manager')){
+                 $this->add('organization_id', 'hidden', [
+                    'value' => Auth::user()->manageOrganization['id']
+                ]);
+            }
+            
+            $this->add('manager_id', 'choice', [
                 'choices' => $this->getSpaceManagers(),
                 'selected' => $this->manager_id,
                 'label' => trans('Space::dashboard.fields.space.manager_id')
@@ -204,10 +213,12 @@ class SpacesForm extends AdminForm
         return $array;
     }
     protected function getSpaceEquipment(){
-        return array(
-            "internet" => "اتّصال بالإنترنت", 
-            "floor_sets" => "مجالس أرضية"
-            );
+        $space_equipment = array();
+        $setting = Setting::firstOrFail();
+        foreach (json_decode($setting->space_equipment) as $key => $value) {
+            $space_equipment = array_add($space_equipment, $key, $value);
+        }
+        return $space_equipment;
     }
     protected function getReservationType($isNull, $isMin){
         $array = array();

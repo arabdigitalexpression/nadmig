@@ -17,7 +17,8 @@ return [
         "reservation" => [
             "info"           => "معلومات عن الحجز",
             "facilitator"   => "بيانات الطالب", 
-            "extra" => "تفاصيل أخرى"
+            "extra" => "تفاصيل أخرى",
+            "apply_info" => "معلومات عن التسجيل"
         ]
     ],
     "menu" => [

@@ -18,22 +18,26 @@ class OrganizationController extends ModuleController {
 	{ 
 	  return $dataTable->render($this->viewPath());
 	}
-
+	public function create()
+	{
+		if (Auth::user()->hasRole('admin')) {
+		  return $this->getForm();
+		}
+		return response('Unauthorized.', 401);   
+	}
 	public function store(OrganizationRequest $request)
 	{
+
 		return $this->createFlashRedirect(Organization::class, $request, $this->imageColumn);
 	}
 
 	public function show(Organization $organization)
 	{
+		$organization['links'] = json_decode($organization['links']);
 		if (Auth::user()->can('edit-orgnization')) {
 			return $this->viewPath("show", $organization);
-		}else if(Auth::user()->can('edit-my-orgnization')){
-			if ($organization['manager_id'] == Auth::user()->id) {
-				return $this->viewPath("show", $organization);
-			}else{
-				return response('Unauthorized.', 401);
-			}
+		}else if(Auth::user()->can('edit-my-orgnization') && $organization['manager_id'] == Auth::user()->id){
+			return $this->viewPath("show", $organization);
 		}else{
 			return response('Unauthorized.', 401);
 		}
@@ -41,24 +45,22 @@ class OrganizationController extends ModuleController {
 
 	public function edit(Organization $organization)
 	{
+		$organization['links'] = json_decode($organization['links']);
 		if (Auth::user()->can('edit-orgnization')) {
-		  return $this->getForm($organization);
-		}else if(Auth::user()->can('edit-my-orgnization')){
-		  if ($organization['manager_id'] == Auth::user()->id) {
 			return $this->getForm($organization);
-		  }else{
-			return response('Unauthorized.', 401);
-		  }
+		}else if(Auth::user()->can('edit-my-orgnization') && $organization['manager_id'] == Auth::user()->id){
+			return $this->getForm($organization);
 		}else{
-		  return response('Unauthorized.', 401);
+			return response('Unauthorized.', 401);
 		}
 	}
 
 	public function update(Organization $organization, OrganizationRequest $request)
 	{
+
 		if (Auth::user()->hasRole('admin')) {
 		  return $this->saveFlashRedirect($organization, $request, $this->imageColumn);
-		}else if(Auth::user()->hasRole('orgnization_manager')){
+		}else if(Auth::user()->can('edit-my-orgnization') && $organization['manager_id'] == Auth::user()->id){
 		  return $this->saveFlashRedirect($organization, $request, $this->imageColumn ,'mine.show');
 		}
 	}
@@ -69,7 +71,8 @@ class OrganizationController extends ModuleController {
 	}
 	public function showMyOrg()
 	{
-		$organization = Organization::where('manager_id' , Auth::user()->id)->first();
+		$organization = Auth::user()->manageOrganization;
+		$organization['links'] = json_decode($organization['links']);
 		if ($organization) {
 		  return $this->viewPath("show", $organization);
 		}else{

@@ -17,6 +17,10 @@ return [
     ],
     "title" => "نـدمـج",
     "home"          => "Home",
-    "read_more"     => "Read More"
+    "read_more"     => "Read More", 
+    "button"        => [
+                        "know_less" => "أعرف أقل",
+                        "know_more" => "أعرف أكتر"
+                    ]
 
 ];

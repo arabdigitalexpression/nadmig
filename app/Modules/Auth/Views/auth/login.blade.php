@@ -28,18 +28,12 @@
             <div class="form-group">
                 {!! Form::checkbox('remember', '1', true) !!} {{ trans('auth.login.remember') }}
             </div>
-        </div>
-
-        <div class="footer">
-            {!! Form::submit(trans('auth.login.submit'), ['class' => 'btn bg-auth btn-block btn-flat']) !!}
-            <hr/>
-            <div class="row">
-                <div class="col-xs-6">
-                    <a class="btn btn-link" href="{{ route('password.email') }}"> <i class="fa fa-lock"></i> {{ trans('auth.login.forgot') }}</a>
-                </div>
+            <div class="form-group">
+                {!! Form::submit(trans('auth.login.submit'), ['class' => 'btn bg-auth btn-block btn-flat']) !!}
             </div>
+            <hr/>
+            <a class="btn btn-link" href="{{ route('password.email') }}"> <i class="fa fa-lock"></i> {{ trans('auth.login.forgot') }}</a>
         </div>
-
         {!!  Form::close() !!}
     </div>
 

@@ -307,4 +307,12 @@ abstract class ApplicationController extends Controller
         json_decode($string);
         return (json_last_error() == JSON_ERROR_NONE);
     }
+    /**
+     * send email
+     *
+     * @return bool
+     */
+    protected function sendEmail(){
+        
+    }
 }

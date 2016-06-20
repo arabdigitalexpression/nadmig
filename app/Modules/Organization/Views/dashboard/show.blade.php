@@ -3,17 +3,24 @@
 @section('content')
     <div class="col-xs-12 no-padding">
         <div class="post-title">
-            <h1> {{ $object->name }} <a href="{{ route('dashboard.organization.edit', ['organization' => $object->id ])}}">{{ trans('Organization::dashboard.organization.mine.edit') }}</a> </h1>
+            <h2> {{ $object->name }} <a style="float: left;" href="{{ route('dashboard.organization.edit', ['organization' => $object->id ])}}"><i class="fa fa-pencil" aria-hidden="true"></i></a> </h2>
+            
+            <ul class="info">
+                <li><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $object->geo_location }}</li>
+                <li><i class="fa fa-phone" aria-hidden="true"></i> {{ $object->phone_number }}</li>
+                <li><i class="fa fa-envelope" aria-hidden="true"></i><a href="mailto:{{ $object->email }}"> {{ $object->email }}</a></li>
+                @foreach($object->links as $link)
+                        <li><i class="fa fa-<?php if($link->type == 'website') {echo "globe";}else{echo $link->type;} ?>" aria-hidden="true"></i> <a href="{{ $link->link }}">{{ $link->link }}</a></li>
+                @endforeach
+            </ul>
         </div>
     </div>
-    <p>
-        {!! $object->email !!}
-    </p>
-    <p>
-        {!! $object->phone_number !!}
-    </p>
-    <p>
-        {!! $object->geo_location !!}
-    </p>
-    <h2> {{ trans('Organization::dashboard.fields.organization.description') . ': ' . $object->description  }}</h2>
+    <div class="post-excerpt">
+        <h3>{!! trans('Organization::dashboard.fields.organization.excerpt') !!}:</h3>
+        {!! $object->excerpt !!}
+    </div>
+    <div class="post-description">
+        <h3>{!! trans('Organization::dashboard.fields.organization.description') !!}:</h3>
+        {!! $object->description !!}
+    </div>
 @endsection

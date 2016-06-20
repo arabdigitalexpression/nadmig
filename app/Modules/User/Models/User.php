@@ -18,7 +18,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $fillable = ['email', 'name', 'password', 'picture', 'birthday', 'governorate', 'website', 'facebook', 'twitter', 'instagram'];
+    protected $fillable = ['email', 'name', 'password', 'picture', 'birthday', 'governorate', 'website', 'facebook', 'twitter', 'instagram', 'confirmation_code', 'confirmed'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -69,6 +69,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function reservations()
     {
         return $this->hasMany('App\Modules\Reservation\Models\Reservation');
+    }
+    public function manageOrganization()
+    {
+        return $this->hasOne('App\Modules\Organization\Models\Organization', 'manager_id');
+    }
+    public function manageSpace()
+    {
+        return $this->hasOne('App\Modules\Space\Models\Space', 'manager_id');
     }
 
 }

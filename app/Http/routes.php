@@ -29,7 +29,7 @@ Route::group(['prefix' => 'dashboard', 'namespace' => 'Admin', 'middleware' => '
     Route::resource('page', 'PageController');
 });
 // // organization_manager routes
-// Route::group(['prefix' => 'dashboard', 'namespace' => 'Admin', 'middleware' => 'organization_manager'], function () {
-//     // GET
-//     Route::get('/', ['as' => 'dashboard.root', 'uses' => 'DashboardController@getIndex']);
-// });
+Route::group(['prefix' => 'dashboard', 'namespace' => 'Admin', 'middleware' => 'organization_manager'], function () {
+    // GET
+    Route::get('/', ['as' => 'dashboard.root', 'uses' => 'DashboardController@getIndex']);
+});

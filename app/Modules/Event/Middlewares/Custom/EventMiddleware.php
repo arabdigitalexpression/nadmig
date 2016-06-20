@@ -1,8 +1,8 @@
 <?php namespace App\Modules\Event\Middlewares\Custom;
 
-use App\Base\Middleware\AdminMiddleware as AdminMiddlewareInterface;
+use App\Http\Middleware\Custom\MakeMenu;
 
-class EventMiddleware extends AdminMiddlewareInterface
+class EventMiddleware extends MakeMenu
 {
 
     private $circle = "circle-o";
@@ -12,15 +12,15 @@ class EventMiddleware extends AdminMiddlewareInterface
 		}
 
 		private static function moduleMenu($menu){
-			$module = $menu->add(trans('Event::admin.menu.event.root'), '#')
+			$module = $menu->add(trans('Event::dashboard.menu.event.root'), '#')
 		        ->icon('apple')
 		        ->prependIcon();
 
-		  $module->add(trans('Event::admin.menu.event.add'), ['route' => 'admin.event.create'])
+		  $module->add(trans('Event::dashboard.menu.event.add'), ['route' => 'dashboard.event.create'])
 		      ->icon("circle-o")
 		      ->prependIcon();
 
-		  $module->add(trans('Event::admin.menu.event.all'), ['route' => 'admin.event.index'])
+		  $module->add(trans('Event::dashboard.menu.event.all'), ['route' => 'dashboard.event.index'])
 		      ->icon("circle-o")
 		      ->prependIcon();
 		}

@@ -14,6 +14,6 @@ Route::group(['prefix' => 'api', 'module' => 'Event', 'namespace' => 'Api', 'mid
 });
 
 // Admin routes
-Route::group(['prefix' => 'admin', 'module' => 'Event', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
+Route::group(['prefix' => 'dashboard', 'module' => 'Event', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
 	Route::resource('event', 'EventController');
 });

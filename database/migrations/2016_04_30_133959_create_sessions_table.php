@@ -16,9 +16,10 @@ class CreateSessionsTable extends Migration
             $table->increments('id');
             $table->integer('reservation_id')->unsigned();
             $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade');
-            $table->string('where');
-            $table->string('address');
+            $table->integer('space_id')->unsigned();
+            $table->foreign('space_id')->references('id')->on('spaces');
             $table->json('start_time');
+            $table->string('fees');
             $table->json('period');
             $table->text('excerpt');
             $table->text('description');

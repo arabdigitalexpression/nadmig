@@ -1,10 +1,12 @@
 <?php namespace App\Modules\Auth\Controllers\Application;
 
 use App\Base\Controllers\ApplicationController;
-use App\Modules\Auth\Models\Auth;
+
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-
+use Input;
+use Auth;
+use Redirect;
 class AuthController extends ApplicationController {
 
    /*
@@ -22,7 +24,7 @@ class AuthController extends ApplicationController {
     /**
      * @var string
      */
-    protected $redirectTo = '/dashboard';
+    protected $redirectTo = '/';
 
     /**
      * Create a new authentication controller instance.
@@ -32,4 +34,23 @@ class AuthController extends ApplicationController {
     {
          $this->middleware('guest', ['except' => ['logout', 'getLogout']]);
     }
+    public function postLogin() {
+
+        $credentials = [
+            'email' => Input::get('email'),
+            'password' => Input::get('password'),
+            'confirmed' => 1
+        ];
+
+        if ( ! Auth::attempt($credentials, Input::get('remember')))
+        {
+            return Redirect::back()
+                ->withInput()
+                ->withErrors([
+                    'credentials' => trans('auth.verify.error')
+                ]);
+        }
+        return redirect("/");
+    }
+
 }

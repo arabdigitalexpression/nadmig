@@ -4,7 +4,7 @@ use App\Modules\Space\Models\Space;
 use App\Modules\Space\Requests\Admin\SpaceRequest;
 use App\Modules\Space\Base\Controllers\ModuleController;
 use App\Modules\Space\Controllers\Api\DataTables\SpaceDataTable;
-
+use Auth;
 class SpaceController extends ModuleController {
   /**
    * Image column of the model
@@ -17,31 +17,82 @@ class SpaceController extends ModuleController {
   {
       return $dataTable->render($this->viewPath());
   }
+  public function create()
+  {
+    if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('organization_manager')) {
+      return $this->getForm();
+    }
+    return response('Unauthorized.', 401);   
+  }
 
   public function store(SpaceRequest $request)
   {
+    if (Auth::user()->hasRole('organization_manager') && Auth::user()->manageOrganization['id'] == $request['organization_id'] || Auth::user()->hasRole('admin')) {
       return $this->createFlashRedirect(Space::class, $request, $this->imageColumn);
+    }
+      
   }
 
   public function show(Space $space)
   {
+    if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('organization_manager')){
+      foreach ($space->toArray() as $key => $value) {
+          if ($this->isJson($value)) {
+            $space[$key] = json_decode($value);
+          }     
+      } 
       return $this->viewPath("show", $space);
+    }
+     return response('Unauthorized.', 401); 
+  }
+  public function showMySpace()
+  {
+    $space = Auth::user()->manageSpace;
+    if(Auth::user()->hasRole('space_manager')){
+      foreach ($space->toArray() as $key => $value) {
+          if ($this->isJson($value)) {
+            $space[$key] = json_decode($value);
+          }     
+      }
+      return $this->viewPath("show", $space);
+    }
+    return response('Unauthorized.', 401);
   }
 
   public function edit(Space $space)
   { 
+    
+    // check if he is an admin
+    if(Auth::user()->hasRole('admin')){
       foreach ($space->toArray() as $key => $value) {
           if ($this->isJson($value)) {
               $space[$key] = json_decode($value);
           }
       }
       return $this->getForm($space);
+    }
+    // check if he has permission to edit or add his orgnization
+    else if(Auth::user()->can('edit-my-space') && $space['organization_id'] == Auth::user()->manageOrganization['id']){
+        foreach ($space->toArray() as $key => $value) {
+            if ($this->isJson($value)) {
+                $space[$key] = json_decode($value);
+            }
+        }
+        return $this->getForm($space);
+    }
+    else if(Auth::user()->can('edit-my-space') && $space['manager_id'] == Auth::user()->id){
+        foreach ($space->toArray() as $key => $value) {
+            if ($this->isJson($value)) {
+                $space[$key] = json_decode($value);
+            }
+        }
+        return $this->getForm($space);
+    }
+    return response('Unauthorized.', 401);
   }
 
   public function update(Space $space, SpaceRequest $request)
   {
-     // dd($request->toArray());
-
       return $this->saveFlashRedirect($space, $request, $this->imageColumn);
   }
 

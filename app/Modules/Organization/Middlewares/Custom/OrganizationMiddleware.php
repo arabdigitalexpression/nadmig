@@ -13,15 +13,15 @@ class OrganizationMiddleware extends MakeMenu
 
 		private static function moduleMenu($menu){
 			$module = $menu->add(trans('Organization::dashboard.menu.organization.root'), '#')
-		        ->icon('apple')
+		        ->icon('building')
 		        ->prependIcon();
 
 		  $module->add(trans('Organization::dashboard.menu.organization.add'), ['route' => 'dashboard.organization.create'])
-		      ->icon("circle-o")
+		      ->icon("plus")
 		      ->prependIcon();
 
 		  $module->add(trans('Organization::dashboard.menu.organization.all'), ['route' => 'dashboard.organization.index'])
-		      ->icon("circle-o")
+		      ->icon("list")
 		      ->prependIcon();
 		}
 }

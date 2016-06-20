@@ -10,13 +10,11 @@ class SessionsForm extends AdminForm
             ->add('id', 'hidden', [
                 'attr' => ['id' => 'id']
             ])
-            ->add('where', 'text', [
-                'label' => trans('Session::dashboard.fields.session.where'),
-                'attr' => ['id' => 'where']
-            ])
-            ->add('address', 'text', [
-                'label' => trans('Session::dashboard.fields.session.address'),
-                'attr' => ['id' => 'address']
+            ->add('space_id', 'choice', [
+                'choices' => $this->getSpaces(),
+                'selected' => $this->space_id,
+                'attr' => ['id' => 'space_select'],
+                'label' => trans('Session::application.fields.session.where') . '<a class="agreement" href="#" data-toggle="popover" title=" قواعد و شروط و توجيهات الاستغلال" data-content=""><i class="fa fa-info-circle" aria-hidden="true"></i></a><i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw" style="font-size:12px; display:none;"></i>'
             ])
             ->add('start_time[date]', 'text', [
                 'label' => trans('Session::application.fields.session.start_time_date'),
@@ -31,6 +29,10 @@ class SessionsForm extends AdminForm
                 'value' => function ($start_time) {
                     return $start_time;
                 }
+            ])
+            ->add('fees', 'number', [
+                'attr' => ['id' => 'fees'],
+                'label' => trans('Reservation::application.fields.reservation.fees') . '<span class="fees"></span>'
             ]);
             $this->OptionAndPeriod('period', trans('Session::dashboard.fields.session.period'), false);
             $this->add('excerpt', 'textarea', [
@@ -71,5 +73,13 @@ class SessionsForm extends AdminForm
                 },
                 'attr' => ['id' => $name . '_period']
             ]);
+    }
+    protected function getSpaces(){
+        $array = array();
+        foreach ($this->data[0]->spaces->toArray() as $space)
+        {    
+            $array = array_add($array, $space['id'], $space['name']);   
+        }
+        return $array;
     }
 }

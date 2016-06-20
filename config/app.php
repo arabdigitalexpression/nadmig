@@ -54,7 +54,7 @@ return [
     | to any of the locales which will be supported by the application.
     |
     */
-    'locale' => 'en',
+    'locale' => 'ar',
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale
@@ -170,6 +170,8 @@ return [
         App\Modules\Space\Providers\RouteServiceProvider::class,
         App\Modules\Reservation\Providers\RouteServiceProvider::class,
         App\Modules\Session\Providers\RouteServiceProvider::class,
+        App\Modules\Event\Providers\RouteServiceProvider::class,
+        App\Modules\Log\Providers\RouteServiceProvider::class,
 
     ],
 

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Session extends Model {
 
-	protected $fillable = ['url_id', 'reservation_id', 'where', 'address', 'start_time', 'period', 'excerpt', 'description'];
+	protected $fillable = ['space_id', 'reservation_id', 'start_time', 'fees', 'period', 'excerpt', 'description'];
 
 	public function reservation()
      {

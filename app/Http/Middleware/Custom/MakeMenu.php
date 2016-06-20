@@ -13,6 +13,7 @@ use App\Modules\Organization\Middlewares\Custom\MyOrganizationMiddleware as MyOr
 use App\Modules\Space\Middlewares\Custom\SpaceMiddleware as Space;
 use App\Modules\Reservation\Middlewares\Custom\ReservationMiddleware as Reservation;
 use App\Modules\Session\Middlewares\Custom\SessionMiddleware as Sessions;
+use App\Modules\Event\Middlewares\Custom\EventMiddleware as Events;
 class MakeMenu
 {
     /**
@@ -65,6 +66,7 @@ class MakeMenu
                         ->prependIcon();
                     Organization::AddMenus($menu);
                     Space::AddMenus($menu);
+                    Events::AddMenus($menu);
                     Reservation::AddMenus($menu);
                     Sessions::AddMenus($menu);
                     User::AddMenus($menu);
@@ -75,8 +77,12 @@ class MakeMenu
                         ->prependIcon();
                 }   
 
-             if (Auth::user()->hasRole('orgnization_manager')) {
+             if (Auth::user()->hasRole('organization_manager')) {
                 MyOrganization::AddMenus($menu);
+                Space::AddMenus($menu);
+             }
+             if (Auth::user()->hasRole('space_manager')) {
+                Space::AddMenus($menu);
              }
             
         });
