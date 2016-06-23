@@ -13,11 +13,11 @@ class ReservationMiddleware extends MakeMenu
 
 		private static function moduleMenu($menu){
 			$module = $menu->add(trans('Reservation::dashboard.menu.reservation.root'), '#')
-		        ->icon('apple')
+		        ->icon('object-group')
 		        ->prependIcon();
 
 		  $module->add(trans('Reservation::dashboard.menu.reservation.all'), ['route' => 'dashboard.reservation.index'])
-		      ->icon("circle-o")
+		      ->icon("list")
 		      ->prependIcon();
 		}
 }

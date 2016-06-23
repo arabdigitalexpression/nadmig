@@ -17,10 +17,6 @@ abstract class AdminForm extends Form
             ->add('save', 'submit', [
                 'label' => trans('dashboard.fields.save'),
                 'attr' => ['class' => 'btn btn-primary']
-            ])
-            ->add('clear', 'reset', [
-                'label' => trans('dashboard.fields.reset'),
-                'attr' => ['class' => 'btn btn-warning']
             ]);
     }
     protected function getGovernorates(){
@@ -69,6 +65,58 @@ abstract class AdminForm extends Form
         return array(
             "yes" => "نعم",
             "no" => "لا"
+            );
+    }
+    protected function getReservationType($isNull, $isMin,$isHours, $isDays){
+        $array = array();
+        if ($isNull) {
+            $array['null'] = "لا يوجد";
+        };
+        if ($isMin) {
+            $array['mins'] = "دقائق";
+        };
+        if ($isHours) {
+            $array['hours'] = "ساعات";
+        }
+        if ($isDays) {
+            $array['days'] = "أيام";
+        }
+        return $array;
+    }
+    protected function OptionAndPeriod($name, $title, $isNull = true, $isMin = false, $isHours = false, $isDays = true, $isSelect = true){
+        
+        if ($isNull) {
+            $type = 'hidden';
+        }else{
+            $type = 'number';
+        }
+        if($isSelect){
+            $attr = ['id' => $name . '_period', 'class' => 'space_number'];
+        }else{
+            $attr = ['id' => $name . '_period'];
+        }
+        $this
+            ->add($name . '[type]', 'choice', [
+                'choices' => $this->getReservationType($isNull, $isMin,$isHours, $isDays),
+                'selected' => $this->{$name},
+                'label' => $title,
+                'expanded' => $isSelect,
+                'attr' => ['id' => $name . '_type']
+            ])
+            ->add($name . '[period]', $type, [
+                'wrapper' => ['class' => 'period_val'],
+                'label' => false,
+                'value' => function ($name) {
+                    return $name;
+                },
+                'attr' => $attr
+            ]);
+    }
+    protected function getChangeFeesKeys(){
+        return array(
+                "null" => "لا يوجد",
+                "percentage" => "نسبة من قيمة الحجز",
+                "value" => "قيمة"
             );
     }
 

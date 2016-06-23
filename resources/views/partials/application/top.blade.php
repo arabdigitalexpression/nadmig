@@ -14,7 +14,7 @@
               <ul class="nav navbar-nav navbar-right menu">
                 <li class="{{ Route::is('root') ? 'active' : '' }}"><a href="{{  route('root') }}">{{ trans('application.menu.home') }}</a></li>
                 <li class="{{ Route::is('spaces') ? 'active' : '' }}"><a href="{{  route('spaces') }}">{{ trans('application.menu.spaces') }}</a></li>
-                <li><a href="">{{ trans('application.menu.events') }}</a></li>
+                <li><a href="{{  route('events') }}">{{ trans('application.menu.events') }}</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-left user">
                 @if (Auth::guest())

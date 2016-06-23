@@ -41,29 +41,29 @@ class MakeMenu
                 ->icon('dashboard')
                 ->prependIcon();
              if (Auth::user()->hasRole('admin')) {
-                    $language  = $menu->add(trans('dashboard.menu.language.root'), '#')
-                        ->icon('flag')
-                        ->prependIcon();
+                    // $language  = $menu->add(trans('dashboard.menu.language.root'), '#')
+                    //     ->icon('flag')
+                    //     ->prependIcon();
 
-                    $language->add(trans('dashboard.menu.language.add'), ['route' => 'dashboard.language.create'])
-                        ->icon($this->circle)
-                        ->prependIcon();
+                    // $language->add(trans('dashboard.menu.language.add'), ['route' => 'dashboard.language.create'])
+                    //     ->icon($this->circle)
+                    //     ->prependIcon();
 
-                    $language->add(trans('dashboard.menu.language.all'), ['route' => 'dashboard.language.index'])
-                        ->icon($this->circle)
-                        ->prependIcon();
+                    // $language->add(trans('dashboard.menu.language.all'), ['route' => 'dashboard.language.index'])
+                    //     ->icon($this->circle)
+                    //     ->prependIcon();
 
-                    $pages = $menu->add(trans('dashboard.menu.page.root'), '#')
-                        ->icon('folder')
-                        ->prependIcon();
+                    // $pages = $menu->add(trans('dashboard.menu.page.root'), '#')
+                    //     ->icon('folder')
+                    //     ->prependIcon();
 
-                    $pages->add(trans('dashboard.menu.page.add'), ['route' => 'dashboard.page.create'])
-                        ->icon($this->circle)
-                        ->prependIcon();
+                    // $pages->add(trans('dashboard.menu.page.add'), ['route' => 'dashboard.page.create'])
+                    //     ->icon($this->circle)
+                    //     ->prependIcon();
 
-                    $pages->add(trans('dashboard.menu.page.all'), ['route' => 'dashboard.page.index'])
-                        ->icon($this->circle)
-                        ->prependIcon();
+                    // $pages->add(trans('dashboard.menu.page.all'), ['route' => 'dashboard.page.index'])
+                    //     ->icon($this->circle)
+                    //     ->prependIcon();
                     Organization::AddMenus($menu);
                     Space::AddMenus($menu);
                     Events::AddMenus($menu);
@@ -80,9 +80,13 @@ class MakeMenu
              if (Auth::user()->hasRole('organization_manager')) {
                 MyOrganization::AddMenus($menu);
                 Space::AddMenus($menu);
+                Reservation::AddMenus($menu);
+                Sessions::AddMenus($menu);
              }
              if (Auth::user()->hasRole('space_manager')) {
                 Space::AddMenus($menu);
+                Reservation::AddMenus($menu);
+                Sessions::AddMenus($menu);
              }
             
         });

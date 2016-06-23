@@ -12,16 +12,16 @@ class SpaceController extends ApplicationController {
 	}
 	public function space(Space $space)
 	{
-		$space['reservations'] = $space->organization->reservations()->where("status", "accepted")->take(4)->get();
-		foreach ($space['reservations'] as $reservation) {
-			$reservation['sessions'] = $reservation->sessions;
-		}
-		$space['organization'] = $space->organization;
 		foreach ($space->toArray() as $key => $value) {
-            if ($this->isJson($value)) {
-              $space[$key] = json_decode($value);
-            }     
-        } 
+          if ($this->isJson($value)) {
+            $space[$key] = json_decode($value);
+          }     
+      	} 
+      	// $space->organization->reservations()->where("status", "accepted")->take(6)->get();
+		$space['organization'] = $space->organization;
+  //     	foreach ($space->organization->reservations->where("status", "accepted")->take(6)->get() as $key => $reservation) {
+		// 	$reservation['sessions'] = $reservation->sessions()->where("space_id", $space->id)->get()->toArray();
+		// }
 		return view('Space::application.index', compact('space'));
 	}
 }

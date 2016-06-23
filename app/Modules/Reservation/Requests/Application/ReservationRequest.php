@@ -26,10 +26,11 @@ class ReservationRequest extends Request {
             'dooropen_time' => 'required',
             'dooropen_period' => 'required',
             'links' => 'sometimes',
-            'apply' => 'required',
+            'apply' => 'sometimes',
             'apply_cost' => 'sometimes',
             'apply_deadline' => 'sometimes|date_format:d/m/Y',
-            'apply_agreement' => 'sometimes'
+            'apply_agreement' => 'sometimes', 
+            'description' => 'sometimes'
         ];
     }
 }

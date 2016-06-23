@@ -21,6 +21,7 @@ class CreateReservationsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('name');
             $table->string('artwork');
+            $table->text('description');
             $table->string('facilitator_name');
             $table->string('facilitator_email');
             $table->string('facilitator_phone');
@@ -33,11 +34,11 @@ class CreateReservationsTable extends Migration
             $table->string('event_type');
             $table->json('dooropen_time');
             $table->json('dooropen_period');
-            $table->json('links');
             $table->string('apply');
             $table->string('apply_cost');
             $table->string('apply_deadline');
             $table->string('status');
+            $table->json('actions');
             $table->timestamps();
         });
     }

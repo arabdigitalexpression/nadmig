@@ -12,7 +12,7 @@
                     <h3>{{ $space->name }}<i style="
                         @if($space->status == 'working')
                             color: #3cb878;
-                        @elseif($space->status == 'stoped')
+                        @elseif($space->status == 'stopped')
                             color: #ed1c24;
                         @elseif($space->status == 'closed')
                             color: #898989;
@@ -38,7 +38,9 @@
                         </li>
                     </ul>
                 </div>
+                @if($space->status == 'working')
                 <a class="btn btn-default btn-orange reserve" href="{{ route('reservation.create', ['organization_slug' => $space->organization['slug']])}}" role="button">{{ trans('Space::application.reserve') }}</a>
+                @endif
             </header>
             <div class="post-excerpt">
                 {!! $space->excerpt !!}
@@ -48,23 +50,7 @@
             </div>
             <button type="button" class="btn btn-default more"><i class="fa fa-caret-down" aria-hidden="true"></i>{{trans('application.button.know_more')}}</button>
             <h3>{{ trans('Space::application.page.events') }}</h3>
-            <ul class="spaces-list">
-            @foreach($space->reservations as $reservation)
-                <li class="panel panel-default panel-orange">
-                    <a href="#">
-                        <div class="panel-heading">{{ $reservation->name }}</div>
-                    </a>   
-                        <img src="{{ url($reservation->artwork) }}" class="space-icon img-responsive">
-                        <ul class="space-info">
-                            <li><i class="fa fa-envelope" aria-hidden="true"></i> {{ $reservation->facilitator_email }}</li>
-                            <li><i class="fa fa-phone" aria-hidden="true"></i> {{ $reservation->facilitator_phone }}</li>
-                        </ul>
-
-                    <div class="panel-heading time"><i class="fa fa-calendar" aria-hidden="true"></i> {{ ArabicDate(json_decode($reservation->sessions[0]->start_time)->date) }} ، {{ ArabicTime(json_decode($reservation->sessions[0]->start_time)->time) }}</div>
-
-                </li>
-            @endforeach
-            </ul>
+            
         </div>
     @endif
 

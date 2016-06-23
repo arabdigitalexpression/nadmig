@@ -9,7 +9,7 @@ class OrganizationDataTable extends ModuleDataTableController {
   protected $pluck_columns = ['manager_id' => ['manager', 'name']];
   protected $common_columns = ['created_at', 'updated_at'];
   protected $image_columns = ['logo'];
-  
+  protected $options = ['show', 'edit'];
   public function query()
   {
       $organization = Organization::Query();

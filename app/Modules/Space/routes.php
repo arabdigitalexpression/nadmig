@@ -11,7 +11,8 @@ Route::group(['middleware' => 'web'], function () {
 // API routes
 Route::group(['prefix' => 'api', 'module' => 'Space', 'namespace' => 'Api', 'middleware' => 'api'], function () {
     // get fees and time for the space
-     Route::get('space/{space}', ['as' => 'space.fees_time', 'uses' => 'SpaceController@fees_time']);
+     Route::get('space/{space}', ['as' => 'space.fees_time', 'uses' => 'SpaceController@retrive']);
+     Route::get('space/{space}/{year}/{month}/{day}', ['as' => 'space.date', 'uses' => 'SpaceController@date']);
 });
 
 // Admin routes

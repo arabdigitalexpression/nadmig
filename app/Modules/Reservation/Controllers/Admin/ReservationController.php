@@ -20,7 +20,7 @@ class ReservationController extends ModuleController {
 
   public function show(Reservation $reservation)
   {
-      return $this->viewPath("show", $reservation);
+    return redirect()->route('application.reservation.index', ['reservation_url_id' => $reservation->url_id]);
   }
 
   public function edit(Reservation $reservation)

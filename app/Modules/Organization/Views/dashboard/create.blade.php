@@ -22,6 +22,17 @@
         </div>
     </div>
     <button class="btn btn-primary btn-add-panel"> <i class="glyphicon glyphicon-plus"></i> أضف رابط</button>
+    {!! form_row($form->organization_reservation) !!}
+    {!! form_row($form->{"min_time_before_usage_to_edit[type]"}) !!}
+    {!! form_row($form->{"min_time_before_usage_to_edit[period]"}) !!}
+    {!! form_row($form->{"change_fees[type]"}) !!}
+    {!! form_row($form->{"change_fees[amount]"}) !!}
+    {!! form_row($form->{"min_to_cancel[type]"}) !!}
+    {!! form_row($form->{"min_to_cancel[period]"}) !!}
+    {!! form_row($form->{"cancel_fees[type]"}) !!}
+    {!! form_row($form->{"cancel_fees[amount]"}) !!}
+    {!! form_row($form->{"max_to_confirm[type]"}) !!}
+    {!! form_row($form->{"max_to_confirm[period]"}) !!}
     {!! form_row($form->manager_id) !!}
     {!! form_row($form->save) !!}
     {!! form_row($form->clear) !!}
@@ -43,6 +54,22 @@
                     links({!! json_encode($link) !!}, $template);
                 @endforeach
             @endif
+            $('input[type=\'radio\']').change( function() {
+                var id = $(this).attr('name').replace("[type]", ""); 
+                if ($('input[name="'+$(this).attr('name')+'"]:checked').val() == "null") {
+                    $('#'+id+'_period').attr('type', 'hidden').val("");
+                }else{
+                    $('#'+id+'_period').attr('type', 'number');
+                }
+            });
+            $('input[type=\'radio\']').change( function() {
+                var id = $(this).attr('name').replace("[type]", ""); 
+                if ($('input[name="'+$(this).attr('name')+'"]:checked').val() == "null") {
+                    $('#'+id).attr('type', 'hidden').val("");
+                }else{
+                    $('#'+id).attr('type', 'number');
+                }
+            });
     	})
     </script>
 @endsection

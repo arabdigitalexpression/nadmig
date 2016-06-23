@@ -10,6 +10,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::patch('reservation/{reservation_url_id}/update', ['as' => 'application.reservation.update', 'uses' => 'ReservationController@update']);
         Route::get('reservation/{reservation_url_id}/delete', ['as' => 'application.reservation.del', 'uses' => 'ReservationController@delete']);
         Route::get('reservation/{reservation_url_id}', ['as' => 'application.reservation.index', 'uses' => 'ReservationController@index']);
+        Route::get('reservation/{reservation_url_id}/accept', ['as' => 'application.reservation.accept', 'uses' => 'ReservationController@accept']);
     });
 });
 
@@ -19,6 +20,7 @@ Route::group(['prefix' => 'api', 'module' => 'Reservation', 'namespace' => 'Api'
 });
 
 // Admin routes
-Route::group(['prefix' => 'dashboard', 'module' => 'Reservation', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
+Route::group(['prefix' => 'dashboard', 'module' => 'Reservation', 'namespace' => 'Admin', 'middleware' => 'space_manager'], function () {
 	Route::resource('reservation', 'ReservationController');
+
 });

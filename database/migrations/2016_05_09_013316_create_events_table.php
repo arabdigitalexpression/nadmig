@@ -15,7 +15,8 @@ class CreateEventsTable extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('reservation_id')->unsigned();
-            $table->foreign('reservation_id')->references('id')->on('reservations');;
+            $table->foreign('reservation_id')->references('id')->on('reservations');
+            $table->string('slug');
             $table->timestamps();
         });
     }

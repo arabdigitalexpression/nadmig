@@ -9,7 +9,7 @@ if (!function_exists('get_ops')) {
      * @param $class
      * @return string
      */
-    function get_ops($resource, $id, $class = "btn")
+    function get_ops($resource, $id, $class = "btn", $options, $show_path = null)
     {
         if ($class=="btn") {
             $show_class = "btn btn-xs bg-navy";
@@ -20,28 +20,36 @@ if (!function_exists('get_ops')) {
             $edit_class = "inline-edit";
             $delete_class = "inline-delete";
         }
-        $show_path = route('dashboard.'.$resource.'.show', ['id' => $id]);
+        if(!$show_path){
+            $show_path = route('dashboard.'.$resource.'.show', ['id' => $id]);
+        }
         $edit_path = route('dashboard.'.$resource.'.edit', ['id' => $id]);
         $delete_path = route('dashboard.'.$resource.'.destroy', ['id' => $id]);
         $ops  = '<ul class="list-inline no-margin-bottom">';
-        $ops .=  '<li>';
-        $ops .=  '<a class="'.$show_class.'" href="'.$show_path.'">
-                  <i class="fa fa-search"></i>
-                  '.trans('dashboard.ops.show').'</a>';
-        $ops .=  '</li>';
-        $ops .=  '<li>';
-        $ops .=  '<a class="'.$edit_class.'" href="'.$edit_path.'">
-                 <i class="fa fa-pencil-square-o"></i>
-                  '.trans('dashboard.ops.edit').'</a>';
-        $ops .=  '</li>';
-        $ops .=  '<li>';
-        $ops .= Form::open(['method' => 'DELETE', 'url' => $delete_path]);
-        $ops .= Form::submit('&#xf1f8; ' .trans('dashboard.ops.delete'), [
-                'onclick' => "return confirm('".trans('dashboard.ops.confirmation')."');",
-                'class' => $delete_class
-            ]);
-        $ops .= Form::close();
-        $ops .=  '</li>';
+        if (in_array("show", $options)) {
+            $ops .=  '<li>';
+            $ops .=  '<a class="'.$show_class.'" href="'.$show_path.'">
+                      <i class="fa fa-eye"></i>
+                      '.trans('dashboard.ops.show').'</a>';
+            $ops .=  '</li>';
+        }
+        if (in_array("edit", $options)) {
+            $ops .=  '<li>';
+            $ops .=  '<a class="'.$edit_class.'" href="'.$edit_path.'">
+                     <i class="fa fa-pencil-square-o"></i>
+                      '.trans('dashboard.ops.edit').'</a>';
+            $ops .=  '</li>';
+        }
+        if (in_array("delete", $options)) {
+            $ops .=  '<li>';
+            $ops .= Form::open(['method' => 'DELETE', 'url' => $delete_path]);
+            $ops .= Form::submit('&#xf1f8; ' .trans('dashboard.ops.delete'), [
+                    'onclick' => "return confirm('".trans('dashboard.ops.confirmation')."');",
+                    'class' => $delete_class
+                ]);
+            $ops .= Form::close();
+            $ops .=  '</li>';
+        }
         $ops .=  '</ul>';
         return $ops;
     }

@@ -20,7 +20,12 @@ class OrganizationRequest extends Request {
             'excerpt' => 'required',
             'description' => 'required',
             'links' => 'sometimes',
-            'manager_id' => 'required|integer|exists:users,id'
+            'manager_id' => 'required|integer|exists:users,id',
+            'min_time_before_usage_to_edit' => 'required',
+            'change_fees' => 'required',
+            'min_to_cancel' => 'required',
+            'cancel_fees' => 'required',
+            'max_to_confirm' => 'required',
         ];
     }
 }

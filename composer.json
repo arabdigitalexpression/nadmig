@@ -24,7 +24,8 @@
 		"caffeinated/menus": "~2.0",
 		"yajra/laravel-datatables-oracle": "~6.0",
 		"thedgmbh/modules": "dev-master",
-		"zizaco/entrust": "5.2.x-dev"
+		"zizaco/entrust": "5.2.x-dev",
+		"spatie/activitylog": "^2.4"
 
 	},
 	"require-dev": {

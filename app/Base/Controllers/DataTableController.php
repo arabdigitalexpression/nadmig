@@ -41,6 +41,8 @@ abstract class DataTableController extends DataTable
      */
     protected $ops = true;
 
+    protected $options = array("show", "edit", "delete");
+
     /**
      * Common columns such that used by more than one class, so that translation belongs to root, not to any model
      * specially, for instance, every model has `created_at` and `updated_at` attribute, hence translation of those
@@ -64,6 +66,7 @@ abstract class DataTableController extends DataTable
      */
     public function ajax()
     {
+
         $model = $this->getModelName();
         $datatables = $this->datatables->eloquent($this->query());
         foreach ($this->pluck_columns as $key => $value) {
@@ -83,7 +86,7 @@ abstract class DataTableController extends DataTable
         }
         if ($this->ops === true) {
             $datatables = $datatables->addColumn('ops', function ($data) use ($model) {
-                return get_ops($model, $data->id);
+                return get_ops($model, $data->id, "btn" ,$this->options);  
             });
         }
 

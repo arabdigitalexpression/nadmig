@@ -3,7 +3,7 @@
 Route::group(['middleware' => 'web'], function () {
     // Application routes
     Route::group(['module' => 'Event', 'namespace' => 'Application'], function () {
-        Route::get('event', ['as' => 'event', 'uses' => 'EventController@index']);
+        Route::get('events', ['as' => 'events', 'uses' => 'EventController@list']);
         Route::get('event/{event_slug}', ['as' => 'event.page', 'uses' => 'EventController@index']);
     });
 });

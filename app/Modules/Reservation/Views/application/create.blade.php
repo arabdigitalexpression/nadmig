@@ -63,7 +63,7 @@
             @else
                 new_session();
             @endif
-            var week_days = ["sat", "sun", "mon", "tue", "wed", "thu", "fri"];
+            var week_days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
             $(".btn-add-panel").on("click", function (e) {
                 e.preventDefault();
                 new_session();
@@ -101,42 +101,63 @@
                             
                         }
                     })    
+                }else{
+                    $newPanel.find("#name").val("الجلسة # " + hash);
                 }
+                $newPanel.find("#period_period").after( '<span class="help-block"></span>' );
                 // rename the fields for the pickers
                 $newPanel.find("#start_date").attr("id", "start_date_" + hash);
+                $newPanel.find("#name").attr("id", "name_" + hash);
                 $newPanel.find("#start_time").attr("id", "start_time_" + hash);
                 $newPanel.find("#description").attr("id", "description_" + hash);
                 $newPanel.find("#space_select").attr("id", "space_select_" + hash);
+                $newPanel.find("#period_type").attr("id", "period_type_" + hash);
+                $newPanel.find("#period_period").attr("id", "period_period_" + hash);
                 $newPanel.find("#fees").attr("id", "fees_" + hash);
                 $newPanel.find('.agreement').attr("class", "agreement_text_"+hash);
                 $("#accordion").append($newPanel.fadeIn());
                 editor_init("#description_" + hash);
-                getSpaceData($("#space_select_" + hash ).val());
+                getSpaceData($("#space_select_" + hash ).val(), true);
                 $("#space_select_" + hash ).change(function() {
                     getSpaceData($(this).val());
                 });
+                
             }
-            function getSpaceData(space_id) {
+            function getSpaceData(space_id,  is_data = false) {
                 let picker = date();
                 let picker_time = time();
                 $(".panel-body").find(".fa-spin").show();
                 $.getJSON('/api/space/' + space_id , function( json ) {
                     agreement(json);
                     fees(json);
+                    min_res(json);
                     let working_hours = JSON.parse(json.working_hours_days);
                     let working_week_days = JSON.parse(json.working_week_days);
                     let difference = $(week_days).not(working_week_days).get();
-                    picker.clear();
-                    picker.set('enable', true);
-                    picker_time.clear();
+                    let max_before = JSON.parse(json.max_time_before_reservation);
+                    if (!is_data) {
+                        picker.clear();
+                        picker.set('enable', true);
+                        picker_time.clear();
+                    }
                     picker.set('disable', getNotWorkingDays(difference));
+                    picker.set('min', true);
+                    if(max_before.type == 'days'){
+                        picker.set('max', parseInt(max_before.period));
+                    }
                     picker.on({ set: function(context) {
                         let day = 0;
                         if(moment(context.select).weekday() < 6){
-                            day = moment(context.select).weekday() + 1;
+                            day = moment(context.select).weekday();
                         }
                         picker_time.set('disable', false);
-                        picker_time.set('disable', [{ from: [00, 0], to: [23, 30] },{ from: getTime(working_hours[week_days[day]]['from']), to: getTime(working_hours[week_days[day]]['to']), inverted: true }]);
+                        var date = moment(context.select).format("YYYY/MM/DD");
+                        picker_time.set('disable', [{ from: [00, 0], to: getTime(moment(working_hours[week_days[day]].from, "hh:mm a").subtract(30, 'minutes').format("h:mm A"))},{ from: getTime(moment(working_hours[week_days[day]].to, "hh:mm a").add(30, 'minutes').format("h:mm A")) , to:[23, 30]}]);
+                        $.getJSON('/api/space/' + space_id + '/' + date, function( data ) {
+                            $.each(data, function( index, value ) {
+                              picker_time.set('disable', [{ from: getTime(value.start_time), to: getTime(moment(value.start_time, "hh:mm a").add(value.period.period, value.period.type).format("h:mm A"))}]);
+                            }); 
+                        });
                       }
                     })
                 })
@@ -152,9 +173,40 @@
                 let $input = $('#start_date_' + hash).pickadate({
                     firstDay: 0,
                     format: 'dd/mm/yyyy',
-                    min: new Date(2016,3,1)
                 });
                 return $input.pickadate('picker');
+            }
+            function min_res(json){
+                let min = JSON.parse(json.min_type_for_reservation);
+                let max = JSON.parse(json.max_type_for_reservation);
+                let Atype;
+                $("#period_period_" + hash).parent().find('.help-block').text('الحجز الأدنى ' + min.period + ' ' + TimeTypeArabic(min) + ' | الحجز الأقصى ' + max.period + ' ' + TimeTypeArabic(max));
+                $("#period_period_" + hash).bind('input propertychange', function() {
+                    if(($(this).val() < parseInt(min.period)  && min.type == $("#period_type_" + hash).val()) || (min.type == 'hours' && $("#period_type_" + hash).val() == 'mins') || ($(this).val() > parseInt(max.period)  && max.type == $("#period_type_" + hash).val())){
+                        $(this).parent().addClass('has-error');
+                        $(this).parent().find('.help-block').text('الحجز الأدنى ' + min.period + ' ' + TimeTypeArabic(min) + ' | الحجز الأقصى ' + max.period + ' ' + TimeTypeArabic(max));
+                        $('button[type=submit]').attr('disabled', '');
+                        $(this).closest(".panel").css("border", "#a94442 1px solid");
+                    }else{
+                        $(this).parent().removeClass('has-error');
+                        $(this).parent().find('.help-block').text("");
+                        $('button[type=submit]').removeAttr('disabled');
+                        $(this).closest(".panel").css("border", "#ddd 1px solid");
+                    }
+                });
+            }
+            function TimeTypeArabic(period){
+                let Atype;
+                if(period.type == 'hours'){
+                    if(parseInt(period.period) > 1){
+                        Atype = 'ساعات';
+                    }else{
+                        Atype = 'ساعة';
+                    }
+                }else if(period.type == 'mins'){
+                    Atype = 'دقيقة';   
+                }
+                return Atype;
             }
             function time(){
                 let $input = $('#start_time_' + hash).pickatime();
@@ -171,16 +223,28 @@
             function fees(json){
                  if(json.in_return_key == 'free'){
                      $(".panel-body").find(".fees").text("{{ trans('Reservation::application.fields.reservation.free') }}");
+                     $("#fees_" + hash).hide();
 
                 }else if(json.in_return_key == 'min'){
                     $(".panel-body").find(".fees").text("{{ trans('Reservation::application.fields.reservation.min') }}" + ' ' +json.in_return);
                 }
-                else if(json.in_return_key == 'max'){
-                    $(".panel-body").find(".fees").text("{{ trans('Reservation::application.fields.reservation.max') }}" + ' ' +json.in_return);
+                else if(json.in_return_key == 'exact'){
+                    $(".panel-body").find(".fees").text("{{ trans('Reservation::application.fields.reservation.exact') }}" + ' ' +json.in_return);
                 }
                 else if(json.in_return_key == 'any'){
                     $(".panel-body").find(".fees").text("{{ trans('Reservation::application.fields.reservation.any') }}" + ' ' +json.in_return);
                 }
+                $("#fees_" + hash).bind('input propertychange', function() {
+                    if($(this).val() < parseInt(json.in_return) && (json.in_return_key == 'min' || json.in_return_key == 'exact')){
+                        $(this).parent().addClass('has-error');
+                        $('button[type=submit]').attr('disabled', '');
+                        $(this).closest(".panel").css("border", "#a94442 1px solid");
+                    }else{
+                        $(this).parent().removeClass('has-error');
+                        $('button[type=submit]').removeAttr('disabled');
+                        $(this).closest(".panel").css("border", "#ddd 1px solid");
+                    }
+                });
             }
             function getTime(time){
                 var hour = time.split(":")[0];
@@ -197,7 +261,7 @@
             $('#apply_deadline').pickadate({
                 firstDay: 0,
                 format: 'dd/mm/yyyy',
-                min: new Date(2016,3,1),
+                min: true,
                 disable: [
                     // get not working days
                     @if ($extra->working_week_days)

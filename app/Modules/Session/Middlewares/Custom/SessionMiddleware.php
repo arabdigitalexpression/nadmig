@@ -13,10 +13,10 @@ class SessionMiddleware extends MakeMenu
 
 		private static function moduleMenu($menu){
 			$module = $menu->add(trans('Session::dashboard.menu.session.root'), '#')
-		        ->icon('apple')
+		        ->icon('object-ungroup')
 		        ->prependIcon();
 		  $module->add(trans('Session::dashboard.menu.session.all'), ['route' => 'dashboard.session.index'])
-		      ->icon("circle-o")
+		      ->icon("list")
 		      ->prependIcon();
 		}
 }

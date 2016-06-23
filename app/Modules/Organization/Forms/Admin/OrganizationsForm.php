@@ -51,6 +51,39 @@ class OrganizationsForm extends AdminForm
                     'is_child' => true
                 ]
             ]);
+            $this->add('organization_reservation', 'static', [
+                'label' => false,
+                'tag' => 'div',
+                'attr' => ['class' => 'page-header'],
+                'value' => trans('Organization::dashboard.fields.space.organization_reservation')
+            ]);
+            $this->OptionAndPeriod('min_time_before_usage_to_edit', trans('Organization::dashboard.fields.space.min_time_before_usage_to_edit'));
+           $this
+                ->add('change_fees[type]', 'choice', [
+                    'choices' => $this->getChangeFeesKeys(),
+                    'selected' => $this->change_fees['type'],
+                    'label' => trans('Organization::dashboard.fields.space.change_fees'),
+                    'expanded' => true,
+                    'attr' => ['id' => 'change_fees_key']
+                ])
+                ->add('change_fees[amount]', 'hidden', [
+                    'label' => trans('Organization::dashboard.fields.space.change_fees'), 
+                    'attr' => ['id' => 'change_fees', 'class' => 'space_number']
+                ]);
+            $this->OptionAndPeriod('min_to_cancel', trans('Organization::dashboard.fields.space.min_to_cancel'));
+            $this
+                ->add('cancel_fees[type]', 'choice', [
+                    'choices' => $this->getChangeFeesKeys(),
+                    'selected' => $this->cancel_fees['type'],
+                    'expanded' => true,
+                    'label' => trans('Organization::dashboard.fields.space.cancel_fees'),
+                    'attr' => ['id' => 'cancel_fees_key']
+                ])
+                ->add('cancel_fees[amount]', 'hidden', [
+                    'label' => false, 
+                    'attr' => ['id' => 'cancel_fees', 'class' => 'space_number']
+                ]);
+            $this->OptionAndPeriod('max_to_confirm', trans('Organization::dashboard.fields.space.max_to_confirm'), false, false, true, true);
             if ( Auth::user()->hasRole('admin') ){
                $this->add('manager_id', 'choice', [
                     'choices' => $this->getOrgnizationManagers(),

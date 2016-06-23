@@ -14,6 +14,10 @@ class ReservationsForm extends AdminForm
                 'label' => trans('Reservation::application.fields.reservation.artwork'),
                 'attr' => ['class' => '']
             ])
+            ->add('description', 'textarea', [
+                'label' => trans('Reservation::application.fields.reservation.description'),
+                 'attr' => ['id' => 'description']
+            ])
             ->add('space_info', 'static', [
                 'label' => false,
                 'tag' => 'div',
@@ -95,8 +99,8 @@ class ReservationsForm extends AdminForm
                 'selected' => $this->event_type,
                 'label' => trans('Reservation::application.fields.reservation.event_type')
             ]);
-            $this->OptionAndPeriod('dooropen_time', trans('Reservation::application.fields.reservation.dooropen_time'));
-            $this->OptionAndPeriod('dooropen_period', trans('Reservation::application.fields.reservation.dooropen_period'));
+            $this->OptionAndPeriod('dooropen_time', trans('Reservation::application.fields.reservation.dooropen_time'), true, true, true, false, false);
+            $this->OptionAndPeriod('dooropen_period', trans('Reservation::application.fields.reservation.dooropen_period'), true, true, true, false, false);
             $this->add('apply_info', 'static', [
                 'label' => false,
                 'tag' => 'div',
@@ -126,7 +130,9 @@ class ReservationsForm extends AdminForm
     protected function getGroupAge(){
         return array(
             'null' => 'غير معيّن',
-            // add group ages
+            '3_11' => 'سن من ٣ إلى ١١',
+            '12_17' => 'من سن ١٢ إلى ١٧',
+            '18_up' => 'من ١٨ فيما فوق'
             );
     }
     protected function getHelpMassage($msg){
@@ -137,36 +143,6 @@ class ReservationsForm extends AdminForm
             'private' => 'خاص',
             'public' => 'عام'
             );
-    }
-    protected function getReservationType($isNull){
-        $array = array();
-        if ($isNull) {
-            $array['null'] = "لا يوجد";
-        };
-        $array['mins'] = "دقائق";
-        $array['hours'] = "ساعات";
-        return $array;
-    }
-     protected function OptionAndPeriod($name, $title, $isNull = true){
-        if ($isNull) {
-            $type = 'hidden';
-        }else{
-            $type = 'number';
-        }
-        $this
-            ->add($name . '[type]', 'choice', [
-                'choices' => $this->getReservationType($isNull),
-                'selected' => $this->{$name},
-                'label' => $title,
-                'attr' => ['id' => $name . '_type']
-            ])
-            ->add($name . '[period]', $type, [
-                'label' => false,
-                'value' => function ($name) {
-                    return $name;
-                },
-                'attr' => ['id' => $name . '_period']
-            ]);
     }
     protected function sortBy($field, &$array, $direction = 'asc')
     {

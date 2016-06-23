@@ -15,11 +15,6 @@ class EventMiddleware extends MakeMenu
 			$module = $menu->add(trans('Event::dashboard.menu.event.root'), '#')
 		        ->icon('apple')
 		        ->prependIcon();
-
-		  $module->add(trans('Event::dashboard.menu.event.add'), ['route' => 'dashboard.event.create'])
-		      ->icon("circle-o")
-		      ->prependIcon();
-
 		  $module->add(trans('Event::dashboard.menu.event.all'), ['route' => 'dashboard.event.index'])
 		      ->icon("circle-o")
 		      ->prependIcon();

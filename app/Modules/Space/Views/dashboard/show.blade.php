@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h3>{{ $object->name }} <a style="float: left;" href="{{ route('dashboard.organization.edit', ['organization' => $object->id ])}}"><i class="fa fa-pencil" aria-hidden="true"></i></a></h3>
+    <h3>{{ $object->name }} <a style="float: left;" href="{{ route('dashboard.space.edit', ['space' => $object->id ])}}"><i class="fa fa-pencil" aria-hidden="true"></i></a></h3>
     <h4><strong>الحالة :</strong>
     @if($object->status == 'working')
         عامل

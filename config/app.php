@@ -157,6 +157,7 @@ return [
         Yajra\Datatables\DatatablesServiceProvider::class,
         Thedgmbh\Modules\ModuleServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
+        
 
 
         /*

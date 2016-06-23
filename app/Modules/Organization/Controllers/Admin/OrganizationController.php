@@ -27,16 +27,20 @@ class OrganizationController extends ModuleController {
 	}
 	public function store(OrganizationRequest $request)
 	{
-
-		return $this->createFlashRedirect(Organization::class, $request, $this->imageColumn);
+		if (Auth::user()->hasRole('admin')) {
+		  return $this->createFlashRedirect(Organization::class, $request, $this->imageColumn);
+		}
+		return response('Unauthorized.', 401);  	
 	}
 
 	public function show(Organization $organization)
 	{
-		$organization['links'] = json_decode($organization['links']);
-		if (Auth::user()->can('edit-orgnization')) {
-			return $this->viewPath("show", $organization);
-		}else if(Auth::user()->can('edit-my-orgnization') && $organization['manager_id'] == Auth::user()->id){
+		if (Auth::user()->can('edit-orgnization') || (Auth::user()->can('edit-my-orgnization') && $organization['manager_id'] == Auth::user()->id)) {
+			foreach ($organization->toArray() as $key => $value) {
+	          if ($this->isJson($value)) {
+	              $organization[$key] = json_decode($value);
+	          }
+	      	}
 			return $this->viewPath("show", $organization);
 		}else{
 			return response('Unauthorized.', 401);
@@ -45,10 +49,13 @@ class OrganizationController extends ModuleController {
 
 	public function edit(Organization $organization)
 	{
-		$organization['links'] = json_decode($organization['links']);
-		if (Auth::user()->can('edit-orgnization')) {
-			return $this->getForm($organization);
-		}else if(Auth::user()->can('edit-my-orgnization') && $organization['manager_id'] == Auth::user()->id){
+		
+		if ((Auth::user()->can('edit-orgnization')) || (Auth::user()->can('edit-my-orgnization') && $organization['manager_id'] == Auth::user()->id)) {
+			foreach ($organization->toArray() as $key => $value) {
+	          if ($this->isJson($value)) {
+	              $organization[$key] = json_decode($value);
+	          }
+	      	}
 			return $this->getForm($organization);
 		}else{
 			return response('Unauthorized.', 401);
@@ -58,16 +65,19 @@ class OrganizationController extends ModuleController {
 	public function update(Organization $organization, OrganizationRequest $request)
 	{
 
-		if (Auth::user()->hasRole('admin')) {
+		if (Auth::user()->hasRole('admin') || (Auth::user()->can('edit-my-orgnization') && $organization['manager_id'] == Auth::user()->id)) {
 		  return $this->saveFlashRedirect($organization, $request, $this->imageColumn);
-		}else if(Auth::user()->can('edit-my-orgnization') && $organization['manager_id'] == Auth::user()->id){
-		  return $this->saveFlashRedirect($organization, $request, $this->imageColumn ,'mine.show');
 		}
+		return response('Unauthorized.', 401);
 	}
 
 	public function destroy(Organization $organization)
 	{
-	  return $this->destroyFlashRedirect($organization);
+		if (Auth::user()->hasRole('admin')) {
+		  return $this->destroyFlashRedirect($organization);
+		}
+		return response('Unauthorized.', 401);
+	  
 	}
 	public function showMyOrg()
 	{
@@ -79,4 +89,8 @@ class OrganizationController extends ModuleController {
 		  return "You don't have any organization to manage";
 		}
 	}
+	protected function isJson($string) {
+	   json_decode($string);
+	   return (json_last_error() == JSON_ERROR_NONE);
+  	}
 }

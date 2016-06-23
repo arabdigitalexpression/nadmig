@@ -14,10 +14,12 @@ class SessionRequest extends Request {
         return [
             'where' => 'required',
             'address' => 'required',
+            'start_date' => 'required',
             'start_time' => 'required',
             'period' => 'required',
             'excerpt' => 'required',
-            'description' => 'required',                
+            'description' => 'required',     
+            'name' => 'required'           
         ];
     }
 }

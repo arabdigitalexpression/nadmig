@@ -8,7 +8,7 @@ class Organization extends Model implements SluggableInterface {
 
 	use SluggableTrait;
 	
-	protected $fillable = ['manager_id', 'name', 'geo_location', 'email', 'phone_number', 'excerpt', 'description', 'links','logo','slug'];
+	protected $fillable = ['manager_id', 'name', 'geo_location', 'email', 'phone_number', 'excerpt', 'description', 'links','logo','slug', 'min_time_before_usage_to_edit', 'change_fees', 'min_to_cancel', 'cancel_fees', 'max_to_confirm'];
 
 	protected $sluggable = array(
 	    'build_from' => 'slug',

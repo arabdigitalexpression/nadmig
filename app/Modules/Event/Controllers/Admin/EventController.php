@@ -12,29 +12,29 @@ class EventController extends ModuleController {
       return $dataTable->render($this->viewPath());
   }
 
-  public function store(EventRequest $request)
-  {
-      return $this->createFlashRedirect(Event::class, $request);
-  }
+  // public function store(EventRequest $request)
+  // {
+  //     return $this->createFlashRedirect(Event::class, $request);
+  // }
 
-  public function show(Event $event)
-  {
-      return $this->viewPath("show", $event);
-  }
+  // public function show(Event $event)
+  // {
+  //     return $this->viewPath("show", $event);
+  // }
 
-  public function edit(Event $event)
-  {
-      return $this->getForm($event);
-  }
+  // public function edit(Event $event)
+  // {
+  //     return $this->getForm($event);
+  // }
 
-  public function update(Event $event, EventRequest $request)
-  {
-      return $this->saveFlashRedirect($event, $request);
-  }
+  // public function update(Event $event, EventRequest $request)
+  // {
+  //     return $this->saveFlashRedirect($event, $request);
+  // }
 
-  public function destroy(Event $event)
-  {
-      return $this->destroyFlashRedirect($event);
-  }
+  // public function destroy(Event $event)
+  // {
+  //     return $this->destroyFlashRedirect($event);
+  // }
 
 }

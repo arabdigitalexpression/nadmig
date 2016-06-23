@@ -151,3 +151,51 @@ if (!function_exists('ArabicTime')) {
         return $arabic_time;
     }
 }
+
+if (!function_exists('getGroupAge')) {
+    /**
+     * getGroupAge
+     *
+     * @param $object
+     * @return string
+     */
+    function getGroupAge($key) {
+        $group_age = array(
+            'null' => 'غير معيّن',
+            '3_11' => 'من ٣ إلى ١١',
+            '12_17' => 'من ١٢ إلى ١٧',
+            '18_up' => 'من ١٨ فيما فوق'
+            );
+        return $group_age[$key];
+    }
+}
+if (!function_exists('getEventtype')) {
+    function getEventtype($key){
+        $type = array(
+            'private' => 'خاص',
+            'public' => 'عام'
+            );
+        return $type[$key];
+    }
+}
+if (!function_exists('ArabicPeriod')) {
+    function ArabicPeriod($period){
+        $type = array(
+            'mins' => 'دقيقة',
+            'hours' => 'ساعات'
+            );
+        if (intval($period->period) == 1 && $period->type == 'hours') {
+            return $period->period . " ساعة";    
+        }
+        return $period->period . " " . $type[$period->type];
+    }
+}
+if (!function_exists('ArabicCancelFees')) {
+    function ArabicCancelFees($cancel){
+        $change_fees_type = array("null" => "لا يوجد","percentage" => "نسبة من قيمة الحجز الكلى للمساحات","value" => "قيمة");
+        if ($cancel->type == 'percentage') {
+            return $change_fees_type[$cancel->type] . " " . $cancel->amount . "%";
+        }
+        return $change_fees_type[$cancel->type] . " " . $cancel->amount;
+    }
+}

@@ -11,30 +11,9 @@ class SessionController extends ModuleController {
   {
       return $dataTable->render($this->viewPath());
   }
-
-  public function store(SessionRequest $request)
-  {
-    return $this->createFlashRedirect(Session::class, $request);
-  }
-
   public function show(Session $session)
   {
-      return $this->viewPath("show", $session);
-  }
-
-  public function edit(Session $session)
-  {
-      return $this->getForm($session);
-  }
-
-  public function update(Session $session, SessionRequest $request)
-  {
-      return $this->saveFlashRedirect($session, $request);
-  }
-
-  public function destroy(Session $session)
-  {
-      return $this->destroyFlashRedirect($session);
+      return redirect()->route('session.page', ['session_slug' => $session->slug]);
   }
 
 }

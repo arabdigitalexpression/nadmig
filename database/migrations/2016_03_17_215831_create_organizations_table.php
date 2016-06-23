@@ -25,6 +25,11 @@ class CreateOrganizationsTable extends Migration
             $table->text('excerpt');
             $table->text('description');
             $table->json('links');
+            $table->json('min_time_before_usage_to_edit');
+            $table->json('change_fees');
+            $table->json('min_to_cancel');
+            $table->json('cancel_fees');
+            $table->json('max_to_confirm');
             $table->timestamps();
         });
     }

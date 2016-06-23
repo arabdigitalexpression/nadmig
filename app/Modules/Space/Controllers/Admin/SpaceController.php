@@ -35,7 +35,7 @@ class SpaceController extends ModuleController {
 
   public function show(Space $space)
   {
-    if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('organization_manager')){
+    if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('organization_manager') && Auth::user()->manageOrganization['id'] || Auth::user()->hasRole('space_manager') && $space['manager_id'] == Auth::user()->id){
       foreach ($space->toArray() as $key => $value) {
           if ($this->isJson($value)) {
             $space[$key] = json_decode($value);
@@ -63,7 +63,7 @@ class SpaceController extends ModuleController {
   { 
     
     // check if he is an admin
-    if(Auth::user()->hasRole('admin')){
+    if(Auth::user()->hasRole('admin') || (Auth::user()->hasRole('organization_manager') && Auth::user()->manageOrganization['id']) ||  (Auth::user()->hasRole('space_manager') && $space['manager_id'] == Auth::user()->id)){
       foreach ($space->toArray() as $key => $value) {
           if ($this->isJson($value)) {
               $space[$key] = json_decode($value);
@@ -71,34 +71,23 @@ class SpaceController extends ModuleController {
       }
       return $this->getForm($space);
     }
-    // check if he has permission to edit or add his orgnization
-    else if(Auth::user()->can('edit-my-space') && $space['organization_id'] == Auth::user()->manageOrganization['id']){
-        foreach ($space->toArray() as $key => $value) {
-            if ($this->isJson($value)) {
-                $space[$key] = json_decode($value);
-            }
-        }
-        return $this->getForm($space);
-    }
-    else if(Auth::user()->can('edit-my-space') && $space['manager_id'] == Auth::user()->id){
-        foreach ($space->toArray() as $key => $value) {
-            if ($this->isJson($value)) {
-                $space[$key] = json_decode($value);
-            }
-        }
-        return $this->getForm($space);
-    }
     return response('Unauthorized.', 401);
   }
 
   public function update(Space $space, SpaceRequest $request)
   {
+    if(Auth::user()->hasRole('admin') || (Auth::user()->hasRole('organization_manager') && Auth::user()->manageOrganization['id']) ||  (Auth::user()->hasRole('space_manager') && $request['manager_id'] == Auth::user()->id) && $space['organization_id'] == $request['organization_id']){
+
       return $this->saveFlashRedirect($space, $request, $this->imageColumn);
+    }
+    return response('Unauthorized.', 401);
   }
 
   public function destroy(Space $space)
   {
+    if(Auth::user()->hasRole('admin')){
       return $this->destroyFlashRedirect($space);
+    }
   }
   protected function isJson($string) {
    json_decode($string);

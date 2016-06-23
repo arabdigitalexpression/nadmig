@@ -36,13 +36,7 @@ class SpaceRequest extends Request {
             'max_type_for_reservation' => 'required',
             'min_time_before_reservation' => 'required',
             'max_time_before_reservation' => 'required',
-            'min_time_before_usage_to_edit' => 'required',
-            'change_fees' => 'required',
-            'min_to_cancel' => 'required',
-            'cancel_fees' => 'required',
-            'max_to_confirm' => 'required',
             'reset_time' => 'required',
-            'max_event_per_time' => 'required'
 
         ];
     }
