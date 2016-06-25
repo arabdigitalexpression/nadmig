@@ -7,7 +7,7 @@ use App\Language;
 use Laracasts\Flash\Flash;
 use App\Base\Services\ImageService;
 use App\Http\Controllers\Controller;
-
+use App\Base\Controllers\LogController;
 abstract class ApplicationController extends Controller
 {
        /**
@@ -109,6 +109,7 @@ abstract class ApplicationController extends Controller
 
         $model = $class::create($this->getData($request, $imageColumn));
         $model->id ? Flash::success(trans('application.create.success')) : Flash::error(trans('application.create.fail'));
+        LogController::Log($model, 'created');
         return $this->redirectRoutePath($path, null, $model);
     }
 
@@ -125,6 +126,7 @@ abstract class ApplicationController extends Controller
     {
         $model->fill($this->getData($request, $imageColumn));
         $model->save() ? Flash::success(trans('application.update.success')) : Flash::error(trans('application.update.fail'));
+        LogController::Log($model, 'updated');
         return $this->redirectRoutePath($path, null, $model);
     }
 

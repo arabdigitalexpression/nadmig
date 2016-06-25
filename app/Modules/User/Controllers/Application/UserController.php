@@ -6,6 +6,7 @@ use App\Modules\User\Requests\Application\UserRequest;
 use Laracasts\Flash\Flash;
 use Mail;
 use Input;
+use Auth;
 use App\Modules\Role\Models\Role;
 class UserController extends ApplicationController {
 	/**
@@ -15,9 +16,13 @@ class UserController extends ApplicationController {
      */
     private $imageColumn = "picture";
 
-	public function index(User $user)
+	public function index()
 	{
-	  return view('User::application.index', compact('user'));
+        if(Auth::check()){
+            $user = Auth::user();
+            return view('User::application.index', compact('user'));
+        }
+        return redirect(route('auth.login'));
 	}
 	public function create()
 	{
@@ -42,6 +47,26 @@ class UserController extends ApplicationController {
         });
 		return redirect("/");
 	}
+
+    public function edit()
+    {
+
+        if(Auth::check()){
+            $user = Auth::user();
+            unset($user['password']);
+            return $this->getForm($user, null, $user);
+        }
+        abort(403);
+    }
+
+    public function update(UserRequest $request)
+    {
+        if(Auth::check()){
+            $user = Auth::user();
+            return $this->saveFlashRedirect($user, $request, $this->imageColumn);
+        }
+        abort(403);
+    }
 	public function confirm($confirmation_code)
     {
         if( ! $confirmation_code)

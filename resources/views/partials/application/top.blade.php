@@ -28,6 +28,7 @@
                             @role(['admin','organization_manager'])
                                 <li><a href="{{ url('/dashboard') }}">{{ trans('application.menu.dashboard') }}</a>
                             @endrole
+                            <li><a href="{{ route('application.user.index') }}">{{ trans('application.menu.user') }}</a></li>
                             <li><a href="{{ route('reservation') }}">{{ trans('application.menu.reservation') }}</a></li>
                             <li><a href="{{ url('/auth/logout') }}">{{ trans('application.menu.logout') }}</a></li>
                         </ul>
