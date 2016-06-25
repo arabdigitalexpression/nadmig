@@ -31,13 +31,15 @@
                 </ul>
                 </div>
                  <div class="pull-left">
-                @if(Auth::check() && (Auth::user()->hasRole('admin') || (Auth::user()->hasRole('organization_manager') && Auth::user()->manageOrganization['id'] == $session->reservation->organization_id) || (Auth::user()->hasRole('space_manager') && Auth::user()->manageSpace['id'] == $session->space_id)) )
+                @if(Auth::check() && (Auth::user()->hasRole('admin') || (Auth::user()->hasRole('organization_manager') && Auth::user()->manageOrganization['id'] == $session->reservation->organization_id) || (Auth::user()->hasRole('space_manager') &&  Auth::user()->manageSpace['id'] == $session->space_id)) )
                     @if($session->status != "accepted")
                         <a href="{{ route('session.accept', ['session_slug' => $session->slug ])}}"> <i style="color:#39b54a; font-size: 16px;" class="fa fa-check" aria-hidden="true"> الموافقة </i></a>
                     @endif
                 @endif
-                <a class="btn btn-default" href="{{ route('event.page', ['event_slug' => $session->reservation->event->slug]) }}">{{ 'الرجوع للفاعلية ' }}<i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+                @if($session->reservation->status == "accepted" && $session->reservation->event_type == "public")
+                    <a class="btn btn-default" href="{{ route('event.page', ['event_slug' => $session->reservation->event->slug]) }}">{{ 'الرجوع للفاعلية ' }}<i class="fa fa-chevron-left" aria-hidden="true"></i></a>
                 </div>
+                @endif
             </header>
             <div class="post-excerpt">
                 {!! $session->description !!}

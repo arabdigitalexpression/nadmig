@@ -50,7 +50,29 @@
             </div>
             <button type="button" class="btn btn-default more"><i class="fa fa-caret-down" aria-hidden="true"></i>{{trans('application.button.know_more')}}</button>
             <h3>{{ trans('Space::application.page.events') }}</h3>
-            
+            <ul class="spaces-list">
+                @foreach($space->organization->reservations as $reservation)
+                    <li class="panel panel-default panel-orange">
+                        <a href="{{ route('event.page', ['event_slug' => $reservation->event->toArray()['slug'] ]) }}">
+                            <div class="panel-heading">{{ $reservation->name }}</div>
+                        </a>   
+                            <img src="{{ url($reservation->artwork) }}" class="space-icon img-responsive">
+                        <ul class="space-info">
+
+                            <li><i class="fa fa-calendar" aria-hidden="true"></i> {{ ArabicDate($reservation->start_session['start_date']) }} </li>
+                            <li><i class="fa fa-clock-o" aria-hidden="true"></i> من {{ ArabicTime($reservation->start_session['start_time']) }} إلى 
+                            @if(json_decode($reservation->start_session['period'])->type == 'mins')
+                                {{ ArabicTime(\Carbon\Carbon::createFromFormat('h:i a', $reservation->start_session['start_time'])->addMinutes(intval(json_decode($reservation->start_session['period'])->period))->format('h:i A')) }}</li>
+                            @elseif(json_decode($reservation->start_session['period'])->type == 'hours')
+                                {{ ArabicTime(\Carbon\Carbon::createFromFormat('h:i a', $reservation->start_session['start_time'])->addHours(intval(json_decode($reservation->start_session['period'])->period))->format('h:i A')) }}</li>
+                            @endif
+                            
+                            <li>{{ str_limit($reservation->description, $limit = 150, $end = '...') }}</li>
+                        </ul>
+                        
+                    </li>
+                @endforeach
+            </ul>
         </div>
     @endif
 
