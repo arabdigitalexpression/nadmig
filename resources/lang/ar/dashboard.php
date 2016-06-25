@@ -38,7 +38,7 @@ return [
     "fields" => [
         "created_at"                => "أنشئ فى",
         "dashboard" => [
-            'average_time'          => "Average time",
+            'spaces'          => "عدد المساحات",
             'bounce_rate'           => "Bounce rate",
             'browsers'              => "Browser",
             'chart_country'         => "Country",

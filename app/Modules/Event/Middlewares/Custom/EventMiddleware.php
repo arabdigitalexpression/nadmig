@@ -13,10 +13,10 @@ class EventMiddleware extends MakeMenu
 
 		private static function moduleMenu($menu){
 			$module = $menu->add(trans('Event::dashboard.menu.event.root'), '#')
-		        ->icon('apple')
+		        ->icon('calendar')
 		        ->prependIcon();
 		  $module->add(trans('Event::dashboard.menu.event.all'), ['route' => 'dashboard.event.index'])
-		      ->icon("circle-o")
+		      ->icon("list")
 		      ->prependIcon();
 		}
 }

@@ -1,0 +1,47 @@
+<?php namespace App\Modules\Program\Controllers\Admin;
+
+use App\Modules\Program\Models\Program;
+use App\Modules\Program\Requests\Admin\ProgramRequest;
+use App\Modules\Program\Base\Controllers\ModuleController;
+use App\Modules\Program\Controllers\Api\DataTables\ProgramDataTable;
+
+class ProgramController extends ModuleController {
+
+  /**
+   * Image column of the model
+   *
+   * @var string
+   */
+  private $imageColumn = "artwork";
+  
+  public function index(ProgramDataTable $dataTable)
+  {
+      return $dataTable->render($this->viewPath());
+  }
+
+  public function store(ProgramRequest $request)
+  {
+      return $this->createFlashRedirect(Program::class, $request);
+  }
+
+  public function show(Program $program)
+  {
+      return $this->viewPath("show", $program);
+  }
+
+  public function edit(Program $program)
+  {
+      return $this->getForm($program);
+  }
+
+  public function update(Program $program, ProgramRequest $request)
+  {
+      return $this->saveFlashRedirect($program, $request);
+  }
+
+  public function destroy(Program $program)
+  {
+      return $this->destroyFlashRedirect($program);
+  }
+
+}

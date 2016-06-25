@@ -14,10 +14,10 @@ class ApplyMiddleware extends MakeMenu
 
 		private static function moduleMenu($menu){
 			$module = $menu->add(trans('Apply::dashboard.menu.apply.root'), '#')
-		        ->icon('apple')
+		        ->icon('crosshairs')
 		        ->prependIcon();
 		  $module->add(trans('Apply::dashboard.menu.apply.all'), ['route' => 'dashboard.apply.index'])
-		      ->icon("circle-o")
+		      ->icon("list")
 		      ->prependIcon();
 		}
 }

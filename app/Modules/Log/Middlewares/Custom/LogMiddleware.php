@@ -13,11 +13,11 @@ class LogMiddleware extends MakeMenu
 
 		private static function moduleMenu($menu){
 			$module = $menu->add(trans('Log::dashboard.menu.log.root'), '#')
-		        ->icon('apple')
+		        ->icon('list-alt')
 		        ->prependIcon();
 
 		  $module->add(trans('Log::dashboard.menu.log.all'), ['route' => 'dashboard.log.index'])
-		      ->icon("circle-o")
+		      ->icon("list")
 		      ->prependIcon();
 		}
 }

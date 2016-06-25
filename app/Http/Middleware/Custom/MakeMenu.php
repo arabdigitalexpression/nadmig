@@ -16,6 +16,7 @@ use App\Modules\Session\Middlewares\Custom\SessionMiddleware as Sessions;
 use App\Modules\Event\Middlewares\Custom\EventMiddleware as Events;
 use App\Modules\Apply\Middlewares\Custom\ApplyMiddleware as Apply;
 use App\Modules\Log\Middlewares\Custom\LogMiddleware as Log;
+use App\Modules\Program\Middlewares\Custom\ProgramMiddleware as Program;
 class MakeMenu
 {
     /**
@@ -45,6 +46,7 @@ class MakeMenu
              if (Auth::user()->hasRole('admin')) {
                     Organization::AddMenus($menu);
                     Space::AddMenus($menu);
+                    Program::AddMenus($menu);
                     Events::AddMenus($menu);
                     Reservation::AddMenus($menu);
                     Sessions::AddMenus($menu);

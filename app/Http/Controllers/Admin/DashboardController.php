@@ -6,7 +6,8 @@ use App\Base\Controllers\AdminController;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use LaravelAnalytics;
-
+use Auth; 
+Use App\Modules\Space\Models\Space;
 class DashboardController extends AdminController
 {
     /**
@@ -56,25 +57,12 @@ class DashboardController extends AdminController
 
     public function getIndex()
     {
-        $statistics = [
-            'keywords' => LaravelAnalytics::getTopKeywords($this->period, $this->limit),
-            'referrers' => LaravelAnalytics::getTopReferrers($this->period, $this->limit),
-            'browsers' => LaravelAnalytics::getTopBrowsers($this->period, $this->limit),
-            'pages' => LaravelAnalytics::getMostVisitedPages($this->period, $this->limit),
-            'users' => LaravelAnalytics::getActiveUsers(),
-            'total_visits' => $this->getTotalVisits(),
-            'landings' => $this->getLandings(),
-            'exits' => $this->getExits(),
-            'times' => $this->getTimeOnPages(),
-            'sources' => $this->getSources(),
-            'ops' => $this->getOperatingSystems(),
-            'browsers' => $this->getBrowsers(),
-            'countries' => $this->getCountries(),
-            'visits' => $this->getDailyVisits(),
-            'regions' => $this->getRegions(),
-            'averages' => $this->getAverages()
-        ];
-        return view('dashboard.dashboard.index', compact('statistics'));
+        if (Auth::user()->hasRole('space_manager')) {
+            $data = [
+                'spaces' => Space::where('manager_id', Auth::user()->id)->get()->toArray(),
+            ];
+        }
+        return view('dashboard.dashboard.index', compact('data'));
     }
 
     /**
