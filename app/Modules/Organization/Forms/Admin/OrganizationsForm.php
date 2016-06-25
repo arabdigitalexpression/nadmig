@@ -12,7 +12,7 @@ class OrganizationsForm extends AdminForm
 		    ->add('name', 'text', [
 	            'label' => trans('Organization::dashboard.fields.organization.name')
 	        ])
-            ->add('slug', 'text', [
+            ->add('name_en', 'text', [
                 'label' => trans('Organization::dashboard.fields.organization.slug')
             ])
             ->add('logo', 'file', [

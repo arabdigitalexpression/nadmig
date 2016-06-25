@@ -72,7 +72,7 @@
                 $(this).parents('.panel').get(0).remove();
             });
             
-            function new_session(data = null){
+            function new_session(data){
                 var $newPanel = $template.clone();
                 $newPanel.find(".collapse").removeClass("in");
                 $newPanel.find(".accordion-toggle").attr("href", "#" + (++hash)).text("الجلسة # " + hash);
@@ -123,18 +123,18 @@
                 });
                 
             }
-            function getSpaceData(space_id,  is_data = false) {
-                let picker = date();
-                let picker_time = time();
+            function getSpaceData(space_id,  is_data) {
+                var picker = date();
+                var picker_time = time();
                 $(".panel-body").find(".fa-spin").show();
                 $.getJSON('/api/space/' + space_id , function( json ) {
                     agreement(json);
                     fees(json);
                     min_res(json);
-                    let working_hours = JSON.parse(json.working_hours_days);
-                    let working_week_days = JSON.parse(json.working_week_days);
-                    let difference = $(week_days).not(working_week_days).get();
-                    let max_before = JSON.parse(json.max_time_before_reservation);
+                    var working_hours = JSON.parse(json.working_hours_days);
+                    var working_week_days = JSON.parse(json.working_week_days);
+                    var difference = $(week_days).not(working_week_days).get();
+                    var max_before = JSON.parse(json.max_time_before_reservation);
                     if (!is_data) {
                         picker.clear();
                         picker.set('enable', true);
@@ -146,7 +146,7 @@
                         picker.set('max', parseInt(max_before.period));
                     }
                     picker.on({ set: function(context) {
-                        let day = 0;
+                        var day = 0;
                         if(moment(context.select).weekday() < 6){
                             day = moment(context.select).weekday();
                         }
@@ -170,16 +170,16 @@
                 $('.agreement_text_'+hash).popover();
             }
             function date(){
-                let $input = $('#start_date_' + hash).pickadate({
+                var $input = $('#start_date_' + hash).pickadate({
                     firstDay: 0,
                     format: 'dd/mm/yyyy',
                 });
                 return $input.pickadate('picker');
             }
             function min_res(json){
-                let min = JSON.parse(json.min_type_for_reservation);
-                let max = JSON.parse(json.max_type_for_reservation);
-                let Atype;
+                var min = JSON.parse(json.min_type_for_reservation);
+                var max = JSON.parse(json.max_type_for_reservation);
+                var Atype;
                 $("#period_period_" + hash).parent().find('.help-block').text('الحجز الأدنى ' + min.period + ' ' + TimeTypeArabic(min) + ' | الحجز الأقصى ' + max.period + ' ' + TimeTypeArabic(max));
                 $("#period_period_" + hash).bind('input propertychange', function() {
                     if(($(this).val() < parseInt(min.period)  && min.type == $("#period_type_" + hash).val()) || (min.type == 'hours' && $("#period_type_" + hash).val() == 'mins') || ($(this).val() > parseInt(max.period)  && max.type == $("#period_type_" + hash).val())){
@@ -196,7 +196,7 @@
                 });
             }
             function TimeTypeArabic(period){
-                let Atype;
+                var Atype;
                 if(period.type == 'hours'){
                     if(parseInt(period.period) > 1){
                         Atype = 'ساعات';
@@ -209,7 +209,7 @@
                 return Atype;
             }
             function time(){
-                let $input = $('#start_time_' + hash).pickatime();
+                var $input = $('#start_time_' + hash).pickatime();
                 return $input.pickatime( 'picker' );
             }
             function getNotWorkingDays(difference){

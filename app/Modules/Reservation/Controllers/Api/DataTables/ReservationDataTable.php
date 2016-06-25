@@ -12,11 +12,11 @@ class ReservationDataTable extends ModuleDataTableController {
   public function query()
   {
   	if (Auth::user()->hasRole('admin')){
-  		$reservation = Reservation::Query();	
+  		$reservation = Reservation::Query()->orderBy('id', 'DESC');
   	}else if(Auth::user()->hasRole('organization_manager')){
-      	$reservation = Reservation::Query()->where('organization_id', Auth::user()->manageOrganization['id']);
+      	$reservation = Reservation::Query()->where('organization_id', Auth::user()->manageOrganization['id'])->orderBy('id', 'DESC');
     }else if(Auth::user()->hasRole('space_manager')){
-        $reservation = Reservation::Query()->where('organization_id', Auth::user()->manageSpace->organization['id']);
+        $reservation = Reservation::Query()->where('organization_id', Auth::user()->manageSpace->organization['id'])->orderBy('id', 'DESC');
     }
     return $this->applyScopes($reservation);
   }

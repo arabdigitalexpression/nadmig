@@ -3,7 +3,7 @@
 @section('content')
 	
     {!! form_start($form) !!}
-    {!! form_until($form, "slug") !!}
+    {!! form_until($form, "name_en") !!}
     <img width="200" src="{{ $object->logo }}">
     {!! form_row($form->logo) !!}
      {!! form_until($form, "description") !!}
@@ -42,7 +42,6 @@
     </br>
     </br>
     {!! form_row($form->save) !!}
-    {!! form_row($form->clear) !!}
     {!! form_end($form, false)!!}
     <script src="{{ url( 'packages/tinymce/tinymce.min.js' ) }}" type="text/javascript"></script>
     <script type="text/javascript">

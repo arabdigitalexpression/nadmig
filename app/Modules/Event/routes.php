@@ -5,6 +5,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::group(['module' => 'Event', 'namespace' => 'Application'], function () {
         Route::get('events', ['as' => 'events', 'uses' => 'EventController@list']);
         Route::get('event/{event_slug}', ['as' => 'event.page', 'uses' => 'EventController@index']);
+        Route::get('event/{event_slug}/apply', ['as' => 'event.apply', 'uses' => 'EventController@apply']);
     });
 });
 
@@ -14,6 +15,6 @@ Route::group(['prefix' => 'api', 'module' => 'Event', 'namespace' => 'Api', 'mid
 });
 
 // Admin routes
-Route::group(['prefix' => 'dashboard', 'module' => 'Event', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
+Route::group(['prefix' => 'dashboard', 'module' => 'Event', 'namespace' => 'Admin', 'middleware' => 'space_manager'], function () {
 	Route::resource('event', 'EventController');
 });

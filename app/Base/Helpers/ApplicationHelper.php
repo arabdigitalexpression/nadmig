@@ -160,12 +160,14 @@ if (!function_exists('getGroupAge')) {
      * @return string
      */
     function getGroupAge($key) {
+
         $group_age = array(
-            'null' => 'غير معيّن',
+            null => 'غير معيّن',
             '3_11' => 'من ٣ إلى ١١',
             '12_17' => 'من ١٢ إلى ١٧',
             '18_up' => 'من ١٨ فيما فوق'
             );
+
         return $group_age[$key];
     }
 }

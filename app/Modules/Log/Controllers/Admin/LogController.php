@@ -11,30 +11,4 @@ class LogController extends ModuleController {
   {
       return $dataTable->render($this->viewPath());
   }
-
-  public function store(LogRequest $request)
-  {
-      return $this->createFlashRedirect(Log::class, $request);
-  }
-
-  public function show(Log $log)
-  {
-      return $this->viewPath("show", $log);
-  }
-
-  public function edit(Log $log)
-  {
-      return $this->getForm($log);
-  }
-
-  public function update(Log $log, LogRequest $request)
-  {
-      return $this->saveFlashRedirect($log, $request);
-  }
-
-  public function destroy(Log $log)
-  {
-      return $this->destroyFlashRedirect($log);
-  }
-
 }

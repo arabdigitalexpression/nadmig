@@ -157,7 +157,7 @@ return [
         Yajra\Datatables\DatatablesServiceProvider::class,
         Thedgmbh\Modules\ModuleServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
-        
+        Spatie\Activitylog\ActivitylogServiceProvider::class,
 
 
         /*
@@ -173,6 +173,7 @@ return [
         App\Modules\Session\Providers\RouteServiceProvider::class,
         App\Modules\Event\Providers\RouteServiceProvider::class,
         App\Modules\Log\Providers\RouteServiceProvider::class,
+        App\Modules\Apply\Providers\RouteServiceProvider::class,
 
     ],
 
@@ -234,6 +235,7 @@ return [
         'Purifier'          => Mews\Purifier\Facades\Purifier::class,
         'Datatables'        => Yajra\Datatables\Datatables::class,
         'Entrust'           => Zizaco\Entrust\EntrustFacade::class,
+        'Activity'          => Spatie\Activitylog\ActivitylogFacade::class,
     ],
 
 ];

@@ -17,6 +17,7 @@ class CreateEventsTable extends Migration
             $table->integer('reservation_id')->unsigned();
             $table->foreign('reservation_id')->references('id')->on('reservations');
             $table->string('slug');
+            $table->string('status');
             $table->timestamps();
         });
     }

@@ -1,8 +1,8 @@
-<?php namespace App\Modules\Log\Requests\Admin;
+<?php namespace App\Modules\Apply\Requests\Admin;
 
 use App\Http\Requests\Request;
 
-class LogRequest extends Request {
+class ApplyRequest extends Request {
 
     public function authorize()
     {

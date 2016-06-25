@@ -5,6 +5,7 @@ use Hash;
 use Carbon\Carbon;
 use Laracasts\Flash\Flash;
 use App\Base\Controllers\ApplicationController;
+use App\Base\Controllers\LogController;
 use App\Modules\Reservation\Models\Reservation;
 use App\Modules\Space\Models\Space;
 use App\Modules\Event\Models\Event;
@@ -40,8 +41,10 @@ public function list()
 }
 public function index($reservation_url_id)
 {
-	$reservation = Reservation::where('url_id', $reservation_url_id)->first();
-    if(Auth::check() && (Auth::user()->hasRole('admin') || (Auth::user()->hasRole('organization_manager') && Auth::user()->manageOrganization['id'] == $reservation->organization_id) ||  (Auth::user()->hasRole('space_manager') && Auth::user()->manageSpace->organization['id'] == $reservation->organization_id))){
+	if(!$reservation = Reservation::where('url_id', $reservation_url_id)->first()){
+        abort(404);
+    }
+    if(Auth::check() && (Auth::user()->hasRole('admin') || (Auth::user()->hasRole('organization_manager') && Auth::user()->manageOrganization['id'] == $reservation->organization_id) ||  (Auth::user()->hasRole('space_manager') && Auth::user()->manageSpace->organization['id'] == $reservation->organization_id) || (Auth::user()->id == $reservation->user_id))){
         $allSessions = $reservation->sessions()->where("status", "!=" ,"deleted")->get();
         foreach ($reservation->toArray() as $key => $value) {
             if ($this->isJson($value)) {
@@ -60,12 +63,14 @@ public function index($reservation_url_id)
         $reservation->organization;
         return view('Reservation::application.index', compact('reservation'));
     }
-    return response('Unauthorized.', 401);
+    abort(401);
 }
 public function delete($reservation_url_id)
 {
-    $reservation = Reservation::where('url_id', $reservation_url_id)->first();
-    if(Auth::check() && (Auth::user()->hasRole('admin') || (Auth::user()->hasRole('organization_manager') && Auth::user()->manageOrganization['id'] == $reservation->organization_id))){
+    if(!$reservation = Reservation::where('url_id', $reservation_url_id)->first()){
+        abort(404);
+    }
+    if(Auth::check() && (Auth::user()->hasRole('admin') || (Auth::user()->hasRole('organization_manager') && Auth::user()->manageOrganization['id'] == $reservation->organization_id) || (Auth::user()->id == $reservation->user_id))){
         
         foreach ($reservation->sessions->toArray() as $key => $session) {
                 $reservation->sessions[$key]['start_timestamp'] = strtotime($session['start_date']);
@@ -74,18 +79,20 @@ public function delete($reservation_url_id)
         $this->sortBy("start_timestamp",$sessions);
         if(Carbon::now()->subDay()->diffInDays(Carbon::createFromTimeStamp($sessions[0]['start_timestamp']), false) > intval(json_decode($reservation->organization->min_to_cancel)->period)){
             $reservation['status'] = 'deleted';
+            LogController::Log($reservation, 'deleted');
             $reservation->update();
             foreach ($reservation->sessions as $session) {
                 unset($session['start_timestamp']);
                 $session['status'] = 'deleted';
+                LogController::Log($session, 'deleted', $reservation);
                 $session->save();
             }
             return redirect()->route('reservation');
         }else{
-            return response('Forbidden.', 403);   
+            abort(403);
         }
     }
-    return response('Unauthorized.', 401);
+    abort(401);
 
 }
 public function create($organization_slug){
@@ -106,9 +113,10 @@ public function store(ReservationRequest $request, $organization_slug)
         }
         $reservation = new Reservation($this->getDataP($request, $this->imageColumn));
         $organization_slug->reservations()->save($reservation) ? Flash::success(trans('application.create.success')) : Flash::error(trans('application.create.fail'));
-
+        LogController::Log($reservation, 'created');
         foreach ($sessions as $session) {
             $session = new Session($this->to_json($session));
+            LogController::Log($session, 'created', $reservation);
             $reservation->sessions()->save($session);
         }
         return $this->redirectRoutePath("index", null, $reservation);
@@ -118,9 +126,12 @@ public function store(ReservationRequest $request, $organization_slug)
 public function edit($reservation_url_id)
 {
 
-    $reservation = Reservation::where('url_id', $reservation_url_id)->first();
-    if(Auth::check() && ((Auth::user()->id == $reservation->user_id) || Auth::user()->hasRole('admin'))){
+    if(!$reservation = Reservation::where('url_id', $reservation_url_id)->first()){
+        abort(404);
+    }   
+    if(Auth::check() && ((Auth::user()->id == $reservation->user_id) || Auth::user()->hasRole('admin') || (Auth::user()->hasRole('organization_manager') && Auth::user()->manageOrganization['id'] == $reservation->organization_id))){
         $allSessions = $reservation->sessions()->where("status", "!=" ,"deleted")->get();
+
         foreach ($reservation->toArray() as $key => $value) {
             if ($this->isJson($value)) {
                 $reservation[$key] = json_decode($value);
@@ -143,24 +154,28 @@ public function edit($reservation_url_id)
             Flash::warning(trans('Reservation::application.edit.warning') . $change_fees_type[$change_fees->type] . " " . $change_fees->amount);
             return $this->getForm($reservation, ['reservation_url_id' => $reservation['url_id']], $reservation->organization);
         }else{
-            return response('Forbidden.', 403);   
+            abort(403);
         }
     }else{
-        return response('Unauthorized.', 401);
+        abort(401);
     }
 
 }
 public function update($reservation_url_id, ReservationRequest $request)
 {
-    $reservation = Reservation::where('url_id', $reservation_url_id)->first();
+    if(!$reservation = Reservation::where('url_id', $reservation_url_id)->first()){
+        abort(404);
+    }
     if(Auth::check() && ((Auth::user()->id == $reservation->user_id) || Auth::user()->hasRole('admin'))){
         $sessions = $request['session'];
         $reservation->fill($this->getDataP($request, $this->imageColumn));
+        
         $actions = json_decode($reservation['actions']);
         foreach ($reservation->sessions()->where('status', '!=' , 'deleted')->get() as $session) {
             if (!$this->in_array_field($session->id, 'id', $sessions)) {
                 $session = Session::findOrFail($session->id);
                 $session['status'] = 'deleted';
+                LogController::Log($session, 'deleted', $reservation);
                 $session->save();
                 array_push($actions, ["session" => $session->id, "action" =>"deleted", "time_stamp" => Carbon::now()->toDateTimeString()]);   
             }
@@ -170,35 +185,59 @@ public function update($reservation_url_id, ReservationRequest $request)
             if ($session['id'] == 0) {
                 if($reservation['status'] == 'accepted'){
                     $reservation['status'] = 'pending';
+                    if(Event::where('reservation_id', $reservation->id)->exists()){
+                        $event = Event::where('reservation_id', $reservation->id)->firstOrFail();
+                        $event->status = 'pending';
+                        $event->save();
+                        LogController::Log($event, 'pending', $reservation);                
+                    }
+                    LogController::Log($reservation, 'pending');
                 }
                 $session = new Session($this->to_json($session));
+                LogController::Log($session, 'created', $reservation);
                 $reservation->sessions()->save($session);
             }else{
-                Session::findOrFail($session['id'])->update($this->to_json($session)); 
+                $updateSession = Session::findOrFail($session['id']);
+                LogController::Log($updateSession, 'updated', $reservation);
+                $updateSession->update($this->to_json($session));
             }
         }
         $reservation['actions'] = json_encode($actions);
         $reservation->push() ? Flash::success(trans('application.update.success')) : Flash::error(trans('application.update.fail'));
+        LogController::Log($reservation, 'updated');
         return $this->redirectRoutePath("index", null, $reservation);
     }
-    return response('Unauthorized.', 401);
+    abort(401);
 }
 public function accept($reservation_url_id)
 {
-    $reservation = Reservation::where('url_id', $reservation_url_id)->first();
+    if(!$reservation = Reservation::where('url_id', $reservation_url_id)->first()){
+        dd($reservation->toArray());
+        abort(404);
+    }
     if(Auth::check() && (Auth::user()->hasRole('admin') || (Auth::user()->hasRole('organization_manager') && Auth::user()->manageOrganization['id'] == $reservation->organization_id) )){
         $reservation['status'] = 'accepted';
+        LogController::Log($reservation, 'accepted');
         $reservation->update();
         foreach ($reservation->sessions as $session) {
             $session['status'] = 'accepted';
+            LogController::Log($session, 'accepted', $reservation);
             $session->save();
         }
         if($reservation->event_type == 'public'){
-                Event::create(['name' => $reservation->name, 'reservation_id' => $reservation->id]);
+            if(!Event::where('reservation_id', $reservation->id)->exists()){
+                $event = Event::create(['name' => $reservation->name, 'reservation_id' => $reservation->id]);
+                LogController::Log($event, 'created', $reservation);                
+            }else{
+                $event = Event::where('reservation_id', $reservation->id)->firstOrFail();
+                $event->status = 'accepted';
+                $event->save();
+                LogController::Log($event, 'accepted', $reservation); 
+            }
         }
         Flash::success(trans('application.update.success'));
         return redirect()->back();
     }
-    return response('Unauthorized.', 401);
+    abort(401);
 }
 }

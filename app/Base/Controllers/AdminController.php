@@ -8,7 +8,7 @@ use App\Language;
 use Laracasts\Flash\Flash;
 use App\Base\Services\ImageService;
 use App\Http\Controllers\Controller;
-
+use App\Base\Controllers\LogController;
 abstract class AdminController extends Controller
 {
     /**
@@ -120,6 +120,7 @@ abstract class AdminController extends Controller
                 $model->perms()->sync($request['permission']);    
             }
         }
+        LogController::Log($model, 'created');
         return $this->redirectRoutePath($path);
     }
 
@@ -136,6 +137,7 @@ abstract class AdminController extends Controller
     {
         $model->fill($this->getData($request, $imageColumn));
         $model->save() ? Flash::success(trans('dashboard.update.success')) : Flash::error(trans('dashboard.update.fail'));
+        LogController::Log($model, 'updated');
         return $this->redirectRoutePath($path);
     }
 

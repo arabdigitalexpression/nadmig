@@ -15,10 +15,10 @@ Route::group(['middleware' => 'web'], function () {
 Route::group(['prefix' => 'api', 'module' => 'Organization', 'namespace' => 'Api', 'middleware' => 'api'], function () {
     //
 });
-
+Route::get('dashboard/organization/mine', ['as' => 'dashboard.organization.mine.show', 'uses' => 'Admin\OrganizationController@showMyOrg', 'middleware' => ['organization_manager']]);
 // Admin routes
-Route::group(['prefix' => 'dashboard', 'module' => 'Organization', 'namespace' => 'Admin', 'middleware' => ['organization_manager']], function () {
-		Route::get('organization/mine', ['as' => 'dashboard.organization.mine.show', 'uses' => 'OrganizationController@showMyOrg']);
+Route::group(['prefix' => 'dashboard', 'module' => 'Organization', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
 		Route::resource('organization', 'OrganizationController');
 
 	});
+

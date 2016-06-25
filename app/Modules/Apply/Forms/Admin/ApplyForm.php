@@ -1,21 +1,21 @@
-<?php namespace App\Modules\Log\Forms\Admin;
+<?php namespace App\Modules\Apply\Forms\Admin;
 
 use App\Base\Forms\AdminForm;
 
-class LogForm extends AdminForm
+class ApplyForm extends AdminForm
 {
     public function buildForm()
     {
         $this
 		        ->add('language_id', 'choice', [
 		            'choices' => $this->data,
-		            'label' => trans('Log::admin.fields.log.language_id')
+		            'label' => trans('Apply::admin.fields.apply.language_id')
 		        ])
 		        ->add('title', 'text', [
-		            'label' => trans('Log::admin.fields.log.title')
+		            'label' => trans('Apply::admin.fields.apply.title')
 		        ])
             ->add('content', 'textarea', [
-                'label' => trans('Log::admin.fields.log.content')
+                'label' => trans('Apply::admin.fields.apply.content')
             ]);
         parent::buildForm();
     }

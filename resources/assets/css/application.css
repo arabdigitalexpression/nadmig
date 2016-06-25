@@ -4,8 +4,22 @@ body{
 	font-family: 'Droid Arabic Naskh', serif;
 	direction: rtl;
 }
+.btn-green{
+	background: #5cb85c;
+	color: #fff;
+	border: none;
+	padding: 5px 20px;
+}
+.text-muted{
+	text-align:center;
+}
 .btn-orange{
 	background: #ff924b;
+	color: #fff;
+	border: none;
+}
+.btn-green:hover{
+	background: #5cb85c;
 	color: #fff;
 	border: none;
 }

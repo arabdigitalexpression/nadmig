@@ -22,6 +22,10 @@ class Reservation extends Model{
     {
         return $this->belongsTo('App\Modules\User\Models\User');
     }
+    public function event()
+    {
+        return $this->hasOne('App\Modules\Event\Models\Event');
+    }
     protected static function boot()
     {
         parent::boot();

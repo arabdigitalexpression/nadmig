@@ -4,6 +4,7 @@ use App\Modules\Organization\Models\Organization;
 use App\Modules\Organization\Requests\Admin\OrganizationRequest;
 use App\Modules\Organization\Base\Controllers\ModuleController;
 use App\Modules\Organization\Controllers\Api\DataTables\OrganizationDataTable;
+use App\Base\Controllers\LogController;
 use Auth;
 class OrganizationController extends ModuleController {
 	/**
@@ -28,6 +29,7 @@ class OrganizationController extends ModuleController {
 	public function store(OrganizationRequest $request)
 	{
 		if (Auth::user()->hasRole('admin')) {
+			
 		  return $this->createFlashRedirect(Organization::class, $request, $this->imageColumn);
 		}
 		return response('Unauthorized.', 401);  	

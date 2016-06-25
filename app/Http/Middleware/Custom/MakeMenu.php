@@ -14,6 +14,8 @@ use App\Modules\Space\Middlewares\Custom\SpaceMiddleware as Space;
 use App\Modules\Reservation\Middlewares\Custom\ReservationMiddleware as Reservation;
 use App\Modules\Session\Middlewares\Custom\SessionMiddleware as Sessions;
 use App\Modules\Event\Middlewares\Custom\EventMiddleware as Events;
+use App\Modules\Apply\Middlewares\Custom\ApplyMiddleware as Apply;
+use App\Modules\Log\Middlewares\Custom\LogMiddleware as Log;
 class MakeMenu
 {
     /**
@@ -41,37 +43,16 @@ class MakeMenu
                 ->icon('dashboard')
                 ->prependIcon();
              if (Auth::user()->hasRole('admin')) {
-                    // $language  = $menu->add(trans('dashboard.menu.language.root'), '#')
-                    //     ->icon('flag')
-                    //     ->prependIcon();
-
-                    // $language->add(trans('dashboard.menu.language.add'), ['route' => 'dashboard.language.create'])
-                    //     ->icon($this->circle)
-                    //     ->prependIcon();
-
-                    // $language->add(trans('dashboard.menu.language.all'), ['route' => 'dashboard.language.index'])
-                    //     ->icon($this->circle)
-                    //     ->prependIcon();
-
-                    // $pages = $menu->add(trans('dashboard.menu.page.root'), '#')
-                    //     ->icon('folder')
-                    //     ->prependIcon();
-
-                    // $pages->add(trans('dashboard.menu.page.add'), ['route' => 'dashboard.page.create'])
-                    //     ->icon($this->circle)
-                    //     ->prependIcon();
-
-                    // $pages->add(trans('dashboard.menu.page.all'), ['route' => 'dashboard.page.index'])
-                    //     ->icon($this->circle)
-                    //     ->prependIcon();
                     Organization::AddMenus($menu);
                     Space::AddMenus($menu);
                     Events::AddMenus($menu);
                     Reservation::AddMenus($menu);
                     Sessions::AddMenus($menu);
+                    Apply::AddMenus($menu);
                     User::AddMenus($menu);
                     Role::AddMenus($menu);
                     Permission::AddMenus($menu);
+                    Log::AddMenus($menu);
                     $settings = $menu->add(trans('dashboard.menu.setting'), ['route' => 'dashboard.setting.index'])
                         ->icon('gears')
                         ->prependIcon();
@@ -80,13 +61,17 @@ class MakeMenu
              if (Auth::user()->hasRole('organization_manager')) {
                 MyOrganization::AddMenus($menu);
                 Space::AddMenus($menu);
+                Events::AddMenus($menu);
                 Reservation::AddMenus($menu);
                 Sessions::AddMenus($menu);
+                Apply::AddMenus($menu);
              }
              if (Auth::user()->hasRole('space_manager')) {
                 Space::AddMenus($menu);
+                Events::AddMenus($menu);
                 Reservation::AddMenus($menu);
                 Sessions::AddMenus($menu);
+                Apply::AddMenus($menu);
              }
             
         });

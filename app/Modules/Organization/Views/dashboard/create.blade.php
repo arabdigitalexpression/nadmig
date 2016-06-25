@@ -35,7 +35,6 @@
     {!! form_row($form->{"max_to_confirm[period]"}) !!}
     {!! form_row($form->manager_id) !!}
     {!! form_row($form->save) !!}
-    {!! form_row($form->clear) !!}
     {!! form_end($form, false)!!}
     <script src="{{ url( 'packages/tinymce/tinymce.min.js' ) }}" type="text/javascript"></script>
     <script type="text/javascript">
