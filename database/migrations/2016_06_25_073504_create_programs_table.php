@@ -18,8 +18,6 @@ class CreateProgramsTable extends Migration
             $table->string('slug')->unique();
             $table->string('artwork');
             $table->text('description');
-            $table->integer('event_id')->unsigned();
-            $table->foreign('event_id')->references('id')->on('events');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

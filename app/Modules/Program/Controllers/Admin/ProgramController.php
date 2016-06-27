@@ -21,7 +21,8 @@ class ProgramController extends ModuleController {
 
   public function store(ProgramRequest $request)
   {
-      return $this->createFlashRedirect(Program::class, $request);
+
+      return $this->createFlashRedirect(Program::class, $request, $this->imageColumn);
   }
 
   public function show(Program $program)
@@ -36,7 +37,10 @@ class ProgramController extends ModuleController {
 
   public function update(Program $program, ProgramRequest $request)
   {
-      return $this->saveFlashRedirect($program, $request);
+    if($request['events']){
+        $program->events()->sync($request['events']);    
+    }
+      return $this->saveFlashRedirect($program, $request, $this->imageColumn);
   }
 
   public function destroy(Program $program)

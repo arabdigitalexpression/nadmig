@@ -12,9 +12,10 @@ class ProgramRequest extends Request {
     public function rules()
     {
         return [
-            'content' => 'required',
-            'language_id' => 'required|integer',
-            'title' => 'required|min:3'
+            'name' => 'required|min:3',
+            'artwork' => 'sometimes', 
+            'description' => 'required|min:10',
+            'events' => 'required'
         ];
     }
 }

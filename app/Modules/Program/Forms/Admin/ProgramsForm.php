@@ -2,6 +2,7 @@
 
 use App\Base\Forms\AdminForm;
 use App\Modules\Event\Models\Event;
+use App\Modules\Program\Models\Program;
 class ProgramsForm extends AdminForm
 {
     public function buildForm()
@@ -20,6 +21,7 @@ class ProgramsForm extends AdminForm
             ->add('events', 'choice', [
                 'label' => trans('Program::dashboard.fields.program.events'),
                 'choices' => $this->getEvents(),
+                'selected' => $this->getProgramEvents($this->model),
                 'expanded' => true,
                 'multiple' => true
             ]);
@@ -32,5 +34,17 @@ class ProgramsForm extends AdminForm
             $array = array_add($array, $event['id'], $event->reservation['name']);   
         }
         return $array;
+    }
+    private function getProgramEvents($program = null){
+        $array = array();
+        if($program == null){
+            return $array;
+        }else{
+            foreach (Program::findOrFail($program->id)->events as $event)
+            {    
+               array_push($array, $event->id);   
+            }
+            return $array;
+        }
     }
 }

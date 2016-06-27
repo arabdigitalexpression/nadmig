@@ -61,7 +61,7 @@ abstract class ModuleDataTableController extends DataTableController
         }
         foreach ($this->common_columns as $column) {
             $title = trans('dashboard.fields.' . $column);
-            array_push($columns, ['data' => $column, 'name' => $column, 'title' => $title]);
+            array_push($columns, ['data' => $column, 'name' => $column, 'title' => $title, 'searchable' => false]);
         }
         if ($this->ops === true) {
             $title = trans('dashboard.ops.name');

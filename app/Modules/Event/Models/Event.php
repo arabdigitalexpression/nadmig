@@ -24,6 +24,10 @@ class Event extends Model implements SluggableInterface {
 	{
 	    return $this->hasMany('App\Modules\Apply\Models\Apply');
 	}
+	public function program()
+	{
+	    return $this->belongsToMany('App\Modules\Program\Models\Program');
+	}
 	protected static function boot()
     {
         parent::boot();

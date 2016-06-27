@@ -119,6 +119,10 @@ abstract class AdminController extends Controller
             if($request['permission']){
                 $model->perms()->sync($request['permission']);    
             }
+        }else if(class_basename($model) == "Program"){
+            if($request['events']){
+                $model->events()->sync(json_decode($request['events']));    
+            }
         }
         LogController::Log($model, 'created');
         return $this->redirectRoutePath($path);
