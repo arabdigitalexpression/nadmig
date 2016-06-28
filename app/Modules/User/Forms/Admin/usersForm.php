@@ -40,13 +40,13 @@ class UsersForm extends AdminForm
             ->add('instagram', 'text', [
                 'label' => trans('User::dashboard.fields.user.instagram')
             ])
-            // ->add('role', 'choice', [
-            //     'choices' => $this->getRoles(),
-            //     'selected' => [],
-            //     'label' => trans('User::dashboard.fields.user.role'),
-            //     'expanded' => true,
-            //     'multiple' => true
-            // ])
+            ->add('role', 'choice', [
+                'choices' => $this->getRoles(),
+                'selected' => $this->getUserRole($this->model),
+                'label' => trans('User::dashboard.fields.user.role'),
+                'expanded' => true,
+                'multiple' => true
+            ])
             ->add('picture', 'file', [
                 'label' => trans('User::dashboard.fields.user.picture'),
                 'attr' => ['class' => '']
@@ -63,7 +63,7 @@ class UsersForm extends AdminForm
         return $array;
     }
     private function getUserRole($user = null){
-
+        
         $array = array();
         if($user == null){
             return $array;
