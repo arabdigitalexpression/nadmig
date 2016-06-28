@@ -91,7 +91,7 @@ abstract class AdminController extends Controller
         return FormBuilder::create($this->formPath, [
                 'method' => $method,
                 'url' => $url,
-                'model' => \Auth::user(),
+                'model' => \Auth::user()->toArray(),
             ], [
                 $extra,
             ]);
