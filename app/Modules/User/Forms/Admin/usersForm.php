@@ -3,7 +3,7 @@
 use App\Base\Forms\AdminForm;
 use App\Modules\User\Models\User;
 use App\Modules\Role\Models\Role;
-class usersForm extends AdminForm
+class UsersForm extends AdminForm
 {
     public function buildForm()
     {

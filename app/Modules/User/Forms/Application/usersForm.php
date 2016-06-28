@@ -1,7 +1,7 @@
 <?php namespace App\Modules\User\Forms\Application;
 
 use App\Base\Forms\AdminForm;
-class usersForm extends AdminForm
+class UsersForm extends AdminForm
 {
     public function buildForm()
     {
