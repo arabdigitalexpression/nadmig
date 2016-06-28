@@ -60,7 +60,6 @@ var elixir = require('laravel-elixir'),
         'pickadate/lib/picker.date.js',
         'pickadate/lib/picker.time.js',
         'pickadate/lib/translations/ar.js',
-        'underscore/underscore-min.js'
     ];
 
 elixir(function(mix) {
