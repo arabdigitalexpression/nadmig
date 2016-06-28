@@ -4,11 +4,11 @@ use App\Base\Controllers\AdminController;
 
 abstract class ModuleController extends AdminController
 {
-    // *
-    //  * Model name
-    //  *
-    //  * @var string
-     
+    /**
+     * Model name
+     *
+     * @var string
+     */
     protected $model = "";
 
     /**
@@ -52,7 +52,7 @@ abstract class ModuleController extends AdminController
      */
     protected function getFormModulePath()
     {
-        // $model =  title_case(str_plural($this->model));
-        return 'App\Modules\User\Forms\Admin\\' . title_case(str_plural($this->model)) . 'Form';
+        $model =  title_case(str_plural($this->model));
+        return 'App\Modules\User\Forms\Admin\\' . $model . 'Form';
     }
 }
