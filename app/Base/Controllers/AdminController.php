@@ -88,14 +88,14 @@ abstract class AdminController extends Controller
         // if($path == null) {
         //     $path = $this->formPath;
         // }
-    
-        return FormBuilder::create($this->formPath, [
+
+        dd( FormBuilder::create($this->formPath, [
                 'method' => $method,
                 'url' => $url,
                 'model' => $model
             ], [
                 $extra,
-            ]);
+            ]));
     }
 
     /**
