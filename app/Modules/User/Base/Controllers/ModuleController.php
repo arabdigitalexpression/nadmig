@@ -4,12 +4,12 @@ use App\Base\Controllers\AdminController;
 
 abstract class ModuleController extends AdminController
 {
-    /**
-     * Model name
-     *
-     * @var string
-     */
-    protected $model = "";
+    // *
+    //  * Model name
+    //  *
+    //  * @var string
+     
+    // protected $model = "";
 
     /**
      * Form class path
