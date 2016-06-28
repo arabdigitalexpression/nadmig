@@ -71,7 +71,7 @@ abstract class AdminController extends Controller
         }
 
         $form = $this->createForm($url, $method, $object, $extra);
-        dd($object);
+        
         return view($path, compact('form', 'object', 'extra'));
     }
 
@@ -88,7 +88,7 @@ abstract class AdminController extends Controller
         // if($path == null) {
         //     $path = $this->formPath;
         // }
-
+        dd($model);
         return FormBuilder::create($this->formPath, [
                 'method' => $method,
                 'url' => $url,
