@@ -5,9 +5,10 @@ use App\Modules\User\Models\User;
 use App\Modules\User\Requests\Admin\UserRequest;
 use App\Modules\User\Base\Controllers\ModuleController;
 use App\Modules\User\Controllers\Api\DataTables\UserDataTable;
+use App\Base\Controllers\ApplicationController;
 use Auth;
 
-class UserController extends ModuleController
+class UserController extends ApplicationController
 {
     /**
      * Image column of the model
