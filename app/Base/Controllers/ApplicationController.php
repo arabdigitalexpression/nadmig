@@ -85,7 +85,7 @@ abstract class ApplicationController extends Controller
         // if($path == null) {
         //     $path = $this->formPath;
         // }
-
+        dd($model);
         return FormBuilder::create($this->formPath, [
                 'method' => $method,
                 'url' => $url,
