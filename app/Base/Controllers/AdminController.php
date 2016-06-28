@@ -58,14 +58,14 @@ abstract class AdminController extends Controller
      * @param null $object
      * @return \BladeView|bool|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getForm($object = null, $extra = null)
+    public function getForm($object = null, $routeData = null, $extra = null)
     {
         if ($object) {
-            $url =  $this->urlRoutePath("update", $object);
+            $url =  $this->urlRoutePath("update", $object, $routeData);
             $method = 'PATCH';
             $path = $this->viewPath("edit");
         } else {
-            $url =  $this->urlRoutePath("store", $object);
+            $url =  $this->urlRoutePath("store", $object, $routeData);
             $method = 'POST';
             $path = $this->viewPath("create");
         }
