@@ -1,42 +1,40 @@
 <?php
 return [
-
     /*
     |--------------------------------------------------------------------------
-    | English Admin Language Lines
+    | Arabic Admin Language Lines
     |--------------------------------------------------------------------------
     */
-
     "create" => [
-        "fail"                      => "Create operation on resource has failed.",
-        "success"                   => "Resource has been created succesfully."
+        "fail"                      => "فشل إنشاء المَورِد.",
+        "success"                   => "تمّ بنجاح إنشاء المورِد"
     ],
     "datatables" => [               // DataTables, files can be found @ https://datatables.net/plug-ins/i18n/
-        "sInfo"                     => "Showing _START_ to _END_ of _TOTAL_ entries",
-        "sInfoEmpty"                => "Showing 0 to 0 of 0 entries",
-        "sInfoFiltered"             => "(filtered from _MAX_ total entries)",
+        "sInfo"                     => "تُعرَض المدخلات من _START_ إلى _END_ من بين _TOTAL_",
+        "sInfoEmpty"                => "لا مُدخلات",
+        "sInfoFiltered"             => "(مُرشَّحة من بين _MAX_ مدخلة في المجمل)",
         "sInfoPostFix"              => "",
-        "sLengthMenu"               => "Show _MENU_ entries",
-        "sProcessing"               => "Processing...",
-        "sSearch"                   => "Search:",
+        "sLengthMenu"               => "اعرض مُدخلات _MENU_",
+        "sProcessing"               => "تجري المعالجة…",
+        "sSearch"                   => "البحث:",
         "sUrl"                      => "",
-        "sZeroRecords"              => "No matching records found",
+        "sZeroRecords"              => "لا توجد سجلّات مطابقة",
         "oPaginate" => [
-            "sFirst"                => "First",
-            "sLast"                 => "Last",
-            "sNext"                 => "Next",
-            "sPrevious"             => "Previous"
+            "sFirst"                => "الأولى",
+            "sLast"                 => "الأخيرة",
+            "sNext"                 => "اللاحقة",
+            "sPrevious"             => "السابقة"
         ]
     ],
     "delete" => [
-        "fail"                      => "Delete operation on resource has failed.",
-        "self"                      => "You can't always get what you want.",
-        "success"                   => "Resource has been deleted succesfully."
+        "fail"                      => "فشلت عملية حذف المَورِد.",
+        "self"                      => "ليس كُلُّ ما يتمناهُ المَرءُ يُدرِكه",
+        "success"                   => "تمَّ بنجاح حذف المورِد."
     ],
-    "elfinder"                      => "File Manager",
-    "empty"                         => "There are not any saved records yet. Why don't you create a new one first?",
+    "elfinder"                      => "مدير الملفات",
+    "empty"                         => "لا توجد سجلّات محفوظة إلى الآن. لِمَ لا تنشئ سجِّلا جديدًا?",
     "fields" => [
-        "created_at"                => "أنشئ فى",
+        "created_at"                => "أُنشئ فى",
         "dashboard" => [
             'spaces'          => "عدد المساحات",
             'bounce_rate'           => "Bounce rate",
@@ -72,10 +70,10 @@ return [
             "language_id"           => "Language",
             "title"                 => "Title",
         ],
-        "published_at"              => "نشر فى",
+        "published_at"              => "نُشر في",
         "read_count"                => "Read Count",
-        "reset"                     => "Reset",
-        "save"                      => "Save",
+        "reset"                     => "صفِّر",
+        "save"                      => "احفظ",
         "setting" => [
             "analytics_id"          => "Analytics ID ( Format: UA-XXXXXX-YY )",
             "disqus_shortname"      => "Disqus Shortname",
@@ -83,18 +81,18 @@ return [
             "facebook"              => "Facebook",
             "logo"                  => "Logo",
             "twitter"               => "Twitter", 
-            "space"                 => "بيانات إدارة المساحات",
+            "space"                 => "بيانات إدارة المساحة",
             "space_equipment"       => "تجهيزات المساحة"
         ],
-        "updated_at"                => "عَدل فى",
+        "updated_at"                => "عُدل فى",
         "uploaded"                  => "Uploaded file",
         "link"                      => [
                                         "type"  => [
                                             "title" => "النوع",
-                                            "website" => "موقع إلكترونى",
-                                            "facebook" => "فيس بوك",
-                                            "twitter" => "توييتر",
-                                            "instagram" => "انستاجرام",
+                                            "website" => "موقع وِب",
+                                            "facebook" => "فيسبوك",
+                                            "twitter" => "تويتر",
+                                            "instagram" => "إنستاغرام",
                                         ],
                                         "title" => "الرابط"
                                     ]
@@ -105,7 +103,7 @@ return [
         "index"                     => "Languages",
         "show"                      => "Show language"
     ],
-    "last_login"                    => "Last Login",
+    "last_login"                    => "آخر ولوج في",
     "menu" => [
         "article" => [
             "add"                   => "Add an Article",
@@ -113,11 +111,11 @@ return [
             "root"                  => "Articles"
         ],
         "category" => [
-            "add"                   => "Add a Category",
-            "all"                   => "All Categories",
-            "root"                  => "Categories"
+            "add"                   => "أضِف تصنيفًا",
+            "all"                   => "كُلُّ التصنيفات",
+            "root"                  => "التصنيفات"
         ],
-        "dashboard"                 => "Dashboard",
+        "dashboard"                 => "لَوْحَةُ التَّحكُّمِ",
         "language" => [
             "add"                   => "Add a Language",
             "all"                   => "All Languages",
@@ -128,19 +126,19 @@ return [
             "all"                   => "All Pages",
             "root"                  => "Pages"
         ],
-        "setting"                   => "Settings",
+        "setting"                   => "تضبيطات",
         "user" => [
-            "add"                   => "Add a User",
-            "all"                   => "All Users",
-            "root"                  => "Users"
+            "add"                   => "أضِف مستخدمًا",
+            "all"                   => "كُلُّ المستخدمين",
+            "root"                  => "المستخدِمون"
         ]
     ],
     "ops" => [
-        "confirmation"              => "هل أنت متأكد؟",
-        "create"                    => "إنشئ",
-        "delete"                    => "أزل",
-        "edit"                      => "تعيدل",
-        "modified"                  => "عًدل فى",
+        "confirmation"              => "أمتأكد؟",
+        "create"                    => "أَنشئ",
+        "delete"                    => "احذف",
+        "edit"                      => "عدِّل",
+        "modified"                  => "عُدِّل في",
         "name"                      => "أختيارات",
         "order"                     => "ترتيب",
         "show"                      => "أظهر"
@@ -156,11 +154,11 @@ return [
     "setting" => [
         "index"                     => "Settings"
     ],
-    "submit"                        => "Submit",
-    "title"                         => "نـدمـج",
+    "submit"                        => "أودِع",
+    "title"                         => "ندمج",
     "update" => [
-        "fail"                      => "Update operation on resource has failed.",
-        "success"                   => "Resource has been updated succesfully."
+        "fail"                      => "فشل تحديث المَورِد.",
+        "success"                   => "تمَّ بنجاح تحديث المَورِد"
     ],
     "user" => [
         "create"                    => "Create user",
@@ -168,5 +166,4 @@ return [
         "index"                     => "Users",
         "show"                      => "Show user"
     ]
-
 ];

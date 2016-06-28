@@ -1,32 +1,28 @@
 <?php
-
 return [
-
     /*
     |--------------------------------------------------------------------------
-    | English Auth Language Lines
+    | Arabic Auth Language Lines
     |--------------------------------------------------------------------------
     */
-
     "login" => [
-        "email"                 => "E-mail address",
-        "forgot"                => "I forgot my password?",
-        "password"              => "Password",
-        "remember"              => "Remember Me",
-        "submit"                => "Login",
-        "title"                 => "Login"
+        "email"                 => "عنوان البريد الإلكتروني",
+        "forgot"                => "نسيت كلمة سرّي",
+        "password"              => "كلمة السّرّ",
+        "remember"              => "تذّكرني",
+        "submit"                => "لج",
+        "title"                 => "الولوج"
     ],
-    "logout"                    => "Logout",
+    "logout"                    => "اخرج",
     "password" => [
-        "email_content"         => "Click to this link to reset your password:",
-        "submit"                => "Send Password Reset Link",
-        "title"                 => "Forgot Password"
+        "email_content"         => "اتبع هذا الرابط لتصفير كلمة سرّك",
+        "submit"                => "أرسل رابط تصفير كلمة السّرّ",
+        "title"                 => "تصفير كلمة السّرّ"
     ],
     "reset" => [
-        "password"              => "New password",
-        "password_confirmation" => "New password confirmation",
-        "submit"                => "Submit",
-        "title"                 => "Reset my Password"
+        "password"              => "كلمة السّر الجديدة",
+        "password_confirmation" => "توكيد كلمة السّرّ الجديدة",
+        "submit"                => "أودّع",
+        "title"                 => "وضع كلمة سرّ جديدة"
     ]
-
 ];

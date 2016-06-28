@@ -1,10 +1,8 @@
 <?php
-
 return [
-
     /*
     |--------------------------------------------------------------------------
-    | English Password Reset Language Lines
+    | Arabic Password Reset Language Lines
     |--------------------------------------------------------------------------
     |
     | The following language lines are the default lines which match reasons
@@ -12,11 +10,9 @@ return [
     | has failed, such as for an invalid token or invalid new password.
     |
     */
-
-    'password' => 'Passwords must be at least six characters and match the confirmation.',
-    'reset' => 'Your password has been reset!',
-    'sent' => 'We have e-mailed your password reset link!',
-    'token' => 'This password reset token is invalid.',
-    'user' => "We can't find a user with that e-mail address."
-
+    'password' => 'كلمة السِّرِّ ينبغي ألا تقل عن ستة أحرف و أن تُطابق التوكيد.',
+    'reset' => 'تمَّ بنجاح تغيير كلمّة سرِّك.',
+    'sent' => 'أُرسِلَت إليك رسالة بريد تحوي رابط تصفير كلمة السِّرِّ.',
+    'token' => 'أمارة تصفير كلمة السِّرِّ هذه ليست صحيحة.',
+    'user' => "لَمْ نجد حساب مستخدِمٍ له عنوان البريد الإلكتروني هذا!"
 ];
