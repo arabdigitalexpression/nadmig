@@ -42,7 +42,7 @@ class UsersForm extends AdminForm
             ])
             ->add('role', 'choice', [
                 'choices' => $this->getRoles(),
-                'selected' => $this->getUserRole($this->model),
+                'selected' => [],
                 'label' => trans('User::dashboard.fields.user.role'),
                 'expanded' => true,
                 'multiple' => true
@@ -63,7 +63,7 @@ class UsersForm extends AdminForm
         return $array;
     }
     private function getUserRole($user = null){
-        
+
         $array = array();
         if($user == null){
             return $array;
