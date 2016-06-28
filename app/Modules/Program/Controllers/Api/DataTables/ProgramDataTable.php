@@ -2,7 +2,7 @@
 
 use App\Modules\Program\Models\Program;
 use App\Modules\Program\Base\Controllers\ModuleDataTableController;
-
+use Auth;
 class ProgramDataTable extends ModuleDataTableController {
 
   protected $columns = ['name', 'description'];
@@ -13,7 +13,11 @@ class ProgramDataTable extends ModuleDataTableController {
   protected $options = ['show', 'edit'];
   public function query()
   {
-      $program = Program::Query();
+      if(Auth::user()->hasRole('admin')){
+      	$program = Program::Query();
+      }elseif(Auth::user()->hasRole('organization_manager')){
+      	$program = Program::Query()->where('user_id', Auth::user()->id);
+      }
       return $this->applyScopes($program);
   }
 

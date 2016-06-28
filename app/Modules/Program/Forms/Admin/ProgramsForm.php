@@ -3,6 +3,7 @@
 use App\Base\Forms\AdminForm;
 use App\Modules\Event\Models\Event;
 use App\Modules\Program\Models\Program;
+use Auth;
 class ProgramsForm extends AdminForm
 {
     public function buildForm()
@@ -29,10 +30,18 @@ class ProgramsForm extends AdminForm
     }
     private function getEvents(){
         $array = array();
-        foreach (Event::all() as $event)
-        {    
-            $array = array_add($array, $event['id'], $event->reservation['name']);   
+        if(Auth::user()->hasRole('admin')){
+            foreach (Event::all() as $event)
+            {    
+                $array = array_add($array, $event['id'], $event->reservation['name']);   
+            }
+        }elseif (Auth::user()->hasRole('organization_manager')) {
+            foreach (Auth::user()->manageOrganization->reservations()->where('status', 'accepted')->where('event_type', 'public')->get() as $reservation)
+            {    
+                $array = array_add($array, $reservation->event->id, $reservation['name']);   
+            }
         }
+
         return $array;
     }
     private function getProgramEvents($program = null){

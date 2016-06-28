@@ -63,6 +63,7 @@ class MakeMenu
              if (Auth::user()->hasRole('organization_manager')) {
                 MyOrganization::AddMenus($menu);
                 Space::AddMenus($menu);
+                Program::AddMenus($menu);
                 Events::AddMenus($menu);
                 Reservation::AddMenus($menu);
                 Sessions::AddMenus($menu);

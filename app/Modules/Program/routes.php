@@ -14,6 +14,6 @@ Route::group(['prefix' => 'api', 'module' => 'Program', 'namespace' => 'Api', 'm
 });
 
 // Admin routes
-Route::group(['prefix' => 'dashboard', 'module' => 'Program', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
+Route::group(['prefix' => 'dashboard', 'module' => 'Program', 'namespace' => 'Admin', 'middleware' => 'organization_manager'], function () {
 	Route::resource('program', 'ProgramController');
 });
