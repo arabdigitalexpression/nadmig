@@ -63,6 +63,7 @@ class UsersForm extends AdminForm
         return $array;
     }
     private function getUserRole($user = null){
+        dd($user);
         $array = array();
         if($user == null){
             return $array;
