@@ -85,14 +85,16 @@ abstract class AdminController extends Controller
      */
     protected function createForm($url, $method, $model, $extra = null)
     {
-        // dd($model);
+        // if($path == null) {
+        //     $path = $this->formPath;
+        // }
 
         return FormBuilder::create($this->formPath, [
                 'method' => $method,
                 'url' => $url,
                 'model' => $model
             ], [
-                $extra
+                $extra,
             ]);
     }
 
