@@ -26,21 +26,21 @@ class CreateSpacesTable extends Migration
             $table->string('logo');
             $table->text('excerpt');
             $table->text('description');
-            $table->json('links');
+            $table->text('links'); // json
             $table->string('in_return_key');
             $table->integer('in_return');
             $table->string('status');
-            $table->json('working_week_days');
-            $table->json('working_hours_days');
+            $table->text('working_week_days'); // json
+            $table->text('working_hours_days'); // json
             $table->string('space_type');
-            $table->json('space_equipment');
+            $table->text('space_equipment'); // json
             $table->text('agreement_text');
             $table->integer('capacity');
             $table->string('smoking');
-            $table->json('min_type_for_reservation');
-            $table->json('max_type_for_reservation');
-            $table->json('min_time_before_reservation');
-            $table->json('max_time_before_reservation');
+            $table->text('min_type_for_reservation'); // json
+            $table->text('max_type_for_reservation'); // json
+            $table->text('min_time_before_reservation'); // json
+            $table->text('max_time_before_reservation'); // json
             $table->timestamps();
         });
     }

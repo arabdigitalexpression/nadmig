@@ -32,13 +32,13 @@ class CreateReservationsTable extends Migration
             $table->integer('expected_attendees');
             $table->integer('reserved_attendees');
             $table->string('event_type');
-            $table->json('dooropen_time');
-            $table->json('dooropen_period');
+            $table->text('dooropen_time'); // json
+            $table->text('dooropen_period'); // json
             $table->string('apply');
             $table->string('apply_cost');
             $table->string('apply_deadline');
             $table->string('status');
-            $table->json('actions');
+            $table->text('actions'); // json
             $table->timestamps();
         });
     }

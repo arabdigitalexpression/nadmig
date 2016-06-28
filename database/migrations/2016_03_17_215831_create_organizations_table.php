@@ -25,12 +25,12 @@ class CreateOrganizationsTable extends Migration
             $table->string('phone_number');
             $table->text('excerpt');
             $table->text('description');
-            $table->json('links');
-            $table->json('min_time_before_usage_to_edit');
-            $table->json('change_fees');
-            $table->json('min_to_cancel');
-            $table->json('cancel_fees');
-            $table->json('max_to_confirm');
+            $table->text('links'); // json
+            $table->text('min_time_before_usage_to_edit'); // json
+            $table->text('change_fees'); // json
+            $table->text('min_to_cancel'); // json
+            $table->text('cancel_fees'); // json
+            $table->text('max_to_confirm'); // json
             $table->timestamps();
         });
     }

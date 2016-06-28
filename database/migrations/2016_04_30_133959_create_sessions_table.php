@@ -23,7 +23,7 @@ class CreateSessionsTable extends Migration
             $table->text('start_date');
             $table->text('start_time');
             $table->string('fees');
-            $table->json('period');
+            $table->text('period'); // json
             $table->text('excerpt');
             $table->text('description');
             $table->string('status');
