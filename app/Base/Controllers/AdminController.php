@@ -69,7 +69,7 @@ abstract class AdminController extends Controller
             $method = 'POST';
             $path = $this->viewPath("create");
         }
-        
+
         $form = $this->createForm($url, $method, $object, $extra);
         dd($object);
         return view($path, compact('form', 'object', 'extra'));
@@ -83,7 +83,7 @@ abstract class AdminController extends Controller
      * @param $model
      * @return \Kris\LaravelFormBuilder\Form
      */
-    protected function createForm($url, $method, $model, $extra)
+    protected function createForm($url, $method, $model, $extra = null)
     {
         // dd($model);
 
