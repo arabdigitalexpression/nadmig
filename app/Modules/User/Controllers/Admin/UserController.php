@@ -58,7 +58,7 @@ class UserController extends ModuleController
      */
     public function edit(User $user)
     {
-
+        dd($user);
         return $this->getForm($user);
     }
 
