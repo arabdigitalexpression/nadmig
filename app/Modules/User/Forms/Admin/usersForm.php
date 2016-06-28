@@ -67,7 +67,7 @@ class UsersForm extends AdminForm
         if($user == null){
             return $array;
         }else{
-            foreach (User::findOrFail($user['id'])->roles as $role)
+            foreach ($user->roles as $role)
             {    
                array_push($array, $role['id']);   
             }
