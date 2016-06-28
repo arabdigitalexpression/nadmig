@@ -16,24 +16,24 @@ abstract class ModuleController extends AdminController
      *
      * @var string
      */
-    protected $formPath = "";
+    // protected $formPath = "";
 
-    /**
-     * Current language
-     *
-     * @var mixed
-     */
-    protected $language;
+    // /**
+    //  * Current language
+    //  *
+    //  * @var mixed
+    //  */
+    // protected $language;
 
-    /**
-     * AdminController constructor.
-     */
-    public function __construct()
-    {
-        $this->model = $this->getModel();
-        $this->formPath = $this->getFormModulePath();
-        $this->language = session('current_lang');
-    }
+    // /**
+    //  * AdminController constructor.
+    //  */
+    // public function __construct()
+    // {
+    //     $this->model = $this->getModel();
+    //     $this->formPath = $this->getFormModulePath();
+    //     $this->language = session('current_lang');
+    // }
 
     public function viewPath($path = "index", $object = false)
     {
