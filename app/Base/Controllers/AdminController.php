@@ -69,8 +69,9 @@ abstract class AdminController extends Controller
             $method = 'POST';
             $path = $this->viewPath("create");
         }
+        dd($object);
         $form = $this->createForm($url, $method, $object, $extra);
-        dd($form);
+
         return view($path, compact('form', 'object', 'extra'));
     }
 
