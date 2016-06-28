@@ -9,31 +9,31 @@ abstract class ModuleController extends AdminController
     //  *
     //  * @var string
      
-    // protected $model = "";
+    protected $model = "";
 
     /**
      * Form class path
      *
      * @var string
      */
-    // protected $formPath = "";
+    protected $formPath = "";
 
-    // /**
-    //  * Current language
-    //  *
-    //  * @var mixed
-    //  */
-    // protected $language;
+    /**
+     * Current language
+     *
+     * @var mixed
+     */
+    protected $language;
 
-    // /**
-    //  * AdminController constructor.
-    //  */
-    // public function __construct()
-    // {
-    //     $this->model = $this->getModel();
-    //     $this->formPath = $this->getFormModulePath();
-    //     $this->language = session('current_lang');
-    // }
+    /**
+     * AdminController constructor.
+     */
+    public function __construct()
+    {
+        $this->model = $this->getModel();
+        $this->formPath = $this->getFormModulePath();
+        $this->language = session('current_lang');
+    }
 
     public function viewPath($path = "index", $object = false)
     {
@@ -52,7 +52,7 @@ abstract class ModuleController extends AdminController
      */
     protected function getFormModulePath()
     {
-        $model =  title_case(str_plural($this->model));
-        return 'App\Modules\User\Forms\Admin\\' . $model . 'Form';
+        // $model =  title_case(str_plural($this->model));
+        return 'App\Modules\User\Forms\Admin\\' . title_case(str_plural($this->model)) . 'Form';
     }
 }
