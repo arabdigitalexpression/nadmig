@@ -25,6 +25,11 @@ class OrganizationsForm extends AdminForm
             ->add('geo_location', 'text', [
                 'label' => trans('Organization::dashboard.fields.organization.geo_location')
             ])
+            ->add('governorate', 'choice', [
+                'choices' => $this->getGovernorates(),
+                'selected' => $this->governorate,
+                'label' => trans('Organization::dashboard.fields.user.governorate'),
+            ])
             ->add('email', 'email', [
                 'label' => trans('Organization::dashboard.fields.organization.email')
             ])

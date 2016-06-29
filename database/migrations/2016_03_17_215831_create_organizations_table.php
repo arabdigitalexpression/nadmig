@@ -21,6 +21,7 @@ class CreateOrganizationsTable extends Migration
             $table->string('logo');
             $table->string('slug')->unique();
             $table->string('geo_location');
+            $table->string('governorate');
             $table->string('email');
             $table->string('phone_number');
             $table->text('excerpt');
