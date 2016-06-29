@@ -27,6 +27,7 @@ class OrganizationRequest extends Request {
             'min_to_cancel' => 'required',
             'cancel_fees' => 'required',
             'max_to_confirm' => 'required',
+            'governorate' => 'required'
         ];
     }
 }

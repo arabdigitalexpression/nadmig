@@ -9,4 +9,14 @@ class ProgramController extends ApplicationController {
   {
       return view('Program::application.index', compact('program'));
   }
+  public function list()
+  {
+  	$programs = Program::orderBy('id', 'desc')->take(10)->get();
+  	foreach ($programs as $program) {
+  		foreach ($program->events as $event) {
+  			$event->reservation->sessions;
+  		};
+  	}
+  	dd($programs->toArray());
+  }
 }

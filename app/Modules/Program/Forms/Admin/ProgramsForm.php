@@ -49,7 +49,7 @@ class ProgramsForm extends AdminForm
         if($program == null){
             return $array;
         }else{
-            foreach (Program::findOrFail($program->id)->events as $event)
+            foreach (Program::findOrFail($program['id'])->events as $event)
             {    
                array_push($array, $event->id);   
             }
