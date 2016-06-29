@@ -11,8 +11,8 @@ abstract class DataTableController extends DataTable
      *
      * @var array
      */
-    protected $parameters = ['dom' => 'Bfrtip', 'buttons' => ['csv', 'excel', 'pdf']];
-
+    // protected $parameters = ['dom' => 'Bfrtip', 'buttons' => ['csv', 'excel', 'pdf']];
+    protected $parameters = [];
     /**
      * Columns to show
      *
