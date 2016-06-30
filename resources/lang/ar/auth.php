@@ -13,6 +13,9 @@ return [
         "submit"                => "لج",
         "title"                 => "الولوج"
     ],
+    "signup" => [
+        "title"                 => "تسجيل حساب جديد"
+    ],
     "logout"                    => "اخرج",
     "password" => [
         "email_content"         => "اتبع هذا الرابط لتصفير كلمة سرّك",

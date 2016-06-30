@@ -11,7 +11,8 @@ return [
         "events" => "الفعاليات",
         "logout" => "الخروج",
         "dashboard" => "لوحة التحكم",
-        "reservation" => "الحجوزات"
+        "reservation" => "الحجوزات",
+        "programs"  => "البرامج"
     ],
     "title" => "نـدمـج",
     "home"          => "Home",

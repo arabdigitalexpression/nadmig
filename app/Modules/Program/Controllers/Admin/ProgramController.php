@@ -27,7 +27,7 @@ class ProgramController extends ModuleController {
 
   public function show(Program $program)
   {
-      return $this->viewPath("show", $program);
+      return redirect()->route('program.page', ['program' => $program->slug]);
   }
 
   public function edit(Program $program)

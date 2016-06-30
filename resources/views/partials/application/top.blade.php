@@ -15,12 +15,13 @@
                 <li class="{{ Route::is('root') ? 'active' : '' }}"><a href="{{  route('root') }}">{{ trans('application.menu.home') }}</a></li>
                 <li class="{{ Route::is('spaces') ? 'active' : '' }}"><a href="{{  route('spaces') }}">{{ trans('application.menu.spaces') }}</a></li>
                 <li><a href="{{  route('events') }}">{{ trans('application.menu.events') }}</a></li>
+                <li><a href="{{  route('programs') }}">{{ trans('application.menu.programs') }}</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-left user">
                 @if (Auth::guest())
-                    <li><a href="{{ url('/auth/login') }}">تسجيل الدخول</a></li>
+                    <li><a href="{{ url('/auth/login') }}">{{ trans('auth.login.title') }}</a></li>
                     <span class="break">|</span>
-                    <li><a href="{{ url('/user/register') }}">تسجيل مستخدم جديد</a></li>
+                    <li><a href="{{ url('/user/register') }}">{{ trans('auth.signup.title') }}</a></li>
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img class="pp" src="{{ url(Auth::user()->picture)}}"><span class="name">{{ Auth::user()->name }}</span> <span class="caret"></span></a>

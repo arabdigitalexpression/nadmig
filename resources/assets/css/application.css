@@ -235,6 +235,10 @@ body{
 	float: right;
 	width: 100%;
 }
+.page .post-header p{
+	float: right;
+	padding: 20px 0 10px;
+}
 /*reservations*/
 .reservations{
 	direction: rtl;
@@ -252,4 +256,14 @@ body{
 	font-size: 16px;
     margin: 0 0 0 15px;
 	color: #363636;
+}
+
+ /* program page */
+ .program .logo{
+	max-height: 300px;
+	max-width: 100%;
+	padding: 0;
+}
+.program .name{
+	width: 100%;
 }

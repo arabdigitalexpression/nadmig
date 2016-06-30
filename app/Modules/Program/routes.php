@@ -3,7 +3,7 @@
 Route::group(['middleware' => 'web'], function () {
     // Application routes
     Route::group(['module' => 'Program', 'namespace' => 'Application'], function () {
-        Route::get('programs', ['as' => 'program', 'uses' => 'ProgramController@list']);
+        Route::get('programs', ['as' => 'programs', 'uses' => 'ProgramController@list']);
         Route::get('program/{program_slug}', ['as' => 'program.page', 'uses' => 'ProgramController@index']);
     });
 });
