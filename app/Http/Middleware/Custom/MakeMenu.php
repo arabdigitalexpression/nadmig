@@ -17,6 +17,7 @@ use App\Modules\Event\Middlewares\Custom\EventMiddleware as Events;
 use App\Modules\Apply\Middlewares\Custom\ApplyMiddleware as Apply;
 use App\Modules\Log\Middlewares\Custom\LogMiddleware as Log;
 use App\Modules\Program\Middlewares\Custom\ProgramMiddleware as Program;
+use App\Modules\School\Middlewares\Custom\SchoolMiddleware as School;
 class MakeMenu
 {
     /**
@@ -51,6 +52,7 @@ class MakeMenu
                     Reservation::AddMenus($menu);
                     Sessions::AddMenus($menu);
                     Apply::AddMenus($menu);
+                    School::AddMenus($menu);
                     User::AddMenus($menu);
                     Role::AddMenus($menu);
                     Permission::AddMenus($menu);

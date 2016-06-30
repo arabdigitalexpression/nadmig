@@ -20,6 +20,9 @@ class Program extends Model implements SluggableInterface {
 	{
 	    return $this->belongsToMany('App\Modules\Event\Models\Event');
 	}
+	public function school(){
+		return $this->belongsTo('App\Modules\School\Models\School');
+	}
 	protected static function boot()
     {
         parent::boot();

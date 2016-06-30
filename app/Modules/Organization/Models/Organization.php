@@ -29,4 +29,7 @@ class Organization extends Model implements SluggableInterface {
     {
         return $this->hasOne('App\Modules\User\Models\User', 'id');
     }
+    public function school(){
+		return $this->belongsTo('App\Modules\School\Models\School');
+	}
 }

@@ -175,6 +175,8 @@ return [
         App\Modules\Log\Providers\RouteServiceProvider::class,
         App\Modules\Apply\Providers\RouteServiceProvider::class,
         App\Modules\Program\Providers\RouteServiceProvider::class,
+        App\Modules\School\Providers\RouteServiceProvider::class,
+        App\Modules\Trainer\Providers\RouteServiceProvider::class,
 
     ],
 
