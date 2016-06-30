@@ -158,7 +158,7 @@ return [
         Thedgmbh\Modules\ModuleServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
         Spatie\Activitylog\ActivitylogServiceProvider::class,
-
+        // Cviebrock\EloquentSluggable\ServiceProvider::class,
 
         /*
          * Modules

@@ -1,8 +1,8 @@
 <?php namespace App\Modules\Trainer\Middlewares\Custom;
 
-use App\Base\Middleware\AdminMiddleware as AdminMiddlewareInterface;
+use App\Http\Middleware\Custom\MakeMenu;
 
-class TrainerMiddleware extends AdminMiddlewareInterface
+class TrainerMiddleware extends MakeMenu
 {
 
     private $circle = "circle-o";
@@ -12,15 +12,15 @@ class TrainerMiddleware extends AdminMiddlewareInterface
 		}
 
 		private static function moduleMenu($menu){
-			$module = $menu->add(trans('Trainer::admin.menu.trainer.root'), '#')
+			$module = $menu->add(trans('Trainer::dashboard.menu.trainer.root'), '#')
 		        ->icon('apple')
 		        ->prependIcon();
 
-		  $module->add(trans('Trainer::admin.menu.trainer.add'), ['route' => 'admin.trainer.create'])
+		  $module->add(trans('Trainer::dashboard.menu.trainer.add'), ['route' => 'dashboard.trainer.create'])
 		      ->icon("circle-o")
 		      ->prependIcon();
 
-		  $module->add(trans('Trainer::admin.menu.trainer.all'), ['route' => 'admin.trainer.index'])
+		  $module->add(trans('Trainer::dashboard.menu.trainer.all'), ['route' => 'dashboard.trainer.index'])
 		      ->icon("circle-o")
 		      ->prependIcon();
 		}

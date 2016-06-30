@@ -3,7 +3,7 @@
 Route::group(['middleware' => 'web'], function () {
     // Application routes
     Route::group(['module' => 'Trainer', 'namespace' => 'Application'], function () {
-        Route::get('trainer', ['as' => 'trainer', 'uses' => 'TrainerController@index']);
+        Route::get('trainers', ['as' => 'trainer', 'uses' => 'TrainerController@list']);
         Route::get('trainer/{trainer_slug}', ['as' => 'trainer.page', 'uses' => 'TrainerController@index']);
     });
 });
@@ -14,6 +14,6 @@ Route::group(['prefix' => 'api', 'module' => 'Trainer', 'namespace' => 'Api', 'm
 });
 
 // Admin routes
-Route::group(['prefix' => 'admin', 'module' => 'Trainer', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
+Route::group(['prefix' => 'dashboard', 'module' => 'Trainer', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
 	Route::resource('trainer', 'TrainerController');
 });

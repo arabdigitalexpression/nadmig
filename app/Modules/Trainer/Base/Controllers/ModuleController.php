@@ -37,7 +37,7 @@ abstract class ModuleController extends AdminController
 
     public function viewPath($path = "index", $object = false)
     {
-        $path = $this->model . '::admin.' . $path;
+        $path = $this->model . '::dashboard.' . $path;
         if ($object !== false) {
             return view($path, compact('object'));
         } else {

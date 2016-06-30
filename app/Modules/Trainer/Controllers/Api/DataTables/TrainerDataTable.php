@@ -5,13 +5,13 @@ use App\Modules\Trainer\Base\Controllers\ModuleDataTableController;
 
 class TrainerDataTable extends ModuleDataTableController {
 
-  protected $columns = ['title'];
-
+  protected $columns = ['bio'];
+  protected $pluck_columns = ['user_id' => ['user', 'name']];
   protected $common_columns = ['created_at', 'updated_at'];
-
+  protected $options = ['edit'];
   public function query()
   {
-      $trainer = Trainer::whereLanguageId(session('current_lang')->id);
+      $trainer = Trainer::Query();
       return $this->applyScopes($trainer);
   }
 

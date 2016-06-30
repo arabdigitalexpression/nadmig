@@ -12,9 +12,10 @@ class TrainerRequest extends Request {
     public function rules()
     {
         return [
-            'content' => 'required',
-            'language_id' => 'required|integer',
-            'title' => 'required|min:3'
+            'user_id' => 'required|integer',
+            'bio'   => 'sometimes',
+            'specialization'   => 'sometimes',
+            'number_workshops'   => 'sometimes'
         ];
     }
 }

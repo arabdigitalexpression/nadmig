@@ -78,5 +78,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $this->hasOne('App\Modules\Space\Models\Space', 'manager_id');
     }
+    public function trainer()
+    {
+        return $this->hasOne('App\Modules\Trainer\Models\Trainer');
+    }
 
 }

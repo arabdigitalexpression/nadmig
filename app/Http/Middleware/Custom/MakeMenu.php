@@ -18,6 +18,7 @@ use App\Modules\Apply\Middlewares\Custom\ApplyMiddleware as Apply;
 use App\Modules\Log\Middlewares\Custom\LogMiddleware as Log;
 use App\Modules\Program\Middlewares\Custom\ProgramMiddleware as Program;
 use App\Modules\School\Middlewares\Custom\SchoolMiddleware as School;
+use App\Modules\Trainer\Middlewares\Custom\TrainerMiddleware as Trainer;
 class MakeMenu
 {
     /**
@@ -53,6 +54,7 @@ class MakeMenu
                     Sessions::AddMenus($menu);
                     Apply::AddMenus($menu);
                     School::AddMenus($menu);
+                    Trainer::AddMenus($menu);
                     User::AddMenus($menu);
                     Role::AddMenus($menu);
                     Permission::AddMenus($menu);

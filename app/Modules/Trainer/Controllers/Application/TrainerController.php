@@ -9,4 +9,9 @@ class TrainerController extends ApplicationController {
   {
       return view('Trainer::application.index', compact('trainer'));
   }
+  public function list()
+  {	
+  	$trainers  = Trainer::all();
+    return view('Trainer::application.list', compact('trainers'));
+  }
 }

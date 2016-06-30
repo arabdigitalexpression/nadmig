@@ -55,16 +55,16 @@ abstract class ModuleDataTableController extends DataTableController
         $columns = [];
 
         $base_columns = array_merge($this->image_columns, $this->columns);
-        foreach (array_merge($base_columns, array_keys($this->pluck_columns)) as $column) {
-            $title = trans(studly_case($model).'::admin.fields.' . strtolower($model) . '.' . $column);
+        foreach (array_merge(array_keys($this->pluck_columns), $base_columns) as $column) {
+            $title = trans(studly_case($model).'::dashboard.fields.' . strtolower($model) . '.' . $column);
             array_push($columns, ['data' => $column, 'name' => $column, 'title' => $title]);
         }
         foreach ($this->common_columns as $column) {
-            $title = trans('admin.fields.' . $column);
-            array_push($columns, ['data' => $column, 'name' => $column, 'title' => $title]);
+            $title = trans('dashboard.fields.' . $column);
+            array_push($columns, ['data' => $column, 'name' => $column, 'title' => $title, 'searchable' => false]);
         }
         if ($this->ops === true) {
-            $title = trans('admin.ops.name');
+            $title = trans('dashboard.ops.name');
             array_push($columns, [
                 'data' => 'ops', 'name' => 'ops', 'title' => $title,
                 'orderable' => false, 'searchable' => false
@@ -80,6 +80,6 @@ abstract class ModuleDataTableController extends DataTableController
      */
     protected function getParameters()
     {
-        return array_merge($this->parameters, ['oLanguage' => trans('admin.datatables')]);
+        return array_merge($this->parameters, ['oLanguage' => trans('dashboard.datatables')]);
     }
 }

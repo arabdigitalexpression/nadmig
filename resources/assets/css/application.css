@@ -132,12 +132,14 @@ body{
 	width: 20%;
 	margin: 0  0 20px 20px;
 	float: right;
+	min-height: 300px;
 }
 .spaces-list li a{
 	text-decoration: none;
 }
 .spaces-list li a .panel-heading i{
 	font-size: 10px;
+	
 }
 .spaces-list li .space-icon{
 	max-height: 175px;
@@ -152,6 +154,10 @@ body{
 	font-size: 14px;
 	color: #000;
 	margin: 5px;
+	min-height: auto;
+}
+.spaces-list li .space-info li i{
+	margin-left: 5px;
 }
 .spaces-list li .space-info li a{
 	color: #000;
