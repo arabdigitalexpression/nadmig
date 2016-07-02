@@ -85,13 +85,18 @@ abstract class ApplicationController extends Controller
         // if($path == null) {
         //     $path = $this->formPath;
         // }
-        return FormBuilder::create($this->formPath, [
+        if ($model) {
+            return FormBuilder::create($this->formPath, [
                 'method' => $method,
                 'url' => $url,
-                'model' => $model
-            ], [
-                $extra,
-            ]);
+                'model' => $model->toArray()
+            ], [ $extra ]);
+        }else{
+            return FormBuilder::create($this->formPath, [
+                'method' => $method,
+                'url' => $url,
+            ], [ $extra ]);
+        }
     }
 
     /**

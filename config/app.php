@@ -149,7 +149,6 @@ return [
         Baum\Providers\BaumServiceProvider::class,
         Caffeinated\Menus\MenusServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-        Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
         Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         Mews\Purifier\PurifierServiceProvider::class,
@@ -158,7 +157,7 @@ return [
         Thedgmbh\Modules\ModuleServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
         Spatie\Activitylog\ActivitylogServiceProvider::class,
-        // Cviebrock\EloquentSluggable\ServiceProvider::class,
+        Cviebrock\EloquentSluggable\ServiceProvider::class,
 
         /*
          * Modules

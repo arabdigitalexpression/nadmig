@@ -1,19 +1,28 @@
 <?php namespace App\Modules\Session\Models;
 
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
 
-class Session extends Model implements SluggableInterface {
+class Session extends Model{
+    use SluggableScopeHelpers;
+    use Sluggable;
 
-    use SluggableTrait;
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 
-    protected $sluggable = array(
-        'build_from' => 'name',
-        'save_to'    => 'slug'
-    );
-
-	protected $fillable = ['space_id', 'reservation_id','start_date',  'start_time', 'fees', 'period', 'excerpt', 'description', 'status', 'name', 'slug'];
+	protected $fillable = ['space_id', 'reservation_id','start_date',  'start_time', 'fees', 'period', 'excerpt', 'description', 'status', 'name'];
 
 	public function reservation()
      {
@@ -28,7 +37,7 @@ class Session extends Model implements SluggableInterface {
         parent::boot();
         Session::creating(function ($session) {
             $session->status = "pending";
-            $session->slug = $session->slug . hash("crc32b",time() . $session->name);
+            // $session->slug = $session->slug . hash("crc32b",time() . $session->name);
         });
     }
 }

@@ -1,20 +1,29 @@
 <?php namespace App\Modules\Event\Models;
 
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
 
-class Event extends Model implements SluggableInterface {
+class Event extends Model{
 
-	use SluggableTrait;
+	use SluggableScopeHelpers;
+	use Sluggable;
 
-	protected $sluggable = array(
-	    'build_from' => 'name',
-	    'save_to'    => 'slug',
-	    'on_update'  => false
-	);
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 
-	protected $fillable = ['reservation_id', 'slug'];
+	protected $fillable = ['reservation_id'];
 
 	public function reservation()
 	{
@@ -32,7 +41,7 @@ class Event extends Model implements SluggableInterface {
     {
         parent::boot();
         Event::creating(function ($event) {
-            $event->slug = $event->slug . hash("crc32b",time() . $event->name);
+            // $event->slug = $event->slug . hash("crc32b",time() . $event->name);
             $event->status = 'accepted';
         });
     }
