@@ -52,7 +52,7 @@ class OrganizationController extends ModuleController {
 	public function edit(Organization $organization)
 	{
 		
-		if ((Auth::user()->can('edit-orgnization')) || (Auth::user()->can('edit-my-orgnization') && $organization['manager_id'] == Auth::user()->id)) {
+		if ((Auth::user()->hasRole('admin')) || (Auth::user()->hasRole('organization_manager') && $organization['manager_id'] == Auth::user()->id)) {
 			foreach ($organization->toArray() as $key => $value) {
 	          if ($this->isJson($value)) {
 	              $organization[$key] = json_decode($value);

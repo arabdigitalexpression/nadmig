@@ -140,7 +140,7 @@ class SpacesForm extends AdminForm
             $this->OptionAndPeriod('max_type_for_reservation', trans('Space::dashboard.fields.space.max_time_for_reservation'), false, false,true, true);
             $this->OptionAndPeriod('min_time_before_reservation', trans('Space::dashboard.fields.space.min_time_before_reservation'));
             $this->OptionAndPeriod('max_time_before_reservation', trans('Space::dashboard.fields.space.max_time_before_reservation'));
-            $this->OptionAndPeriod('reset_time', trans('Space::dashboard.fields.space.reset_time'), false, true, true, false);
+            // $this->OptionAndPeriod('reset_time', trans('Space::dashboard.fields.space.reset_time'), false, true, true, false);
 
         parent::buildForm();
     }
@@ -200,9 +200,12 @@ class SpacesForm extends AdminForm
     protected function getSpaceEquipment(){
         $space_equipment = array();
         $setting = Setting::firstOrFail();
-        foreach (json_decode($setting->space_equipment) as $key => $value) {
-            $space_equipment = array_add($space_equipment, $key, $value);
+        if($setting->space_equipment){
+            foreach (json_decode($setting->space_equipment) as $key => $value) {
+                $space_equipment = array_add($space_equipment, $key, $value);
+            }
         }
+
         return $space_equipment;
     }
     protected function WeekDaysForm()

@@ -20,7 +20,7 @@
         </div>
     </div>
     <button class="btn btn-primary btn-add-panel"> <i class="glyphicon glyphicon-plus"></i> أضف رابط</button>
-    {!! form_until($form, 'reset_time[period]')!!}
+    {!! form_until($form, 'max_time_before_reservation[period]')!!}
     </br>
     {!! form_rest($form)!!}
     <script src="{{ url( 'packages/tinymce/tinymce.min.js' ) }}" type="text/javascript"></script>
