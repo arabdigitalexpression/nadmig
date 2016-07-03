@@ -1,8 +1,8 @@
 <?php namespace App\Modules\Report\Middlewares\Custom;
 
-use App\Base\Middleware\AdminMiddleware as AdminMiddlewareInterface;
+use App\Http\Middleware\Custom\MakeMenu;
 
-class ReportMiddleware extends AdminMiddlewareInterface
+class ReportMiddleware extends MakeMenu
 {
 
     private $circle = "circle-o";
@@ -12,15 +12,18 @@ class ReportMiddleware extends AdminMiddlewareInterface
 		}
 
 		private static function moduleMenu($menu){
-			$module = $menu->add(trans('Report::admin.menu.report.root'), '#')
+			$module = $menu->add(trans('Report::dashboard.menu.report.root'), '#')
 		        ->icon('apple')
 		        ->prependIcon();
 
-		  $module->add(trans('Report::admin.menu.report.add'), ['route' => 'admin.report.create'])
+		  $module->add(trans('Report::dashboard.menu.report.add'), ['route' => 'dashboard.report.create'])
 		      ->icon("circle-o")
 		      ->prependIcon();
 
-		  $module->add(trans('Report::admin.menu.report.all'), ['route' => 'admin.report.index'])
+		  $module->add(trans('Report::dashboard.menu.report.all'), ['route' => 'dashboard.report.index'])
+		      ->icon("circle-o")
+		      ->prependIcon();
+		   $module->add(trans('Report::dashboard.menu.report.trainer.all'), ['route' => 'dashboard.report.trainer'])
 		      ->icon("circle-o")
 		      ->prependIcon();
 		}

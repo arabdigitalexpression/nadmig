@@ -237,3 +237,20 @@ if (!function_exists('GovArabic')) {
         }
 
 }
+if (!function_exists('TrainerReportAnswer')) {
+    function TrainerReportAnswer($key){
+        $choose = [ 1 => 'بنسبة ضعيفة', 2 => 'بنسبة متوسطة', 3 => 'بنسبة كبيرة' ];
+        return $choose[$key];
+    }
+}
+if (!function_exists('diff_in_weeks_and_days')) {
+    function diff_in_weeks_and_days($from, $to){
+       $day   = 24 * 3600;
+        $from  = strtotime($from);
+        $to    = strtotime($to) + $day;
+        $diff  = abs($to - $from);
+        $weeks = floor($diff / $day / 7);
+        $out   = array();
+        return (int)($weeks);
+    }
+}

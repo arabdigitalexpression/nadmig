@@ -2,7 +2,7 @@
 
 use App\Base\Forms\AdminForm;
 
-class ReportForm extends AdminForm
+class ReportsForm extends AdminForm
 {
     public function buildForm()
     {

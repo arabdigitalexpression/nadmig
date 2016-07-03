@@ -19,6 +19,7 @@ use App\Modules\Log\Middlewares\Custom\LogMiddleware as Log;
 use App\Modules\Program\Middlewares\Custom\ProgramMiddleware as Program;
 use App\Modules\School\Middlewares\Custom\SchoolMiddleware as School;
 use App\Modules\Trainer\Middlewares\Custom\TrainerMiddleware as Trainer;
+use App\Modules\Report\Middlewares\Custom\ReportMiddleware as Report;
 class MakeMenu
 {
     /**
@@ -55,6 +56,7 @@ class MakeMenu
                     Apply::AddMenus($menu);
                     School::AddMenus($menu);
                     Trainer::AddMenus($menu);
+                    Report::AddMenus($menu);
                     User::AddMenus($menu);
                     Role::AddMenus($menu);
                     Permission::AddMenus($menu);

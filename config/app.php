@@ -176,6 +176,7 @@ return [
         App\Modules\Program\Providers\RouteServiceProvider::class,
         App\Modules\School\Providers\RouteServiceProvider::class,
         App\Modules\Trainer\Providers\RouteServiceProvider::class,
+        App\Modules\Report\Providers\RouteServiceProvider::class,
 
     ],
 
