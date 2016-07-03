@@ -41,7 +41,7 @@
     {!! form_row($form->manager_id) !!}
     </br>
     </br>
-    {!! form_row($form->save) !!}
+    {!! form_row($form->submit) !!}
     {!! form_end($form, false)!!}
     <script src="{{ url( 'packages/tinymce/tinymce.min.js' ) }}" type="text/javascript"></script>
     <script type="text/javascript">
