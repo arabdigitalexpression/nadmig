@@ -1,18 +1,27 @@
 <?php namespace App\Modules\School\Models;
 
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
 
-class School extends Model implements SluggableInterface {
+class School extends Model {
 
-	use SluggableTrait;
+	use SluggableScopeHelpers;
+	use Sluggable;
 
-	protected $sluggable = array(
-	    'build_from' => 'name',
-	    'save_to'    => 'slug',
-	    'on_update'  => true
-	);
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 
 	protected $fillable = ['name', 'organization_id', 'program_id'];
 
@@ -24,5 +33,9 @@ class School extends Model implements SluggableInterface {
 	{
 	    return $this->belongsTo('App\Modules\Organization\Models\Organization');
 	}
+    public function kids()
+    {
+        return $this->belongsToMany('App\Modules\User\Models\User');
+    }
 
 }

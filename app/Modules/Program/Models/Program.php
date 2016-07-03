@@ -1,18 +1,27 @@
 <?php namespace App\Modules\Program\Models;
 
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
-class Program extends Model implements SluggableInterface {
+class Program extends Model{
 
-	use SluggableTrait;
+	use SluggableScopeHelpers;
+	use Sluggable;
 
-	protected $sluggable = array(
-	    'build_from' => 'name',
-	    'save_to'    => 'slug',
-	    'on_update'  => true
-	);
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 
 	protected $fillable = ['name', 'artwork', 'description', 'user_id'];
 

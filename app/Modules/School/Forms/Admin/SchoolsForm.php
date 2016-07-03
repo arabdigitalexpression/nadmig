@@ -3,6 +3,8 @@
 use App\Base\Forms\AdminForm;
 use App\Modules\Organization\Models\Organization;
 use App\Modules\Program\Models\Program;
+use App\Modules\School\Models\School;
+use App\Modules\User\Models\User;
 class SchoolsForm extends AdminForm
 {
     public function buildForm()
@@ -22,6 +24,13 @@ class SchoolsForm extends AdminForm
                 'selected' => $this->program_id,
                 'attr'  => ['id' => 'program'],
                 'label' => trans('School::dashboard.fields.program')
+            ])
+            ->add('kids', 'choice', [
+                'choices' => $this->getKids(),
+                'selected' => $this->getSchoolKids($this->model),
+                'attr' => ['class' => 'chosen-select chosen-rtl'],
+                'multiple' => true,
+                'label' => trans('School::dashboard.fields.program')
             ]);
         parent::buildForm();
     }
@@ -40,5 +49,27 @@ class SchoolsForm extends AdminForm
             $array = array_add($array, $program['id'], $program['name']);   
         }
         return $array;
+    }
+    protected function getKids(){
+        $array = array();
+        foreach (User::all() as $user)
+        {    
+            if($user->hasRole('user')){
+                $array = array_add($array, $user['id'], $user['email']);    
+            }
+        }
+        return $array;
+    }
+    private function getSchoolKids($school = null){
+        $array = array();
+        if($school == null){
+            return $array;
+        }else{
+            foreach (School::findOrFail($school['id'])->kids as $kid)
+            {    
+               array_push($array, $kid->id);   
+            }
+            return $array;
+        }
     }
 }

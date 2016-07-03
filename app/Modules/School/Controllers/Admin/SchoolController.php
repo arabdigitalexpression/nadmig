@@ -29,7 +29,10 @@ class SchoolController extends ModuleController {
 
   public function update(School $school, SchoolRequest $request)
   {
-      return $this->saveFlashRedirect($school, $request);
+    if($request['kids']){
+      $school->kids()->sync($request['kids']);    
+    }
+    return $this->saveFlashRedirect($school, $request);
   }
 
   public function destroy(School $school)
