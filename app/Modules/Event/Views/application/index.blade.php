@@ -50,6 +50,7 @@
                                         </div>
                                       </div>
                                     </div>
+                                    </br>
                                     <button type="button" class="btn btn-primary btn-green" data-toggle="modal" data-target=".bs-example-modal-lg">{{ trans('Event::application.apply.text') }} </button>  
                                     @if($event->reservation->apply_cost > 0)
                                         <i style="font-size: 13px;" class="fa fa-money" aria-hidden="true"></i>  {{ $event->reservation->apply_cost . ' جنيه' }}
@@ -82,6 +83,7 @@
                                 
 
                             </p>
+                            </br>
                             <button type="button" class="btn btn-primary btn-green" data-toggle="modal" data-target=".bs-example-modal-lg">{{ trans('Event::application.apply.text') }} </button>  
                             @if($event->reservation->apply_cost > 0)
                                 <i style="font-size: 13px;" class="fa fa-money" aria-hidden="true"></i>  {{ $event->reservation->apply_cost . ' جنيه' }}

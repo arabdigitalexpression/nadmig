@@ -23,7 +23,7 @@ class Event extends Model{
         ];
     }
 
-	protected $fillable = ['reservation_id'];
+	protected $fillable = ['reservation_id', 'name'];
 
 	public function reservation()
 	{
@@ -45,10 +45,15 @@ class Event extends Model{
     {
         return $this->program->first()->school();
     }
+    public function report()
+    {
+        return $this->hasOne('App\Modules\Report\Models\TrainerReport');
+    }
 	protected static function boot()
     {
         parent::boot();
         Event::creating(function ($event) {
+            unset($event->name);
             $event->status = 'accepted';
         });
     }

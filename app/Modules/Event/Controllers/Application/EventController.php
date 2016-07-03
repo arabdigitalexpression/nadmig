@@ -33,7 +33,6 @@ class EventController extends ApplicationController {
       if(Auth::check()){
         $event['apply'] = $event->apply()->where('user_id', '=', Auth::user()->id)->get();
       }
-      // dd($event->toArray());
       return view('Event::application.index', compact('event'));
   }
   public function list()
