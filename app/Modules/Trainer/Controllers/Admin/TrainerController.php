@@ -24,11 +24,15 @@ class TrainerController extends ModuleController {
 
   public function edit(Trainer $trainer)
   {
+    
       return $this->getForm($trainer);
   }
 
   public function update(Trainer $trainer, TrainerRequest $request)
   {
+    if($request['workshops']){
+        $trainer->events()->sync($request['workshops']);    
+    }
       return $this->saveFlashRedirect($trainer, $request);
   }
 

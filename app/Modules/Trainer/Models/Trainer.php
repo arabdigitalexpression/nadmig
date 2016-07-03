@@ -6,11 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Trainer extends Model {
 
-	protected $fillable = ['user_id', 'bio', 'specialization', 'number_workshops'];
+	protected $fillable = ['user_id', 'bio', 'specialization'];
 
 	public function user()
 	{
 	    return $this->belongsTo('App\Modules\User\Models\User');
 	}
-
+	public function events()
+    {
+        return $this->belongsToMany('App\Modules\Event\Models\Event');
+    }
 }

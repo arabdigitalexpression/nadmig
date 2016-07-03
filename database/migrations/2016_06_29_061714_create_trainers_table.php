@@ -19,7 +19,6 @@ class CreateTrainersTable extends Migration
             $table->string('slug');
             $table->text('bio');
             $table->string('specialization');
-            $table->integer('number_workshops');
             $table->timestamps();
         });
     }

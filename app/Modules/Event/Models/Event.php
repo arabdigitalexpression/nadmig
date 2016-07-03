@@ -37,11 +37,18 @@ class Event extends Model{
 	{
 	    return $this->belongsToMany('App\Modules\Program\Models\Program');
 	}
+    public function trainer()
+    {
+        return $this->belongsToMany('App\Modules\Trainer\Models\Trainer');
+    }
+    public function school()
+    {
+        return $this->program->first()->school();
+    }
 	protected static function boot()
     {
         parent::boot();
         Event::creating(function ($event) {
-            // $event->slug = $event->slug . hash("crc32b",time() . $event->name);
             $event->status = 'accepted';
         });
     }

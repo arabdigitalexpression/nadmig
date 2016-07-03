@@ -138,6 +138,10 @@ abstract class AdminController extends Controller
             if($request['kids']){
                 $model->kids()->sync(json_decode($request['kids']));    
             }
+        }else if(class_basename($model) == "Trainer"){
+            if($request['workshops']){
+                $model->events()->sync(json_decode($request['workshops']));    
+            }
         }
         LogController::Log($model, 'created');
         return $this->redirectRoutePath($path);
