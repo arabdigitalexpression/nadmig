@@ -28,15 +28,26 @@ body{
 	color: #fff;
 	border: none;	
 }
+.panel-default.week .panel-heading{
+	float: right;
+    width: 100%;
+    margin-bottom: 15px;
+}
 .panel-orange .panel-heading{
 	background: #ff924b;
 	color: #fff;
 	padding:10px;
 	border-color: #ff924b;  
+	margin-bottom: 0 !important;
+}
+.panel-orange .panel-footer{
+	float: right;
+    width: 100%;
 }
 .panel-orange .panel-body{
 	border-color: #ff924b;	
 }
+
 .inside{
 	width: 100%;	
 }
@@ -272,4 +283,11 @@ body{
 }
 .program .name{
 	width: 100%;
+}
+
+/* report page */
+.user-thumbnail{
+	width: 50px;
+	height: 50px;
+	display: inline-block;
 }
