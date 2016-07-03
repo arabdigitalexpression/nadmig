@@ -26,7 +26,7 @@ class SchoolsForm extends AdminForm
                 'label' => trans('School::dashboard.fields.program')
             ])
             ->add('kids', 'choice', [
-                'choices' => $this->getKids(),
+                'choices' => $this->getKids($this->model),
                 'selected' => $this->getSchoolKids($this->model),
                 'attr' => ['class' => 'chosen-select chosen-rtl'],
                 'multiple' => true,
@@ -50,14 +50,27 @@ class SchoolsForm extends AdminForm
         }
         return $array;
     }
-    protected function getKids(){
+    protected function getKids($school = null){
         $array = array();
-        foreach (User::all() as $user)
-        {    
-            if($user->hasRole('user')){
-                $array = array_add($array, $user['id'], $user['email']);    
-            }
-        }
+        if($school != null){
+            foreach (User::all() as $user)
+            {    
+                if($user->hasRole('user') && is_null($user->school()->first())){
+                    $array = array_add($array, $user['id'], $user['email']);    
+                }
+            } 
+            foreach ($school->kids as $kid)
+            {    
+                $array = array_add($array, $kid['id'], $kid['email']);    
+            } 
+        }else{
+           foreach (User::all() as $user)
+            {    
+                if($user->hasRole('user') && is_null($user->school()->first())){
+                    $array = array_add($array, $user['id'], $user['email']);    
+                }
+            } 
+        }        
         return $array;
     }
     private function getSchoolKids($school = null){
