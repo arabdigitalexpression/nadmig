@@ -7,7 +7,7 @@
         <ul class="spaces-list">
         @foreach($trainers as $trainer)
             <li class="panel panel-default panel-orange">
-                <a href="#">
+                <a href="{{ route('trainer.page', ['trainer_slug' => $trainer->slug]) }}">
                 <img src="{{ url($trainer->user->picture) }}" class="space-icon img-responsive">
                 </a>   
                     

@@ -12,9 +12,6 @@ class TrainersForm extends AdminForm
             ])
             ->add('specialization', 'textarea', [
                 'label' => trans('Trainer::dashboard.fields.trainer.specialization')
-            ])
-            ->add('number_workshops', 'number', [
-                'label' => trans('Trainer::dashboard.fields.trainer.number_workshops')
             ]);
         parent::buildForm();
     }

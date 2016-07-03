@@ -1,10 +1,27 @@
 <?php namespace App\Modules\Trainer\Models;
 
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
 
 class Trainer extends Model {
+
+	use SluggableScopeHelpers;
+	use Sluggable;
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'user.name'
+            ]
+        ];
+    }
 
 	protected $fillable = ['user_id', 'bio', 'specialization'];
 

@@ -20,9 +20,6 @@ class SpacesForm extends AdminForm
 		    ->add('name', 'text', [
                 'label' => trans('Space::dashboard.fields.space.name')
             ])
-            ->add('slug', 'text', [
-                'label' => trans('Space::dashboard.fields.space.slug')
-            ])
             ->add('geo_location', 'text', [
                 'label' => trans('Space::dashboard.fields.space.geo_location')
             ])
