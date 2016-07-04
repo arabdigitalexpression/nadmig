@@ -40,4 +40,13 @@ class Organization extends Model {
     public function school(){
 		return $this->belongsTo('App\Modules\School\Models\School');
 	}
+
+    protected $casts = [
+        'links' => 'object',
+        'min_time_before_usage_to_edit' => 'object',
+        'change_fees' => 'object',
+        'min_to_cancel' => 'object',
+        'cancel_fees' => 'object',
+        'max_to_confirm' => 'object'
+    ];
 }
