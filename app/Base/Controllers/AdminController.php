@@ -124,7 +124,7 @@ abstract class AdminController extends Controller
         $model->id ? Flash::success(trans('dashboard.create.success')) : Flash::error(trans('dashboard.create.fail'));
         if(class_basename($model) == "User"){
             if($request['role']){
-                $model->roles()->sync(json_decode($request['role']));     
+                $model->roles()->sync($request['role']);     
             }
         }else if(class_basename($model) == "Role"){
             if($request['permission']){
