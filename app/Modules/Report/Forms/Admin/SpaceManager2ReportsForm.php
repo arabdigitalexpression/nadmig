@@ -37,17 +37,17 @@ class SpaceManager2ReportsForm extends AdminForm
         {    
             if(Auth::user()->hasRole('organization_manager')){
                 if ( $session->reservation->organization->id == Auth::user()->manageOrganization->id && is_null(SpaceManager2Report::where('session_id', $session->id)->first()) && (Carbon::createFromFormat('Y/m/d', $session->start_date)->diffInDays(Carbon::now(), false) <= 0)) {
-                    $array = array_add($array, $session['id'], $session['name']);       
+                    $array = array_add($array, $session['id'], "(" . $session->reservation->name . ") --> " . $session['name']);       
                 }
             }
             if(Auth::user()->hasRole('space_manager')){
                 if ( $session->space_id == Auth::user()->manageSpace->id && is_null(SpaceManager2Report::where('session_id', $session->id)->first()) && (Carbon::createFromFormat('Y/m/d', $session->start_date)->diffInDays(Carbon::now(), false) <= 0)) {
-                    $array = array_add($array, $session['id'], $session['name']);       
+                    $array = array_add($array, $session['id'], "(" . $session->reservation->name . ") --> " . $session['name']);       
                 }
             }
             if (Auth::user()->hasRole('admin')) {
                 if (is_null(SpaceManager2Report::where('session_id', $session->id)->first()) && (Carbon::createFromFormat('Y/m/d', $session->start_date)->diffInDays(Carbon::now(), false) <= 0)) {
-                    $array = array_add($array, $session['id'], $session['name']);       
+                    $array = array_add($array, $session['id'], "(" . $session->reservation->name . ") --> " . $session['name']);       
                 }
             }
             
