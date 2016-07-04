@@ -18,7 +18,7 @@ class TrainerController extends ApplicationController {
   	}
   	abort(404);
   }
-  public function list()
+  public function all()
   {	
   	$trainers  = Trainer::all();
     return view('Trainer::application.list', compact('trainers'));
