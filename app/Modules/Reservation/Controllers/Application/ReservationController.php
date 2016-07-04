@@ -17,7 +17,6 @@ private $imageColumn = "artwork";
 
 public function all()
 {
-
     if(Auth::check()){
         $reservations = Auth::user()->reservations()->where("status", "!=" ,"deleted")->get();
         foreach ($reservations as $reservation) {

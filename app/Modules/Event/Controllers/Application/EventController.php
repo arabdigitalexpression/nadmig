@@ -25,7 +25,7 @@ class EventController extends ApplicationController {
       }
       return view('Event::application.index', compact('event'));
   }
-  public function list()
+  public function all()
   {
   	$events = Event::where('status', 'accepted')->get();
   	foreach ($events as $event) {
