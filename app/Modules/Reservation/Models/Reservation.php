@@ -35,4 +35,10 @@ class Reservation extends Model{
             $reservation->url_id = md5(Auth::user()->id . $reservation->name . time());
         });
     }
+
+    protected $casts = [
+        'dooropen_time' => 'object',
+        'dooropen_period' => 'object',
+        'actions' => 'object'  
+    ];
 }

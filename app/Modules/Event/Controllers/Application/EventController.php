@@ -12,18 +12,8 @@ class EventController extends ApplicationController {
   {
 
       $allSessions = $event->reservation->sessions()->where("status", "!=" ,"deleted")->get();
-      foreach ($event->reservation->toArray() as $key => $value) {
-          if ($this->isJson($value)) {
-              $reservation[$key] = json_decode($value);
-          }
-      }
       foreach ($allSessions as $key_1 => $sessions) {
           $sessions['start_timestamp'] = strtotime($sessions['start_date']);
-          foreach ($sessions->toArray() as $key_2 => $session) {
-              if ($this->isJson($session)) {
-                $allSessions[$key_1][$key_2] = json_decode($session);
-              }     
-          }  
           $sessions->space;
       }
       $sessions = $allSessions->toArray();
@@ -42,11 +32,6 @@ class EventController extends ApplicationController {
         $event->reservation;
         foreach ($event->reservation->sessions->toArray() as $key_1 => $sessions) {
             $sessions['start_timestamp'] = strtotime($sessions['start_date']);
-            foreach ($sessions as $key_2 => $session) {
-                if ($this->isJson($session)) {
-                  $event->reservation['sessions'][$key_1][$key_2] = json_decode($session);
-                }     
-            }  
         }
         $sessions = $event->reservation->sessions->toArray();
         $this->sortBy("start_date",$sessions);

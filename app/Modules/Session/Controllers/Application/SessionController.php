@@ -10,11 +10,6 @@ class SessionController extends ApplicationController {
   public function index(Session $session)
   {
   	if(Auth::check() && (Auth::user()->hasRole('admin') || (Auth::user()->hasRole('organization_manager') && Auth::user()->manageOrganization['id'] == $session->reservation->organization_id) || (Auth::user()->hasRole('space_manager') && Auth::user()->manageSpace->organization['id'] == $session->reservation->organization_id) )){
-	  	foreach ($session->toArray() as $key => $value) {
-	  		if (!is_array($value) && $this->isJson($value)) {
-	              $session[$key] = json_decode($value);
-	        } 
-	  	}
 	  	$session->space;
 	  	$session->reservation;
       $session->reservation->event;
@@ -23,11 +18,6 @@ class SessionController extends ApplicationController {
 	abort(401);
   }
   public function show(Event $event, Session $session){
-    foreach ($session->toArray() as $key => $value) {
-        if (!is_array($value) && $this->isJson($value)) {
-                $session[$key] = json_decode($value);
-        } 
-    }
     $session->space;
     $session->reservation;
     $session->reservation->event;

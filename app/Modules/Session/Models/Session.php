@@ -37,7 +37,9 @@ class Session extends Model{
         parent::boot();
         Session::creating(function ($session) {
             $session->status = "pending";
-            // $session->slug = $session->slug . hash("crc32b",time() . $session->name);
         });
     }
+    protected $casts = [
+        'period' => 'object'
+    ];
 }

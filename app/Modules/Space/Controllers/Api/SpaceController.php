@@ -19,12 +19,6 @@ class SpaceController extends ModuleController {
   	$date = $year . '/' . $month . '/' . $day;
   	$sessions = Session::where(['space_id' => $space['id'], 'start_date' => $date])->get();
   	foreach ($sessions as $key_1 => $session) {
-		foreach ($session->toArray() as $key_2 => $value) {
-          if ($this->isJson($value)) {
-            $sessions[$key_1][$key_2] = json_decode($value);
-            
-          }       
-      	} 
       	$sessions[$key_1] = array_only($sessions[$key_1]->toArray(), array('id','start_date', 'start_time','period'));
   	} 
   	return $sessions;

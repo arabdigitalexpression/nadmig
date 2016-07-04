@@ -147,12 +147,6 @@ abstract class ApplicationController extends Controller
     private function getData($request, $imageColumn)
     {
         $data = $request->all();
-        foreach ($data as $key => $value) {
-            if (is_array($value)) {
-                $data[$key] = json_encode($value);
-                $request->replace($data);
-            }
-        }
         return $imageColumn === false ? $request->all() : ImageService::uploadImage($request, $imageColumn);
     }
      /**

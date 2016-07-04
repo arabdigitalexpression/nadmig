@@ -36,11 +36,6 @@ class SpaceController extends ModuleController {
   public function show(Space $space)
   {
     if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('organization_manager') && Auth::user()->manageOrganization['id'] || Auth::user()->hasRole('space_manager') && $space['manager_id'] == Auth::user()->id){
-      foreach ($space->toArray() as $key => $value) {
-          if ($this->isJson($value)) {
-            $space[$key] = json_decode($value);
-          }     
-      } 
       return $this->viewPath("show", $space);
     }
      return response('Unauthorized.', 401); 
@@ -49,11 +44,6 @@ class SpaceController extends ModuleController {
   {
     $space = Auth::user()->manageSpace;
     if(Auth::user()->hasRole('space_manager')){
-      foreach ($space->toArray() as $key => $value) {
-          if ($this->isJson($value)) {
-            $space[$key] = json_decode($value);
-          }     
-      }
       return $this->viewPath("show", $space);
     }
     return response('Unauthorized.', 401);
@@ -64,11 +54,6 @@ class SpaceController extends ModuleController {
     
     // check if he is an admin
     if(Auth::user()->hasRole('admin') || (Auth::user()->hasRole('organization_manager') && Auth::user()->manageOrganization['id']) ||  (Auth::user()->hasRole('space_manager') && $space['manager_id'] == Auth::user()->id)){
-      foreach ($space->toArray() as $key => $value) {
-          if ($this->isJson($value)) {
-              $space[$key] = json_decode($value);
-          }
-      }
       return $this->getForm($space);
     }
     return response('Unauthorized.', 401);

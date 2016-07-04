@@ -22,19 +22,14 @@ public function list()
         $reservations = Auth::user()->reservations()->where("status", "!=" ,"deleted")->get();
         foreach ($reservations as $reservation) {
             $reservation->organization;
-            foreach ($reservation->sessions->toArray() as $key_1 => $sessions) {
-                $sessions['start_date'] = strtotime($sessions['start_date']);
-                foreach ($sessions as $key_2 => $session) {
-                    if ($this->isJson($session)) {
-                      $reservation->sessions[$key_1][$key_2] = json_decode($session);
-                    }     
-                }  
+            foreach ($reservation->sessions->toArray() as $key => $session) {
+                $reservation->sessions[$key]['start_date'] = strtotime($session['start_date']);
             }
             $sessions = $reservation->sessions->toArray();
             $this->sortBy("start_date",$sessions);
             $reservation['sessions'] = $sessions;
         }
-        // dd($reservations->toArray());
+        
         return view('Reservation::application.list', compact('reservations'));
     }
     return redirect()->route('auth.login');
@@ -45,21 +40,11 @@ public function index($reservation_url_id)
         abort(404);
     }
     if(Auth::check() && (Auth::user()->hasRole('admin') || (Auth::user()->hasRole('organization_manager') && Auth::user()->manageOrganization['id'] == $reservation->organization_id) ||  (Auth::user()->hasRole('space_manager') && Auth::user()->manageSpace->organization['id'] == $reservation->organization_id) || (Auth::user()->id == $reservation->user_id))){
-        $allSessions = $reservation->sessions()->where("status", "!=" ,"deleted")->get();
-        foreach ($reservation->toArray() as $key => $value) {
-            if ($this->isJson($value)) {
-                $reservation[$key] = json_decode($value);
-            }
+        $sessions = $reservation->sessions()->where("status", "!=" ,"deleted")->get();
+        foreach ($sessions->toArray() as $key => $session) {
+            $session['start_date'] = strtotime($session['start_date']);
         }
-        foreach ($allSessions->toArray() as $key_1 => $sessions) {
-            $sessions['start_timestamp'] = strtotime($sessions['start_date']);
-            foreach ($sessions as $key_2 => $session) {
-                if ($this->isJson($session)) {
-                  $allSessions[$key_1][$key_2] = json_decode($session);
-                }     
-            }  
-        }
-        $reservation['sessions'] = $allSessions;
+        $reservation['sessions'] = $sessions;
         $reservation->organization;
         return view('Reservation::application.index', compact('reservation'));
     }
@@ -77,7 +62,7 @@ public function delete($reservation_url_id)
         }
         $sessions = $reservation->sessions->toArray();
         $this->sortBy("start_timestamp",$sessions);
-        if(Carbon::now()->subDay()->diffInDays(Carbon::createFromTimeStamp($sessions[0]['start_timestamp']), false) > intval(json_decode($reservation->organization->min_to_cancel)->period)){
+        if(Carbon::now()->subDay()->diffInDays(Carbon::createFromTimeStamp($sessions[0]['start_timestamp']), false) > intval($reservation->organization->min_to_cancel->period)){
             $reservation['status'] = 'deleted';
             LogController::Log($reservation, 'deleted');
             $reservation->update();
@@ -115,7 +100,7 @@ public function store(ReservationRequest $request, $organization_slug)
         $organization_slug->reservations()->save($reservation) ? Flash::success(trans('application.create.success')) : Flash::error(trans('application.create.fail'));
         LogController::Log($reservation, 'created');
         foreach ($sessions as $session) {
-            $session = new Session($this->to_json($session));
+            $session = new Session($session);
             LogController::Log($session, 'created', $reservation);
             $reservation->sessions()->save($session);
         }
@@ -125,31 +110,19 @@ public function store(ReservationRequest $request, $organization_slug)
 }
 public function edit($reservation_url_id)
 {
-
     if(!$reservation = Reservation::where('url_id', $reservation_url_id)->first()){
         abort(404);
     }   
     if(Auth::check() && ((Auth::user()->id == $reservation->user_id) || Auth::user()->hasRole('admin') || (Auth::user()->hasRole('organization_manager') && Auth::user()->manageOrganization['id'] == $reservation->organization_id))){
-        $allSessions = $reservation->sessions()->where("status", "!=" ,"deleted")->get();
-
-        foreach ($reservation->toArray() as $key => $value) {
-            if ($this->isJson($value)) {
-                $reservation[$key] = json_decode($value);
-            }
+        $sessions = $reservation->sessions()->where("status", "!=" ,"deleted")->get();
+        foreach ($sessions->toArray() as $key => $session) {
+            $sessions[$key]['start_timestamp'] = strtotime($session['start_date']);
         }
-        foreach ($allSessions->toArray() as $key_1 => $sessions) {
-            $sessions['start_timestamp'] = strtotime($sessions['start_date']);
-            foreach ($sessions as $key_2 => $session) {
-                if ($this->isJson($session)) {
-                  $allSessions[$key_1][$key_2] = json_decode($session);
-                }     
-            }  
-        }
-        $sortedSessions = $allSessions->toArray();
+        $sortedSessions = $sessions->toArray();
         $this->sortBy("start_timestamp",$sortedSessions);
         $reservation['sessions'] = $sortedSessions;
-        if(Carbon::now()->subDay()->diffInDays(Carbon::createFromTimeStamp($sortedSessions[0]['start_timestamp']), false) > intval(json_decode($reservation->organization->min_time_before_usage_to_edit)->period)){
-            $change_fees = json_decode($reservation->organization->change_fees);
+        if(Carbon::now()->subDay()->diffInDays(Carbon::createFromTimeStamp($sortedSessions[0]['start_timestamp']), false) > intval($reservation->organization->min_time_before_usage_to_edit->period)){
+            $change_fees = $reservation->organization->change_fees;
             $change_fees_type = array("null" => "لا يوجد","percentage" => "نسبة من قيمة الحجز الكلى للمساحات","value" => "قيمة");
             Flash::warning(trans('Reservation::application.edit.warning') . $change_fees_type[$change_fees->type] . " " . $change_fees->amount);
             return $this->getForm($reservation, ['reservation_url_id' => $reservation['url_id']], $reservation->organization);
@@ -170,7 +143,7 @@ public function update($reservation_url_id, ReservationRequest $request)
         $sessions = $request['session'];
         $reservation->fill($this->getDataP($request, $this->imageColumn));
         
-        $actions = json_decode($reservation['actions']);
+        $actions = $reservation['actions'];
         foreach ($reservation->sessions()->where('status', '!=' , 'deleted')->get() as $session) {
             if (!$this->in_array_field($session->id, 'id', $sessions)) {
                 $session = Session::findOrFail($session->id);
@@ -193,16 +166,16 @@ public function update($reservation_url_id, ReservationRequest $request)
                     }
                     LogController::Log($reservation, 'pending');
                 }
-                $session = new Session($this->to_json($session));
+                $session = new Session($session);
                 LogController::Log($session, 'created', $reservation);
                 $reservation->sessions()->save($session);
             }else{
                 $updateSession = Session::findOrFail($session['id']);
                 LogController::Log($updateSession, 'updated', $reservation);
-                $updateSession->update($this->to_json($session));
+                $updateSession->update($session);
             }
         }
-        $reservation['actions'] = json_encode($actions);
+        $reservation['actions'] = $actions;
         $reservation->push() ? Flash::success(trans('application.update.success')) : Flash::error(trans('application.update.fail'));
         LogController::Log($reservation, 'updated');
         return $this->redirectRoutePath("index", null, $reservation);

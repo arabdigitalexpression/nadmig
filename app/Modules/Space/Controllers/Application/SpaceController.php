@@ -12,11 +12,6 @@ class SpaceController extends ApplicationController {
 	}
 	public function space(Space $space)
 	{
-		foreach ($space->toArray() as $key => $value) {
-          if ($this->isJson($value)) {
-            $space[$key] = json_decode($value);
-          }     
-      	} 
       	$space->organization->reservations = $space->organization->reservations()->where("status", "accepted")->where("event_type", "public")->take(4)->get();
       	foreach ($space->organization->reservations()->where("status", "accepted")->where("event_type", "public")->take(4)->get() as $key => $reservation) {
 	      	foreach ($reservation->sessions()->where('space_id', $space->id)->get() as $key_1 => $sessions) {

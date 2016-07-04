@@ -23,9 +23,9 @@
                         <td>{{ $reservation->created_at }}</td>
                         <td>
                         <a class="edit" href="{{ route('application.reservation.index', ['reservation_url_id' => $reservation->url_id])}}"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                        @if(\Carbon\Carbon::now()->subDay()->diffInDays(\Carbon\Carbon::createFromTimeStamp($reservation->sessions[0]['start_date']), false) > intval(json_decode($reservation->organization->min_time_before_usage_to_edit)->period))
+                        @if(\Carbon\Carbon::now()->subDay()->diffInDays(\Carbon\Carbon::createFromTimeStamp($reservation->sessions[0]['start_date']), false) > intval($reservation->organization->min_time_before_usage_to_edit->period))
                             <a class="edit" href="{{ route('application.reservation.edit', ['reservation_url_id' => $reservation->url_id])}}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                            @if(\Carbon\Carbon::now()->subDay()->diffInDays(\Carbon\Carbon::createFromTimeStamp($reservation->sessions[0]['start_date']), false) > intval(json_decode($reservation->organization->min_to_cancel)->period))
+                            @if(\Carbon\Carbon::now()->subDay()->diffInDays(\Carbon\Carbon::createFromTimeStamp($reservation->sessions[0]['start_date']), false) > intval($reservation->organization->min_to_cancel->period))
                                 <a class="del del_{{ $key+1 }}" href="{{ route('application.reservation.del', ['reservation_url_id' => $reservation->url_id])}}"><i class="fa fa-times" aria-hidden="true"> إلغاء</i></a>
                             @endif
                         @endif
@@ -37,7 +37,7 @@
 
                             <script type="text/javascript">
                                 $('.del_{{ $key+1 }}').click(function(e){
-                                    if(!confirm("{!! 'فى حالة إلغاء الحجز سوف يتم تطبيق غرامة ' . ArabicCancelFees(json_decode($reservation->organization->change_fees)) !!}")){
+                                    if(!confirm("{!! 'فى حالة إلغاء الحجز سوف يتم تطبيق غرامة ' . ArabicCancelFees($reservation->organization->change_fees) !!}")){
                                         return false;
                                     }
                                 });

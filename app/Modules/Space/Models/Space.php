@@ -33,4 +33,14 @@ class Space extends Model {
         return $this->hasMany('App\Modules\Session\Models\Session');
     }
 
+    protected $casts = [
+        'links' => 'object',
+        'working_week_days' => 'object',
+        'working_hours_days' => 'object',
+        'space_equipment' => 'object',
+        'min_type_for_reservation' => 'object',
+        'max_type_for_reservation' => 'object',
+        'min_time_before_reservation' => 'object',
+        'max_time_before_reservation' => 'object'
+    ];
 }

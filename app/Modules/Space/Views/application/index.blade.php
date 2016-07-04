@@ -62,10 +62,10 @@
 
                                 <li><i class="fa fa-calendar" aria-hidden="true"></i> {{ ArabicDate($reservation->start_session['start_date']) }} </li>
                                 <li><i class="fa fa-clock-o" aria-hidden="true"></i> من {{ ArabicTime($reservation->start_session['start_time']) }} إلى 
-                                @if(json_decode($reservation->start_session['period'])->type == 'mins')
-                                    {{ ArabicTime(\Carbon\Carbon::createFromFormat('h:i a', $reservation->start_session['start_time'])->addMinutes(intval(json_decode($reservation->start_session['period'])->period))->format('h:i A')) }}</li>
-                                @elseif(json_decode($reservation->start_session['period'])->type == 'hours')
-                                    {{ ArabicTime(\Carbon\Carbon::createFromFormat('h:i a', $reservation->start_session['start_time'])->addHours(intval(json_decode($reservation->start_session['period'])->period))->format('h:i A')) }}</li>
+                                @if($reservation->start_session['period']->type == 'mins')
+                                    {{ ArabicTime(\Carbon\Carbon::createFromFormat('h:i a', $reservation->start_session['start_time'])->addMinutes(intval($reservation->start_session['period']->period))->format('h:i A')) }}</li>
+                                @elseif($reservation->start_session['period']->type == 'hours')
+                                    {{ ArabicTime(\Carbon\Carbon::createFromFormat('h:i a', $reservation->start_session['start_time'])->addHours(intval($reservation->start_session['period']->period))->format('h:i A')) }}</li>
                                 @endif
                                 
                                 <li>{{ str_limit($reservation->description, $limit = 150, $end = '...') }}</li>

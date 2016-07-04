@@ -174,16 +174,16 @@ abstract class AdminController extends Controller
     private function getData($request, $imageColumn)
     {
         $data = $request->all();
-        foreach ($data as $key => $value) {
-            if (is_array($value)) {
-                if($key == 'links'){
-                    $data[$key] = json_encode(array_values($value));
-                }else{
-                    $data[$key] = json_encode($value);
-                }
-                $request->replace($data);
-            }
-        }
+        // foreach ($data as $key => $value) {
+        //     if (is_array($value)) {
+        //         if($key == 'links'){
+        //             $data[$key] = json_encode(array_values($value));
+        //         }else{
+        //             $data[$key] = json_encode($value);
+        //         }
+        //         $request->replace($data);
+        //     }
+        // }
         return $imageColumn === false ? $request->all() : ImageService::uploadImage($request, $imageColumn);
     }
 

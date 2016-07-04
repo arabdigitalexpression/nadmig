@@ -131,10 +131,10 @@
                     agreement(json);
                     fees(json);
                     min_res(json);
-                    var working_hours = JSON.parse(json.working_hours_days);
-                    var working_week_days = JSON.parse(json.working_week_days);
+                    var working_hours = json.working_hours_days;
+                    var working_week_days = json.working_week_days;
                     var difference = $(week_days).not(working_week_days).get();
-                    var max_before = JSON.parse(json.max_time_before_reservation);
+                    var max_before = json.max_time_before_reservation;
                     if (!is_data) {
                         picker.clear();
                         picker.set('enable', true);
@@ -177,8 +177,8 @@
                 return $input.pickadate('picker');
             }
             function min_res(json){
-                var min = JSON.parse(json.min_type_for_reservation);
-                var max = JSON.parse(json.max_type_for_reservation);
+                var min = json.min_type_for_reservation;
+                var max = json.max_type_for_reservation;
                 var Atype;
                 $("#period_period_" + hash).parent().find('.help-block').text('الحجز الأدنى ' + min.period + ' ' + TimeTypeArabic(min) + ' | الحجز الأقصى ' + max.period + ' ' + TimeTypeArabic(max));
                 $("#period_period_" + hash).bind('input propertychange', function() {
