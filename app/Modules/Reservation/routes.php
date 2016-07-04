@@ -3,7 +3,7 @@
 Route::group(['middleware' => 'web'], function () {
     // Application routes
     Route::group(['module' => 'Reservation', 'namespace' => 'Application'], function () {
-        Route::get('reservation', ['as' => 'reservation', 'uses' => 'ReservationController@list']);
+        Route::get('reservation', ['as' => 'reservation', 'uses' => 'ReservationController@all']);
         Route::get('organization/{organization_slug}/reserve', ['as' => 'reservation.create', 'uses' => 'ReservationController@create']);
         Route::post('organization/{organization_slug}/reservation/store', ['as' => 'application.reservation.store', 'uses' => 'ReservationController@store']);
         Route::get('reservation/{reservation_url_id}/edit', ['as' => 'application.reservation.edit', 'uses' => 'ReservationController@edit']);

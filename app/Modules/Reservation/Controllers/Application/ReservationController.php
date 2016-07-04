@@ -15,7 +15,7 @@ class ReservationController extends ApplicationController {
 
 private $imageColumn = "artwork";
 
-public function list()
+public function all()
 {
 
     if(Auth::check()){
