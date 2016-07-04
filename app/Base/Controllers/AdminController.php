@@ -132,15 +132,15 @@ abstract class AdminController extends Controller
             }
         }else if(class_basename($model) == "Program"){
             if($request['events']){
-                $model->events()->sync(json_decode($request['events']));    
+                $model->events()->sync($request['events']);    
             }
         }else if(class_basename($model) == "School"){
             if($request['kids']){
-                $model->kids()->sync(json_decode($request['kids']));    
+                $model->kids()->sync($request['kids']);    
             }
         }else if(class_basename($model) == "Trainer"){
             if($request['workshops']){
-                $model->events()->sync(json_decode($request['workshops']));    
+                $model->events()->sync($request['workshops']);    
             }
         }
         LogController::Log($model, 'created');
