@@ -19,8 +19,21 @@ Route::group(['prefix' => 'api', 'module' => 'Report', 'namespace' => 'Api', 'mi
 });
 
 // Admin routes
-Route::group(['prefix' => 'dashboard', 'module' => 'Report', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
+Route::group(['prefix' => 'dashboard', 'module' => 'Report', 'namespace' => 'Admin', 'middleware' => 'space_manager'], function () {
     Route::get('report/trainer', ['as' => 'dashboard.report.trainer', 'uses' => 'ReportController@trainer']);
+
     Route::get('report/trainer/{id}/show', ['as' => 'dashboard.trainerreport.show', 'uses' => 'ReportController@trainerShow']);
+    ////////////////////////////////////
+    //// Space manage 2 routes /////
+    //////////////////////////////////
+    Route::get('report/space_manger_2/create', ['as' => 'dashboard.report.space_manger_2.create', 'uses' => 'ReportController@space_manger_2Create']);
+    Route::get('report/space_manger_2', ['as' => 'dashboard.spacemanager2report.index', 'uses' => 'ReportController@space_manger_2Index']);
+    Route::get('report/space_manger_2/list', ['as' => 'dashboard.report.space_manger_2.index', 'uses' => 'ReportController@space_manger_2Index']);
+    Route::get('report/space_manger_2/{report_id}/show', ['as' => 'dashboard.spacemanager2report.show', 'uses' => 'ReportController@space_manger_2Show']);
+    Route::get('report/space_manger_2/{report_id}/edit', ['as' => 'dashboard.spacemanager2report.edit', 'uses' => 'ReportController@space_manger_2Edit']);
+    Route::get('report/space_manger_2/{report_id}/destroy', ['as' => 'dashboard.spacemanager2report.destroy', 'uses' => 'ReportController@space_manger_2Destroy']);
+    Route::Post('report/space_manger_2/store', ['as' => 'dashboard.report.space_manger_2.store', 'uses' => 'ReportController@space_manger_2Store']);
+    Route::patch('report/space_manger_2/{report_id}/update', ['as' => 'dashboard.report.space_manger_2.update', 'uses' => 'ReportController@space_manger_2Update']);
+
 	Route::resource('report', 'ReportController');
 });

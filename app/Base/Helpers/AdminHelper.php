@@ -263,3 +263,9 @@ if (!function_exists('getSpaceEquipment')) {
         return $space_equipment[$equipment];
     }
 }
+if (!function_exists('getReportType')) {
+    function getReportType($key){
+        $type = [ 'video' => 'فيديو', 'visual expression' => 'تعبير بصري', 'music' => 'موسيقى' ];
+        return $type[$key];
+    }
+}

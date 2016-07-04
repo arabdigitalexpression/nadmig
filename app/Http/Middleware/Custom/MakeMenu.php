@@ -74,6 +74,7 @@ class MakeMenu
                 Reservation::AddMenus($menu);
                 Sessions::AddMenus($menu);
                 Apply::AddMenus($menu);
+                Report::AddMenus($menu);
              }
              if (Auth::user()->hasRole('space_manager')) {
                 Space::AddMenus($menu);
@@ -81,6 +82,7 @@ class MakeMenu
                 Reservation::AddMenus($menu);
                 Sessions::AddMenus($menu);
                 Apply::AddMenus($menu);
+                Report::AddMenus($menu);
              }
             
         });

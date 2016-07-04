@@ -1,23 +1,18 @@
 <?php namespace App\Modules\Report\Controllers\Api\DataTables;
 
-use App\Modules\Report\Models\TrainerReport;
+use App\Modules\Report\Models\SpaceManager2Report;
 use App\Modules\Report\Base\Controllers\ModuleDataTableController;
 use Auth;
-class TrainerReportDataTable extends ModuleDataTableController {
+class SpaceManager2ReportDataTable extends ModuleDataTableController {
 
   protected $columns = ['user_id'];
 
   protected $common_columns = ['created_at', 'updated_at'];
+  protected $options = ['show'];
 
-  if(Auth::user()->hasRole('admin')){
-  	protected $options = ['show', 'edit'];
-  }else{
-  	protected $options = ['show'];
-  }
-  
   public function query()
   {
-      $report = TrainerReport::Query();
+      $report = SpaceManager2Report::Query();
       return $this->applyScopes($report);
   }
 
