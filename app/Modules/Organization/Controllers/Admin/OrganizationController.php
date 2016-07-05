@@ -80,8 +80,4 @@ class OrganizationController extends ModuleController {
 		  return "You don't have any organization to manage";
 		}
 	}
-	protected function isJson($string) {
-	   json_decode($string);
-	   return (json_last_error() == JSON_ERROR_NONE);
-  	}
 }

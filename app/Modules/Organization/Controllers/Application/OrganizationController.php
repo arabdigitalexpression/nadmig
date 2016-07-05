@@ -10,8 +10,7 @@ class OrganizationController extends ApplicationController {
 		return view('Organization::application.index', compact('organization'));
 	}
 	public function organization(Organization $organization){
-		$organization['links'] = json_decode($organization['links']);
-		$organization['spaces'] = $organization->spaces;
+		$organization->spaces;
 		return view('Organization::application.show', compact('organization'));	
 	}
 }
