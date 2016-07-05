@@ -34,7 +34,7 @@ class Space extends Model {
     }
 
     protected $casts = [
-        'links' => 'object',
+        'links' => 'array',
         'working_week_days' => 'object',
         'working_hours_days' => 'object',
         'space_equipment' => 'object',

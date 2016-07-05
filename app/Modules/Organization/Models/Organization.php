@@ -42,7 +42,7 @@ class Organization extends Model {
 	}
 
     protected $casts = [
-        'links' => 'object',
+        'links' => 'array',
         'min_time_before_usage_to_edit' => 'object',
         'change_fees' => 'object',
         'min_to_cancel' => 'object',
