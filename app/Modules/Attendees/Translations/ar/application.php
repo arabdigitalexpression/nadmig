@@ -8,13 +8,13 @@ return [
     */
 
     "attendees" => [
-        "create"                    => "Create attendees",
+        "create"                    => "استماره التقديم",
         "edit"                      => "Edit attendees",
         "index"                     => "attendees",
         "show"                      => "Show attendees"
     ],
     "fields" => [
-         "attendees" => [
+        "attendees" => [
             "name"           => "آسم المشترك / ه",
             "birthday"               => "تاريخ الميلاد",
             "type"               => "النوع",

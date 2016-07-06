@@ -19,6 +19,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="name">{{ trans('School::application.title') }}</span> <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
+                        <li><a href="{{ route('application.attendees.create') }}">{{ trans('Attendees::application.attendees.create') }}</a></li>
                         <li><a href="{{ route('schools') }}">{{ trans('School::application.title') }}</a></li>
                         <li><a href="{{ route('trainers') }}">{{ trans('Trainer::application.title') }}</a></li>
                     </ul>
