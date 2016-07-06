@@ -25,7 +25,8 @@
 		"yajra/laravel-datatables-oracle": "~6.0",
 		"thedgmbh/modules": "dev-master",
 		"zizaco/entrust": "5.2.x-dev",
-		"spatie/activitylog": "^2.4"
+		"spatie/activitylog": "^2.4",
+		"maatwebsite/excel": "~2.1.0"
 
 	},
 	"require-dev": {

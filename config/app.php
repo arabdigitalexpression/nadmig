@@ -158,6 +158,7 @@ return [
         Zizaco\Entrust\EntrustServiceProvider::class,
         Spatie\Activitylog\ActivitylogServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
         /*
          * Modules
@@ -239,6 +240,7 @@ return [
         'Datatables'        => Yajra\Datatables\Datatables::class,
         'Entrust'           => Zizaco\Entrust\EntrustFacade::class,
         'Activity'          => Spatie\Activitylog\ActivitylogFacade::class,
+        'Excel'             => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];
