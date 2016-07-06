@@ -3,7 +3,7 @@
 Route::group(['middleware' => 'web'], function () {
     // Application routes
     Route::group(['module' => 'School', 'namespace' => 'Application'], function () {
-        Route::get('school', ['as' => 'school', 'uses' => 'SchoolController@index']);
+        Route::get('schools', ['as' => 'schools', 'uses' => 'SchoolController@index']);
         Route::get('school/{school_slug}', ['as' => 'school.page', 'uses' => 'SchoolController@index']);
     });
 });

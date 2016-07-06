@@ -1,5 +1,5 @@
 <header class="main-header">
-    <a href="{{ route('dashboard.root') }}" class="logo"> {{ trans('dashboard.title')  }}</a>
+    <a href="{{ route('root') }}" class="logo"> {{ trans('dashboard.title')  }}<span style="font-size: 10px;">تجريبي</span></a>
     <nav class="navbar navbar-static-top" role="navigation">
         <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle</span>

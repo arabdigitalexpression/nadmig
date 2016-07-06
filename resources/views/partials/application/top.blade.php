@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default navbar-custom">
     <div class="container">
         <div class="inside">
-            <a class="navbar-brand" href="{{  route('root') }}">{{ trans('application.title') }}</a>
+            <a class="navbar-brand" href="{{  route('root') }}">{{ trans('application.title') }} <span style="font-size: 10px;">تجريبي</span></a>
             <div class="navbar-header">
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
@@ -14,8 +14,15 @@
               <ul class="nav navbar-nav navbar-right menu">
                 <li class="{{ Route::is('root') ? 'active' : '' }}"><a href="{{  route('root') }}">{{ trans('application.menu.home') }}</a></li>
                 <li class="{{ Route::is('spaces') ? 'active' : '' }}"><a href="{{  route('spaces') }}">{{ trans('application.menu.spaces') }}</a></li>
-                <li><a href="{{  route('events') }}">{{ trans('application.menu.events') }}</a></li>
-                <li><a href="{{  route('programs') }}">{{ trans('application.menu.programs') }}</a></li>
+                <li class="{{ Route::is('events') ? 'active' : '' }}"><a href="{{  route('events') }}">{{ trans('application.menu.events') }}</a></li>
+                <li class="{{ Route::is('programs') ? 'active' : '' }}"><a href="{{  route('programs') }}">{{ trans('application.menu.programs') }}</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="name">{{ trans('School::application.title') }}</span> <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="{{ route('schools') }}">{{ trans('School::application.title') }}</a></li>
+                        <li><a href="{{ route('trainers') }}">{{ trans('Trainer::application.title') }}</a></li>
+                    </ul>
+                </li>
               </ul>
               <ul class="nav navbar-nav navbar-left user">
                 @if (Auth::guest())

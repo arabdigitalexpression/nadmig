@@ -24,14 +24,14 @@ class SchoolsForm extends AdminForm
                 'selected' => $this->program_id,
                 'attr'  => ['id' => 'program'],
                 'label' => trans('School::dashboard.fields.program')
-            ])
-            ->add('kids', 'choice', [
-                'choices' => $this->getKids($this->model),
-                'selected' => $this->getSchoolKids($this->model),
-                'attr' => ['class' => 'chosen-select chosen-rtl'],
-                'multiple' => true,
-                'label' => trans('School::dashboard.fields.program')
             ]);
+            // ->add('kids', 'choice', [
+            //     'choices' => $this->getKids($this->model),
+            //     'selected' => $this->getSchoolKids($this->model),
+            //     'attr' => ['class' => 'chosen-select chosen-rtl'],
+            //     'multiple' => true,
+            //     'label' => trans('School::dashboard.fields.program')
+            // ])
         parent::buildForm();
     }
     protected function getOrgnizations(){

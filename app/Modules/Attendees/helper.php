@@ -1,0 +1,4 @@
+<?php
+ /**
+ *	Attendees Helper  
+ */

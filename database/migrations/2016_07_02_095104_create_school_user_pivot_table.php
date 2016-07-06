@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSchoolUserPivotTable extends Migration
+class CreateEventAttendeesPivotTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,12 @@ class CreateSchoolUserPivotTable extends Migration
      */
     public function up()
     {
-        Schema::create('school_user', function (Blueprint $table) {
-            $table->integer('school_id')->unsigned()->index();
-            $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade');
-            $table->integer('user_id')->unsigned()->index();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->primary(['school_id', 'user_id']);
+        Schema::create('event_attendees', function (Blueprint $table) {
+            $table->integer('event_id')->unsigned()->index();
+            $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
+            $table->integer('attende_id')->unsigned()->index();
+            $table->foreign('attende_id')->references('id')->on('attendees')->onDelete('cascade');
+            $table->primary(['event_id', 'attende_id']);
         });
     }
 
@@ -28,6 +28,6 @@ class CreateSchoolUserPivotTable extends Migration
      */
     public function down()
     {
-        Schema::drop('school_user');
+        Schema::drop('event_attendees');
     }
 }
