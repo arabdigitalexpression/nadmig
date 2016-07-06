@@ -3,11 +3,14 @@
 use App\Modules\Report\Models\Report;
 use App\Modules\Report\Models\TrainerReport;
 use App\Modules\Report\Models\SpaceManager2Report;
+use App\Modules\Report\Models\LikeDislikeReport;
 use App\Modules\Report\Requests\Admin\ReportRequest;
 use App\Modules\Report\Requests\Admin\SpaceManager2ReportRequest;
+use App\Modules\Report\Requests\Admin\LikeDislikeReportRequest;
 use App\Modules\Report\Base\Controllers\ModuleController;
 use App\Modules\Report\Controllers\Api\DataTables\ReportDataTable;
 use App\Modules\Report\Controllers\Api\DataTables\TrainerReportDataTable;
+use App\Modules\Report\Controllers\Api\DataTables\LikeDislikeDataTable;
 use App\Modules\Report\Controllers\Api\DataTables\SpaceManager2ReportDataTable;
 class ReportController extends ModuleController {
 
@@ -82,4 +85,40 @@ class ReportController extends ModuleController {
   public function space_manger_2Destroy(){
     abrot(404);
   }
+
+
+  ////////////////////////////////////
+  //// Like Dislike functions /////
+  //////////////////////////////////
+  public function like_dislike_reports_Create(){
+    $this->formPath = 'App\Modules\Report\Forms\Admin\LikeDislikeReportsForm';
+    $url = route('dashboard.report.like_dislike_reports.store');
+    $form = $this->createForm($url, 'POST', null, null);
+    return view('Report::dashboard.create', compact('form'));
+  }
+  
+  public function like_dislike_reports_Index(LikeDislikeDataTable $dataTable){
+    return $dataTable->render($this->viewPath());
+  }
+  public function like_dislike_reports_Show(LikeDislikeReport $report_id){
+      return $this->viewPath("space_manager_2_show", $report_id);
+  }
+  public function like_dislike_reports_Store(LikeDislikeReportRequest $request)
+  {
+    return $this->createFlashRedirect(LikeDislikeReport::class, $request, false, 'like_dislike_reports.index');
+  }
+  public function like_dislike_reports_Edit(LikeDislikeReport $report_id){
+    $this->formPath = 'App\Modules\Report\Forms\Admin\SpaceManager2ReportsForm';
+    $url = route('dashboard.report.like_dislike_reports.update', ['report_id' => $report_id->id]);
+    $form = $this->createForm($url, 'PATCH', $report_id, null);
+    return view('Report::dashboard.create', compact('form'));
+  }
+  public function like_dislike_reports_Update(LikeDislikeReport $report_id, LikeDislikeReportRequest $request)
+  {
+    return $this->saveFlashRedirect($report_id, $request);
+  }
+  public function like_dislike_reports_Destroy(){
+    abrot(404);
+  }
+
 }

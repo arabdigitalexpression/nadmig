@@ -35,5 +35,21 @@ Route::group(['prefix' => 'dashboard', 'module' => 'Report', 'namespace' => 'Adm
     Route::Post('report/space_manger_2/store', ['as' => 'dashboard.report.space_manger_2.store', 'uses' => 'ReportController@space_manger_2Store']);
     Route::patch('report/space_manger_2/{report_id}/update', ['as' => 'dashboard.report.space_manger_2.update', 'uses' => 'ReportController@space_manger_2Update']);
 
+
+
+    ///////////////////////////////////////
+    //// Like Dislike Reports routes /////
+    /////////////////////////////////////
+    Route::get('report/like_dislike/create', ['as' => 'dashboard.report.like_dislike_reports.create', 'uses' => 'ReportController@like_dislike_reports_Create']);
+    Route::get('report/like_dislike', ['as' => 'dashboard.likedislike.index', 'uses' => 'ReportController@like_dislike_reports_Index']);
+    Route::get('report/like_dislike/list', ['as' => 'dashboard.report.like_dislike_reports.index', 'uses' => 'ReportController@like_dislike_reports_Index']);
+    Route::get('report/like_dislike/{report_id}/show', ['as' => 'dashboard.likedislike.show', 'uses' => 'ReportController@like_dislike_reports_Show']);
+    Route::get('report/like_dislike/{report_id}/edit', ['as' => 'dashboard.likedislike.edit', 'uses' => 'ReportController@like_dislike_reports_Edit']);
+    Route::get('report/like_dislike/{report_id}/destroy', ['as' => 'dashboard.likedislike.destroy', 'uses' => 'ReportController@like_dislike_reports_Destroy']);
+    Route::Post('report/like_dislike/store', ['as' => 'dashboard.report.like_dislike_reports.store', 'uses' => 'ReportController@like_dislike_reports_Store']);
+    Route::patch('report/like_dislike/{report_id}/update', ['as' => 'dashboard.report.like_dislike_reports.update', 'uses' => 'ReportController@like_dislike_reports_Update']);
+
+
+    
 	Route::resource('report', 'ReportController');
 });
