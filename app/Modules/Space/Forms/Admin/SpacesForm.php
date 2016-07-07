@@ -23,6 +23,11 @@ class SpacesForm extends AdminForm
             ->add('geo_location', 'text', [
                 'label' => trans('Space::dashboard.fields.space.geo_location')
             ])
+            ->add('governorate', 'choice', [
+                'choices' => $this->getGovernorates(),
+                'selected' => $this->governorate,
+                'label' => trans('Space::dashboard.fields.space.governorate'),
+            ])
             ->add('email', 'email', [
                 'label' => trans('Space::dashboard.fields.space.email')
             ])
