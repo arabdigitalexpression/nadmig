@@ -86,5 +86,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $this->belongsToMany('App\Modules\School\Models\School');
     }
-
+    protected static function boot()
+    {
+        parent::boot();
+        User::creating(function ($user) {
+            if(!$user->picture){
+                $user->picture = "/files/pp.png";
+            }
+        });
+    }
 }

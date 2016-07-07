@@ -37,7 +37,6 @@ class UserController extends ModuleController
     public function store(UserRequest $request)
     {
         $request['confirmed'] = 1;
-
         return $this->createFlashRedirect(User::class, $request, $this->imageColumn);
     }
 
