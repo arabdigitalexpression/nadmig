@@ -16,8 +16,8 @@ class CreateTrainerReportsTable extends Migration
             $table->increments('id');
             $table->integer('event_id')->unsigned();
             $table->foreign('event_id')->references('id')->on('events');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('attendees_id')->unsigned();
+            $table->foreign('attendees_id')->references('id')->on('attendees');
             $table->integer('trainer_id')->unsigned();
             $table->foreign('trainer_id')->references('id')->on('trainers');
             $table->integer('week');

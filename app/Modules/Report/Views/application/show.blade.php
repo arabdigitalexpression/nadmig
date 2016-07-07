@@ -1,13 +1,14 @@
 @extends('layouts.application')
 
-@section('title'){{ getTitle($report->user->name) }}@endsection
+@section('title'){{ getTitle($report->attende->name) }}@endsection
 
 
 @section('content')
-    <h3><img class="img-responsive user-thumbnail" src="{{ url($report->user->picture) }}">  {{ $report->user->name }}</h3>
+
+    <h3><img class="img-responsive user-thumbnail" src="{{ url('/files/pp.png') }}">  {{ $report->attende->name }}</h3>
     @if(diff_in_weeks_and_days(\Carbon\Carbon::createFromFormat('Y/m/d', $report->event->reservation->sessions()->first()['start_date'])->format('Y-m-d'), \Carbon\Carbon::now()) == $report->week)
 	    <div class="pull-left">
-	    	<a style="font-size: 18px;" href="{{ route('report.page.event.edit', ['event_slug' => $report->event->slug, 'week' => $report->week, 'user_id' => $report->user->id]) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+	    	<a style="font-size: 18px;" href="{{ route('report.page.event.edit', ['event_slug' => $report->event->slug, 'week' => $report->week, 'attendees_id' => $report->attende->id]) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 	    </div>
     @endif
     <h4>الاسبوع {{ $report->week }}</h4>

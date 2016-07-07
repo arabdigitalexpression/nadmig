@@ -29,6 +29,9 @@ class AttendeesController extends ModuleController {
 
   public function update(Attendees $attendees, AttendeesRequest $request)
   {
+    if($request['workshop']){
+        $attendees->events()->sync($request['workshop']);    
+    }
       return $this->saveFlashRedirect($attendees, $request);
   }
 

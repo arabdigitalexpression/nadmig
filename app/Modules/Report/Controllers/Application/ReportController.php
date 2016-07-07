@@ -4,7 +4,7 @@ use App\Base\Controllers\ApplicationController;
 use App\Modules\Report\Requests\Application\TrainerRequest;
 use App\Modules\Report\Models\TrainerReport;
 use App\Modules\Event\Models\Event;
-use App\Modules\User\Models\User;
+use App\Modules\Attendees\Models\Attendees;
 use Laracasts\Flash\Flash;
 use Carbon\Carbon;
 use App\Base\Controllers\LogController;
@@ -20,19 +20,19 @@ class ReportController extends ApplicationController {
   	if($now->diffInDays($end, false) > 0){
   		$count = $this->diff_in_weeks_and_days($start, $now);
   	}else{
-		$count = $this->diff_in_weeks_and_days($start, $end->format('Y-m-d'))+2;
+		  $count = $this->diff_in_weeks_and_days($start, $end->format('Y-m-d'))+2;
   	}
     return view('Report::application.index', compact('event', 'count'));
   }
-  public function report(Event $event, $week, $user_id)
+  public function report(Event $event, $week, $attendees_id)
   {
-  	if(is_null(TrainerReport::where('event_id', $event->id)->where('week', $week)->where('user_id', $user_id)->first())){
-	  	$user = User::findOrFail($user_id);
-	  	$url =  route("report.page.event.store", ['event_slug' => $event->slug, 'week' => $week, 'user_id' => $user->id]);
+  	if(is_null(TrainerReport::where('event_id', $event->id)->where('week', $week)->where('attendees_id', $attendees_id)->first())){
+	  	$attende = Attendees::findOrFail($attendees_id);
+	  	$url =  route("report.page.event.store", ['event_slug' => $event->slug, 'week' => $week, 'attendees_id' => $attende->id]);
 	  	$this->formPath = "App\Modules\Report\Forms\Application\TrainerReportForm";
 	    $method = 'POST';
 	    $path = $this->viewPath("create");
-	    $extra = $user;
+	    $extra = $attende;
 	    $form = $this->createForm($url, $method, null, $extra);
 	    return view($path, compact('form', 'extra'));
 	}else{
@@ -40,10 +40,10 @@ class ReportController extends ApplicationController {
   		return redirect()->route('report.page', ['event_slug' => $event->slug]);  
 	}
   }
-  public function store(Event $event, $week, $user_id, TrainerRequest $request)
+  public function store(Event $event, $week, $attendees_id, TrainerRequest $request)
   {
-  	if(is_null(TrainerReport::where('event_id', $event->id)->where('week', $week)->where('user_id', $user_id)->first())){
-		$request['user_id'] =  intval($user_id);
+  	if(is_null(TrainerReport::where('event_id', $event->id)->where('week', $week)->where('attendees_id', $attendees_id)->first())){
+		  $request['attendees_id'] =  intval($attendees_id);
 	  	$request['week'] =  intval($week);
 	  	$request['event_id'] = $event->id;
 	  	$model = TrainerReport::create($this->getDataP($request, false));
@@ -56,26 +56,26 @@ class ReportController extends ApplicationController {
   	}
 
   }
-  public function show(Event $event, $week, $user_id)
+  public function show(Event $event, $week, $attendees_id)
   {
-  	if(!is_null(TrainerReport::where('event_id', $event->id)->where('week', $week)->where('user_id', $user_id)->first())){
-  		$report = TrainerReport::where('event_id', $event->id)->where('week', $week)->where('user_id', $user_id)->first();
+  	if(!is_null(TrainerReport::where('event_id', $event->id)->where('week', $week)->where('attendees_id', $attendees_id)->first())){
+  		$report = TrainerReport::where('event_id', $event->id)->where('week', $week)->where('attendees_id', $attendees_id)->first();
   		return view('Report::application.show', compact('report'));
   	}else{
   		abort(404);
   	}
   }
-  public function edit(Event $event, $week, $user_id)
+  public function edit(Event $event, $week, $attendees_id)
   {
-  	if(TrainerReport::where('event_id', $event->id)->where('week', $week)->where('user_id', $user_id)->first()){
-  		$report = TrainerReport::where('event_id', $event->id)->where('week', $week)->where('user_id', $user_id)->first();
+  	if(TrainerReport::where('event_id', $event->id)->where('week', $week)->where('attendees_id', $attendees_id)->first()){
+  		$report = TrainerReport::where('event_id', $event->id)->where('week', $week)->where('attendees_id', $attendees_id)->first();
   		if($this->diff_in_weeks_and_days(Carbon::createFromFormat('Y/m/d', $event->reservation->sessions()->first()['start_date'])->format('Y-m-d'), Carbon::now()) == $report->week){
-  			$user = User::findOrFail($user_id);
-		  	$url =  route("report.page.event.edit", ['event_slug' => $event->slug, 'week' => $week, 'user_id' => $user->id]);
+  			$attende = Attendees::findOrFail($attendees_id);
+		  	$url =  route("report.page.event.edit", ['event_slug' => $event->slug, 'week' => $week, 'attendees_id' => $attende->id]);
 		  	$this->formPath = "App\Modules\Report\Forms\Application\TrainerReportForm";
 		    $method = 'PATCH';
 		    $path = $this->viewPath("edit");
-		    $extra = $user;
+		    $extra = $attende;
 		    $form = $this->createForm($url, $method, $report, $extra);
 		    return view($path, compact('form', 'extra'));
   		}else{
@@ -85,10 +85,10 @@ class ReportController extends ApplicationController {
 		abort(401);
 	}
   }
-  public function update(Event $event, $week, $user_id, TrainerRequest $request)
+  public function update(Event $event, $week, $attendees_id, TrainerRequest $request)
   {
-  	if(TrainerReport::where('event_id', $event->id)->where('week', $week)->where('user_id', $user_id)->first()){
-  		$report = TrainerReport::where('event_id', $event->id)->where('week', $week)->where('user_id', $user_id)->first();
+  	if(TrainerReport::where('event_id', $event->id)->where('week', $week)->where('attendees_id', $attendees_id)->first()){
+  		$report = TrainerReport::where('event_id', $event->id)->where('week', $week)->where('attendees_id', $attendees_id)->first();
   		$report->fill($this->getDataP($request, null));
         $report->save() ? Flash::success(trans('Report::application.create.success')) : Flash::error(trans('Report::application.create.fail'));
         LogController::Log($report, 'updated');

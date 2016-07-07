@@ -134,9 +134,9 @@ abstract class AdminController extends Controller
             if($request['events']){
                 $model->events()->sync($request['events']);    
             }
-        }else if(class_basename($model) == "School"){
-            if($request['kids']){
-                $model->kids()->sync($request['kids']);    
+        }else if(class_basename($model) == "Attendees"){
+            if($request['workshop']){
+                $model->events()->sync($request['workshop']);    
             }
         }else if(class_basename($model) == "Trainer"){
             if($request['workshops']){

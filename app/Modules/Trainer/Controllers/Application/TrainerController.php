@@ -21,6 +21,7 @@ class TrainerController extends ApplicationController {
   public function all()
   {	
   	$trainers  = Trainer::all();
+
     return view('Trainer::application.list', compact('trainers'));
   }
 }

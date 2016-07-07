@@ -49,6 +49,9 @@ class Event extends Model{
     {
         return $this->hasOne('App\Modules\Report\Models\TrainerReport');
     }
+    public function attendees(){
+        return $this->belongsToMany('App\Modules\Attendees\Models\Attendees');
+    }
 	protected static function boot()
     {
         parent::boot();

@@ -1,7 +1,7 @@
 <?php namespace App\Modules\Attendees\Forms\Admin;
 
 use App\Base\Forms\AdminForm;
-
+use App\Modules\Event\Models\Event;
 class AttendeesForm extends AdminForm
 {
     public function buildForm()
@@ -77,7 +77,36 @@ class AttendeesForm extends AdminForm
             ->add('guardian_approval', 'textarea', [
                     'label' => trans('Attendees::dashboard.fields.attendees.guardian_approval'), 
                     'required' => true
-                ]);
+                ])
+            ->add('workshop', 'choice', [
+                'choices' => $this->getWorkshops(),
+                'selected' => $this->getKidWorkshop($this->model),
+                'attr' => ['class' => 'chosen-select chosen-rtl'],
+                'multiple' => true,
+                'label' => trans('Attendees::dashboard.fields.program')
+            ]);
         parent::buildForm();
+    }
+    protected function getWorkshops(){
+        $array = array();
+        foreach (Event::all() as $event)
+        {    
+            if($event->program()->first() && $event->school){
+                $array = array_add($array, $event['id'], $event->reservation['name']);    
+            }
+        }       
+        return $array;
+    }
+    private function getKidWorkshop($attende = null){
+        $array = array();
+        if($attende == null){
+            return $array;
+        }else{
+            foreach ($attende->events as $event)
+            {    
+               array_push($array, $event->id);   
+            }
+            return $array;
+        }
     }
 }

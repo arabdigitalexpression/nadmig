@@ -17,6 +17,7 @@
             }else{
                 $('#hear_about_us_other').attr('type', 'hidden');
             }
+            $(".chosen-select").chosen({width: "100%", placeholder_text_multiple: "قم بأختيار الفتية المشتركين بالمدرسة"});
         });
     </script>
 @endsection
