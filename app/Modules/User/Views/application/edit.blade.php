@@ -4,6 +4,7 @@
 
 
 @section('content')
+    <div class="page">
      {!! form($form) !!}
      <script type="text/javascript">
      	$(function(){
@@ -17,4 +18,5 @@
             });
      	})
      </script>
+     </div>
 @endsection
