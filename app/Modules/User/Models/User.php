@@ -94,5 +94,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                 $user->picture = "/files/pp.png";
             }
         });
+        User::updating(function ($user) {
+            if(!$user->picture){
+                $user->picture = "/files/pp.png";
+            }
+        });
     }
 }
