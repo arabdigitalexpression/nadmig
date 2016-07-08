@@ -12,7 +12,9 @@ return [
         "logout" => "الخروج",
         "dashboard" => "لوحة التحكم",
         "reservation" => "الحجوزات",
-        "programs"  => "البرامج"
+        "programs"  => "البرامج",
+        "user"  => "المستخدم",
+        "trainer" => "المدرب"
     ],
     "title" => "نـدمـج",
     "home"          => "Home",
