@@ -12,7 +12,8 @@
                     <h3>{{ $trainer->user->name }}</h3>
                     <ul class="info">
                         <li><i class="fa fa-envelope" aria-hidden="true"></i><a href="mailto:{{ $trainer->user->email }}"> {{ $trainer->user->email }}</a></li>
-                        <li><i class="fa fa-birthday-cake" aria-hidden="true"></i>{{ ArabicDate(\Carbon\Carbon::createFromFormat('Y-m-d', $trainer->user->birthday)->format('Y/m/d')) }}</li>
+                        {{-- <li><i class="fa fa-birthday-cake" aria-hidden="true"></i>{{ ArabicDate(\Carbon\Carbon::createFromFormat('Y-m-d', $trainer->user->birthday)->format('Y/m/d')) }}</li> --}}
+
                         <li><i class="fa fa-map-marker" aria-hidden="true"></i>{{ GovArabic($trainer->user->governorate) }}</li>
                         @if($trainer->user->website)
                             <li><i class="fa fa-globe" aria-hidden="true"></i><a href="{{ $trainer->user->website }}">{{ $trainer->user->website }}</a></li>
@@ -28,6 +29,8 @@
                             <a href="{{ $trainer->user->instagram }}"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                         @endif
                         </li>
+                        <li><i class="fa fa-rocket" aria-hidden="true"></i>{{ $trainer->specialization }}</li>
+                        <li>{{ $trainer->bio }}</li>
                     </ul>
                     
                 </div>

@@ -10,7 +10,7 @@ class TrainersForm extends AdminForm
             ->add('bio', 'textarea', [
                 'label' => trans('Trainer::dashboard.fields.trainer.bio')
             ])
-            ->add('specialization', 'textarea', [
+            ->add('specialization', 'text', [
                 'label' => trans('Trainer::dashboard.fields.trainer.specialization')
             ]);
         parent::buildForm();

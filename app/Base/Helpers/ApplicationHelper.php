@@ -231,7 +231,8 @@ if (!function_exists('GovArabic')) {
                 'matruh' => 'مطروح',
                 'monufia' => 'المنوفية',
                 'minya' => 'المنيا',
-                'new_valley' => 'الوادي الجديد'
+                'new_valley' => 'الوادي الجديد',
+                'cyber_land' => 'أرض الفضاء'
             );
             return $governorate[$key];
         }

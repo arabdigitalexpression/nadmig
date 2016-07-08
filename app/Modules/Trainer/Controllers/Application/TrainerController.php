@@ -2,6 +2,7 @@
 
 use App\Base\Controllers\ApplicationController;
 use App\Modules\Trainer\Models\Trainer;
+use App\Modules\Trainer\Requests\Application\TrainerRequest;
 use Auth;
 class TrainerController extends ApplicationController {
 
@@ -23,5 +24,23 @@ class TrainerController extends ApplicationController {
   	$trainers  = Trainer::all();
 
     return view('Trainer::application.list', compact('trainers'));
+  }
+  public function edit($trainer_slug)
+  {
+    
+    if(Auth::check()){
+      $trainer = Trainer::findBySlug($trainer_slug);
+      return $this->getForm($trainer, null, $trainer);
+    }
+    abort(403);
+  }
+
+  public function update($trainer_slug, TrainerRequest $request)
+  {
+      if(Auth::check()){
+          $trainer = Trainer::findBySlug($trainer_slug);
+          return $this->saveFlashRedirect($trainer, $request, null);
+      }
+      abort(403);
   }
 }

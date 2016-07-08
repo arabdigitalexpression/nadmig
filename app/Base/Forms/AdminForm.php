@@ -47,7 +47,8 @@ abstract class AdminForm extends Form
                 'matruh' => 'مطروح',
                 'monufia' => 'المنوفية',
                 'minya' => 'المنيا',
-                'new_valley' => 'الوادي الجديد'
+                'new_valley' => 'الوادي الجديد',
+                'cyber_land' => 'أرض الفضاء'
             );
     }
     protected function getWeekdays(){
