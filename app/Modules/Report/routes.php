@@ -52,6 +52,7 @@ Route::group(['prefix' => 'dashboard', 'module' => 'Report', 'namespace' => 'Adm
     /////////////////////////
     //// Export Routes /////
     ///////////////////////
+    Route::get('report/export', ['as' => 'dashboard.report.export.index', 'uses' => 'ReportController@export_page']);
     Route::get('report/{model_name}/export', ['as' => 'dashboard.report.export', 'uses' => 'ReportController@export']);
 
 	Route::resource('report', 'ReportController');

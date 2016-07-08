@@ -126,6 +126,9 @@ class ReportController extends ModuleController {
   ////////////////////////////
   //// Export Functions /////
   //////////////////////////
+  public function export_page(){
+    return view('Report::dashboard.export');
+  }
   public function export($model_name)
   {
     $model = '\App\Modules\Report\Models\\' . $model_name;
@@ -148,6 +151,9 @@ class ReportController extends ModuleController {
       if($data[$key_1]['trainer_id']){
         $data[$key_1]['trainer_id'] = $data[$key_1]->trainer->user->name;  
       }
+      if($data[$key_1]['session_id']){
+        $data[$key_1]['session_id'] =  $data[$key_1]->session->reservation->name . ' --> ' . $data[$key_1]->session->name;  
+      }
       foreach ($value_1->toArray() as $key_2 => $value_2) {
         if (is_object($value_2)) {
           foreach ($value_2 as $key_3 => $value_3) {
@@ -160,7 +166,6 @@ class ReportController extends ModuleController {
       }
     }
     $data = $data->toArray();
-    dd($data);
     return Excel::create($model_name . '_' . Carbon::now(), function($excel) use($data) {
         $excel->sheet('Sheetname', function($sheet) use($data) {
             $sheet->fromArray($data, null, 'A1', false, true);

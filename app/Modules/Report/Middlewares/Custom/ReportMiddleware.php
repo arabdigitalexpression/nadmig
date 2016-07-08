@@ -38,6 +38,9 @@ class ReportMiddleware extends MakeMenu
 		   	$module->add(trans('Report::dashboard.menu.report.trainer.all'), ['route' => 'dashboard.report.trainer'])
 		      ->icon("circle-o")
 		      ->prependIcon();
+		    $module->add(trans('Report::dashboard.menu.report.trainer.export'), ['route' => 'dashboard.report.export.index'])
+		      ->icon("circle-o")
+		      ->prependIcon(); 
 		   }
 		}
 }
