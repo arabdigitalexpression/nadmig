@@ -91,7 +91,9 @@ body{
 	color: #fff !important;
 }
 .menu li.dropdown a:focus, 
-.menu li.dropdown a:hover{
+.menu li.dropdown a:hover,
+.menu li a:focus,
+.menu li a:hover{
 	background: #ff8737 !important;
 	color: #fff !important;
 	border-radius: 3px;
