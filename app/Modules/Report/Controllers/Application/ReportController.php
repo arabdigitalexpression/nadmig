@@ -20,7 +20,7 @@ class ReportController extends ApplicationController {
   	if($now->diffInDays($end, false) > 0){
   		$count = $this->diff_in_weeks_and_days($start, $now);
   	}else{
-		  $count = $this->diff_in_weeks_and_days($start, $end->format('Y-m-d'))+2;
+		  $count = $this->diff_in_weeks_and_days($start, $end->format('Y-m-d'));
   	}
     return view('Report::application.index', compact('event', 'count'));
   }
