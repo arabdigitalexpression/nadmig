@@ -17,8 +17,8 @@
                             color: #898989;
                         @endif
                         " class="fa fa-circle" aria-hidden="true"></i></div>
-                </a>   
-                    <img src="{{ url($space->logo) }}" class="space-icon img-responsive">
+                </a>  
+                    <div style="background-image: url({ url($space->logo) }});" class="space-icon"> </div> 
                     <ul class="space-info">
                         <li><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $space->geo_location }}</li>
                         <li><i class="fa fa-phone" aria-hidden="true"></i> {{ $space->phone_number }}</li>

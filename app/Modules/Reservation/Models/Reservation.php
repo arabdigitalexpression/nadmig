@@ -33,6 +33,9 @@ class Reservation extends Model{
             $reservation->user_id = Auth::user()->id;
             $reservation->status = "pending";
             $reservation->url_id = md5(Auth::user()->id . $reservation->name . time());
+            if(!$reservation->artwork){
+                $reservation->artwork = "/files/event_picture.png";
+            }
         });
     }
 

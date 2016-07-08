@@ -10,7 +10,7 @@
                 <a href="{{ route('program.page', ['event_slug' => $program->slug ]) }}">
                     <div class="panel-heading">{{ $program->name }}</div>
                 </a>   
-                    <img src="{{ url($program->artwork) }}" class="space-icon img-responsive">
+                <div style="background-image: url({{ url($program->artwork) }});" class="space-icon"> </div>
                 <ul class="space-info">
 
                     <li><i class="fa fa-calendar" aria-hidden="true"></i> من {{ ArabicDate($program->start_session['start_date']) }} </li>
