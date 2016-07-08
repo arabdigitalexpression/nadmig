@@ -184,6 +184,8 @@ body{
 	color: #000;
 	margin: 5px;
 	min-height: auto;
+	max-width: 100%;
+    min-width: 80%;
 }
 .spaces-list li .space-info li i{
 	margin-left: 5px;
