@@ -49,7 +49,10 @@ Route::group(['prefix' => 'dashboard', 'module' => 'Report', 'namespace' => 'Adm
     Route::Post('report/like_dislike/store', ['as' => 'dashboard.report.like_dislike_reports.store', 'uses' => 'ReportController@like_dislike_reports_Store']);
     Route::patch('report/like_dislike/{report_id}/update', ['as' => 'dashboard.report.like_dislike_reports.update', 'uses' => 'ReportController@like_dislike_reports_Update']);
 
+    /////////////////////////
+    //// Export Routes /////
+    ///////////////////////
+    Route::get('report/{model_name}/export', ['as' => 'dashboard.report.export', 'uses' => 'ReportController@export']);
 
-    
 	Route::resource('report', 'ReportController');
 });

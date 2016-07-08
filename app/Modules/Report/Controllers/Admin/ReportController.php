@@ -12,6 +12,8 @@ use App\Modules\Report\Controllers\Api\DataTables\ReportDataTable;
 use App\Modules\Report\Controllers\Api\DataTables\TrainerReportDataTable;
 use App\Modules\Report\Controllers\Api\DataTables\LikeDislikeDataTable;
 use App\Modules\Report\Controllers\Api\DataTables\SpaceManager2ReportDataTable;
+use Excel;
+use Carbon\Carbon;
 class ReportController extends ModuleController {
 
   public function index(ReportDataTable $dataTable)
@@ -101,7 +103,7 @@ class ReportController extends ModuleController {
     return $dataTable->render($this->viewPath());
   }
   public function like_dislike_reports_Show(LikeDislikeReport $report_id){
-      return $this->viewPath("space_manager_2_show", $report_id);
+      // return $this->viewPath("space_manager_2_show", $report_id);
   }
   public function like_dislike_reports_Store(LikeDislikeReportRequest $request)
   {
@@ -119,6 +121,51 @@ class ReportController extends ModuleController {
   }
   public function like_dislike_reports_Destroy(){
     abrot(404);
+  }
+
+  ////////////////////////////
+  //// Export Functions /////
+  //////////////////////////
+  public function export($model_name)
+  {
+    $model = '\App\Modules\Report\Models\\' . $model_name;
+    $data = $model::all();
+
+    foreach ($data as $key_1 => $value_1) {
+      if ($data[$key_1]['user_id']) {
+        $data[$key_1]['user_id'] = $data[$key_1]->user->name;
+      }
+      if($data[$key_1]['organization_id']){
+        $data[$key_1]['organization_id'] = $data[$key_1]->organization->name;  
+      }
+      if($data[$key_1]['event_id']){
+        $data[$key_1]['event_id'] = $data[$key_1]->event->reservation->name;  
+        $data[$key_1]['organization_id'] = $data[$key_1]->event->reservation->organization->name;  
+      }
+      if($data[$key_1]['attendees_id']){
+        $data[$key_1]['attendees_id'] = $data[$key_1]->attende->name;  
+      }
+      if($data[$key_1]['trainer_id']){
+        $data[$key_1]['trainer_id'] = $data[$key_1]->trainer->user->name;  
+      }
+      foreach ($value_1->toArray() as $key_2 => $value_2) {
+        if (is_object($value_2)) {
+          foreach ($value_2 as $key_3 => $value_3) {
+            $data[$key_1][trans('Report::dashboard.'.$model_name.'.fields.'. $key_2 .'.'. $key_3)] = $value_3;  
+          }
+        }else{
+          $data[$key_1][trans('Report::dashboard.'.$model_name.'.fields.'. $key_2)] = $value_2;
+        }
+        unset($data[$key_1][$key_2]);
+      }
+    }
+    $data = $data->toArray();
+    dd($data);
+    return Excel::create($model_name . '_' . Carbon::now(), function($excel) use($data) {
+        $excel->sheet('Sheetname', function($sheet) use($data) {
+            $sheet->fromArray($data, null, 'A1', false, true);
+        });
+    })->export('xls');
   }
 
 }

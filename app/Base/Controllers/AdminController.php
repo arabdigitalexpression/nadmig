@@ -329,4 +329,13 @@ abstract class AdminController extends Controller
         $model =  title_case(str_plural($this->model));
         return 'App\Forms\Admin\\' . $model . 'Form';
     }
+    /**
+     * Returns if a string is json or not
+     *
+     * @return bool
+     */
+    protected function isJson($string) {
+        json_decode($string);
+        return (json_last_error() == JSON_ERROR_NONE);
+    }
 }

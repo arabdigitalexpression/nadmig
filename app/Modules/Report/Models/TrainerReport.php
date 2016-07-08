@@ -18,6 +18,10 @@ class TrainerReport extends Model{
     {
         return $this->belongsTo('App\Modules\Event\Models\Event');
     }
+    public function trainer()
+    {
+        return $this->belongsTo('App\Modules\Trainer\Models\Trainer');
+    }
 	protected static function boot()
     {
         parent::boot();
