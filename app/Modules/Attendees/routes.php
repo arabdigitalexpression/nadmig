@@ -3,8 +3,8 @@
 Route::group(['middleware' => 'web'], function () {
     // Application routes
     Route::group(['module' => 'Attendees', 'namespace' => 'Application'], function () {
-        Route::get('school/attendees/regisater', ['as' => 'application.attendees.create', 'uses' => 'AttendeesController@create']);
-        Route::post('school/attendees/regisater', ['as' => 'application.attendees.store', 'uses' => 'AttendeesController@store']);
+        Route::get('school/attendees/register', ['as' => 'application.attendees.create', 'uses' => 'AttendeesController@create']);
+        Route::post('school/attendees/register', ['as' => 'application.attendees.store', 'uses' => 'AttendeesController@store']);
         Route::get('attendees/{attendees_slug}', ['as' => 'attendees.page', 'uses' => 'AttendeesController@index']);
     });
 });
