@@ -8,10 +8,19 @@ return [
     */
 
     "report" => [
-        "create"                    => "Create report",
-        "edit"                      => "Edit report",
-        "index"                     => "report",
-        "show"                      => "Show report"
+
+        "like_dislike_reports" => [
+            "create"                    => "Create report",
+            "edit"                      => "Edit report",
+            "index"                     => "report",
+            "show"                      => "Show report"
+        ],
+        "space_manger_2" => [
+            "create"                    => "Create report",
+            "edit"                      => "Edit report",
+            "index"                     => "report",
+            "show"                      => "Show report"
+        ],
     ],
     "LikeDislikeReport" => [
         "fields" => [
@@ -106,9 +115,16 @@ return [
     ],
     "menu" => [
         "report" => [
-            "add"                   => "Add an report",
-            "all"                   => "All report",
-            "root"                  => "Reports"
+            "root" => "التقارير",
+            "like_dislike" => [
+                "add"                   => "أضف تقرير ( أعجبني و لم يعجبني )",
+                "all"                   => "تقارير ( أعجبني و لم يعجبني )",
+            ],
+            "space_manger_2" => [
+                "add"                   => "أضف تقرير ( مسؤول المساحة )",
+                "all"                   => "تقارير ( مسؤول المساحة )",
+            ],
+
         ]
     ]
 ];
