@@ -24,18 +24,20 @@
                         <li><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $space->address }}</li>
                         <li><i class="fa fa-phone" aria-hidden="true"></i> {{ $space->phone_number }}</li>
                         <li><i class="fa fa-envelope" aria-hidden="true"></i><a href="mailto:{{ $space->email }}"> {{ $space->email }}</a></li>
-                        @foreach($space->links as $link)
-                                @if($link['type'] == 'website')
-                                <li><i class="fa fa-globe" aria-hidden="true"></i> <a href="{{ $link['link'] }}">{{ $link['link'] }}</a></li>
-                                @endif
-                        @endforeach
-                        <li>
+                        @if($space->links)
                             @foreach($space->links as $link)
-                                @if($link['type'] != 'website')
-                                 <a href="{{ $link['link'] }}"><i class="fa fa-{{ $link['link'] }}" aria-hidden="true"></i></a>
-                                @endif
+                                    @if($link['type'] == 'website')
+                                    <li><i class="fa fa-globe" aria-hidden="true"></i> <a href="{{ $link['link'] }}">{{ $link['link'] }}</a></li>
+                                    @endif
                             @endforeach
-                        </li>
+                            <li>
+                                @foreach($space->links as $link)
+                                    @if($link['type'] != 'website')
+                                     <a href="{{ $link['link'] }}"><i class="fa fa-{{ $link['link'] }}" aria-hidden="true"></i></a>
+                                    @endif
+                                @endforeach
+                            </li>
+                        @endif
                     </ul>
                 </div>
                 @if($space->status == 'working')
