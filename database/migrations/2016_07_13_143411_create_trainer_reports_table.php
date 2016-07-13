@@ -12,8 +12,7 @@ class CreateTrainerReportsTable extends Migration
      */
     public function up()
     {
-        Schema::create('trainer_reports', function (Blueprint $table) {
-            $table->increments('id');
+        $table->increments('id');
             $table->integer('event_id')->unsigned();
             $table->foreign('event_id')->references('id')->on('events');
             $table->integer('attendees_id')->unsigned();
@@ -33,7 +32,6 @@ class CreateTrainerReportsTable extends Migration
             $table->text('ability_to_thinking');
             $table->text('ability_to_inovate');
             $table->timestamps();
-        });
     }
 
     /**
