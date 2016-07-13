@@ -17,7 +17,7 @@ class CreateAttendeeEventPivotTable extends Migration
             $table->foreign('attendees_id')->references('id')->on('attendees')->onDelete('cascade');
             $table->integer('event_id')->unsigned()->index();
             $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
-            $table->primary(['attendee_id', 'event_id']);
+            $table->primary(['attendees_id', 'event_id']);
         });
     }
 
