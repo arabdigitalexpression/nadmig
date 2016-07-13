@@ -51,6 +51,7 @@
             <button type="button" class="btn btn-default more"><i class="fa fa-caret-down" aria-hidden="true"></i>{{trans('application.button.know_more')}}</button>
             <h3>{{ trans('Space::application.page.events') }}</h3>
             <ul class="spaces-list">
+            @if($space->organization->reservations)
                 @foreach($space->organization->reservations as $reservation)
                     @if($reservation->start_session)
                         <li class="panel panel-default panel-orange">
@@ -73,6 +74,7 @@
                         </li>
                     @endif
                 @endforeach
+                @endif
             </ul>
         </div>
     @endif
