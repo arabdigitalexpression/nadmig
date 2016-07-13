@@ -15,7 +15,7 @@ class OrganizationRequest extends Request {
             'name' => 'required|min:3',
             'name_en' => 'required|min:3',
             'logo' => 'sometimes',
-            'geo_location' => 'required',
+            'address' => 'required',
             'email'     => 'required|email|min:6|unique:organizations,email,'.$this->segment(3),
             'phone_number' => 'required',
             'excerpt' => 'required',

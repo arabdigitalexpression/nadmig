@@ -16,7 +16,7 @@
     </h4>
      <ul class="info">
         <li><i class="fa fa-building" aria-hidden="true"></i><a href="{{ route('organization.page', ['organization_slug' => $object->organization->slug ])}}">{{ $object->organization->name }}</a></li>
-        <li><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $object->geo_location }}</li>
+        <li><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $object->address }}</li>
         <li><i class="fa fa-phone" aria-hidden="true"></i> {{ $object->phone_number }}</li>
         <li><i class="fa fa-envelope" aria-hidden="true"></i><a href="mailto:{{ $object->email }}"> {{ $object->email }}</a></li>
         @foreach($object->links as $link)

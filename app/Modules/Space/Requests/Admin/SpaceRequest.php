@@ -13,7 +13,7 @@ class SpaceRequest extends Request {
     {
         return [
             'name' => 'required|min:3',
-            'geo_location' => 'required',
+            'address' => 'required',
             'governorate' => 'required',
             'email'     => 'required|email|min:6',
             'phone_number' => 'required',

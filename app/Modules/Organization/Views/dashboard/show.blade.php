@@ -6,7 +6,7 @@
             <h2> {{ $object->name }} <a style="float: left;" href="{{ route('dashboard.organization.edit', ['organization' => $object->id ])}}"><i class="fa fa-pencil" aria-hidden="true"></i></a> </h2>
             
             <ul class="info">
-                <li><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $object->geo_location }}</li>
+                <li><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $object->address }}</li>
                 <li><i class="fa fa-phone" aria-hidden="true"></i> {{ $object->phone_number }}</li>
                 <li><i class="fa fa-envelope" aria-hidden="true"></i><a href="mailto:{{ $object->email }}"> {{ $object->email }}</a></li>
                 @foreach($object->links as $link)

@@ -11,7 +11,7 @@
                 <div class="name">
                     <h3>{{ $organization->name }}</h3>
                     <ul class="info">
-                        <li><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $organization->geo_location }}</li>
+                        <li><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $organization->address }}</li>
                         <li><i class="fa fa-phone" aria-hidden="true"></i> {{ $organization->phone_number }}</li>
                         <li><i class="fa fa-envelope" aria-hidden="true"></i><a href="mailto:{{ $organization->email }}"> {{ $organization->email }}</a></li>
                         @foreach($organization->links as $link)
@@ -54,7 +54,7 @@
                         </a>   
                             <img src="{{ url($space->logo) }}" class="space-icon img-responsive">
                             <ul class="space-info">
-                                <li><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $space->geo_location }}</li>
+                                <li><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $space->address }}</li>
                                 <li><i class="fa fa-phone" aria-hidden="true"></i> {{ $space->phone_number }}</li>
                                 <li><i class="fa fa-envelope" aria-hidden="true"></i><a href="mailto:{{ $space->email }}"> {{ $space->email }}</a></li>
                                 <li><i class="fa fa-globe" aria-hidden="true"></i> <a href="{{ $space->website }}">{{ $space->website }}</a></li>

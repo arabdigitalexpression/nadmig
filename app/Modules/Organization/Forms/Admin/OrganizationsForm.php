@@ -22,8 +22,8 @@ class OrganizationsForm extends AdminForm
                     if($logo){ return $logo; }else { return 0; };
                 }
             ])
-            ->add('geo_location', 'text', [
-                'label' => trans('Organization::dashboard.fields.organization.geo_location')
+            ->add('address', 'text', [
+                'label' => trans('Organization::dashboard.fields.organization.address')
             ])
             ->add('governorate', 'choice', [
                 'choices' => $this->getGovernorates(),

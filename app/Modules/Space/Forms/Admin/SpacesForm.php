@@ -20,8 +20,8 @@ class SpacesForm extends AdminForm
 		    ->add('name', 'text', [
                 'label' => trans('Space::dashboard.fields.space.name')
             ])
-            ->add('geo_location', 'text', [
-                'label' => trans('Space::dashboard.fields.space.geo_location')
+            ->add('address', 'text', [
+                'label' => trans('Space::dashboard.fields.space.address')
             ])
             ->add('governorate', 'choice', [
                 'choices' => $this->getGovernorates(),

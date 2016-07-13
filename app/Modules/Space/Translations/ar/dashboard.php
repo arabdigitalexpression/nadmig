@@ -16,7 +16,7 @@ return [
     "fields" => [
         "space" => [
             "space_info"            => "بيانات أساسية",
-            "geo_location"          => "عنوان",
+            "address"          => "عنوان",
             "email"                 => "الايميل",
             "description"           => "وصف",
             "name"                  => "الأسم",

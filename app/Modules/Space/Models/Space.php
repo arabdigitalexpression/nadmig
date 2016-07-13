@@ -22,7 +22,7 @@ class Space extends Model {
         ];
     }
 
-	protected $fillable = ['manager_id', 'name', 'geo_location', 'email', 'phone_number', 'excerpt', 'description', 'links', 'in_return_key', 'in_return', 'status', 'working_week_days', 'working_houre_days', 'space_type', 'space_equipment', 'agreement_text', 'capacity', 'smoking', 'organization_id', 'min_type_for_reservation', 'max_type_for_reservation', 'min_time_before_reservation', 'max_time_before_reservation', 'logo','working_hours_days', 'governorate'];
+	protected $fillable = ['manager_id', 'name', 'address', 'email', 'phone_number', 'excerpt', 'description', 'links', 'in_return_key', 'in_return', 'status', 'working_week_days', 'working_houre_days', 'space_type', 'space_equipment', 'agreement_text', 'capacity', 'smoking', 'organization_id', 'min_type_for_reservation', 'max_type_for_reservation', 'min_time_before_reservation', 'max_time_before_reservation', 'logo','working_hours_days', 'governorate'];
 	
     public function organization()
     {

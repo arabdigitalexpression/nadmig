@@ -21,7 +21,7 @@
                     </h3>
                     <ul class="info">
                         <li><i class="fa fa-building" aria-hidden="true"></i><a href="{{ route('organization.page', ['organization_slug' => $space->organization->slug ])}}">{{ $space->organization->name }}</a></li>
-                        <li><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $space->geo_location }}</li>
+                        <li><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $space->address }}</li>
                         <li><i class="fa fa-phone" aria-hidden="true"></i> {{ $space->phone_number }}</li>
                         <li><i class="fa fa-envelope" aria-hidden="true"></i><a href="mailto:{{ $space->email }}"> {{ $space->email }}</a></li>
                         @foreach($space->links as $link)

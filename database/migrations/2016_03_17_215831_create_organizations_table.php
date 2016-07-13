@@ -20,7 +20,7 @@ class CreateOrganizationsTable extends Migration
             $table->string('name_en');
             $table->string('logo');
             $table->string('slug')->unique();
-            $table->string('geo_location');
+            $table->string('address');
             $table->string('governorate');
             $table->string('email');
             $table->string('phone_number');

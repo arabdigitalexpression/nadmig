@@ -19,7 +19,7 @@ return [
     ],
     "fields" => [
         "organization" => [
-            "geo_location"          => "عنوان",
+            "address"          => "عنوان",
             "email"                 => "الايميل",
             "description"           => "وصف",
             "name"                  => "الأسم",

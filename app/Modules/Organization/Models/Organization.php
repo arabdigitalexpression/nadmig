@@ -22,7 +22,7 @@ class Organization extends Model {
         ];
     }
 
-	protected $fillable = ['manager_id', 'name', 'name_en', 'geo_location', 'email', 'phone_number', 'excerpt', 'description', 'links','logo','min_time_before_usage_to_edit', 'change_fees', 'min_to_cancel', 'cancel_fees', 'max_to_confirm', 'governorate'];
+	protected $fillable = ['manager_id', 'name', 'name_en', 'address', 'email', 'phone_number', 'excerpt', 'description', 'links','logo','min_time_before_usage_to_edit', 'change_fees', 'min_to_cancel', 'cancel_fees', 'max_to_confirm', 'governorate'];
 
 	
 	public function reservations()
