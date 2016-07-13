@@ -1,10 +1,10 @@
 <?php namespace App\Modules\Report\Controllers\Admin;
 
-use App\Modules\Report\Models\Report;
+use App\Modules\Report\Models\Report8;
 use App\Modules\Report\Models\TrainerReport;
 use App\Modules\Report\Models\SpaceManager2Report;
 use App\Modules\Report\Models\LikeDislikeReport;
-use App\Modules\Report\Requests\Admin\ReportRequest;
+use App\Modules\Report\Requests\Admin\Report8Request;
 use App\Modules\Report\Requests\Admin\SpaceManager2ReportRequest;
 use App\Modules\Report\Requests\Admin\LikeDislikeReportRequest;
 use App\Modules\Report\Base\Controllers\ModuleController;
@@ -16,43 +16,43 @@ use Excel;
 use Carbon\Carbon;
 class ReportController extends ModuleController {
 
-  public function index(ReportDataTable $dataTable)
-  {
-      return $dataTable->render($this->viewPath());
-  }
   public function trainer(TrainerReportDataTable $dataTable)
   {
-
     return $dataTable->render($this->viewPath());
   }
-  public function trainerShow(TrainerReport $trainer){
-    dd($trainer);
-    return redirect()->route('event.page', ['event_slug' => $event->slug]);
+  public function trainerShow(TrainerReport $report_id){
+    return redirect()->route('event.page', ['event_slug' => $report_id->event->slug]);
   }
-  public function store(ReportRequest $request)
-  {
-      return $this->createFlashRedirect(Report::class, $request);
+  public function trainerEdit(TrainerReport $trainer){
+   return redirect();
   }
+  public function trainerDestroy(TrainerReport $trainer){
+   return redirect();
+  }
+  // public function store(ReportRequest $request)
+  // {
+  //     return $this->createFlashRedirect(Report::class, $request);
+  // }
 
-  public function show(Report $report)
-  {
-      return $this->viewPath("show", $report);
-  }
+  // public function show(Report $report)
+  // {
+  //     return $this->viewPath("show", $report);
+  // }
 
-  public function edit(Report $report)
-  {
-      return $this->getForm($report);
-  }
+  // public function edit(Report $report)
+  // {
+  //     return $this->getForm($report);
+  // }
 
-  public function update(Report $report, ReportRequest $request)
-  {
-      return $this->saveFlashRedirect($report, $request);
-  }
+  // public function update(Report $report, ReportRequest $request)
+  // {
+  //     return $this->saveFlashRedirect($report, $request);
+  // }
 
-  public function destroy(Report $report)
-  {
-      return $this->destroyFlashRedirect($report);
-  }
+  // public function destroy(Report $report)
+  // {
+  //     return $this->destroyFlashRedirect($report);
+  // }
 
   ////////////////////////////////////
   //// Space manage 2 functions /////
@@ -120,6 +120,39 @@ class ReportController extends ModuleController {
     return $this->saveFlashRedirect($report_id, $request);
   }
   public function like_dislike_reports_Destroy(){
+    abrot(404);
+  }
+  ////////////////////////////////////
+  //// report 8 functions /////
+  //////////////////////////////////
+  public function report_8_Create(){
+    $this->formPath = 'App\Modules\Report\Forms\Admin\Report8ReportsForm';
+    $url = route('dashboard.report.report_8.store');
+    $form = $this->createForm($url, 'POST', null, null);
+    return view('Report::dashboard.create', compact('form'));
+  }
+  
+  public function report_8_Index(LikeDislikeDataTable $dataTable){
+    return $dataTable->render($this->viewPath());
+  }
+  public function report_8_Show(Report8 $report_id){
+      // return $this->viewPath("space_manager_2_show", $report_id);
+  }
+  public function report_8_Store(Report8Request $request)
+  {
+    return $this->createFlashRedirect(Report8::class, $request, false, 'report_8.index');
+  }
+  public function report_8_Edit(Report8 $report_id){
+    $this->formPath = 'App\Modules\Report\Forms\Admin\Report8ReportsForm';
+    $url = route('dashboard.report.report_8.update', ['report_id' => $report_id->id]);
+    $form = $this->createForm($url, 'PATCH', $report_id, null);
+    return view('Report::dashboard.create', compact('form'));
+  }
+  public function report_8_Update(Report8 $report_id, Report8Request $request)
+  {
+    return $this->saveFlashRedirect($report_id, $request);
+  }
+  public function report_8_Destroy(){
     abrot(404);
   }
 

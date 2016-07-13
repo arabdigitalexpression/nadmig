@@ -9,11 +9,12 @@ class TrainerReportDataTable extends ModuleDataTableController {
 
   protected $common_columns = ['created_at', 'updated_at'];
 
-  if(Auth::user()->hasRole('admin')){
-  	protected $options = ['show', 'edit'];
-  }else{
-  	protected $options = ['show'];
-  }
+  // if(Auth::user()->hasRole('admin')){
+  // 	protected $options = ['show', 'edit'];
+  // }else{
+  // 	protected $options = ['show'];
+  // }
+  protected $options = ['show'];
   
   public function query()
   {

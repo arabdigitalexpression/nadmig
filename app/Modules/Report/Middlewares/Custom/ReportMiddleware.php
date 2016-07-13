@@ -34,6 +34,15 @@ class ReportMiddleware extends MakeMenu
 		      ->icon("circle-o")
 		      ->prependIcon();
 
+		   // report 8
+		   $module->add(trans('Report::dashboard.menu.report.report_8.add'), ['route' => 'dashboard.report.report_8.create'])
+		      ->icon("circle-o")
+		      ->prependIcon();
+		      
+		  $module->add(trans('Report::dashboard.menu.report.report_8.all'), ['route' => 'dashboard.report.report_8.index'])
+		      ->icon("circle-o")
+		      ->prependIcon();
+
 		   if(Auth::user()->hasRole('admin')){
 		   	$module->add(trans('Report::dashboard.menu.report.trainer.all'), ['route' => 'dashboard.report.trainer'])
 		      ->icon("circle-o")

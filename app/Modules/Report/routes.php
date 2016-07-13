@@ -20,9 +20,13 @@ Route::group(['prefix' => 'api', 'module' => 'Report', 'namespace' => 'Api', 'mi
 
 // Admin routes
 Route::group(['prefix' => 'dashboard', 'module' => 'Report', 'namespace' => 'Admin', 'middleware' => 'space_manager'], function () {
-    Route::get('report/trainer', ['as' => 'dashboard.report.trainer', 'uses' => 'ReportController@trainer']);
-
-    Route::get('report/trainer/{id}/show', ['as' => 'dashboard.trainerreport.show', 'uses' => 'ReportController@trainerShow']);
+    ////////////////////////////////////
+    //// trainer routes /////
+    //////////////////////////////////
+    Route::get('report/trainer/list', ['as' => 'dashboard.report.trainer', 'uses' => 'ReportController@trainer']);
+    Route::get('report/trainer/{report_id}/edit', ['as' => 'dashboard.trainerreport.edit', 'uses' => 'ReportController@trainerEdit']);
+    Route::get('report/trainer/{report_id}/del', ['as' => 'dashboard.trainerreport.destroy', 'uses' => 'ReportController@trainerDestroy']);
+    Route::get('report/trainer/{report_id}/show', ['as' => 'dashboard.trainerreport.show', 'uses' => 'ReportController@trainerShow']);
     ////////////////////////////////////
     //// Space manage 2 routes /////
     //////////////////////////////////
@@ -48,6 +52,18 @@ Route::group(['prefix' => 'dashboard', 'module' => 'Report', 'namespace' => 'Adm
     Route::get('report/like_dislike/{report_id}/destroy', ['as' => 'dashboard.likedislike.destroy', 'uses' => 'ReportController@like_dislike_reports_Destroy']);
     Route::Post('report/like_dislike/store', ['as' => 'dashboard.report.like_dislike_reports.store', 'uses' => 'ReportController@like_dislike_reports_Store']);
     Route::patch('report/like_dislike/{report_id}/update', ['as' => 'dashboard.report.like_dislike_reports.update', 'uses' => 'ReportController@like_dislike_reports_Update']);
+
+    ///////////////////////////////////////
+    //// Report 8 Reports routes /////
+    /////////////////////////////////////
+    Route::get('report/report_8/create', ['as' => 'dashboard.report.report_8.create', 'uses' => 'ReportController@report_8_Create']);
+    Route::get('report/report_8', ['as' => 'dashboard.report8.index', 'uses' => 'ReportController@report_8_Index']);
+    Route::get('report/report_8/list', ['as' => 'dashboard.report.report_8.index', 'uses' => 'ReportController@report_8_Index']);
+    Route::get('report/report_8/{report_id}/show', ['as' => 'dashboard.report8.show', 'uses' => 'ReportController@report_8_Show']);
+    Route::get('report/report_8/{report_id}/edit', ['as' => 'dashboard.report8.edit', 'uses' => 'ReportController@report_8_Edit']);
+    Route::get('report/report_8/{report_id}/destroy', ['as' => 'dashboard.report8.destroy', 'uses' => 'ReportController@report_8_Destroy']);
+    Route::Post('report/report_8/store', ['as' => 'dashboard.report.report_8.store', 'uses' => 'ReportController@report_8_Store']);
+    Route::patch('report/report_8/{report_id}/update', ['as' => 'dashboard.report.report_8_.update', 'uses' => 'ReportController@report_8_Update']);
 
     /////////////////////////
     //// Export Routes /////
