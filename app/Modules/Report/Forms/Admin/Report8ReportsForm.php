@@ -8,10 +8,10 @@ class Report8ReportsForm extends AdminForm
     {
         $this
 	        ->add('what_happens', 'textarea', [
-	            'label' => 'أعجبني'
+	            'label' => 'ماذا يتم بالفعل'
 	        ])
 	        ->add('notes', 'textarea', [
-	            'label' => 'لم يعجبني'
+	            'label' => 'انطبعات\ملاحظات\أسئلة\توصيات على ماذا سمعته'
 	        ]);
             $this->question('does_it_achive_the_goal', 'تمت أهداف التدريب بشكل كامل');
             $this->question('trainer_explaination_intraction', 'طريقة شرح المدرب تفاعلية');
@@ -22,11 +22,11 @@ class Report8ReportsForm extends AdminForm
     }
     protected function question($name, $title){
         $this
-            ->add($name . '[percentage]', 'choice', [
+            ->add($name, 'choice', [
                 'choices' => [ 'أوافق بشدة' => 'أوافق بشدة', 'أوافق' => 'أوافق', 'محايد' => 'محايد', 'لاأوافق' => 'لاأوافق', 'لا أوافق بشدة' => 'لا أوافق بشدة' ],
                 'selected' => $this->{$name},
                 'label' => $title,
-                'attr' => ['id' => $name . '_type']
+                'attr' => ['id' => $name]
             ]);
     }
 }

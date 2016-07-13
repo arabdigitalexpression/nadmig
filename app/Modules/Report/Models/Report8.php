@@ -2,7 +2,7 @@
 
 
 use Illuminate\Database\Eloquent\Model;
-
+use Auth;
 class Report8 extends Model{
 
 	protected $table = 'report_8';

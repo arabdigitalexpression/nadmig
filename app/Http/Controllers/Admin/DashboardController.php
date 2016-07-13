@@ -57,10 +57,9 @@ class DashboardController extends AdminController
 
     public function getIndex()
     {
+        $data = [];
         if (Auth::user()->hasRole('space_manager')) {
-            $data = [
-                'spaces' => Space::where('manager_id', Auth::user()->id)->get()->toArray(),
-            ];
+            $data['spaces'] = Space::where('manager_id', Auth::user()->id)->get()->toArray();
         }
         return view('dashboard.dashboard.index', compact('data'));
     }

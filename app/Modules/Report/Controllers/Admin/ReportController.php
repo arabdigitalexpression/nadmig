@@ -8,7 +8,7 @@ use App\Modules\Report\Requests\Admin\Report8Request;
 use App\Modules\Report\Requests\Admin\SpaceManager2ReportRequest;
 use App\Modules\Report\Requests\Admin\LikeDislikeReportRequest;
 use App\Modules\Report\Base\Controllers\ModuleController;
-use App\Modules\Report\Controllers\Api\DataTables\ReportDataTable;
+use App\Modules\Report\Controllers\Api\DataTables\Report8DataTable;
 use App\Modules\Report\Controllers\Api\DataTables\TrainerReportDataTable;
 use App\Modules\Report\Controllers\Api\DataTables\LikeDislikeDataTable;
 use App\Modules\Report\Controllers\Api\DataTables\SpaceManager2ReportDataTable;
@@ -132,7 +132,7 @@ class ReportController extends ModuleController {
     return view('Report::dashboard.create', compact('form'));
   }
   
-  public function report_8_Index(LikeDislikeDataTable $dataTable){
+  public function report_8_Index(Report8DataTable $dataTable){
     return $dataTable->render($this->viewPath());
   }
   public function report_8_Show(Report8 $report_id){

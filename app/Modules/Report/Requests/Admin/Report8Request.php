@@ -2,7 +2,7 @@
 
 use App\Http\Requests\Request;
 
-class LikeDislikeReportRequest extends Request {
+class Report8Request extends Request {
 
     public function authorize()
     {

@@ -89,7 +89,7 @@
         className: 'buttons-create',
 
         text: function (dt) {
-            return '<i class="fa fa-plus"></i> ' + dt.i18n('buttons.create', 'Create');
+            // return '<i class="fa fa-plus"></i> ' + dt.i18n('buttons.create', 'Create');
         },
 
         action: function (e, dt, button, config) {

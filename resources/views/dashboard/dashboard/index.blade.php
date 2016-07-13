@@ -3,9 +3,13 @@
 @section('content')
     <section class="content">
         <div class="row">
+        	@if($data)
             {!! dashboard_box("bg-aqua", "circle-o",
                 trans('dashboard.fields.dashboard.spaces'), count($data['spaces'])) !!}
-            
+            @else
+            	<h3>لوحة التحكم</h3>
+            @endif
+
         </div>
        
 

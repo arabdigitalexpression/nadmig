@@ -14,23 +14,26 @@
               <ul class="nav navbar-nav navbar-right menu">
                 <li class="{{ Route::is('root') ? 'active' : '' }}"><a href="{{  route('root') }}">{{ trans('application.menu.home') }}</a></li>
                 <li class="{{ Route::is('spaces') ? 'active' : '' }}"><a href="{{  route('spaces') }}">{{ trans('application.menu.spaces') }}</a></li>
-                <li class="{{ Route::is('events') ? 'active' : '' }}"><a href="{{  route('events') }}">{{ trans('application.menu.events') }}</a></li>
-                <li class="{{ Route::is('programs') ? 'active' : '' }}"><a href="{{  route('programs') }}">{{ trans('application.menu.programs') }}</a></li>
+                {{-- <li class="{{ Route::is('events') ? 'active' : '' }}"><a href="{{  route('events') }}">{{ trans('application.menu.events') }}</a></li> --}}
+                {{-- <li class="{{ Route::is('programs') ? 'active' : '' }}"><a href="{{  route('programs') }}">{{ trans('application.menu.programs') }}</a></li> --}}
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="name">{{ trans('School::application.title') }}</span> <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="{{ route('application.attendees.create') }}">{{ trans('Attendees::application.attendees.create') }}</a></li>
-                        <li><a href="{{ route('schools') }}">{{ trans('School::application.title') }}</a></li>
-                        <li><a href="{{ route('trainers') }}">{{ trans('Trainer::application.title') }}</a></li>
+                        {{-- <li><a href="{{ route('schools') }}">{{ trans('School::application.title') }}</a></li> --}}
+                        {{-- <li><a href="{{ route('trainers') }}">{{ trans('Trainer::application.title') }}</a></li> --}}
                     </ul>
                 </li>
               </ul>
-              <ul class="nav navbar-nav navbar-left user">
+              
                 @if (Auth::guest())
+                <ul class="nav navbar-nav navbar-left guest">
                     <li><a href="{{ url('/auth/login') }}">{{ trans('auth.login.title') }}</a></li>
                     <span class="break">|</span>
                     <li><a href="{{ url('/user/register') }}">{{ trans('auth.signup.title') }}</a></li>
+                </ul>
                 @else
+                <ul class="nav navbar-nav navbar-left user">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img class="pp" src="{{ url(Auth::user()->picture)}}"><span class="name">{{ Auth::user()->name }}</span> <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
@@ -45,8 +48,9 @@
                             <li><a href="{{ url('/auth/logout') }}">{{ trans('application.menu.logout') }}</a></li>
                         </ul>
                     </li>
+                </ul>
                 @endif
-              </ul>
+              
             </div><!-- /.navbar-collapse -->
         </div>
         @if (Session::has('flash_notification.message'))

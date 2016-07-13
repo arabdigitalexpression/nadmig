@@ -6,6 +6,7 @@
     	<option value="TrainerReport">تقارير المدربين</option>
     	<option value="SpaceManager2Report">تقرير مدير المساحة نموذج ٢</option>
     	<option value="LikeDislikeReport">تقرير اعجبنى و لم يعجبنى</option>
+        <option value="Report8">نموذج ٨</option>
     </select>
     </br>
     </br>
