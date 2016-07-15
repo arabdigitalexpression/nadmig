@@ -5,8 +5,8 @@ use App\Modules\Attendees\Base\Controllers\ModuleDataTableController;
 use Auth;
 class AttendeesDataTable extends ModuleDataTableController {
 
-  protected $columns = ['name','birthday'];
-
+  protected $columns = ['name','birthday', 'type', 'address', 'city', 'phone_number', 'email', 'school_name', 'track', 'media_coverage', 'guardian_name', 'guardian_phone', 'guardian_approval'];
+  
   protected $common_columns = ['created_at'];
   protected $options = ['edit'];
   public function query()
