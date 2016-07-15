@@ -29,6 +29,7 @@ return [
             "guardian_name"               => "أسم ولي الأمر",
             "guardian_phone"               => "رقم الهاتف ولي الأمر",
             "guardian_approval"               => "موافقه ولي الأمر",
+            "organization"      => "المؤسسة"
         ]
     ],
     "menu" => [

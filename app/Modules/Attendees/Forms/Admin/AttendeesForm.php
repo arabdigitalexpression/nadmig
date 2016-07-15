@@ -2,6 +2,7 @@
 
 use App\Base\Forms\AdminForm;
 use App\Modules\Event\Models\Event;
+use App\Modules\Organization\Models\Organization;
 use App\Modules\Reservation\Models\Reservation;
 use Auth;
 class AttendeesForm extends AdminForm
@@ -49,6 +50,12 @@ class AttendeesForm extends AdminForm
                     'choices' => ['music&sound' => 'الصوت والموسيقي', 'video' => 'الفيديو', 'visual_art' => 'التعبير البصري ( الرسم بآنواعه )'],
                     'selected' => $this->track,
                     'label' => trans('Attendees::dashboard.fields.attendees.track'),
+                    'required' => true
+                ])
+             ->add('organization_id', 'choice', [
+                    'choices' => $this->getOrganizations(),
+                    'selected' => $this->organization_id,
+                    'label' => trans('Attendees::dashboard.fields.attendees.organization'),
                     'required' => true
                 ])
             ->add('hear_about_us[type]', 'choice', [
@@ -121,5 +128,13 @@ class AttendeesForm extends AdminForm
             }
             return $array;
         }
+    }
+    protected function getOrganizations (){
+        $array = array();
+        foreach (Organization::all() as $org)
+        {    
+            $array = array_add($array, $org['id'], $org['name']);   
+        }
+        return $array;
     }
 }
