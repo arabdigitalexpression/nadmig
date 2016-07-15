@@ -76,6 +76,7 @@ class MakeMenu
                 Reservation::AddMenus($menu);
                 Sessions::AddMenus($menu);
                 Apply::AddMenus($menu);
+                Attendees::AddMenus($menu);
                 Report::AddMenus($menu);
              }
              if (Auth::user()->hasRole('space_manager')) {

@@ -29,6 +29,10 @@ class Event extends Model{
 	{
 	    return $this->belongsTo('App\Modules\Reservation\Models\Reservation');
 	}
+    public function organization()
+    {
+        return $this->reservation->organization();
+    }
 	public function apply()
 	{
 	    return $this->hasMany('App\Modules\Apply\Models\Apply');

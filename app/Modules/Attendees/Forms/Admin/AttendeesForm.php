@@ -2,6 +2,8 @@
 
 use App\Base\Forms\AdminForm;
 use App\Modules\Event\Models\Event;
+use App\Modules\Reservation\Models\Reservation;
+use Auth;
 class AttendeesForm extends AdminForm
 {
     public function buildForm()
@@ -89,7 +91,18 @@ class AttendeesForm extends AdminForm
     }
     protected function getWorkshops(){
         $array = array();
-        foreach (Event::all() as $event)
+        if(Auth::user()->hasRole('admin')){
+            $events = Event::all();
+        }elseif(Auth::user()->hasRole('organization_manager')){
+            // $events = Reservation::where('organization_id', Auth::user()->manageOrganization['id'])->event;
+            $events = Event::all();
+            foreach ($events as $key => $event) {
+                if($event->organization->id != Auth::user()->manageOrganization['id']){
+                    unset($events[$key]);
+                }
+            }
+        }
+        foreach ($events as $event)
         {    
             if($event->program()->first() && $event->school){
                 $array = array_add($array, $event['id'], $event->reservation['name']);    

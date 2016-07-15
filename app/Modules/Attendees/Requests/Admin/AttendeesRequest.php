@@ -25,8 +25,7 @@ class AttendeesRequest extends Request {
             'media_coverage' => 'required',
             'guardian_name' => 'required',
             'guardian_phone' => 'required',
-            'guardian_approval' => 'required',
-
+            'guardian_approval' => 'required'
         ];
     }
 }

@@ -15,6 +15,6 @@ Route::group(['prefix' => 'api', 'module' => 'Attendees', 'namespace' => 'Api', 
 });
 
 // Admin routes
-Route::group(['prefix' => 'dashboard', 'module' => 'Attendees', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
+Route::group(['prefix' => 'dashboard', 'module' => 'Attendees', 'namespace' => 'Admin', 'middleware' => 'organization_manager'], function () {
 	Route::resource('attendees', 'AttendeesController');
 });

@@ -1,7 +1,7 @@
 <?php namespace App\Modules\Attendees\Forms\Application;
 
 use App\Base\Forms\AdminForm;
-
+use App\Modules\Organization\Models\Organization;
 class AttendeesForm extends AdminForm
 {
     public function buildForm()
@@ -49,6 +49,12 @@ class AttendeesForm extends AdminForm
                     'label' => trans('Attendees::application.fields.attendees.track'),
                     'required' => true
                 ])
+            ->add('organization_id', 'choice', [
+                    'choices' => $this->getOrganizations(),
+                    'selected' => $this->organization_id,
+                    'label' => trans('Attendees::application.fields.attendees.organization'),
+                    'required' => true
+                ])
             ->add('hear_about_us[type]', 'choice', [
                     'choices' => ['facebook' => 'فيس يوك', 'twitter' => 'تويتر', 'partner_ngo' => 'جمعيه شريكه', 'friend' => 'صديق', 'other' => 'آخري'],
                     'selected' => $this->hear_about_us,
@@ -79,5 +85,13 @@ class AttendeesForm extends AdminForm
                     'required' => true
                 ]);
         parent::buildForm();
+    }
+    protected function getOrganizations (){
+        $array = array();
+        foreach (Organization::all() as $org)
+        {    
+            $array = array_add($array, $org['id'], $org['name']);   
+        }
+        return $array;
     }
 }
