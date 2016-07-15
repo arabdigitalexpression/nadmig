@@ -63,6 +63,10 @@ class UserController extends ApplicationController {
     {
         if(Auth::check()){
             $user = Auth::user();
+            if ($request['password'] == "") {
+                unset($request['password']);
+                unset($request['password_confirmation']);
+            }
             return $this->saveFlashRedirect($user, $request, $this->imageColumn);
         }
         abort(403);

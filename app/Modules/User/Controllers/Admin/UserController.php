@@ -59,6 +59,7 @@ class UserController extends ModuleController
      */
     public function edit(User $user)
     {
+        unset($user['password']);
         return $this->getForm($user);
     }
 
@@ -73,6 +74,10 @@ class UserController extends ModuleController
     {
         // update user roles
         $user->roles()->sync($request['role']);
+        if ($request['password'] == "") {
+            unset($request['password']);
+            unset($request['password_confirmation']);
+        }
         return $this->saveFlashRedirect($user, $request, $this->imageColumn);
     }
 
