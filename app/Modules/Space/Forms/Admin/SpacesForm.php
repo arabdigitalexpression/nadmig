@@ -194,6 +194,14 @@ class SpacesForm extends AdminForm
     }
     protected function getSpaceManagers(){
         $array = array();
+        if(Auth::user()->hasRole('organization_manager')){
+            $array = array_add($array, Auth::user()->id, Auth::user()->name);  
+        }
+        if(Auth::user()->hasRole('admin')){
+            foreach (Role::find(2)->users as $user) {
+                $array = array_add($array, $user['id'], $user['name']);  
+            }
+        }
         foreach (Role::find(3)->users as $user) {
             $array = array_add($array, $user['id'], $user['name']);  
         }
