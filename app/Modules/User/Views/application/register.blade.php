@@ -8,7 +8,7 @@
 
     <div class="login-box" id="login-box">
         <div class="header">
-            <i class="fa fa-user-plus"></i> {{ trans('user.register.title') }}
+            <i class="fa fa-user-plus"></i> {{ trans('User::application.register.title') }}
         </div>
         <div class="body bg-gray-50">
             {!! form($form) !!}
