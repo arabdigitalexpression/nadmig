@@ -46,8 +46,7 @@ class OrganizationController extends ModuleController {
 
 	public function edit(Organization $organization)
 	{
-		
-		if ((Auth::user()->hasRole('admin')) || (Auth::user()->hasRole('organization_manager') && $organization['manager_id'] == Auth::user()->id)) {
+		if ((Auth::user()->hasRole('admin')) || ((Auth::user()->hasRole('organization_manager') && $organization['manager_id'] == Auth::user()->id))) {
 			return $this->getForm($organization);
 		}else{
 			return response('Unauthorized.', 401);
@@ -57,7 +56,7 @@ class OrganizationController extends ModuleController {
 	public function update(Organization $organization, OrganizationRequest $request)
 	{
 
-		if (Auth::user()->hasRole('admin') || (Auth::user()->can('edit-my-orgnization') && $organization['manager_id'] == Auth::user()->id)) {
+		if (Auth::user()->hasRole('admin') || ((Auth::user()->hasRole('organization_manager') && $organization['manager_id'] == Auth::user()->id))) {
 		  return $this->saveFlashRedirect($organization, $request, $this->imageColumn);
 		}
 		return response('Unauthorized.', 401);
