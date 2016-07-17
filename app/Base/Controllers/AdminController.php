@@ -159,8 +159,8 @@ abstract class AdminController extends Controller
     public function saveFlashRedirect($model, $request, $imageColumn = false, $path = "index")
     {
         $model->fill($this->getData($request, $imageColumn));
-        $model->save() ? Flash::success(trans('dashboard.update.success')) : Flash::error(trans('dashboard.update.fail'));
         LogController::Log($model, 'updated');
+        $model->save() ? Flash::success(trans('dashboard.update.success')) : Flash::error(trans('dashboard.update.fail'));
         return $this->redirectRoutePath($path);
     }
 

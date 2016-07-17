@@ -15,18 +15,19 @@ class LogController extends Controller
 		}else{
 			$className = class_basename(get_class($model));
 		}
-		// if ($action != "created") {
-		// 	$changes = 'changing the value of ' . . ' from ' . . ' to [new value]';
-		// }
-		if ($relation) {
-			$belongTo = ' belong to ' . class_basename(get_class($relation)) . ' having id ' . $relation->id ; 
-			Activity::log('User ' . Auth::user()->name . ' having ID ' . Auth::user()->id . ' has ' .$action . ' ' .  $className . ' having id ' . $model->id . $belongTo . ' on ' . Carbon::now());
-		}else{
-			Activity::log($className . ' ' . $model->name . ' with id ' . $model->id . ' was ' . $action);
+		if ($action != "created") {
+			if($model->getDirty()){
+				foreach ($model->getDirty() as $key => $value) {
+					$changes = 'changing the value of ' . $key . ' from ' . $model->getOriginal()[$key] . ' to ' . $value;
+					if ($relation) {
+						$belongTo = ' belong to ' . class_basename(get_class($relation)) . ' having id ' . $relation->id ; 
+						Activity::log('User ' . Auth::user()->name . ' having ID ' . Auth::user()->id . ' has ' .$action . ' ' .  $className . ' having id ' . $model->id . ' ' . $belongTo . ' on ' . Carbon::now() . ' ' . $changes);
+					}else{
+						Activity::log('User ' . Auth::user()->name . ' having ID ' . Auth::user()->id . ' has ' .$action . ' ' .  $className . ' having id ' . $model->id . ' on ' . Carbon::now() . ' ' . $changes);
+					}
+				}	
+			}
 		}
+		
 	}
 }
-// User [user.username] having ID [user.id] has [action]
-// [object.reservation.request] having ID [object.reservation.ID] on
-// [action.timestamp] changing the value of [fieldname] from [oldvalue] to
-// [new value].
