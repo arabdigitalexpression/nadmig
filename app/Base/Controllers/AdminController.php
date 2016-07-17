@@ -121,6 +121,7 @@ abstract class AdminController extends Controller
     {
 
         $model = $class::create($this->getData($request, $imageColumn));
+        LogController::Log($model, 'created');
         $model->id ? Flash::success(trans('dashboard.create.success')) : Flash::error(trans('dashboard.create.fail'));
         if(class_basename($model) == "User"){
             if($request['role']){
@@ -143,7 +144,6 @@ abstract class AdminController extends Controller
                 $model->events()->sync($request['workshops']);    
             }
         }
-        LogController::Log($model, 'created');
         return $this->redirectRoutePath($path);
     }
 

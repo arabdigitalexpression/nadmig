@@ -47,8 +47,8 @@ class ReportController extends ApplicationController {
 	  	$request['week'] =  intval($week);
 	  	$request['event_id'] = $event->id;
 	  	$model = TrainerReport::create($this->getDataP($request, false));
+      LogController::Log($model, 'updated');
 	    $model->id ? Flash::success(trans('Report::application.create.success')) : Flash::error(trans('Report::application.create.fail'));
-	    LogController::Log($model, 'updated');
 	  	return redirect()->route('report.page', ['event_slug' => $event->slug]);  		
   	}else{
   		Flash::error(trans('Report::application.create.created'));
@@ -90,8 +90,8 @@ class ReportController extends ApplicationController {
   	if(TrainerReport::where('event_id', $event->id)->where('week', $week)->where('attendees_id', $attendees_id)->first()){
   		$report = TrainerReport::where('event_id', $event->id)->where('week', $week)->where('attendees_id', $attendees_id)->first();
   		$report->fill($this->getDataP($request, null));
-        $report->save() ? Flash::success(trans('Report::application.create.success')) : Flash::error(trans('Report::application.create.fail'));
-        LogController::Log($report, 'updated');
+      LogController::Log($report, 'updated');
+      $report->save() ? Flash::success(trans('Report::application.create.success')) : Flash::error(trans('Report::application.create.fail'));
         return redirect()->route('report.page', ['event_slug' => $event->slug]);  		
   	}else{
 		abort(401);

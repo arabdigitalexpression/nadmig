@@ -96,8 +96,9 @@ public function store(ReservationRequest $request, $organization_slug)
             return back()->withInput();
         }
         $reservation = new Reservation($this->getDataP($request, $this->imageColumn));
-        $organization_slug->reservations()->save($reservation) ? Flash::success(trans('application.create.success')) : Flash::error(trans('application.create.fail'));
         LogController::Log($reservation, 'created');
+        $organization_slug->reservations()->save($reservation) ? Flash::success(trans('application.create.success')) : Flash::error(trans('application.create.fail'));
+        
         foreach ($sessions as $session) {
             $session = new Session($session);
             LogController::Log($session, 'created', $reservation);
@@ -160,8 +161,8 @@ public function update($reservation_url_id, ReservationRequest $request)
                     if(Event::where('reservation_id', $reservation->id)->exists()){
                         $event = Event::where('reservation_id', $reservation->id)->firstOrFail();
                         $event->status = 'pending';
-                        $event->save();
                         LogController::Log($event, 'pending', $reservation);                
+                        $event->save();
                     }
                     LogController::Log($reservation, 'pending');
                 }
@@ -175,8 +176,8 @@ public function update($reservation_url_id, ReservationRequest $request)
             }
         }
         $reservation['actions'] = $actions;
-        $reservation->push() ? Flash::success(trans('application.update.success')) : Flash::error(trans('application.update.fail'));
         LogController::Log($reservation, 'updated');
+        $reservation->push() ? Flash::success(trans('application.update.success')) : Flash::error(trans('application.update.fail'));
         return $this->redirectRoutePath("index", null, $reservation);
     }
     abort(401);
@@ -203,8 +204,8 @@ public function accept($reservation_url_id)
             }else{
                 $event = Event::where('reservation_id', $reservation->id)->firstOrFail();
                 $event->status = 'accepted';
-                $event->save();
                 LogController::Log($event, 'accepted', $reservation); 
+                $event->save();
             }
         }
         Flash::success(trans('application.update.success'));

@@ -112,8 +112,8 @@ abstract class ApplicationController extends Controller
     {
 
         $model = $class::create($this->getData($request, $imageColumn));
-        $model->id ? Flash::success(trans('application.create.success')) : Flash::error(trans('application.create.fail'));
         LogController::Log($model, 'created');
+        $model->id ? Flash::success(trans('application.create.success')) : Flash::error(trans('application.create.fail'));
         return $this->redirectRoutePath($path, null, $model);
     }
 
@@ -129,8 +129,8 @@ abstract class ApplicationController extends Controller
     public function saveFlashRedirect($model, $request, $imageColumn = false, $path = "index")
     {
         $model->fill($this->getData($request, $imageColumn));
-        $model->save() ? Flash::success(trans('application.update.success')) : Flash::error(trans('application.update.fail'));
         LogController::Log($model, 'updated');
+        $model->save() ? Flash::success(trans('application.update.success')) : Flash::error(trans('application.update.fail'));
         return $this->redirectRoutePath($path, null, $model);
     }
 

@@ -27,6 +27,8 @@ class LogController extends Controller
 					}
 				}	
 			}
+		}else{
+			Activity::log('User ' . Auth::user()->name . ' having ID ' . Auth::user()->id . ' has ' .$action . ' ' .  $className . ' having id ' . $model->id . ' on ' . Carbon::now() . ' ' . $changes);
 		}
 		
 	}
