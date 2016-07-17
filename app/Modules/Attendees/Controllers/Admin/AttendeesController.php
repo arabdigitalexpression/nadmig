@@ -14,7 +14,7 @@ class AttendeesController extends ModuleController {
 
   public function store(AttendeesRequest $request)
   {
-    if(Auth::user()->hasRole('organization_manager')){
+    if(Auth::user()->hasRole('organization_manager') || Auth::user()->hasRole('admin')){
       $request['organization_id'] = Auth::user()->manageOrganization->id;
     }
     return $this->createFlashRedirect(Attendees::class, $request);
