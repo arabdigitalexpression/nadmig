@@ -55,6 +55,7 @@ class AttendeesForm extends AdminForm
              ->add('organization_id', 'choice', [
                     'choices' => $this->getOrganizations(),
                     'selected' => $this->organization_id,
+                    'empty_value' => '=== قم بأختيار المؤسسة ===',
                     'label' => trans('Attendees::dashboard.fields.attendees.organization'),
                     'required' => true
                 ])
