@@ -7,8 +7,7 @@ class LogDataTable extends ModuleDataTableController {
 
   protected $columns = ['text'];
   protected $ops = false;
-  protected $pluck_columns = ['user_id' => ['user', 'name']];
-  protected $common_columns = ['created_at', 'updated_at'];
+  protected $common_columns = ['created_at'];
   protected $options = [];
 
   public function query()
