@@ -113,7 +113,7 @@ public function edit($reservation_url_id)
     if(!$reservation = Reservation::where('url_id', $reservation_url_id)->first()){
         abort(404);
     }   
-    if(Auth::check() && ((Auth::user()->id == $reservation->user_id) || Auth::user()->hasRole('admin') || (Auth::user()->hasRole('organization_manager') && Auth::user()->manageOrganization['id'] == $reservation->organization_id))){
+    if(Auth::user()->hasRole('admin') || (Auth::check() && ((Auth::user()->id == $reservation->user_id) || (Auth::user()->hasRole('organization_manager') && Auth::user()->manageOrganization['id'] == $reservation->organization_id)))){
         $sessions = $reservation->sessions()->where("status", "!=" ,"deleted")->get();
         foreach ($sessions->toArray() as $key => $session) {
             $sessions[$key]['start_timestamp'] = strtotime($session['start_date']);
@@ -121,7 +121,7 @@ public function edit($reservation_url_id)
         $sortedSessions = $sessions->toArray();
         $this->sortBy("start_timestamp",$sortedSessions);
         $reservation['sessions'] = $sortedSessions;
-        if(Carbon::now()->subDay()->diffInDays(Carbon::createFromTimeStamp($sortedSessions[0]['start_timestamp']), false) > intval($reservation->organization->min_time_before_usage_to_edit->period)){
+        if(Carbon::now()->subDay()->diffInDays(Carbon::createFromTimeStamp($sortedSessions[0]['start_timestamp']), false) > intval($reservation->organization->min_time_before_usage_to_edit->period) || Auth::user()->hasRole('admin')){
             $change_fees = $reservation->organization->change_fees;
             $change_fees_type = array("null" => "لا يوجد","percentage" => "نسبة من قيمة الحجز الكلى للمساحات","value" => "قيمة");
             Flash::warning(trans('Reservation::application.edit.warning') . $change_fees_type[$change_fees->type] . " " . $change_fees->amount);
