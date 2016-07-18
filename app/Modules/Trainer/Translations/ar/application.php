@@ -9,5 +9,11 @@ return [
     "title" => "المدربين", 
     "trainer" => [
        "report"           => "التقارير"
-    ]
+    ],
+    "fields" => [
+        "trainer" => [
+            "specialization"           => "التخصوص (المهارات)",
+            "bio"               => "نبذ عنك"
+        ]
+    ],
 ];
