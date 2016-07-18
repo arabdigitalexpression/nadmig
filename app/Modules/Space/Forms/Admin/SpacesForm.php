@@ -66,6 +66,16 @@ class SpacesForm extends AdminForm
                 'label' => trans('Space::dashboard.fields.space.in_return'), 
                 'attr' => ['id' => 'in_return']
             ])
+            ->add('usage_period_key', 'choice', [
+                'choices' => $this->getUsagePeriodKeys(),
+                'selected' => $this->usage_period_key,
+                'label' => trans('Space::dashboard.fields.space.usage_period_key'),
+                'attr' => ['id' => 'usage_period_key']
+            ])
+            ->add('usage_period', 'number', [
+                'label' => false, 
+                'attr' => ['id' => 'usage_period']
+            ])
             ->add('status', 'choice', [
                 'choices' => $this->getSpaceStatus(),
                 'selected' => $this->status,
@@ -153,6 +163,12 @@ class SpacesForm extends AdminForm
             "exact" => trans('Space::dashboard.fields.space.exact'),
             "any" => trans('Space::dashboard.fields.space.any')
             );
+    }
+    protected function getUsagePeriodKeys(){
+        return array(
+            "hours" => trans('Space::dashboard.fields.space.hours'),
+            "days" => trans('Space::dashboard.fields.space.days')
+            );   
     }
     protected function getSpaceStatus(){
         return array(
