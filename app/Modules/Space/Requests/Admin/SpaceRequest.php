@@ -23,7 +23,7 @@ class SpaceRequest extends Request {
             'links' => 'sometimes',
             'manager_id' => 'required|integer|exists:users,id',
             'in_return_key' => 'required',
-            'in_return' => 'required',
+            'in_return' => 'sometimes',
             'status' => 'required',
             'working_week_days' => 'required',
             'working_hours_days' => 'required',
