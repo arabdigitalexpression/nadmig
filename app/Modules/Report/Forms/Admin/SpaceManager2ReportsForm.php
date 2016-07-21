@@ -20,6 +20,9 @@ class SpaceManager2ReportsForm extends AdminForm
                 'selected' => $this->session_id,
                 'label' => 'اسم\رقم الجلسة',
             ])
+            ->add('trainers', 'text', [
+                'label' => 'اسماء المدربين'
+            ])
             ->add('date', 'date', [
                 'label' => 'التاريخ',
             ])

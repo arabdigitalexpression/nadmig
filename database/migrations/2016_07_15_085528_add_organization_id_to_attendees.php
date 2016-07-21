@@ -13,8 +13,8 @@ class AddOrganizationIdToAttendees extends Migration
     public function up()
     {
         Schema::table('attendees', function($table) {
-            $table->integer('organization_id')->unsigned()->after('name');
-            $table->foreign('organization_id')->references('id')->on('organizations');
+            // $table->integer('organization_id')->unsigned()->after('name');
+            // $table->foreign('organization_id')->references('id')->on('organizations');
         });
     }
 

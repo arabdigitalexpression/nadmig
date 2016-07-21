@@ -15,6 +15,7 @@ class SpaceManager2ReportRequest extends Request {
             'type' => 'required',
             'session_id' => 'required|integer',
             'date' => 'required|date',
+            'trainers' => 'required',
             'attendees' => 'required',
             'notes' => 'required',
         ];
