@@ -19,9 +19,11 @@
         <li><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $object->address }}</li>
         <li><i class="fa fa-phone" aria-hidden="true"></i> {{ $object->phone_number }}</li>
         <li><i class="fa fa-envelope" aria-hidden="true"></i><a href="mailto:{{ $object->email }}"> {{ $object->email }}</a></li>
-        @foreach($object->links as $link)
-       		<li><i class="fa fa-<?php if($link->type == 'website') {echo "globe";}else{echo $link->type;} ?>" aria-hidden="true"></i> <a href="{{ $link->link }}">{{ $link->link }}</a></li>
-        @endforeach
+        @if($object->links)
+            @foreach($object->links as $link)
+                <li><i class="fa fa-<?php if($link['type'] == 'website') {echo "globe";}else{echo $link['type'];} ?>" aria-hidden="true"></i> <a href="{{ $link['link'] }}">{{ $link['link'] }}</a></li>
+            @endforeach
+        @endif
     </ul>
     <div class="post-excerpt">
         <h3>{!! trans('Space::dashboard.fields.space.excerpt') !!}:</h3>
