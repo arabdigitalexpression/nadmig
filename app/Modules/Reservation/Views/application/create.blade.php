@@ -184,8 +184,7 @@
             }
             function min_res(json){
                 var min = json.min_type_for_reservation;
-                var max = json.max_type_for_reservation;
-                var Atype;
+                var max = json.max_type_for_reservation;                
                 $("#period_period_" + hash).parent().find('.help-block').text('الحجز الأدنى ' + min.period + ' ' + TimeTypeArabic(min) + ' | الحجز الأقصى ' + max.period + ' ' + TimeTypeArabic(max));
                 $("#period_period_" + hash).bind('input propertychange', function() {
                     if(($(this).val() < parseInt(min.period)  && min.type == $("#period_type_" + hash).val()) || (min.type == 'hours' && $("#period_type_" + hash).val() == 'mins') || ($(this).val() > parseInt(max.period)  && max.type == $("#period_type_" + hash).val())){
@@ -211,6 +210,9 @@
                     }
                 }else if(period.type == 'mins'){
                     Atype = 'دقيقة';   
+                }
+                else if(period.type == 'days'){
+                    Atype = 'ايام';   
                 }
                 return Atype;
             }
