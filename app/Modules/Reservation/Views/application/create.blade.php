@@ -135,24 +135,30 @@
                     var working_week_days = json.working_week_days;
                     var difference = $(week_days).not(working_week_days).get();
                     var max_before = json.max_time_before_reservation;
+                    picker.set('min', true);
+                    @if(Auth::user()->hasRole('admin') && Auth::user()->manageOrganization['id'] == $extra->id)
+                        if(max_before.type == 'days'){
+                            picker.set('max', parseInt(max_before.period));
+                        }
+                    @endif
                     if (!is_data) {
                         picker.clear();
                         picker.set('enable', true);
                         picker_time.clear();
                     }
                     picker.set('disable', getNotWorkingDays(difference));
-                    picker.set('min', true);
-                    if(max_before.type == 'days'){
-                        picker.set('max', parseInt(max_before.period));
-                    }
                     picker.on({ set: function(context) {
-                        var day = 0;
+                        var day = null;
                         if(moment(context.select).weekday() < 6){
                             day = moment(context.select).weekday();
+                        }else{
+                            day = 0;
                         }
                         picker_time.set('disable', false);
                         var date = moment(context.select).format("YYYY/MM/DD");
-                        picker_time.set('disable', [{ from: [00, 0], to: getTime(moment(working_hours[week_days[day]].from, "hh:mm a").subtract(30, 'minutes').format("h:mm A"))},{ from: getTime(moment(working_hours[week_days[day]].to, "hh:mm a").add(30, 'minutes').format("h:mm A")) , to:[23, 30]}]);
+                        if(working_hours[week_days[day]]['from'] != "" && working_hours[week_days[day]]['to'] != ""){
+                            picker_time.set('disable', [{ from: [00, 0], to: getTime(moment(working_hours[week_days[day]].from, "hh:mm a").subtract(30, 'minutes').format("h:mm A"))},{ from: getTime(moment(working_hours[week_days[day]].to, "hh:mm a").add(30, 'minutes').format("h:mm A")) , to:[23, 30]}]);     
+                        }
                         $.getJSON('/api/space/' + space_id + '/' + date, function( data ) {
                             $.each(data, function( index, value ) {
                               picker_time.set('disable', [{ from: getTime(value.start_time), to: getTime(moment(value.start_time, "hh:mm a").add(value.period.period, value.period.type).format("h:mm A"))}]);
@@ -254,8 +260,9 @@
                     hour = parseInt(hour) + 12;
                 }
                 if( parseInt(hour) == 24 ){
-                    hour = 00
+                    hour = parseInt("00");
                 }
+                
                 return [hour, mins];
             }
             $('#apply_deadline').pickadate({
