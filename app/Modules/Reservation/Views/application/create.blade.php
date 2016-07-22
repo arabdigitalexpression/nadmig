@@ -212,7 +212,7 @@
                     Atype = 'دقيقة';   
                 }
                 else if(period.type == 'days'){
-                    Atype = 'ايام';   
+                    Atype = 'يوم';   
                 }
                 return Atype;
             }
