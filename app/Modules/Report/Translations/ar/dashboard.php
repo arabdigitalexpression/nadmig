@@ -127,6 +127,16 @@ return [
             "content"               => "Content",
             "description"           => "Description",
             "title"                 => "Title"
+        ],
+        "likedislike" => [
+            "id" => "رقم التسلسل",
+            "like" => 'أعجبني',
+            "dislike" => 'لم يعجبني',
+            "need_to_enhance" => "يحتاج لتحسين",
+            "user_id" => "أسم المستخدم",
+            "organization_id" => "المؤسسة",
+            "created_at" => "أنشئ في",
+            "updated_at" => "عًدل في"  
         ]
     ],
     "menu" => [

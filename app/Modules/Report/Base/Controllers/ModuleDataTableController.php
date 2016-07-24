@@ -56,7 +56,7 @@ abstract class ModuleDataTableController extends DataTableController
 
         $base_columns = array_merge($this->image_columns, $this->columns);
         foreach (array_merge($base_columns, array_keys($this->pluck_columns)) as $column) {
-            $title = trans(studly_case($model).'::dashboard.fields.' . strtolower($model) . '.' . $column);
+            $title = trans('Report::dashboard.fields.' . strtolower($model) . '.' . $column);
             array_push($columns, ['data' => $column, 'name' => $column, 'title' => $title]);
         }
         foreach ($this->common_columns as $column) {

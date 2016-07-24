@@ -5,8 +5,8 @@ use App\Modules\Report\Base\Controllers\ModuleDataTableController;
 use Auth;
 class LikeDislikeDataTable extends ModuleDataTableController {
 
-  protected $columns = ['user_id'];
-
+  protected $columns = ['like', 'dislike', 'need_to_enhance'];
+  protected $pluck_columns = ['user_id' => ['user', 'name'], 'organization_id' => ['organization' , 'name']];
   protected $common_columns = ['created_at', 'updated_at'];
   protected $options = ['show'];
 
