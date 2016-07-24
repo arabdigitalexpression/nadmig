@@ -21,6 +21,7 @@ return [
             "index"                     => "report",
             "show"                      => "Show report"
         ],
+        "trainer" => "تقارير المدربين"
     ],
     "LikeDislikeReport" => [
         "fields" => [
