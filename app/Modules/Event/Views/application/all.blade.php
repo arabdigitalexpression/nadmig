@@ -14,7 +14,7 @@
                 <ul class="space-info">
                     <li><i class="fa fa-calendar" aria-hidden="true"></i> {{ ArabicDate($event->reservation->start_session['start_date']) }} </li>
                     <li><i class="fa fa-clock-o" aria-hidden="true"></i> من {{ ArabicTime($event->reservation->start_session['start_time']) }}
-                    <li>{{ str_limit($event->reservation->description, $limit = 150, $end = '...') }}</li>
+                    <li>{{ str_limit($event->reservation->description, $limit = 50, $end = '...') }}</li>
                 </ul>
                 
             </li>
