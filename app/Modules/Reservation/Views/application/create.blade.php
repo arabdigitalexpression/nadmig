@@ -134,12 +134,13 @@
                     var working_hours = json.working_hours_days;
                     var working_week_days = json.working_week_days;
                     var difference = $(week_days).not(working_week_days).get();
-                    var max_before = json.max_time_before_reservation;
-                    picker.set('min', true);
+                    var max_before = json.max_time_before_reservation;                    
                     @if(Auth::user()->hasRole('admin') && Auth::user()->manageOrganization['id'] == $extra->id)
                         if(max_before.type == 'days'){
                             picker.set('max', parseInt(max_before.period));
                         }
+                    @else
+                        picker.set('min', true);
                     @endif
                     if (!is_data) {
                         picker.clear();
