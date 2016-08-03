@@ -65,6 +65,8 @@ return array(
 
         // Remove multiple dashes or whitespaces
         $string = preg_replace("/[\s-]+/", " ", $string);
+        // Remove #
+        $string = preg_replace("/ #/", "", $string);
 
         // Convert whitespaces and underscore to the given separator
         $string = preg_replace("/[\s_]/", $separator, $string);
