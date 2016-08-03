@@ -139,6 +139,7 @@
                         if(max_before.type == 'days'){
                             picker.set('max', parseInt(max_before.period));
                         }
+                        picker.set('min', false);
                     @else
                         picker.set('min', true);
                     @endif
