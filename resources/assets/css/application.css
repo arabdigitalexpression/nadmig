@@ -197,6 +197,10 @@ body{
 	height: auto;
 	width: 100%;
 }
+.spaces-list li .space-info li p{
+	width: 90%;
+    margin: 10px 0 0 0;
+}
 .spaces-list li .space-info li i{
 	margin-left: 5px;
 }
