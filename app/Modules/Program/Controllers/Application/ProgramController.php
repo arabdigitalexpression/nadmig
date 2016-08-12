@@ -23,7 +23,6 @@ class ProgramController extends ApplicationController {
   public function programs()
   {
   	$programs = Program::orderBy('id', 'desc')->take(10)->get();
-  	dd($programs);
   	foreach ($programs as $program) {
   		$sessions = array();
   		foreach ($program->events as $event) {
