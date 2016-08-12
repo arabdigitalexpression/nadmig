@@ -1,24 +1,26 @@
 @extends('layouts.application')
 
-@section('title'){{ getTitle($school) }}@endsection
-@section('description'){{ getDescription($school) }}@endsection
+@section('title'){{ getTitle('المدارس الصيقية') }}@endsection
 
 @section('content')
-    @if(count($school))
-        <article class="post">
-            <header class="post-header">
-                <div class="post-title">
-                    <h2>{{ $school->title }}</h2>
-                </div>
-            </header>
-            <div class="post-excerpt">
-                {!! $school->content !!}
-            </div>
-            <footer class="post-footer">
-                @if(!empty(Config::get('settings')->disqus_shortname))
-                    <div id="disqus_thread" class="comments"></div>
-                @endif
-            </footer>
-        </article>
+    @if(count($schools))
+        <ul class="spaces-list">
+        @foreach($schools as $school)
+            <li class="panel panel-default panel-orange full">
+                <a href="{{ route('program.page', ['event_slug' => $school->program->slug ]) }}">
+                    <div class="panel-heading">{{ $school->program->name }}</div>
+                </a>   
+                <div style="background-image: url({{ url($school->program->artwork) }});" class="space-icon"> </div>
+                <ul class="space-info">
+{{-- 
+                    <li><i class="fa fa-calendar" aria-hidden="true"></i> من {{ ArabicDate($school->program->start_session['start_date']) }} </li>
+                    <li> إلى {{ ArabicDate($school->program->end_session['start_date']) }} </li> --}}
+                    <li><i class="fa fa-building" aria-hidden="true"></i> {{ $school->organization->name }}</li>
+                    <li>{{ str_limit($school->program->description, $limit = 150, $end = '...') }}</li>
+                </ul>
+                
+            </li>
+        @endforeach
+        </ul>
     @endif
 @endsection

@@ -27,7 +27,7 @@ class School extends Model {
 
 	public function program()
 	{
-	    return $this->hasOne('App\Modules\Program\Models\Program');
+	    return $this->belongsTo('App\Modules\Program\Models\Program');
 	}
 	public function organization()
 	{
