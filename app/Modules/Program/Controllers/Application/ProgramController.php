@@ -20,7 +20,7 @@ class ProgramController extends ApplicationController {
   	// dd($program->toArray());
     return view('Program::application.index', compact('program'));
   }
-  public function list()
+  public function programs()
   {
   	$programs = Program::orderBy('id', 'desc')->take(10)->get();
   	dd($programs);
