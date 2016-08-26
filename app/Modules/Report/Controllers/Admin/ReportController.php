@@ -29,31 +29,6 @@ class ReportController extends ModuleController {
   public function trainerDestroy(TrainerReport $trainer){
    return redirect();
   }
-  // public function store(ReportRequest $request)
-  // {
-  //     return $this->createFlashRedirect(Report::class, $request);
-  // }
-
-  // public function show(Report $report)
-  // {
-  //     return $this->viewPath("show", $report);
-  // }
-
-  // public function edit(Report $report)
-  // {
-  //     return $this->getForm($report);
-  // }
-
-  // public function update(Report $report, ReportRequest $request)
-  // {
-  //     return $this->saveFlashRedirect($report, $request);
-  // }
-
-  // public function destroy(Report $report)
-  // {
-  //     return $this->destroyFlashRedirect($report);
-  // }
-
   ////////////////////////////////////
   //// Space manage 2 functions /////
   //////////////////////////////////
@@ -162,11 +137,14 @@ class ReportController extends ModuleController {
   public function export_page(){
     return view('Report::dashboard.export');
   }
-  public function export($model_name)
+  public function export($model_name, $period, $from_date, $to_date)
   {
     $model = '\App\Modules\Report\Models\\' . $model_name;
-    $data = $model::all();
-
+    if ($period == "all") {
+      $data = $model::all();
+    }else{
+      $data = $model::whereBetween('created_at', [$from_date, $to_date])->get();
+    }
     foreach ($data as $key_1 => $value_1) {
       if ($data[$key_1]['user_id']) {
         $data[$key_1]['user_id'] = $data[$key_1]->user->name;
