@@ -12,6 +12,10 @@ class Attendees extends Model{
 	    return $this->belongsToMany('App\Modules\Event\Models\Event');
 	}
 
+	public function organization()
+	{
+	    return $this->belongsTo('App\Modules\Organization\Models\Organization');
+	}
 	protected $casts = [
 		'hear_about_us' => 'object'
 	];

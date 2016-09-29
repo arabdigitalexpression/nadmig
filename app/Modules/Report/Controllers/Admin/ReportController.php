@@ -137,7 +137,7 @@ class ReportController extends ModuleController {
   public function export_page(){
     return view('Report::dashboard.export');
   }
-  public function export($model_name, $period, $from_date, $to_date)
+  public function export($model_name, $period, $from_date = null, $to_date = null)
   {
     $model = '\App\Modules\Report\Models\\' . $model_name;
     if ($period == "all") {
