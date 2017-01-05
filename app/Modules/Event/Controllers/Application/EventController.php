@@ -4,8 +4,10 @@ use Laracasts\Flash\Flash;
 use App\Base\Controllers\ApplicationController;
 use App\Modules\Event\Models\Event;
 use App\Modules\Apply\Models\Apply;
+use App\Modules\Reservation\Models\Reservation;
 use App\Base\Controllers\LogController;
 use Auth;
+use Input;
 class EventController extends ApplicationController {
 
   public function index(Event $event)
@@ -26,18 +28,42 @@ class EventController extends ApplicationController {
       return view('Event::application.index', compact('event'));
   }
   public function all()
-  {
-  	$events = Event::where('status', 'accepted')->get();
-  	foreach ($events as $event) {
-        $event->reservation;
-        foreach ($event->reservation->sessions->toArray() as $key_1 => $sessions) {
+  {  	
+    $settings = include base_path('./resources/settings.php');
+    $params = Input::get();
+    if(array_key_exists('event_tags', Input::get())){
+      unset($params['start_date']);
+      $et = explode(",", Input::get("event_tags"));
+      $reservations = Reservation::where(function ($query) use($et) {
+                  foreach($et as $item){
+                      if ($item != '') {
+                        $query->orwhere('event_tags', 'like',  '%' . $item .'%');
+                      }
+                  } 
+                  if (Input::get('start_date') != '') {
+                      if (Input::get('expression') == 'or') {
+                        $query->orwhere('start_date', Input::get('start_date'));  
+                      } elseif (Input::get('expression') == 'and') {
+                        $query->where('start_date', Input::get('start_date'));  
+                      }
+                  }
+            })->where('event_type', 'public')->where('status', 'accepted')->paginate(10);
+    }
+    else {
+      unset($params['page']);
+      $reservations = Reservation::Where($params)->where('event_type', 'public')->where('status', 'accepted')->paginate(10);
+    }
+    
+    foreach ($reservations as $reservation) {
+        foreach ($reservation->sessions->toArray() as $key_1 => $sessions) {
             $sessions['start_timestamp'] = strtotime($sessions['start_date']);
         }
-        $sessions = $event->reservation->sessions->toArray();
+        $sessions = $reservation->sessions->toArray();
         $this->sortBy("start_date",$sessions);
-        $event->reservation['start_session'] = $sessions[0];
+        $reservation['start_session'] = $sessions[0];
     }
-    return view('Event::application.all', compact('events'));
+    
+    return view('Event::application.all', [ 'reservations' => $reservations->appends(Input::except('page')), 'event_tags' => $settings['event_tags']]);
   }
   public function apply(Event $event){
     if (Auth::check()) {

@@ -6,6 +6,7 @@ class ReservationsForm extends AdminForm
 {
     public function buildForm()
     {
+        $settings = include base_path('./resources/settings.php');
         $this
             ->add('name', 'text', [
                 'label' => trans('Reservation::application.fields.reservation.name')
@@ -98,6 +99,13 @@ class ReservationsForm extends AdminForm
                 'choices' => $this->getEventtype(),
                 'selected' => $this->event_type,
                 'label' => trans('Reservation::application.fields.reservation.event_type')
+            ]);
+            $this->add('event_tags', 'choice', [
+                'choices' => $settings['event_tags'],
+                'selected' => $this->event_tags,
+                'label' => trans('Reservation::dashboard.fields.reservation.event_tags'),
+                'attr' => ['class' => 'chosen-select chosen-rtl'],
+                'multiple' => true
             ]);
             $this->OptionAndPeriod('dooropen_time', trans('Reservation::application.fields.reservation.dooropen_time'), true, true, true, false, false);
             $this->OptionAndPeriod('dooropen_period', trans('Reservation::application.fields.reservation.dooropen_period'), true, true, true, false, false);

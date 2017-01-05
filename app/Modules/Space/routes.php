@@ -13,6 +13,7 @@ Route::group(['prefix' => 'api', 'module' => 'Space', 'namespace' => 'Api', 'mid
     // get fees and time for the space
      Route::get('space/{space}', ['as' => 'space.fees_time', 'uses' => 'SpaceController@retrive']);
      Route::get('space/{space}/{year}/{month}/{day}', ['as' => 'space.date', 'uses' => 'SpaceController@date']);
+     Route::get('space/{space}/{year}/{month}/{day}/{time}/{period}', ['as' => 'space.date', 'uses' => 'SpaceController@check_date']);
 });
 
 // Admin routes

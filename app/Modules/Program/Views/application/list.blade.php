@@ -21,5 +21,16 @@
             </li>
         @endforeach
         </ul>
+    @else
+        <center><h3 class="no-result">لا توجد برامج!</h3></center>
     @endif
+    <ul class="pager">
+            @php($meta = $programs->toArray())
+            @if($meta['prev_page_url'])
+                <li class="previous"><a href="{{$meta['prev_page_url']}}">السابق <span aria-hidden="true">&larr;</span> </a></li>    
+            @endif
+            @if($meta['next_page_url'])
+                <li class="next"><a href="{{$meta['next_page_url']}}"><span aria-hidden="true">&rarr;</span> التالي </a></li>
+            @endif
+         </ul>
 @endsection

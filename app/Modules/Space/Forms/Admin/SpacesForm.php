@@ -9,6 +9,7 @@ class SpacesForm extends AdminForm
 {
     public function buildForm()
     {
+        $settings = include base_path('./resources/settings.php');
         $this
             ->add('space_info', 'static', [
 
@@ -91,12 +92,13 @@ class SpacesForm extends AdminForm
             $this->WeekDaysForm();
         $this
             ->add('space_type', 'choice', [
-                'choices' => $this->getSpaceType(),
+                'choices' => $settings['space_type'],
+                'empty_value' => '=== نوع المساحة ===',
                 'selected' => $this->space_type,
                 'label' => trans('Space::dashboard.fields.space.space_type'),
             ])
             ->add('space_equipment', 'choice', [
-                'choices' => $this->getSpaceEquipment(),
+                'choices' => $settings['space_equipment'],
                 'selected' => $this->space_equipment,
                 'label' => trans('Space::dashboard.fields.space.space_equipment'),
                 'attr' => ['class' => 'chosen-select chosen-rtl'],
@@ -179,7 +181,7 @@ class SpacesForm extends AdminForm
     }
     protected function getSpaceType(){
         return array(
-            "libarary" => trans('Space::dashboard.fields.space.libarary'),
+            "library" => trans('Space::dashboard.fields.space.libarary'),
             "cinema" => trans('Space::dashboard.fields.space.cinema'),
             "sound_studio" => trans('Space::dashboard.fields.space.sound_studio'),
             "lecture_hole" => trans('Space::dashboard.fields.space.lecture_hole'), 

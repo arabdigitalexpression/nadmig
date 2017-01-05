@@ -2,7 +2,7 @@
 
 use App\Base\Controllers\ApplicationController;
 use App\Modules\Program\Models\Program;
-
+use Input;
 class ProgramController extends ApplicationController {
 
   public function index(Program $program)
@@ -22,7 +22,7 @@ class ProgramController extends ApplicationController {
   }
   public function programs()
   {
-  	$programs = Program::orderBy('id', 'desc')->take(10)->get();
+  	$programs = Program::orderBy('id', 'desc')->paginate(10);
   	foreach ($programs as $program) {
   		$sessions = array();
   		foreach ($program->events as $event) {
@@ -40,6 +40,7 @@ class ProgramController extends ApplicationController {
   		$program['start_session'] = array_shift($sessions);
 		$program['end_session'] = array_pop($sessions);
   	}
+    $programs->appends(Input::except('page'));
   	return view('Program::application.list', compact('programs'));
   }
 }

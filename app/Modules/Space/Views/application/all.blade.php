@@ -3,6 +3,34 @@
 @section('title'){{ getTitle('المساحات') }}@endsection
 
 @section('content')
+    {{-- {{ dd($spaces->toArray())}} --}}
+    <form action="" class="form-inline filter">
+        <div class="form-group">
+            <label for="space_type">النوع: </label>
+            <select name="space_type" class="form-control space_type">
+                <option value="">=== نوع المساحة ===</option>
+                @foreach($space_type as $key => $type)
+                    <option value="{{$key}}">{{$type}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
+            <select name="expression" class="form-control expression">
+                <option value="or">إو</option>
+                <option value="and">و</option>
+            </select>
+        </div>
+         <div class="form-group">
+            <label for="space_equipment">معدات: </label>
+            <select multiple class="form-control chosen-select chosen-rtl">
+                @foreach($space_equipment as $key => $type)
+                    <option value="{{$key}}">{{$type}}</option>
+                @endforeach
+            </select>
+            <input type="hidden" name="space_equipment" class="space_equipment">
+        </div>
+        <input type="submit" name="" class="btn-submit btn btn-success pull-left" value="رشح">
+    </form>
     @if(count($spaces))
         <ul class="spaces-list">
         @foreach($spaces as $space)
@@ -28,5 +56,45 @@
             </li>
         @endforeach
         </ul>
+    @else
+        <center><h3 class="no-result">لا توجد مساحات!</h3></center>
     @endif
+    <ul class="pager">
+        @php($meta = $spaces->toArray())
+        @if($meta['prev_page_url'])
+            <li class="previous"><a href="{{$meta['prev_page_url']}}">السابق <span aria-hidden="true">&larr;</span> </a></li>    
+        @endif
+        @if($meta['next_page_url'])
+            <li class="next"><a href="{{$meta['next_page_url']}}"><span aria-hidden="true">&rarr;</span> التالي </a></li>
+        @endif
+     </ul>
+    <script type="text/javascript">
+        $(function(){
+            @if (Input::get('space_type')) 
+                $('.space_type option[value={{Input::get('space_type')}}]').attr('selected','selected');
+            @endif
+            @if (Input::get('expression')) 
+                $('.expression option[value={{Input::get('expression')}}]').attr('selected','selected');
+            @endif
+            var space_equipment = "{!! Input::get('space_equipment') !!}".split(",");
+            space_equipment.forEach(function(sq){
+                if (sq != '') $('.chosen-select option[value='+sq+']').attr('selected','selected');
+            })
+            $('.filter').on('submit',function(e){
+                e.preventDefault();
+                var selMulti = $.map($(".chosen-select option:selected"), function (el, i) {
+                    return $(el).val();
+                });
+                $('.space_equipment').val(selMulti);
+                e.currentTarget.submit();
+            })
+            $(".chosen-select").chosen({width: "auto", placeholder_text_multiple: "قم بأختيار تجهيزات المساحة"});
+        })
+    </script>
+    <style type="text/css">
+        .chosen-container {
+            min-width: 200px;
+        }
+    </style>
 @endsection
+

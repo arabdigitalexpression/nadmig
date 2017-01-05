@@ -22,3 +22,4 @@ $(function() {
         $(this).parent("p").append($("<div></div>").addClass("flex-video").append($(this)));
     });
 });
+     

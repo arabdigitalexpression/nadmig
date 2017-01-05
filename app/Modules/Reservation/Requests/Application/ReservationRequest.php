@@ -25,6 +25,7 @@ class ReservationRequest extends Request {
             'event_type' => 'required',
             'dooropen_time' => 'required',
             'dooropen_period' => 'required',
+            'event_tags' => 'required',
             'links' => 'sometimes',
             'apply' => 'sometimes',
             'apply_cost' => 'sometimes',

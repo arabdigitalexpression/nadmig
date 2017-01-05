@@ -10,7 +10,8 @@
     <div class="panel-group" id="accordion" aria-multiselectable="true" data-prototype="{{ form_row($form->session->prototype()) }}">
         <div class="panel panel-default template" style="display: none;">
             <div class="panel-heading"> 
-
+                {{-- clone icon --}}
+            <span class="duplicate-session pull-left "><i class="fa fa-clone" aria-hidden="true"></i></span>
               <h4 class="panel-title">
                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true">
                   Collapsible Group Item #1 (template panel)
@@ -34,6 +35,7 @@
     <script src="{{ url( 'packages/tinymce/tinymce.min.js' ) }}" type="text/javascript"></script>
     <script type="text/javascript">
         $(function() {
+            $(".chosen-select").chosen({width: "100%", placeholder_text_multiple: "قم بأختيار نوع الفاعلية"});
             // apply check action
             $("#apply").change(function() {
                 if(this.checked) {
@@ -75,11 +77,110 @@
                     $(this).parents('.panel').get(0).remove();
                 }
             });
+            $(document).on('click', '.duplicate-session', function () {
+                let n = $(this).parent('.panel-heading').parent('.panel').find('.panel-collapse').attr('id');
+                if ($('#start_date_'+n).val() != "" && $('#start_time_'+n).val() != "" && $('#period_period_'+n).val() != "") {
+                    $('#duplicate-session .content input[name=number]').val(n);
+                    $('#duplicate-session').modal('toggle');
+                }else {
+                    alert("آضف يوم و ساعة و فترة بداية الجلسة لكي نتمكن من نسخها")
+                }
+            });
+            $(document).on('click', '.duplicate-action', function () {
+                let n = $('input[name=number]').val();
+                for (var i = 1; i <= $('input[name=duplocation-number]').val(); i++){
+                    let plus = i;
+                    var session = {};
+                    var space = $('#space_select_'+n+' option:selected').val();
+                    var duplocation_period = $('#duplocation-period option:selected').val();
+                    if (duplocation_period == 'every-day') {
+                        let date = moment($('#start_date_'+n).val(), 'YYYY/MM/DD').add(plus, 'days').format("YYYY/MM/DD");
+                        let time = $('#start_time_'+n).val();
+                        let period_type = $('#period_type_'+n).val();
+                        let period_period = $('#period_period_'+n).val();
+                        $.getJSON('/api/space/' + space + '/' + date + '/' + time + '/' + period_period  , function( json ) {
+                            if (json.available) {
+                                session.start_date = moment($('#start_date_'+n).val(), 'YYYY/MM/DD').add(plus, 'days').format("YYYY/MM/DD");
+                                console.log(session.start_date);
+                                session.duplicated = true;
+                                session.start_time = time;
+                                session.period = {period: period_period, type: period_type}
+                                session.name = $('#name_'+n).val()
+                                session.excerpt = $('#'+n+' #excerpt').val()
+                                session.fees = $('#fees_'+n).val()
+                                session.description = $('#description_'+n).val()
+                                new_session(session);
+                            }
+                            else {
+                                alert("التاريخ " + date + " غير متاح!");
+                            }
+                        });
+                    }
+                    else if (duplocation_period == 'every-week') {
+                        let date = moment($('#start_date_'+n).val(), 'YYYY/MM/DD').add(plus, 'weeks').format("YYYY/MM/DD");
+                        let time = $('#start_time_'+n).val();
+                        let period_type = $('#period_type_'+n).val();
+                        let period_period = $('#period_period_'+n).val();
+                        $.getJSON('/api/space/' + space + '/' + date + '/' + time + '/' + period_period  , function( json ) {
+                            if (json.available) {
+                                session.start_date = moment($('#start_date_'+n).val(), 'YYYY/MM/DD').add(plus, 'weeks').format("YYYY/MM/DD");
+                                session.duplicated = true;
+                                session.start_time = time;
+                                session.period = {period: period_period, type: period_type}
+                                session.name = $('#name_'+n).val()
+                                session.excerpt = $('#'+n+' #excerpt').val()
+                                session.fees = $('#fees_'+n).val()
+                                session.description = $('#description_'+n).val()
+                                new_session(session);
+                            }
+                            else {
+                                alert("التاريخ " + date + " غير متاح!");
+                            }
+                        });
+                    }
+                    else if (duplocation_period == 'every-month') {
+                        let date = moment($('#start_date_'+n).val(), 'YYYY/MM/DD').add(plus, 'months').format("YYYY/MM/DD");
+                        let time = $('#start_time_'+n).val();
+                        let period_type = $('#period_type_'+n).val();
+                        let period_period = $('#period_period_'+n).val();
+                        $.getJSON('/api/space/' + space + '/' + date + '/' + time + '/' + period_period  , function( json ) {
+                            if (json.available) {
+                                session.start_date = moment($('#start_date_'+n).val(), 'YYYY/MM/DD').add(plus, 'months').format("YYYY/MM/DD");
+                                session.duplicated = true;
+                                session.start_time = time;
+                                session.period = {period: period_period, type: period_type}
+                                session.name = $('#name_'+n).val()
+                                session.excerpt = $('#'+n+' #excerpt').val()
+                                session.fees = $('#fees_'+n).val()
+                                session.description = $('#description_'+n).val()
+                                new_session(session);
+                            }
+                            else {
+                                alert("التاريخ " + date + " غير متاح!");
+                            }
+                        });
+                    }
+                }
+                $('#duplicate-session').modal('toggle');
+            
+            })
+            function check_date(space_id, date, time, period, callback){
+                $.getJSON('/api/space/' + space_id + '/' + date + '/' + time + '/' + period  , function( json ) {
+                    if (json == "") {
+                        callback(false, null)
+                    }
+                    callback(true, json)
+                });
+            }
             function new_session(data){
-
+                console.log(data);
                 var $newPanel = $template.clone();
                 $newPanel.find(".collapse").removeClass("in");
-                $newPanel.find(".accordion-toggle").attr("href", "#" + (++hash)).text("الجلسة # " + hash);
+                if (data.duplicated) {
+                    $newPanel.find(".accordion-toggle").attr("href", "#" + (++hash)).text("الجلسة # " + hash + " (" + data.start_date + ")");
+                } else {
+                    $newPanel.find(".accordion-toggle").attr("href", "#" + (++hash)).text("الجلسة # " + hash);
+                }
                 var count = $("#accordion").children().length;
                 var proto = $("#accordion").data('prototype').replace(/__NAME__/g, count)
                                 .replace(/\[start_time\[date\]\]/g, "[start_time][date]")
@@ -106,7 +207,6 @@
                             }
                             
                         }
-
                     })
                     if(data.status == 'pending'){
                         $newPanel.find(".panel-title").before('<i style="color:#898989;" class="fa fa-cog pull-left" aria-hidden="true"></i><span class="glyphicon glyphicon-remove-circle pull-left "></span>');  
@@ -115,8 +215,7 @@
                         $newPanel.find(".panel-body :input").attr("disabled", true);
                         $newPanel.find(".panel-body #id:input").attr("disabled", false);
                         $newPanel.find(".panel-title").before('<i style="color:#39b54a;" class="fa fa-check pull-left" aria-hidden="true"></i>');
-                    }
-                    $newPanel.find(".accordion-toggle").text($newPanel.find('#name').val());
+                    }   
                 }else{
                     editor_init("#description_" + hash);
                     $newPanel.find("#name").val("الجلسة # " + hash);
@@ -125,6 +224,7 @@
                 $newPanel.find("#period_period").after( '<span class="help-block"></span>' );
                 // rename the fields for the pickers
                 $newPanel.find("#start_date").attr("id", "start_date_" + hash);
+                $newPanel.find("#name").attr("id", "name_" + hash);
                 $newPanel.find("#start_time").attr("id", "start_time_" + hash);
                 $newPanel.find("#description").attr("id", "description_" + hash);
                 $newPanel.find("#space_select").attr("id", "space_select_" + hash);
@@ -191,7 +291,7 @@
             function date(){
                 var $input = $('#start_date_' + hash).pickadate({
                     firstDay: 0,
-                    format: 'dd/mm/yyyy',
+                    format: 'yyyy/mm/dd',
                     min: Date.now()
                 });
                 return $input.pickadate('picker');
@@ -302,3 +402,27 @@
         });
     </script>
 @endsection
+<div class="modal fade" tabindex="-1" role="dialog" id="duplicate-session" aria-labelledby="duplicate-session">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header"> <button class="pull-left" style="background: none; border: none;" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button> <h4 class="modal-title">نسخ الجلسة</h4> </div>
+      <div class="content" style="padding: 0 15px;">
+        <div class="form-group">
+            <label for="duplocation-period" class="control-label">فترة التكرار</label>
+            <select id="duplocation-period" name="duplocation-period" style="width: 100%;">
+                <option value="every-day">كل يوم</option>
+                <option value="every-week">كل اسبوع</option>
+                <option value="every-month">كل شهر</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="duplocation-number" class="control-label">عدد مرات التكرار</label>
+            <input class="form-control" id="duplocation-number" value="1" name="duplocation-number" type="number">
+        </div>
+        <input type="hidden" name="number" value="">
+      </div>
+      <div class="modal-footer"> <button class="duplicate-action btn-primary btn">نسخ</button> </div>
+    </div>
+  </div>
+</div>
+
