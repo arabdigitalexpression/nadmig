@@ -156,7 +156,8 @@ body{
 	text-align: right
 }
 /* Spaces */
-.spaces-list{
+.spaces-list,
+.spaces-list-small{
 	list-style: none;
 	float: right;
 	padding: 0;
@@ -168,10 +169,12 @@ body{
 	float: right;
 	height: 390px;
 }
-.spaces-list li a{
+.spaces-list li a,
+.spaces-list-small li a{
 	text-decoration: none;
 }
-.spaces-list li a .panel-heading i{
+.spaces-list li a .panel-heading i,
+.spaces-list-small li a .panel-heading i{
 	font-size: 10px;
 	
 }
@@ -184,31 +187,65 @@ body{
 	-moz-background-size: cover;
 	-o-background-size: cover;
     background-size: cover;
+
 }
 .spaces-list li .space-info{
 	list-style: none;
 	padding: 5px 10px 0;
 	float: right;
+	display: inline-block;
 }
-.spaces-list li .space-info li{
+.spaces-list li .space-info li,
+.spaces-list-small li .space-info li{
 	font-size: 14px;
 	color: #000;
 	margin: 5px;
 	height: auto;
 	width: 100%;
 }
-.spaces-list li .space-info li p{
+.spaces-list li .space-info li p,
+.spaces-list-small li .space-info li p{
 	width: 90%;
     margin: 10px 0 0 0;
 }
-.spaces-list li .space-info li i{
+.spaces-list li .space-info li i,
+.spaces-list-small li .space-info li i{
 	margin-left: 5px;
 }
-.spaces-list li .space-info li a{
+.spaces-list li .space-info li a,
+.spaces-list-small li .space-info li a{
 	color: #000;
 }
 .panel-group .panel-heading span{
 	margin-right: 5px;
+}
+
+.spaces-list-small li {
+	min-width: 250px;
+	width: 30%;
+	margin: 0  0 20px 20px;
+	float: right;
+	height: 143px;
+}
+
+.spaces-list-small li .space-icon{
+	height: 100px;
+    width: 40%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    -webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+    background-size: cover;
+    float: right;
+}
+.spaces-list-small li .space-info{
+	list-style: none;
+	padding: 5px 10px 0;
+	float: left;
+	display: inline-block;
+	width: 59%;
+	margin-top: 15px;
 }
 /* space page */
 .page h3{
