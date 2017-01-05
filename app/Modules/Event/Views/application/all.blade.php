@@ -3,21 +3,21 @@
 @section('title'){{ getTitle('الفاعليات') }}@endsection
 
 @section('content')
+    <form action="" class="form-inline filter">
+         <div class="form-group">
+            <label for="event_tags">نوع الفاعلية    : </label>
+            <select multiple class="form-control chosen-select chosen-rtl">
+                @foreach($event_tags as $key => $type)
+                    <option value="{{$key}}">{{$type}}</option>
+                @endforeach
+            </select>
+            <input type="hidden" name="event_tags" class="event_tags">
+        </div>
+        <input type="submit" name="" class="btn-submit btn btn-success pull-left" value="رشح">
+    </form>
     @if(count($reservations))
-        <form action="" class="form-inline filter">
-             <div class="form-group">
-                <label for="event_tags">نوع الفاعلية    : </label>
-                <select multiple class="form-control chosen-select chosen-rtl">
-                    @foreach($event_tags as $key => $type)
-                        <option value="{{$key}}">{{$type}}</option>
-                    @endforeach
-                </select>
-                <input type="hidden" name="event_tags" class="event_tags">
-            </div>
-            <input type="submit" name="" class="btn-submit btn btn-success pull-left" value="رشح">
-        </form>
         <ul class="spaces-list">
-        @foreach($reservations as $reservation)
+        @foreach($reservations->sortBy('start_date')->reverse() as $reservation)
             <li class="panel panel-default panel-orange">
                 <a href="{{ route('event.page', ['event_slug' => $reservation->event->slug ]) }}">
                     <div class="panel-heading">{{ $reservation->name }}</div>
@@ -28,12 +28,9 @@
                     <li><i class="fa fa-clock-o" aria-hidden="true"></i> من {{ ArabicTime($reservation->start_session['start_time']) }}
                     <p>{{ str_limit($reservation->description, $limit = 100, $end = '...') }}</p>
                 </ul>
-                
             </li>
         @endforeach
         </ul>
-
-        
     @else
         <center><h3 class="no-result">لا توجد فاعليات!</h3></center>
     @endif

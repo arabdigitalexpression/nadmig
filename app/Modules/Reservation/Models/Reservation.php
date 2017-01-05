@@ -12,7 +12,7 @@ class Reservation extends Model{
 
 	public function sessions()
     {
-        return $this->hasMany('App\Modules\Session\Models\Session');
+        return $this->hasMany('App\Modules\Session\Models\Session')->orderBy('start_date');
     }
     public function organization()
     {

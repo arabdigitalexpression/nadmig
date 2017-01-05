@@ -47,7 +47,7 @@ class EventController extends ApplicationController {
                         $query->where('start_date', Input::get('start_date'));  
                       }
                   }
-            })->where('event_type', 'public')->where('status', 'accepted')->paginate(10);
+            })->where('event_type', 'public')->where('status', 'accepted')->orderBy('sessions.start_date', 'desc')->paginate(10);
     }
     else {
       unset($params['page']);
@@ -55,14 +55,11 @@ class EventController extends ApplicationController {
     }
     
     foreach ($reservations as $reservation) {
-        foreach ($reservation->sessions->toArray() as $key_1 => $sessions) {
-            $sessions['start_timestamp'] = strtotime($sessions['start_date']);
-        }
-        $sessions = $reservation->sessions->toArray();
-        $this->sortBy("start_date",$sessions);
-        $reservation['start_session'] = $sessions[0];
+        $reservation['start_date'] = $reservation->sessions[0]['start_date'];
+        $reservation['start_session'] = $reservation->sessions[0];
     }
-    
+    // $reservations->orderBy('start_date', 'desc')->toArray();
+    // dd($reservations->toArray());
     return view('Event::application.all', [ 'reservations' => $reservations->appends(Input::except('page')), 'event_tags' => $settings['event_tags']]);
   }
   public function apply(Event $event){
