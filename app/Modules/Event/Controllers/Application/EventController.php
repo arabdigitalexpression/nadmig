@@ -4,6 +4,7 @@ use Laracasts\Flash\Flash;
 use App\Base\Controllers\ApplicationController;
 use App\Modules\Event\Models\Event;
 use App\Modules\Apply\Models\Apply;
+use App\Modules\Space\Models\Space;
 use App\Modules\Reservation\Models\Reservation;
 use App\Base\Controllers\LogController;
 use Auth;
@@ -31,8 +32,12 @@ class EventController extends ApplicationController {
   {  	
     $settings = include base_path('./resources/settings.php');
     $params = Input::get();
-    if(array_key_exists('event_tags', Input::get())){
-      unset($params['start_date']);
+    if(isset($params['event_tags']) && $params['event_tags'] != ''){
+      $organizations = [];
+      if (isset($params['governorate'])) {
+        $spaces = Space::where('governorate', $params['governorate'])->get();
+        $organizations = array_unique($spaces->pluck('organization_id')->toArray());
+      }
       $et = explode(",", Input::get("event_tags"));
       $reservations = Reservation::where(function ($query) use($et) {
                   foreach($et as $item){
@@ -47,19 +52,19 @@ class EventController extends ApplicationController {
                         $query->where('start_date', Input::get('start_date'));  
                       }
                   }
-            })->where('event_type', 'public')->where('status', 'accepted')->orderBy('sessions.start_date', 'desc')->paginate(10);
+            })->whereIn('organization_id', $organizations)->where('event_type', 'public')->where('status', 'accepted')->orderBy('sessions.start_date', 'desc')->paginate(10);
     }
-    else {
+    else if (isset($params['governorate'])){
       unset($params['page']);
-      $reservations = Reservation::Where($params)->where('event_type', 'public')->where('status', 'accepted')->paginate(10);
+      $spaces = Space::where('governorate', $params['governorate'])->get();
+      $reservations = Reservation::whereIn('organization_id', array_unique($spaces->pluck('organization_id')->toArray()))->where('event_type', 'public')->where('status', 'accepted')->paginate(10);
+    } else {
+      $reservations = Reservation::Where('event_type', 'public')->where('status', 'accepted')->paginate(10);
     }
-    
     foreach ($reservations as $reservation) {
         $reservation['start_date'] = $reservation->sessions[0]['start_date'];
         $reservation['start_session'] = $reservation->sessions[0];
     }
-    // $reservations->orderBy('start_date', 'desc')->toArray();
-    // dd($reservations->toArray());
     return view('Event::application.all', [ 'reservations' => $reservations->appends(Input::except('page')), 'event_tags' => $settings['event_tags']]);
   }
   public function apply(Event $event){

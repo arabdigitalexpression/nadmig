@@ -4,6 +4,15 @@
 
 @section('content')
     <form action="" class="form-inline filter">
+        <div class="form-group pull-right">
+            <label for="governorate">المحافظة : </label>
+            <select name="governorate" class="form-control governorate">
+                @php($govs = GetGovArabic())
+                @foreach($govs as $key => $gov)
+                    <option value="{{$key}}">{{$gov}}</option>
+                @endforeach
+            </select>
+        </div>
          <div class="form-group pull-right">
             <label for="event_tags">نوع الفاعلية    : </label>
             <select multiple class="form-control chosen-select chosen-rtl">
@@ -46,6 +55,9 @@
      <script type="text/javascript">
         $(function(){
             var event_tags = "{!! Input::get('event_tags') !!}".split(",");
+            @if (Input::get('governorate')) 
+                $('.governorate option[value={{Input::get('governorate')}}]').attr('selected','selected');
+            @endif
             event_tags.forEach(function(sq){
                 if (sq != '') $('.chosen-select option[value='+sq+']').attr('selected','selected');
             })

@@ -238,6 +238,43 @@ if (!function_exists('GovArabic')) {
         }
 
 }
+if (!function_exists('GetGovArabic')) {
+        function GetGovArabic(){
+            $governorate =     array(
+                'alexandria' => 'الإسكندرية',
+                'ismailia' => 'الإسماعيلية',
+                'aswan' => 'أسوان',
+                'asyut' => 'أسيوط',
+                'luxor' => 'الأقصر',
+                'red_sea' => 'البحر الأحمر',
+                'beheira' => 'البحيرة',
+                'beni_suef' => 'بني سويف',
+                'port_said' => 'بورسعيد',
+                'south_sinai' => 'جنوب سيناء',
+                'giza' => 'الجيزة',
+                'dakahlia' => 'الدقهلية',
+                'damietta' => 'دمياط',
+                'sohag' => 'سوهاج',
+                'suez' => 'السويس',
+                'sharqia' => 'الشرقية',
+                'north_sinai' => 'شمال سيناء',
+                'gharbia' => 'الغربية',
+                'faiyum' => 'الفيوم',
+                'cairo' => 'القاهرة',
+                'qalyubia' => 'القليوبية',
+                'qena' => 'قنا',
+                'kafr_el_sheikh' => 'كفر الشيخ',
+                'matruh' => 'مطروح',
+                'monufia' => 'المنوفية',
+                'minya' => 'المنيا',
+                'new_valley' => 'الوادي الجديد',
+                'cyber_land' => 'أرض الفضاء'
+            );
+            return $governorate;
+        }
+
+}
+
 if (!function_exists('TrainerReportAnswer')) {
     function TrainerReportAnswer($key){
         $choose = [ 1 => 'بنسبة ضعيفة', 2 => 'بنسبة متوسطة', 3 => 'بنسبة كبيرة' ];

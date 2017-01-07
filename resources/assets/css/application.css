@@ -374,7 +374,7 @@ body{
 /*Filter*/
 .filter {
 	margin-bottom: 15px;
-	float: right;
+	display: inline-block;
 }
 .filter .form-group {
 	margin-left: 30px;
