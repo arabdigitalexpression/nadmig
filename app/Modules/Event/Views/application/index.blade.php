@@ -113,7 +113,7 @@
             </header>
             <p>{{ $event->reservation->description }}</p>
             <h4>الجلسات</h4>
-            <ul class="spaces-list">
+            <ul class="spaces-list sessions-list">
             @foreach($event->reservation->sessions as $session)
                 <li class="panel panel-default panel-orange">
                 <a href="{{ route('session.show', ['session_slug' => $session['slug'], 'event_slug' => $event->slug ])}}">
