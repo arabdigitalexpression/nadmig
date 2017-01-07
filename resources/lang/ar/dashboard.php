@@ -36,7 +36,22 @@ return [
     "fields" => [
         "created_at"                => "أُنشئ فى",
         "dashboard" => [
+            'organizations'          => "عدد المؤسسات",
             'spaces'          => "عدد المساحات",
+            'reservations'    => [
+                'count' => "عدد الحجوزات",
+                'title' => "أخر الحجوزات",
+                'name' => "الأسم",
+                'status' => "الحالة",
+                'created_at' => 'أَنشئ قى'
+            ],
+            'events'          => "عدد الفاعليات",
+            'logs'      => [
+                'title' => "أخر النشاطات",
+                'text' => 'نشاطات',
+                'created_at' => 'أَنشئ قى'
+            ],
+            'more' => 'المزيد',
             'bounce_rate'           => "Bounce rate",
             'browsers'              => "Browser",
             'chart_country'         => "Country",
@@ -56,19 +71,6 @@ return [
             'visitors'              => "Visitors",
             'visits'                => "Visits",
             'world_visitors'        => "Visitor distribution: World"
-        ],
-        "language" => [
-            "code"                  => "Code",
-            "flag"                  => "Flag",
-            "site_description"      => "Site Description",
-            "site_title"            => "Site Title",
-            "title"                 => "Title"
-        ],
-        "page" => [
-            "content"               => "Content",
-            "description"           => "Description",
-            "language_id"           => "Language",
-            "title"                 => "Title",
         ],
         "published_at"              => "نُشر في",
         "read_count"                => "Read Count",
@@ -116,11 +118,6 @@ return [
             "root"                  => "التصنيفات"
         ],
         "dashboard"                 => "لَوْحَةُ التَّحكُّمِ",
-        "language" => [
-            "add"                   => "Add a Language",
-            "all"                   => "All Languages",
-            "root"                  => "Languages"
-        ],
         "page" => [
             "add"                   => "Add a Page",
             "all"                   => "All Pages",

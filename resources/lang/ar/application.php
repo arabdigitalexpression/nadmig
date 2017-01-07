@@ -17,8 +17,8 @@ return [
         "trainer" => "المدرب"
     ],
     "title" => "نـدمـج",
-    "home"          => "Home",
-    "read_more"     => "Read More", 
+    "home"          => "الصفحة الرئيسية",
+    "more"     => " المزيد", 
     "button"        => [
                         "know_less" => "فصّل",
                         "know_more" => "أوجز"
