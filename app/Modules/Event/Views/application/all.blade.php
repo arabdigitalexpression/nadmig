@@ -4,7 +4,7 @@
 
 @section('content')
     <form action="" class="form-inline filter">
-         <div class="form-group">
+         <div class="form-group pull-right">
             <label for="event_tags">نوع الفاعلية    : </label>
             <select multiple class="form-control chosen-select chosen-rtl">
                 @foreach($event_tags as $key => $type)
@@ -13,7 +13,7 @@
             </select>
             <input type="hidden" name="event_tags" class="event_tags">
         </div>
-        <input type="submit" name="" class="btn-submit btn btn-success pull-left" value="رشح">
+        <input type="submit" name="" class="btn-submit btn btn-success pull-right" style="font-family: FontAwesome;"  value="&#xf0b0 رشح">
     </form>
     @if(count($reservations))
         <ul class="spaces-list">

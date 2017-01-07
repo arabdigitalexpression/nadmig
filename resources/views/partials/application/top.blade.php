@@ -37,7 +37,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img class="pp" src="{{ url(Auth::user()->picture)}}"><span class="name">{{ Auth::user()->name }}</span> <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            @role(['admin','organization_manager'])
+                            @role(['admin','organization_manager', 'space_manager'])
                                 <li><a href="{{ url('/dashboard') }}">{{ trans('application.menu.dashboard') }}</a>
                             @endrole
                             @if (Auth::user()->trainer)

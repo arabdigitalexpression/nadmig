@@ -99,7 +99,6 @@
                         $.getJSON('/api/space/' + space + '/' + date + '/' + time + '/' + period_period  , function( json ) {
                             if (json.available) {
                                 session.start_date = moment($('#start_date_'+n).val(), 'YYYY/MM/DD').add(plus, 'days').format("YYYY/MM/DD");
-                                console.log(session.start_date);
                                 session.duplicated = true;
                                 session.start_time = time;
                                 session.period = {period: period_period, type: period_type}
@@ -171,10 +170,9 @@
                 });
             }
             function new_session(data){
-                console.log(data);
                 var $newPanel = $template.clone();
                 $newPanel.find(".collapse").removeClass("in");
-                if (data.duplicated) {
+                if ( data && data.duplicated) {
                     $newPanel.find(".accordion-toggle").attr("href", "#" + (++hash)).text("الجلسة # " + hash + " (" + data.start_date + ")");
                 } else {
                     $newPanel.find(".accordion-toggle").attr("href", "#" + (++hash)).text("الجلسة # " + hash);
@@ -192,7 +190,6 @@
                     $.each(data, function(index, value){
                         if(typeof value === 'object' && value != null){
                             $.each(value, function(key, val){
-                                console.log(key, val);
                                 $newPanel.find("#start_" + key).val(val);
                                 $newPanel.find("#period_" + key).val(val);
                             });
@@ -280,7 +277,6 @@
                 $('.agreement_text_'+hash).popover();
             }
             function date(){
-                console.log($('#start_date_' + hash).val())
                 var $input = $('#start_date_' + hash).pickadate({
                     firstDay: 0,
                     format: 'yyyy/mm/dd',

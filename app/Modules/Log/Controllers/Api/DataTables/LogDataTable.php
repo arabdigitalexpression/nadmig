@@ -5,7 +5,7 @@ use App\Modules\Log\Base\Controllers\ModuleDataTableController;
 
 class LogDataTable extends ModuleDataTableController {
 
-  protected $columns = ['text'];
+  protected $columns = ['text', 'ip_address'];
   protected $ops = false;
   protected $common_columns = ['created_at'];
   protected $options = [];

@@ -31,7 +31,7 @@ class Space extends Model {
     public function sessions()
     {
         return $this->hasMany('App\Modules\Session\Models\Session');
-    }
+    } 
 
     protected $casts = [
         'links' => 'array',
