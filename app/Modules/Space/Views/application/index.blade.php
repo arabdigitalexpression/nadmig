@@ -54,11 +54,11 @@
             <h3>{{ trans('Space::application.page.events') }}</h3>
             <ul class="spaces-list">
             @if($space->organization->reservations)
-                @foreach($space->organization->reservations as $reservation)
+                @foreach($space->organization->reservations->sortBy('start_date')->reverse() as $reservation)
                     @if($reservation->start_session)
                         <li class="panel panel-default panel-orange">
                             <a href="{{ route('event.page', ['event_slug' => $reservation->event->toArray()['slug'] ]) }}">
-                                <div class="panel-heading">{{ $reservation->name }}</div>
+                                <div class="panel-heading">{{ str_limit($reservation->name, $limit = 30, $end = '...') }}</div>
                             </a>   
                                 <img src="{{ url($reservation->artwork) }}" class="space-icon img-responsive">
                             <ul class="space-info">
@@ -71,7 +71,7 @@
                                     {{ ArabicTime(\Carbon\Carbon::createFromFormat('h:i a', $reservation->start_session['start_time'])->addHours(intval($reservation->start_session['period']->period))->format('h:i A')) }}</li>
                                 @endif
                                 
-                                <li>{{ str_limit($reservation->description, $limit = 150, $end = '...') }}</li>
+                                <li>{{ str_limit($reservation->description, $limit = 85, $end = '...') }}</li>
                             </ul>
                         </li>
                     @endif
