@@ -88,7 +88,7 @@ public function create($organization_slug){
     return view($path, compact('form', 'extra'));
 }
 public function store(ReservationRequest $request, $organization_slug)
-{	
+{
     if(Auth::check()){
         $sessions = $request['session'];
         if(!$sessions){

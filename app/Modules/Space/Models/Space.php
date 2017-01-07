@@ -33,6 +33,16 @@ class Space extends Model {
         return $this->hasMany('App\Modules\Session\Models\Session');
     } 
 
+    protected static function boot()
+    {
+        parent::boot();
+        Space::creating(function ($space) {
+            if(!$space->logo){
+                $space->logo = "/files/space_picture.png";
+            }
+        });
+    }
+
     protected $casts = [
         'links' => 'array',
         'working_week_days' => 'object',
