@@ -68,6 +68,7 @@ elixir(function(mix) {
     mix
         .less('admin.less', bowerDir + 'admin.css', { paths: adminLess })
         .styles(adminCss, 'public/css/admin.css', bowerDir)
+        .styles('dashboard.css', 'public/css/dashboard.css')
         .scripts(adminJs, 'public/js/admin.js', bowerDir)
         .sass('admin-buttons.scss', 'public/css/admin-buttons.css')
         .copy('resources/assets/datatables/buttons.server-side.js', 'public/js/buttons.server-side.js')
