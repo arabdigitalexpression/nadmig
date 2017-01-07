@@ -29,13 +29,14 @@
         @foreach($reservations->sortBy('start_date')->reverse() as $reservation)
             <li class="panel panel-default panel-orange">
                 <a href="{{ route('event.page', ['event_slug' => $reservation->event->slug ]) }}">
-                    <div class="panel-heading">{{ $reservation->name }}</div>
+                    <div class="panel-heading">{{ str_limit($reservation->name, $limit = 30, $end = '...') }}</div>
                 </a>   
-                <div style="background-image: url({{ url($reservation->artwork) }});" class="space-icon"> </div>
+                <div style="background-image: url({{ url($reservation->artwork) }});" class="space-icon"> 
+                </div>
                 <ul class="space-info">
                     <li><i class="fa fa-calendar" aria-hidden="true"></i> {{ ArabicDate($reservation->start_session['start_date']) }} </li>
-                    <li><i class="fa fa-clock-o" aria-hidden="true"></i> من {{ ArabicTime($reservation->start_session['start_time']) }}
-                    <p>{{ str_limit($reservation->description, $limit = 100, $end = '...') }}</p>
+                    <li><i class="fa fa-clock-o" aria-hidden="true"></i> من {{ ArabicTime($reservation->start_session['start_time']) }}</li>
+                    <li>{{ str_limit($reservation->description, $limit = 85, $end = '...') }}</li>
                 </ul>
             </li>
         @endforeach

@@ -20,7 +20,7 @@ class HomeController extends ApplicationController
      	    $reservation['start_session'] = $reservation->sessions[0];
      	}
      	$reservations = $reservations->sortBy('start_date')->reverse();
-     	// dd($reservations->toArray());
+     	// dd($reservations->take(1));
         return view('application.home.index', compact('reservations'));
     }
 }

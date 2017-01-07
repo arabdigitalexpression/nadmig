@@ -69,7 +69,7 @@
 
                     
             <h4>الجلسات</h4>
-            <ul class="spaces-list">
+            <ul class="spaces-list sessions-list">
             @foreach($reservation->sessions as $session)
                 <li class="panel panel-default panel-orange">
                 <a href="{{ route('session.page', ['session_slug' => $session->slug ])}}">
