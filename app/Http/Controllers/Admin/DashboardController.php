@@ -8,6 +8,11 @@ use Illuminate\Support\Collection;
 use LaravelAnalytics;
 use Auth; 
 Use App\Modules\Space\Models\Space;
+Use App\Modules\Reservation\Models\Reservation;
+Use App\Modules\Event\Models\Event;
+use App\Modules\Organization\Models\Organization;
+use Spatie\Activitylog\Models\Activity;
+
 class DashboardController extends AdminController
 {
     /**
@@ -58,10 +63,32 @@ class DashboardController extends AdminController
     public function getIndex()
     {
         $data = [];
-        if (Auth::user()->hasRole('space_manager')) {
-            $data['spaces'] = Space::where('manager_id', Auth::user()->id)->get()->toArray();
+        $count = [];
+        if (Auth::user()->hasRole('admin')) {
+            $count['organizations'] = Organization::count();
+            $count['spaces'] = Space::count();
+            $count['reservations'] = Reservation::count();
+            $count['events'] = Event::count();
+            $data['reservations'] = Reservation::orderBy('id', 'desc')->take(5)->get();
+            $data['logs'] = Activity::orderBy('id', 'desc')->take(5)->get();
         }
-        return view('dashboard.dashboard.index', compact('data'));
+        else if (Auth::user()->hasRole('organization_manager')) {
+            $count['spaces'] = Space::where('organization_id', Auth::user()->manageOrganization->id)->count();
+            $count['reservations'] = Reservation::where('organization_id', Auth::user()->manageOrganization->id)->count();
+            $count['events'] = Event::with(['reservation' => function ($query) {
+                $query->where('organization_id', Auth::user()->manageOrganization->id);
+            }])->count();   
+            $data['reservations'] = Reservation::where('organization_id', Auth::user()->manageOrganization->id)->orderBy('id', 'desc')->take(5)->get();
+        }
+        else if (Auth::user()->hasRole('space_manager')) {
+            $count['spaces'] = Space::where('manager_id', Auth::user()->id)->count();
+            $count['reservations'] = Reservation::where('organization_id', Auth::user()->manageSpace->organization->id)->count();
+            $count['events'] = Event::with(['reservation' => function ($query) {
+                $query->where('organization_id', Auth::user()->manageSpace->organization->id);
+            }])->count();    
+            $data['reservations'] = Reservation::where('organization_id', Auth::user()->manageSpace->organization->id)->orderBy('id', 'desc')->take(5)->get();
+        }
+        return view('dashboard.dashboard.index', ['count' => $count,  'data' => $data]);
     }
 
     /**

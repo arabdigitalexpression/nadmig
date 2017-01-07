@@ -8,14 +8,13 @@
             <ul class="nav navbar-nav">
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img class="user-image img-circle" src="{{ !empty($user->picture) ? $user->picture : 'https://ssl.gstatic.com/accounts/ui/avatar_2x.png' }}" alt="{{ Auth::user()->name  }}" />
+                        <img class="user-image img-circle" src="{{ !empty(url(Auth::user()->picture)) ? url(Auth::user()->picture) : 'https://ssl.gstatic.com/accounts/ui/avatar_2x.png' }}" alt="{{ Auth::user()->name  }}" />
                         <span class="hidden-xs">{{ Auth::user()->name  }}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="user-header">
-                            <img class="img-circle" src="{{ !empty($user->picture) ? $user->picture : 'https://ssl.gstatic.com/accounts/ui/avatar_2x.png' }}" alt="{{ Auth::user()->name  }}" />
+                            <img class="img-circle" src="{{ !empty(url(Auth::user()->picture)) ? url(Auth::user()->picture) : 'https://ssl.gstatic.com/accounts/ui/avatar_2x.png' }}" alt="{{ Auth::user()->name  }}" />
                             <p>{{ Auth::user()->name  }}</p>
-                            @include('partials.common.languages', ['languages' => Config::get('languages'), 'route' => 'dashboard.language.change' ])
                         </li>
                         <li class="user-footer">
                             <div class="pull-left">

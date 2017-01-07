@@ -7,6 +7,7 @@
     <meta name="_token" content="{{ csrf_token() }}" />
     <title> {{  trans(ucfirst(explode(".", Route::getCurrentRoute()->getName())[1]) . '::' . Route::getCurrentRoute()->getName()) . ' | ' .  trans('dashboard.title')  }} </title>
     <link rel="stylesheet" type="text/css" href="{{ url( elixir('css/admin.css') ) }}">
+    <link rel="stylesheet" type="text/css" href="{{ url( 'css/dashboard.css' ) }}">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

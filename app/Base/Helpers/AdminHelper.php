@@ -225,7 +225,7 @@ if (!function_exists('isModule')) {
 if (!function_exists('dashboard_box')) {
     function dashboard_box($bg, $icon, $text, $number)
     {
-        $str  = '<div class="col-md-3 col-sm-6 col-xs-12">';
+        $str  = '<div class="col-md-3 col-sm-6 col-xs-12" style="float:right;">';
         $str .= '<div class="info-box">';
         $str .= '<span class="info-box-icon '.$bg.'">';
         $str .= '<i class="fa fa-'.$icon.'"></i>';
