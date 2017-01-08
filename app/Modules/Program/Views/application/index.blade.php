@@ -21,7 +21,7 @@
                 @foreach($program->events as $event)
                 <li class="panel panel-default panel-orange">
                     <a href="{{ route('event.page', ['event_slug' => $event->slug ]) }}">
-                        <div class="panel-heading">{{ $event->reservation->name }}</div>
+                        <div class="panel-heading">{{ str_limit($event->reservation->name, $limit = 85, $end = '...') }}</div>
                     </a>   
                         <img src="{{ url($event->reservation->artwork) }}" class="space-icon img-responsive">
                     <ul class="space-info">
@@ -34,7 +34,7 @@
                             {{ ArabicTime(\Carbon\Carbon::createFromFormat('h:i a', $event->start_session['start_time'])->addHours(intval($event->start_session['period']->period))->format('h:i A')) }}</li>
                         @endif
                         
-                        <li>{{ str_limit($event->reservation->description, $limit = 150, $end = '...') }}</li>
+                        <li>{{ str_limit($event->reservation->description, $limit = 85, $end = '...') }}</li>
                     </ul>
                     
                 </li>
