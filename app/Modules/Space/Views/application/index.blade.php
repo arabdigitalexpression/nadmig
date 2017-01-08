@@ -40,7 +40,7 @@
                         @endif
                     </ul>
                 </div>
-                @if($space->status == 'working')
+                @if($space->status == 'working' && Auth::user())
                 <a class="btn btn-default btn-orange reserve" href="{{ route('reservation.create', ['organization_slug' => $space->organization['slug']])}}" role="button">{{ trans('Space::application.reserve') }}</a>
                 @endif
             </header>
