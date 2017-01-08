@@ -76,7 +76,7 @@
                 $(this).parents('.panel').get(0).remove();
             });
             $(document).on('click', '.duplicate-session', function () {
-                let n = $(this).parent('.panel-heading').parent('.panel').find('.panel-collapse').attr('id');
+                var n = $(this).parent('.panel-heading').parent('.panel').find('.panel-collapse').attr('id');
                 if ($('#start_date_'+n).val() != "" && $('#start_time_'+n).val() != "" && $('#period_period_'+n).val() != "") {
                     $('#duplicate-session .content input[name=number]').val(n);
                     $('#duplicate-session').modal('toggle');
@@ -85,17 +85,17 @@
                 }
             });
             $(document).on('click', '.duplicate-action', function () {
-                let n = $('input[name=number]').val();
+                var n = $('input[name=number]').val();
                 for (var i = 1; i <= $('input[name=duplocation-number]').val(); i++){
-                    let plus = i;
+                    var plus = i;
                     var session = {};
                     var space = $('#space_select_'+n+' option:selected').val();
                     var duplocation_period = $('#duplocation-period option:selected').val();
                     if (duplocation_period == 'every-day') {
-                        let date = moment($('#start_date_'+n).val(), 'YYYY/MM/DD').add(plus, 'days').format("YYYY/MM/DD");
-                        let time = $('#start_time_'+n).val();
-                        let period_type = $('#period_type_'+n).val();
-                        let period_period = $('#period_period_'+n).val();
+                        var date = moment($('#start_date_'+n).val(), 'YYYY/MM/DD').add(plus, 'days').format("YYYY/MM/DD");
+                        var time = $('#start_time_'+n).val();
+                        var period_type = $('#period_type_'+n).val();
+                        var period_period = $('#period_period_'+n).val();
                         $.getJSON('/api/space/' + space + '/' + date + '/' + time + '/' + period_period  , function( json ) {
                             if (json.available) {
                                 session.start_date = moment($('#start_date_'+n).val(), 'YYYY/MM/DD').add(plus, 'days').format("YYYY/MM/DD");
@@ -114,10 +114,10 @@
                         });
                     }
                     else if (duplocation_period == 'every-week') {
-                        let date = moment($('#start_date_'+n).val(), 'YYYY/MM/DD').add(plus, 'weeks').format("YYYY/MM/DD");
-                        let time = $('#start_time_'+n).val();
-                        let period_type = $('#period_type_'+n).val();
-                        let period_period = $('#period_period_'+n).val();
+                        var date = moment($('#start_date_'+n).val(), 'YYYY/MM/DD').add(plus, 'weeks').format("YYYY/MM/DD");
+                        var time = $('#start_time_'+n).val();
+                        var period_type = $('#period_type_'+n).val();
+                        var period_period = $('#period_period_'+n).val();
                         $.getJSON('/api/space/' + space + '/' + date + '/' + time + '/' + period_period  , function( json ) {
                             if (json.available) {
                                 session.start_date = moment($('#start_date_'+n).val(), 'YYYY/MM/DD').add(plus, 'weeks').format("YYYY/MM/DD");
@@ -136,10 +136,10 @@
                         });
                     }
                     else if (duplocation_period == 'every-month') {
-                        let date = moment($('#start_date_'+n).val(), 'YYYY/MM/DD').add(plus, 'months').format("YYYY/MM/DD");
-                        let time = $('#start_time_'+n).val();
-                        let period_type = $('#period_type_'+n).val();
-                        let period_period = $('#period_period_'+n).val();
+                        var date = moment($('#start_date_'+n).val(), 'YYYY/MM/DD').add(plus, 'months').format("YYYY/MM/DD");
+                        var time = $('#start_time_'+n).val();
+                        var period_type = $('#period_type_'+n).val();
+                        var period_period = $('#period_period_'+n).val();
                         $.getJSON('/api/space/' + space + '/' + date + '/' + time + '/' + period_period  , function( json ) {
                             if (json.available) {
                                 session.start_date = moment($('#start_date_'+n).val(), 'YYYY/MM/DD').add(plus, 'months').format("YYYY/MM/DD");
