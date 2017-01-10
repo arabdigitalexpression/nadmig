@@ -8,48 +8,48 @@ return [
     */
 
     "organization" => [
-        "create"                    => "Create organization",
-        "edit"                      => "Edit organization",
+        "create"                    => "أنشئ منظَّمة",
+        "edit"                      => "حرِّر بيانات منظَّمة",
         "index"                     => "منظمات",
         "show"                      => "منظمة",
         "mine"                      => [
                                         "show"  => "منظمتى",
-                                        "edit"  => "تعديل"
+                                        "edit"  => "حرِّر"
                                     ]
     ],
     "fields" => [
         "organization" => [
-            "address"          => "عنوان",
-            "email"                 => "الايميل",
+            "address"          => "العنوان",
+            "email"                 => "عنوان البريد الإلكتروني",
             "description"           => "وصف",
-            "name"                  => "الأسم",
-            "website"               => "موقعك الخاص ( إن وجد )",
-            "facebook"              => "فيس بوك",
-            "twitter"               => "تويتر",
-            "instagram"             => "انستجرام",
-            "phone_number"          => "رقم الهاتف",
+            "name"                  => "الاسم",
+            "website"               => "موقع الوِب",
+            "facebook"              => "صفحة فيسبوك",
+            "twitter"               => "اسم تويتر",
+            "instagram"             => "إنستجرام",
+            "phone_number"          => "رقم التلفون",
             "excerpt"               => "وصف مختصر",
-            "manager_id"            => "مدير حساب المنظمة", 
-            "slug"                  => "الأسم مختصر بالأنجليزية", 
+            "manager_id"            => "مدير حساب المنظمة",
+            "slug"                  => "مميِّز باللاتينية",
             "logo"            => "شعار المنظمة",
             "governorate"           => "المحافظة",
             "organization_reservation" => "بيانات الحجوزات",
-            "min_time_before_usage_to_edit" => "المدة الدنيا قبل الاستخدام لتعديل بيانات الحجز",
-            "change_fees" => "مقابل تغير بيانات الحجز",
-            "min_to_cancel" => "المدة الدنيا قبل إلغاء الحجز",
+            "min_time_before_usage_to_edit" => "المدة الدنيا لتعديل الحجز",
+            "change_fees" => "مقابل تغيير بيانات الحجز",
+            "min_to_cancel" => "المدة الدنيا لإلغاء الحجز",
             "cancel_fees" => "مقابل إلغاء الحجز",
-            "max_to_confirm" => "المدة القصوي لتأكيد الحجز من قبل المؤسسة"
+            "max_to_confirm" => "المدة القصوى لتوكيد الحجز"
 
         ]
     ],
     "menu" => [
         "organization" => [
-            "add"                   => "Add an organization",
-            "all"                   => "All organization",
-            "root"                  => "Organizations"
-        ], 
+            "add"                   => "أضِف منظَّمة",
+            "all"                   => "كلّ المنظَّمات",
+            "root"                  => "المنظَّمات"
+        ],
         "my_organization" => [
-            "root"                  => "منظمتى"
+            "root"                  => "منظَّمتي"
         ]
     ]
 ];
