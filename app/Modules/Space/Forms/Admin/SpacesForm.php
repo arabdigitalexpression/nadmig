@@ -226,15 +226,8 @@ class SpacesForm extends AdminForm
         return $array;
     }
     protected function getSpaceEquipment(){
-        $space_equipment = array();
-        $setting = Setting::firstOrFail();
-        if($setting->space_equipment){
-            foreach (json_decode($setting->space_equipment) as $key => $value) {
-                $space_equipment = array_add($space_equipment, $key, $value);
-            }
-        }
-
-        return $space_equipment;
+        $settings = include base_path('./resources/settings.php');
+        return $settings['space_equipment'];
     }
     protected function WeekDaysForm()
     {

@@ -255,12 +255,8 @@ if (!function_exists('getWeekdays')) {
 }
 if (!function_exists('getSpaceEquipment')) {
     function getSpaceEquipment($equipment){
-        $space_equipment = array();
-        $setting = \App\Setting::firstOrFail();
-        foreach (json_decode($setting->space_equipment) as $key => $value) {
-            $space_equipment = array_add($space_equipment, $key, $value);
-        }
-        return $space_equipment[$equipment];
+        $settings = include base_path('./resources/settings.php');
+        return $settings['space_equipment'][$equipment];
     }
 }
 if (!function_exists('getReportType')) {
