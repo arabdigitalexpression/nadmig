@@ -80,13 +80,13 @@ class ReservationsForm extends AdminForm
                 'selected' => $this->group_age,
                 'label' => trans('Reservation::application.fields.reservation.group_age')
             ]);
-            $spaces = $this->data[0]->spaces->toArray();
-            $this->sortBy('capacity',   $spaces);
-            $this->add('capacity', 'hidden', [
-                'label' => false,
-                'value' => $spaces[0]['capacity']
-            ])
-            ->add('max_attendees', 'number', [
+            // $spaces = $this->data[0]->spaces->toArray();
+            // $this->sortBy('capacity',   $spaces);
+            // $this->add('capacity', 'hidden', [
+            //     'label' => false,
+            //     'value' => $spaces[0]['capacity']
+            // ])
+            $this->add('max_attendees', 'number', [
                 'label' => trans('Reservation::application.fields.reservation.max_attendees') . $this->getHelpMassage($spaces[0]['capacity'] . " بالاقصى")
             ])
             ->add('expected_attendees', 'number', [

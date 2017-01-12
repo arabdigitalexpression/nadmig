@@ -19,7 +19,6 @@ class ReservationRequest extends Request {
             'facilitator_phone' => 'required|min:10',
             'group_name' => 'sometimes|min:3',
             'group_age' => 'required',
-            'max_attendees' => 'required|integer|max:'.$this->get('capacity'),
             'expected_attendees' => 'required|integer|max:'.$this->get('max_attendees'),
             'reserved_attendees' => 'required|integer|max:'.$this->get('max_attendees'),
             'event_type' => 'required',
