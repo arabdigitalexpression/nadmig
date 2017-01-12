@@ -86,7 +86,7 @@ class ReservationsForm extends AdminForm
                 'label' => false,
                 'value' => end($spaces)['capacity']
             ])
-            $this->add('max_attendees', 'number', [
+            ->add('max_attendees', 'number', [
                 'label' => trans('Reservation::application.fields.reservation.max_attendees') . $this->getHelpMassage(end($spaces)['capacity'] . " بالاقصى")
             ])
             ->add('expected_attendees', 'number', [
