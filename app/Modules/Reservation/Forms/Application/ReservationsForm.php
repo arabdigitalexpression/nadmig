@@ -80,8 +80,8 @@ class ReservationsForm extends AdminForm
                 'selected' => $this->group_age,
                 'label' => trans('Reservation::application.fields.reservation.group_age')
             ]);
-            // $spaces = $this->data[0]->spaces->toArray();
-            // $this->sortBy('capacity',   $spaces);
+            $spaces = $this->data[0]->spaces->toArray();
+            $this->sortBy('capacity',   $spaces);
             // $this->add('capacity', 'hidden', [
             //     'label' => false,
             //     'value' => $spaces[0]['capacity']
