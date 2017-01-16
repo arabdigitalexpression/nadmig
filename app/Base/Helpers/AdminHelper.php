@@ -243,10 +243,10 @@ if (!function_exists('getWeekdays')) {
     function getWeekdays($key){
         $days = array(
             "sat" => "السبت",
-            "sun" => "الاحد",
+            "sun" => "الأحد",
             "mon" => "الاثنين",
             "tue" => "الثلاثاء",
-            "wed" => "الاربعاء",      
+            "wed" => "الأربعاء",      
             "thu" => "الخميس",
             "fri" => "الجمعة"
             );
@@ -261,7 +261,7 @@ if (!function_exists('getSpaceEquipment')) {
 }
 if (!function_exists('getReportType')) {
     function getReportType($key){
-        $type = [ 'video' => 'فيديو', 'visual expression' => 'تعبير بصري', 'music' => 'موسيقى' ];
+        $type = [ 'video' => 'الفيديو', 'visual expression' => 'التعبير البصري', 'music' => 'الموسيقا و الصوت' ];
         return $type[$key];
     }
 }

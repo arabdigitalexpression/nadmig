@@ -34,22 +34,22 @@ return [
     "elfinder"                      => "مدير الملفات",
     "empty"                         => "لا توجد سجلّات محفوظة إلى الآن. لِمَ لا تنشئ سجِّلا جديدًا?",
     "fields" => [
-        "created_at"                => "أُنشئ فى",
+        "created_at"                => "أُنشئ في",
         "dashboard" => [
-            'organizations'          => "عدد المؤسسات",
+            'organizations'          => "عدد المنظّمات",
             'spaces'          => "عدد المساحات",
             'reservations'    => [
                 'count' => "عدد الحجوزات",
-                'title' => "أخر الحجوزات",
-                'name' => "الأسم",
+                'title' => "آخر الحجوزات",
+                'name' => "الاسم",
                 'status' => "الحالة",
-                'created_at' => 'أَنشئ قى'
+                'created_at' => 'أَنشئ في'
             ],
             'events'          => "عدد الفاعليات",
             'logs'      => [
-                'title' => "أخر النشاطات",
+                'title' => "آخر النشاطات",
                 'text' => 'نشاطات',
-                'created_at' => 'أَنشئ قى'
+                'created_at' => 'أَنشئ في'
             ],
             'more' => 'المزيد',
             'bounce_rate'           => "Bounce rate",
@@ -79,10 +79,10 @@ return [
         "setting" => [
             "analytics_id"          => "Analytics ID ( Format: UA-XXXXXX-YY )",
             "disqus_shortname"      => "Disqus Shortname",
-            "email"                 => "Email",
-            "facebook"              => "Facebook",
-            "logo"                  => "Logo",
-            "twitter"               => "Twitter", 
+            "email"                 => "عنوان البريد الإلكتروني",
+            "facebook"              => "فيسبوك",
+            "logo"                  => "أيقونة",
+            "twitter"               => "تويتر", 
             "space"                 => "بيانات إدارة المساحة",
             "space_equipment"       => "تجهيزات المساحة"
         ],
@@ -94,7 +94,7 @@ return [
                                             "website" => "موقع وِب",
                                             "facebook" => "فيسبوك",
                                             "twitter" => "تويتر",
-                                            "instagram" => "إنستاغرام",
+                                            "instagram" => "إنستغرام",
                                         ],
                                         "title" => "الرابط"
                                     ]

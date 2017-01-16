@@ -14,7 +14,7 @@ return [
         "title"                 => "الولوج"
     ],
     "signup" => [
-        "title"                 => "تسجيل حساب جديد"
+        "title"                 => "فتح حساب"
     ],
     "logout"                    => "اخرج",
     "password" => [
@@ -25,7 +25,7 @@ return [
     "reset" => [
         "password"              => "كلمة السّر الجديدة",
         "password_confirmation" => "توكيد كلمة السّرّ الجديدة",
-        "submit"                => "أودّع",
+        "submit"                => "أودع",
         "title"                 => "وضع كلمة سرّ جديدة"
     ]
 ];

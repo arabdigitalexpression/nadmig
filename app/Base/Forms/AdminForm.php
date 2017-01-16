@@ -48,16 +48,16 @@ abstract class AdminForm extends Form
                 'monufia' => 'المنوفية',
                 'minya' => 'المنيا',
                 'new_valley' => 'الوادي الجديد',
-                'cyber_land' => 'أرض الفضاء'
+                'cyber_land' => 'الفضاء السبراني'
             );
     }
     protected function getWeekdays(){
         return array(
             "sat" => "السبت",
-            "sun" => "الاحد",
+            "sun" => "الأحد",
             "mon" => "الاثنين",
             "tue" => "الثلاثاء",
-            "wed" => "الاربعاء",      
+            "wed" => "الأربعاء",      
             "thu" => "الخميس",
             "fri" => "الجمعة"
             );
