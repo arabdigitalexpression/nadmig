@@ -84,10 +84,10 @@ class ReservationsForm extends AdminForm
             $this->sortBy('capacity',   $spaces);
             $this->add('capacity', 'hidden', [
                 'label' => false,
-                'value' => $spaces[0]['capacity']
+                'value' => end($spaces)['capacity']
             ])
             ->add('max_attendees', 'number', [
-                'label' => trans('Reservation::application.fields.reservation.max_attendees') . $this->getHelpMassage($spaces[0]['capacity'] . " بالاقصى")
+                'label' => trans('Reservation::application.fields.reservation.max_attendees') . $this->getHelpMassage(end($spaces)['capacity'] . " بالاقصى")
             ])
             ->add('expected_attendees', 'number', [
                 'label' => trans('Reservation::application.fields.reservation.expected_attendees')

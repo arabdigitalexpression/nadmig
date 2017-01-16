@@ -28,12 +28,12 @@ class SpaceController extends ApplicationController {
 								$query->where('space_type', Input::get('space_type'));	
 							}
 						}     
-			        })->paginate(10);	
+			        })->paginate(12);	
 
 		}
 		else {
 			unset($params['page']);
-			$spaces = Space::Where($params)->paginate(10);
+			$spaces = Space::Where($params)->paginate(12);
 		}
 		return view('Space::application.all', ['spaces' => $spaces->appends(Input::except('page')), 'space_type' => $settings['space_type'], 'space_equipment' => $settings['space_equipment']]);
 	}
