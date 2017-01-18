@@ -8,23 +8,23 @@ return [
     */
 
     "role" => [
-        "create"                    => "Create role",
-        "edit"                      => "Edit role",
+        "create"                    => "أنشئ دورًا",
+        "edit"                      => "حرّر دورًا",
         "index"                     => "role",
-        "show"                      => "Show role"
+        "show"                      => "أظهر الأدوار"
     ],
     "fields" => [
        "role" => [
-            "display_name"               => "الأسم الظاهر",
+            "display_name"               => "الاسم الظاهر",
             "description"           => "الوصف",
-            "name"                 => "الأسم",
-            "permission"           => "صلاحيات"
+            "name"                 => "الاسم",
+            "permission"           => "الصلاحيات"
         ]
     ],
     "menu" => [
          "role" => [
-            "add"                   => "Add an role",
-            "all"                   => "All role",
+            "add"                   => "أضِف دورًا",
+            "all"                   => "كلّ الأدوار",
             "root"                  => "Roles"
         ]
     ]

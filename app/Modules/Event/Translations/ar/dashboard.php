@@ -8,24 +8,24 @@ return [
     */
 
     "event" => [
-        "create"                    => "Create event",
-        "edit"                      => "Edit event",
+        "create"                    => "أنشئ فعالية",
+        "edit"                      => "حرّر الفعالية",
         "index"                     => "event",
-        "show"                      => "Show event"
+        "show"                      => "أظهر الفعالية"
     ],
     "fields" => [
         "event" => [
             "language_id"           => "Language",
             "content"               => "Content",
-            "description"           => "Description",
-            "title"                 => "Title"
+            "description"           => "الوصف",
+            "title"                 => "العنوان"
         ]
     ],
     "menu" => [
         "event" => [
-            "add"                   => "Add an event",
-            "all"                   => "All event",
-            "root"                  => "Events"
+            "add"                   => "أضِف فعالية",
+            "all"                   => "كل الفعاليات",
+            "root"                  => "الفعاليات"
         ]
     ]
 ];

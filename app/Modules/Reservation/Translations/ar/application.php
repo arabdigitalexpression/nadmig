@@ -8,14 +8,14 @@ return [
     */
 
     "reservation" => [
-        "create"                    => "Create reservation",
-        "edit"                      => "Edit reservation",
+        "create"                    => "ضع طلب حجز",
+        "edit"                      => "حرّر طلب الحجز",
         "index"                     => "reservation",
-        "show"                      => "Show reservation"
+        "show"                      => "اعرض طلبات الحجز"
     ],
     "fields" => [
         "reservation" => [
-            "info"           => "معلومات عن الحجز",
+            "info"           => "معلومات عن طلب الحجز",
             "facilitator"   => "بيانات الطالب", 
             "extra" => "تفاصيل أخرى",
             "apply_info" => "معلومات عن التسجيل"
@@ -23,8 +23,8 @@ return [
     ],
     "menu" => [
         "reservation" => [
-            "add"                   => "Add an reservation",
-            "all"                   => "All reservation",
+            "add"                   => "ضع طلب حجز",
+            "all"                   => "كل طلبات الحجز",
             "root"                  => "Reservations"
         ]
     ]

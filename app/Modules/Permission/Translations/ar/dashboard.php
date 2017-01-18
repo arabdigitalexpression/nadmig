@@ -15,9 +15,9 @@ return [
     ],
     "fields" => [
         "permission" => [
-            "display_name"               => "الأسم الظاهر",
+            "display_name"               => "الاسم الظاهر",
             "description"           => "الوصف",
-            "name"                 => "الأسم"
+            "name"                 => "الاسم"
         ]
     ],
     "menu" => [

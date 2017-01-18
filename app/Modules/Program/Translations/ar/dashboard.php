@@ -8,23 +8,23 @@ return [
     */
 
     "program" => [
-        "create"                    => "Create program",
-        "edit"                      => "Edit program",
+        "create"                    => "أنشئ برنامجًا",
+        "edit"                      => "حرّر البرنامج",
         "index"                     => "program",
-        "show"                      => "Show program"
+        "show"                      => "أظهر البرنامج"
     ],
     "fields" => [
         "program" => [
             "language_id"           => "Language",
             "content"               => "Content",
-            "description"           => "Description",
-            "title"                 => "Title"
+            "description"           => "الوصف",
+            "title"                 => "العنوان"
         ]
     ],
     "menu" => [
         "program" => [
-            "add"                   => "Add an program",
-            "all"                   => "All program",
+            "add"                   => "أضِف برنامجا",
+            "all"                   => "كلّ البرامج",
             "root"                  => "Programs"
         ]
     ]

@@ -8,34 +8,34 @@ return [
     */
 
     "attendees" => [
-        "create"                    => "Create attendees",
-        "edit"                      => "Edit attendees",
+        "create"                    => "طلب مشاركة",
+        "edit"                      => "حرّر طلبات المشاركة",
         "index"                     => "attendees",
-        "show"                      => "Show attendees"
+        "show"                      => "أظهر طلبات المشاركة"
     ],
     "fields" => [
          "attendees" => [
-            "name"           => "آسم المشترك / ه",
+            "name"           => "الاسم",
             "birthday"               => "تاريخ الميلاد",
             "type"               => "النوع",
-            "address"               => "محل الأقامه",
-            "city"               => "المدينه",
+            "address"               => "محل الإقامة",
+            "city"               => "المدينة",
             "phone_number"               => "رقم الهاتف",
-            "email"               => "البريد الأليكتروني",
+            "email"               => "عنوان البريد الإلكتروني",
             "school_name"               => "اسم مدرستك",
-            "track"               => "اختار اي نوع من الفنون الثلاثه تود أن تشارك به",
-            "hear_about_us"               => "من اين سمعت عن المدرسة",
-            "media_coverage"               => "عندك مشكله أن يتم تصويرك خلال المدرسه ويتم نشرها",
-            "guardian_name"               => "أسم ولي الأمر",
-            "guardian_phone"               => "رقم الهاتف ولي الأمر",
-            "guardian_approval"               => "موافقه ولي الأمر",
-            "organization"      => "المؤسسة"
+            "track"               => "في أي المجالات تود المشاركة",
+            "hear_about_us"               => "كيف سمعت بالمدرسة",
+            "media_coverage"               => "ألديك مانع من ظهورك في صور فوتوغرافية أثناء المدرسة و نشرها؟",
+            "guardian_name"               => "اسم ولي الأمر",
+            "guardian_phone"               => "رقم هاتف ولي الأمر",
+            "guardian_approval"               => "موافقة ولي الأمر",
+            "organization"      => "المنظّمة"
         ]
     ],
     "menu" => [
         "attendees" => [
-            "add"                   => "Add an attendees",
-            "all"                   => "All attendees",
+            "add"                   => "أضف طلب مشاركة",
+            "all"                   => "كلّ طلبات المشاركة",
             "root"                  => "Attendeess"
         ]
     ]

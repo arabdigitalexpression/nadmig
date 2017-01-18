@@ -8,17 +8,17 @@ return [
     */
 
     "reservation" => [
-        "create"                    => "Create reservation",
-        "edit"                      => "Edit reservation",
+        "create"                    => "أنشئ طلب حجز",
+        "edit"                      => "حرّر طلب الحجز",
         "index"                     => "reservation",
-        "show"                      => "Show reservation"
+        "show"                      => "أظهر طلبات الحجز"
     ],
     "fields" => [
         "reservation" => [
             "language_id"           => "Language",
             "content"               => "Content",
-            "description"           => "Description",
-            "title"                 => "Title"
+            "description"           => "الوصف",
+            "title"                 => "العنوان"
         ]
     ],
     "menu" => [

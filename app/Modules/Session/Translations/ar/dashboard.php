@@ -8,23 +8,23 @@ return [
     */
 
     "session" => [
-        "create"                    => "Create session",
-        "edit"                      => "Edit session",
+        "create"                    => "أنشئ جلسة",
+        "edit"                      => "حرّر جلسة",
         "index"                     => "session",
-        "show"                      => "Show session"
+        "show"                      => "أظهر الجلسات"
     ],
     "fields" => [
         "session" => [
-            "language_id"           => "Language",
-            "content"               => "Content",
-            "description"           => "Description",
-            "title"                 => "Title"
+            "language_id"           => "اللغة",
+            "content"               => "المحتوى",
+            "description"           => "الوصف",
+            "title"                 => "العنوان"
         ]
     ],
     "menu" => [
         "session" => [
-            "add"                   => "Add an session",
-            "all"                   => "All session",
+            "add"                   => "أضِف جلسة",
+            "all"                   => "كل الجلسات",
             "root"                  => "Sessions"
         ]
     ]

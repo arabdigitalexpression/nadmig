@@ -1,7 +1,7 @@
 <?php
 return [
 
-   "reserve" => "حجز المساحة",
+   "reserve" => "احجز المساحة",
    "page" => [
    	"events" => "على مد الشوف"
    ]

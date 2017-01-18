@@ -8,23 +8,23 @@ return [
     */
 
     "apply" => [
-        "create"                    => "Create apply",
-        "edit"                      => "Edit apply",
+        "create"                    => "أنشئ طلب حجز",
+        "edit"                      => "حرّر طلب حجز",
         "index"                     => "apply",
-        "show"                      => "Show apply"
+        "show"                      => "أظهر طلب حجز"
     ],
     "fields" => [
         "apply" => [
             "language_id"           => "Language",
             "content"               => "Content",
-            "description"           => "Description",
-            "title"                 => "Title"
+            "description"           => "الوصف",
+            "title"                 => "العنوان"
         ]
     ],
     "menu" => [
         "apply" => [
-            "add"                   => "Add an apply",
-            "all"                   => "All apply",
+            "add"                   => "ضع طلب حجز",
+            "all"                   => "كلّ طلبات الحجز",
             "root"                  => "Applys"
         ]
     ]
