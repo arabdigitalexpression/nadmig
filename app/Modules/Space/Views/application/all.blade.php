@@ -7,7 +7,7 @@
     <form action="" class="form-inline filter">
         <div class="form-group pull-right">
             <label for="space_type">النوع: </label>
-            <select name="space_type" class="form-control space_type">
+            <select name="space_type"  multiple class="form-control chosen-select chosen-rtl space_type">
                 <option value="">=== نوع المساحة ===</option>
                 @foreach($space_type as $key => $type)
                     <option value="{{$key}}">{{$type}}</option>
@@ -23,7 +23,7 @@
         </div>
          <div class="form-group pull-right">
             <label for="space_equipment">معدات: </label>
-            <select multiple class="form-control chosen-select chosen-rtl">
+            <select multiple class="form-control chosen-select chosen-rtl space_equipment">
                 @foreach($space_equipment as $key => $type)
                     <option value="{{$key}}">{{$type}}</option>
                 @endforeach
@@ -79,11 +79,11 @@
             @endif
             var space_equipment = "{!! Input::get('space_equipment') !!}".split(",");
             space_equipment.forEach(function(sq){
-                if (sq != '') $('.chosen-select option[value='+sq+']').attr('selected','selected');
+                if (sq != '') $('.space_equipment option[value='+sq+']').attr('selected','selected');
             })
             $('.filter').on('submit',function(e){
                 e.preventDefault();
-                var selMulti = $.map($(".chosen-select option:selected"), function (el, i) {
+                var selMulti = $.map($(".space_equipment option:selected"), function (el, i) {
                     return $(el).val();
                 });
                 $('.space_equipment').val(selMulti);

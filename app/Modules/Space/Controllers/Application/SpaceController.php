@@ -22,16 +22,35 @@ class SpaceController extends ApplicationController {
 			               	}
 			            } 
 			            if (Input::get('space_type') != '') {
+			            	$st = explode(",", Input::get("space_type"));
 							if (Input::get('expression') == 'or') {
-								$query->orwhere('space_type', Input::get('space_type'));	
+								foreach($st as $item){
+								   	if ($item != '') {
+								   		$query->orwhere('space_type', 'like',  '%' . $item .'%');
+								   	}
+								} 
 							} elseif (Input::get('expression') == 'and') {
-								$query->where('space_type', Input::get('space_type'));	
+								$st = explode(",", Input::get("space_type"));
+								foreach($st as $item){
+								   	if ($item != '') {
+								   		$query->where('space_type', 'like',  '%' . $item .'%');
+								   	}
+								}
 							}
 						}     
 			        })->paginate(12);	
 
-		}
-		else {
+		}elseif(array_key_exists('space_type', Input::get())) {
+			unset($params['page']);
+			$spaces = Space::Where(function ($query) use($sq) {
+						$st = explode(",", Input::get("space_type"));
+						foreach($st as $item){
+						   	if ($item != '') {
+						   		$query->orwhere('space_type', 'like',  '%' . $item .'%');
+						   	}
+						}   
+			        })->paginate(12);
+		}else {
 			unset($params['page']);
 			$spaces = Space::Where($params)->paginate(12);
 		}
