@@ -26,7 +26,7 @@
         {{-- @if (count($reservations)) --}}
             <h3>على مد الشوف <a class="pull-left btn btn-default" href="{{ route('events')}}">{{ trans('application.more') }} >></a></h3>
             <ul class="spaces-list-small">
-                @foreach ($reservations->slice(3,null) as $index => $reservation)
+                @foreach ($reservations->slice(4,null) as $index => $reservation)
                     {{-- @if ($index > 3)  --}}
                     @if (isset($reservation)) 
                         <li class="panel panel-default panel-orange">
