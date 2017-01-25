@@ -235,19 +235,22 @@
                     var working_hours = json.working_hours_days;
                     var working_week_days = json.working_week_days;
                     var difference = $(week_days).not(working_week_days).get();
-                    var max_before = json.max_time_before_reservation;                    
-                    @if(Auth::user()->hasRole('user'))
+                    var max_before = json.max_time_before_reservation; 
+                    
+                     @if(Auth::user()->hasRole('user') || (Auth::user()->hasRole('organization_manager') && is_null(Auth::user()->manageOrganization)) || ( Auth::user()->hasRole('space_manager') && is_null(Auth::user()->manageSpace)) || ( Auth::user()->hasRole('organization_manager') && Auth::user()->manageOrganization && Auth::user()->manageOrganization->id !== $extra->id ) || ( Auth::user()->hasRole('space_manager') && Auth::user()->manageSpace && Auth::user()->manageSpace->organization->id != $extra->id) )
                         if(max_before.type == 'days'){
                             picker.set('max', parseInt(max_before.period));
                         }
                         picker.set('min', true);                        
+                        picker.set('disable', getNotWorkingDays(difference));
                     @endif
                     if (!is_data) {
                         picker.clear();
                         picker.set('enable', true);
                         picker_time.clear();
                     }
-                    picker.set('disable', getNotWorkingDays(difference));
+
+                    
                     picker.on({ set: function(context) {
                         var day = null;
                         if(moment(context.select).weekday() < 6){
@@ -255,11 +258,16 @@
                         }else{
                             day = 0;
                         }
-                        picker_time.set('disable', false);
+                        
+                       @if(Auth::user()->hasRole('user') || is_null(Auth::user()->manageOrganization) || is_null(Auth::user()->manageSpace) || ( Auth::user()->hasRole('organization_manager') && Auth::user()->manageOrganization && Auth::user()->manageOrganization->id !== $extra->id ) || ( Auth::user()->hasRole('space_manager') && Auth::user()->manageSpace && Auth::user()->manageSpace->organization->id != $extra->id) )
+                            picker_time.set('disable', false);
+                            if(working_hours[week_days[day]]['from'] != "" && working_hours[week_days[day]]['to'] != ""){
+                                picker_time.set('disable', [{ from: [00, 0], to: getTime(moment(working_hours[week_days[day]].from, "hh:mm a").subtract(30, 'minutes').format("h:mm A"))},{ from: getTime(moment(working_hours[week_days[day]].to, "hh:mm a").add(30, 'minutes').format("h:mm A")) , to:[23, 30]}]);
+                            }
+                        @endif
+                             
+                        
                         var date = moment(context.select).format("YYYY/MM/DD");
-                        if(working_hours[week_days[day]]['from'] != "" && working_hours[week_days[day]]['to'] != ""){
-                            picker_time.set('disable', [{ from: [00, 0], to: getTime(moment(working_hours[week_days[day]].from, "hh:mm a").subtract(30, 'minutes').format("h:mm A"))},{ from: getTime(moment(working_hours[week_days[day]].to, "hh:mm a").add(30, 'minutes').format("h:mm A")) , to:[23, 30]}]);     
-                        }
                         $.getJSON('/api/space/' + space_id + '/' + date, function( data ) {
                             $.each(data, function( index, value ) {
                               picker_time.set('disable', [{ from: getTime(value.start_time), to: getTime(moment(value.start_time, "hh:mm a").add(value.period.period, value.period.type).format("h:mm A"))}]);

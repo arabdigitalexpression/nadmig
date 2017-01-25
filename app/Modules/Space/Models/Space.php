@@ -48,6 +48,7 @@ class Space extends Model {
         'working_week_days' => 'object',
         'working_hours_days' => 'object',
         'space_equipment' => 'object',
+        'space_type' => 'object',
         'min_type_for_reservation' => 'object',
         'max_type_for_reservation' => 'object',
         'min_time_before_reservation' => 'object',

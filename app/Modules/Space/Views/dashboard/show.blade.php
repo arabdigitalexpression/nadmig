@@ -12,7 +12,10 @@
     @endif
     </h4>
     <h4><strong>{!! trans('Space::dashboard.fields.space.space_type') !!}:</strong>
-    		{!! trans('Space::dashboard.fields.space.' . $object->space_type) !!}
+            @foreach ($object->space_type as $space_type)
+                {!! trans('Space::dashboard.fields.space.' . $space_type) !!}
+            @endforeach
+    		
     </h4>
      <ul class="info">
         <li><i class="fa fa-building" aria-hidden="true"></i><a href="{{ route('organization.page', ['organization_slug' => $object->organization->slug ])}}">{{ $object->organization->name }}</a></li>

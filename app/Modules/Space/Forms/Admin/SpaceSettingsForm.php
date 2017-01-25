@@ -11,6 +11,9 @@ class SpaceSettingsForm extends AdminForm
     	 $this
             ->add('equipment', 'textareae', [
                 'label' => trans('Space::dashboard.fields.space.space_equipment')
+            ])
+            ->add('type', 'textareae', [
+                'label' => trans('Space::dashboard.fields.space.space_type')
             ]);
          parent::buildForm();
     }

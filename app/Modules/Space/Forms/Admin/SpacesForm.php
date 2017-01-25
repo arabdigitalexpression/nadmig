@@ -93,9 +93,10 @@ class SpacesForm extends AdminForm
         $this
             ->add('space_type', 'choice', [
                 'choices' => $settings['space_type'],
-                'empty_value' => '=== نوع المساحة ===',
                 'selected' => $this->space_type,
                 'label' => trans('Space::dashboard.fields.space.space_type'),
+                'attr' => ['class' => 'chosen-select chosen-rtl'],
+                'multiple' => true
             ])
             ->add('space_equipment', 'choice', [
                 'choices' => $settings['space_equipment'],
