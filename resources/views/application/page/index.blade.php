@@ -1,24 +1,24 @@
 @extends('layouts.application')
 
-@section('title'){{ getTitle($page) }}@endsection
-@section('description'){{ getDescription($page) }}@endsection
+@section('title'){{ $page->title }}@endsection
 
 @section('content')
     @if(count($page))
-        <article class="post">
+        <div>
             <header class="post-header">
                 <div class="post-title">
-                    <h2>{{ $page->title }}</h2>
+                    <h2>{{ $page->title }}
+                    @if (Auth::user()->hasRole('admin'))
+                        <a href="{{ route('dashboard.page.edit', ['page' => $page->id])}}" class="pull-left">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
+                    @endif
+                    </h2>
                 </div>
             </header>
             <div class="post-excerpt">
                 {!! $page->content !!}
             </div>
-            <footer class="post-footer">
-                @if(!empty(Config::get('settings')->disqus_shortname))
-                    <div id="disqus_thread" class="comments"></div>
-                @endif
-            </footer>
-        </article>
+        </div>
     @endif
 @endsection

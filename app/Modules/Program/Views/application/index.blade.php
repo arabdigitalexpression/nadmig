@@ -14,7 +14,7 @@
                     <img class="logo" src="{{ url($program->artwork) }}">
                 @endif
             </header>
-            <div class="post-header">
+            <div class="post-header pull-right">
                 <p>{{ $program->description }}</p>
             </div>    
             <ul class="spaces-list">

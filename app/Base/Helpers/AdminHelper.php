@@ -149,7 +149,7 @@ if (!function_exists('renderNode')) {
         $list = 'class="dd-list"';
         $class = 'class="dd-item"';
         $handle = 'class="dd-handle"';
-        $title  = '<span class="ol-buttons"> ' . get_ops($resource, $node->id, 'inline') . '</span>';
+        $title  = '<span class="ol-buttons"> ' . get_ops($resource, $node->id, "btn", ["show", "edit", "delete"]) . '</span>';
         $title  .= '<div '.$handle.'>' . $node->title . '</div>';
         if ($node->isLeaf()) {
             return '<li '.$class.' '.$id.'>' . $title . '</li>';

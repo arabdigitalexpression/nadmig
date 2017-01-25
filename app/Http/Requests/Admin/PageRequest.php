@@ -26,7 +26,6 @@ class PageRequest extends Request
         return [
             'content'     => 'required',
             'description' => 'required|max:160',
-            'language_id' => 'required|integer',
             'title'       => 'required|min:3',
         ];
     }

@@ -16,6 +16,7 @@
                 <li class="{{ Route::is('spaces') ? 'active' : '' }}"><a href="{{  route('spaces') }}">{{ trans('application.menu.spaces') }}</a></li>
                 <li class="{{ Route::is('events') ? 'active' : '' }}"><a href="{{  route('events') }}">{{ trans('application.menu.events') }}</a></li>
                 <li class="{{ Route::is('programs') ? 'active' : '' }}"><a href="{{  route('programs') }}">{{ trans('application.menu.programs') }}</a></li>
+                <li class="{{ Route::is('page') ? 'active' : '' }}"><a href="{{  route('page', ['page_slug' => 'ندمج']) }}">{{ trans('application.menu.about_us') }}</a></li>
                 <!-- <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="name">{{ trans('School::application.title') }}</span> <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">

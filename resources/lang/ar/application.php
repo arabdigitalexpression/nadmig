@@ -14,7 +14,8 @@ return [
         "reservation" => "الحجوزات",
         "programs"  => "البرامج",
         "user"  => "المستخدم",
-        "trainer" => "المدرب"
+        "trainer" => "المدرب",
+        "about_us" => "عنا"
     ],
     "title" => "نـدمج",
     "home"          => "الأولى",
