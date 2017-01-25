@@ -37,7 +37,8 @@
             </header>
             <p>{{ $reservation->description }}</p>
             <div class="row">
-              <div class="col-md-6 col-md-push-6">
+
+              <div class="col-md-4">
                     <h4>تفاصيل أخرى</h4>
                     <ul>
                         <h5><strong>السن</strong> : {{ getGroupAge($reservation->group_age) }}</h4>
@@ -54,7 +55,8 @@
                     </ul>
                     
               </div>
-              <div class="col-md-6 col-md-pull-6">
+             
+              <div class="col-md-4">
                   @if($reservation->apply)
                     <h4>الإشتراكات</h4>
                         <ul>
@@ -63,6 +65,14 @@
                             <h5><strong>اتفاق التقديم</strong> : </h4> <p> {!! nl2br(e($reservation->apply_agreement)) !!} </p>
                         </ul>
                     @endif
+              </div>
+              <div class="col-md-4">
+                    <h4>مسؤول الحجز</h4>
+                    <ul>
+                        <h5><strong>الاسم</strong> : {{ $reservation->facilitator_name }}</h5>
+                        <h5><strong>الإيميل</strong> : {{ $reservation->facilitator_email }}</h5>
+                        <h5><strong>الهاتف</strong> : {{ $reservation->facilitator_phone }}</h5>
+                    </ul>
               </div>
             </div>
                 
