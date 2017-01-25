@@ -18,10 +18,11 @@
                 <p>{{ $program->description }}</p>
             </div>    
             <ul class="spaces-list">
+
                 @foreach($program->events as $event)
                 <li class="panel panel-default panel-orange">
                     <a href="{{ route('event.page', ['event_slug' => $event->slug ]) }}">
-                        <div class="panel-heading">{{ str_limit($event->reservation->name, $limit = 85, $end = '...') }}</div>
+                        <div class="panel-heading">{{ str_limit($event->reservation->name, $limit = 30, $end = '...') }}</div>
                     </a>   
                         <img src="{{ url($event->reservation->artwork) }}" class="space-icon img-responsive">
                     <ul class="space-info">

@@ -3,7 +3,6 @@
 @section('title'){{ getTitle('المساحات') }}@endsection
 
 @section('content')
-    {{-- {{ dd($spaces->toArray())}} --}}
     <form action="" class="form-inline filter">
         <div class="form-group pull-right">
             <label for="space_type">النوع: </label>
