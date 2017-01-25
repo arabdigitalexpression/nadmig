@@ -6,9 +6,11 @@
 @section('content')
     @if(count($space))
         <div class="page">
-            <header class="post-header">
-                <img class="logo" src="{{ url($space->logo) }}">
-                <div class="name">
+            <header class="post-header row">
+                <div class="col-md-3 col-md-push-9">
+                    <img class="logo" src="{{ url($space->logo) }}">
+                </div>
+                <div class="name col-md-6 col-md-pull-3">
                     <h3>{{ $space->name }}<i style="
                         @if($space->status == 'working')
                             color: #3cb878;
@@ -54,9 +56,11 @@
                             </ul>
                    
                 </div>
-                @if($space->status == 'working' && Auth::user())
-                    <a class="btn btn-default btn-orange reserve pull-left" href="{{ route('reservation.create', ['organization_slug' => $space->organization['slug']])}}" role="button">{{ trans('Space::application.reserve') }}</a>
-                @endif
+                <div class="col-md-3 col-md-pull-3 pull-left">
+                    @if($space->status == 'working' && Auth::user())
+                        <a class="btn btn-default btn-orange reserve pull-left" href="{{ route('reservation.create', ['organization_slug' => $space->organization['slug']])}}" role="button">{{ trans('Space::application.reserve') }}</a>
+                    @endif
+                </div>
             </header>
             <div class="post-excerpt">
                 {!! $space->excerpt !!}
