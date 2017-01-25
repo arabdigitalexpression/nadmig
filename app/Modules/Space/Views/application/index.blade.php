@@ -18,30 +18,44 @@
                             color: #898989;
                         @endif
                         " class="fa fa-circle" aria-hidden="true"></i>
+                        
                     </h3>
-                    <ul class="info">
-                        <li><i class="fa fa-building" aria-hidden="true"></i><a href="{{ route('organization.page', ['organization_slug' => $space->organization->slug ])}}">{{ $space->organization->name }}</a></li>
-                        <li><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $space->address }}</li>
-                        <li><i class="fa fa-phone" aria-hidden="true"></i> {{ $space->phone_number }}</li>
-                        <li><i class="fa fa-envelope" aria-hidden="true"></i><a href="mailto:{{ $space->email }}"> {{ $space->email }}</a></li>
-                        @if($space->links)
-                            @foreach($space->links as $link)
-                                    @if($link['type'] == 'website')
-                                    <li><i class="fa fa-globe" aria-hidden="true"></i> <a href="{{ $link['link'] }}">{{ $link['link'] }}</a></li>
-                                    @endif
-                            @endforeach
-                            <li>
-                                @foreach($space->links as $link)
-                                    @if($link['type'] != 'website')
-                                     <a href="{{ $link['link'] }}"><i class="fa fa-{{ $link['link'] }}" aria-hidden="true"></i></a>
-                                    @endif
-                                @endforeach
-                            </li>
-                        @endif
-                    </ul>
+
+                     <ul class="info">
+                                <li><i class="fa fa-building" aria-hidden="true"></i><a href="{{ route('organization.page', ['organization_slug' => $space->organization->slug ])}}">{{ $space->organization->name }}</a></li>
+                                <li><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $space->address }}</li>
+                                <li><i class="fa fa-phone" aria-hidden="true"></i> {{ $space->phone_number }}</li>
+                                <li><i class="fa fa-envelope" aria-hidden="true"></i><a href="mailto:{{ $space->email }}"> {{ $space->email }}</a></li>
+                                @if($space->links)
+                                    @foreach($space->links as $link)
+                                            @if($link['type'] == 'website')
+                                            <li><i class="fa fa-globe" aria-hidden="true"></i> <a href="{{ $link['link'] }}">{{ $link['link'] }}</a></li>
+                                            @endif
+                                    @endforeach
+                                    <li>
+                                        @foreach($space->links as $link)
+                                            @if($link['type'] != 'website')
+                                             <a href="{{ $link['link'] }}"><i class="fa fa-{{ $link['link'] }}" aria-hidden="true"></i></a>
+                                            @endif
+                                        @endforeach
+                                    </li>
+                                @endif
+                                @php($settings = include base_path('./resources/settings.php'))
+                                <li>
+                                    @foreach($space->space_type as $type)
+                                            <a href="{{ route('spaces', ['space_type' => $type]) }}" class="space_type_tag btn btn-default">{{ $settings['space_type'][$type] }}</a>
+                                    @endforeach
+                                </li>
+                                <li>
+                                    @foreach($space->space_equipment as $equipment)
+                                            <a href="{{ route('spaces', ['space_equipment' => $equipment]) }}" class="space_equipment_tag btn btn-default">{{ $settings['space_equipment'][$equipment] }}</a>
+                                    @endforeach
+                                </li>
+                            </ul>
+                   
                 </div>
                 @if($space->status == 'working' && Auth::user())
-                <a class="btn btn-default btn-orange reserve" href="{{ route('reservation.create', ['organization_slug' => $space->organization['slug']])}}" role="button">{{ trans('Space::application.reserve') }}</a>
+                    <a class="btn btn-default btn-orange reserve pull-left" href="{{ route('reservation.create', ['organization_slug' => $space->organization['slug']])}}" role="button">{{ trans('Space::application.reserve') }}</a>
                 @endif
             </header>
             <div class="post-excerpt">
@@ -50,10 +64,10 @@
             <div class="post-description">
                 {!! $space->description !!}
             </div>
-            <button type="button" class="btn btn-default more"><i class="fa fa-caret-down" aria-hidden="true"></i>{{trans('application.button.know_more')}}</button>
+            <button type="button" class="btn btn-default more"><i class="fa fa-caret-down pull-left" aria-hidden="true"></i>{{trans('application.button.know_more')}}</button>
+            @if($space->organization->events)
             <h3>{{ trans('Space::application.page.events') }}</h3>
             <ul class="spaces-list">
-            @if($space->organization->reservations)
                 @foreach($space->organization->reservations->sortBy('start_date')->reverse() as $reservation)
                     @if($reservation->start_session)
                         <li class="panel panel-default panel-orange">
@@ -76,8 +90,9 @@
                         </li>
                     @endif
                 @endforeach
-                @endif
+                
             </ul>
+            @endif
         </div>
     @endif
 
@@ -85,10 +100,12 @@
         $(function(){
             $('.more').on("click", function(){
                 if( $('.post-description').css("display") == "none" ){
-                    $( this ).html('<i class="fa fa-caret-up" aria-hidden="true"></i>'+"{{trans('application.button.know_less')}}");
+                    $( this ).html('<i class="fa fa-caret-up pull-left" aria-hidden="true"></i>'+"{{trans('application.button.know_less')}}");
+                    $('.post-excerpt').hide();
                     $('.post-description').show();
                 }else{
-                    $( this ).html('<i class="fa fa-caret-down" aria-hidden="true"></i>'+"{{trans('application.button.know_more')}}");
+                    $( this ).html('<i class="fa fa-caret-down pull-left" aria-hidden="true"></i>'+"{{trans('application.button.know_more')}}");
+                    $('.post-excerpt').show();
                     $('.post-description').hide();
                 }
                  

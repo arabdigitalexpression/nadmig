@@ -253,6 +253,21 @@ body{
 	background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 69%,rgba(255,255,255,1) 99%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
 }
+
+.space_type_tag {
+	padding: 6px 12px;
+    font-size: 14px;
+    border: none;
+    background: #5BC0EB;
+    color: #fff !important;
+}
+.space_equipment_tag {
+	padding: 5px;
+    font-size: 12px;
+    border: none;
+    background: #9BC53D;
+    color: #fff !important;
+}
 /* space page */
 .page h3{
 	width: 100%;
@@ -280,7 +295,7 @@ body{
 	max-width: 300px;
 	float: right;
 	padding: 10px;
-	max-height: 250px;
+	/*max-height: 250px;*/
 }
 .page .name{
 	float: right;
@@ -311,7 +326,6 @@ body{
 }
 .page .reserve{
 	float: left;
-	margin-top: 15px;
 }
 .page form{
 	width: 70%;
@@ -320,7 +334,7 @@ body{
 .post-excerpt{
 	width: 100%;
 	float: right;
-	margin: 5px 0 0 5px;
+	margin: 10px;
 }
 .post-description{
 	width: 100%;

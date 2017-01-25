@@ -42,8 +42,8 @@ class SpaceController extends ApplicationController {
 
 		}elseif(array_key_exists('space_type', Input::get())) {
 			unset($params['page']);
-			$spaces = Space::Where(function ($query) use($sq) {
-						$st = explode(",", Input::get("space_type"));
+			$st = explode(",", Input::get("space_type"));
+			$spaces = Space::Where(function ($query) use($st) {
 						foreach($st as $item){
 						   	if ($item != '') {
 						   		$query->orwhere('space_type', 'like',  '%' . $item .'%');
