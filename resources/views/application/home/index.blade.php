@@ -22,8 +22,8 @@
             @endif
     	@endforeach
         </ul>
-        {{-- @if (count($reservations) > 4) --}}
-        @if (count($reservations))
+        @if (count($reservations) > 4)
+        {{-- @if (count($reservations)) --}}
             <h3>على مد الشوف <a class="pull-left btn btn-default" href="{{ route('events')}}">{{ trans('application.more') }} >></a></h3>
             <ul class="spaces-list-small">
                 @foreach ($reservations as $index => $reservation)
