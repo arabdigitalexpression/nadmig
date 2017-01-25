@@ -26,8 +26,8 @@
         {{-- @if (count($reservations)) --}}
             <h3>على مد الشوف <a class="pull-left btn btn-default" href="{{ route('events')}}">{{ trans('application.more') }} >></a></h3>
             <ul class="spaces-list-small">
-                @foreach ($reservations as $index => $reservation)
-                    @if (isset($reservation) && $index > 3) 
+                @foreach (array_slice($reservations, 4, null, true) as $index => $reservation)
+                    {{-- @if ($index > 3)  --}}
                     {{-- @if (isset($reservation))  --}}
                         <li class="panel panel-default panel-orange">
                             <a href="{{ route('event.page', ['event_slug' => $reservation->event->slug ]) }}">
@@ -39,7 +39,7 @@
                                 <li><i class="fa fa-clock-o" aria-hidden="true"></i> من {{ ArabicTime($reservation->start_session['start_time']) }}
                             </ul>
                         </li>
-                    @endif
+                    {{-- @endif --}}
                 @endforeach
             </ul>
         @endif    
