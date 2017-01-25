@@ -292,7 +292,7 @@ body{
 	font-size: 14px;
 }
 .page .logo{
-	max-width: 300px;
+	/*max-width: 300px;*/
 	float: right;
 	padding: 10px;
 	/*max-height: 250px;*/
@@ -350,7 +350,7 @@ body{
 	width: 100%;
 }
 .page .post-header p{
-	float: right;
+	float: left;
 	padding: 20px 0 10px;
 }
 /*reservations*/

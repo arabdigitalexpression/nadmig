@@ -52,7 +52,7 @@ class EventController extends ApplicationController {
                         $query->where('start_date', Input::get('start_date'));  
                       }
                   }
-            })->whereIn('organization_id', $organizations)->where('event_type', 'public')->where('status', 'accepted')->orderBy('sessions.start_date', 'desc')->paginate(10);
+            })->whereIn('organization_id', $organizations)->where('event_type', 'public')->where('status', 'accepted')->paginate(10);
     }
     else if (isset($params['governorate'])){
       unset($params['page']);

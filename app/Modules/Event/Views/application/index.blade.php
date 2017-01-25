@@ -5,11 +5,14 @@
 @section('content')
     @if(count($event))
          <div class="page">
-            <header class="post-header">
-                @if($event->reservation->artwork)
-                    <img class="logo" src="{{ url($event->reservation->artwork) }}">
-                @endif
-                <div class="name">
+            <header class="post-header row">
+                <div class="col-md-3 col-md-push-9">
+                    @if($event->reservation->artwork)
+                        <img class="logo" src="{{ url($event->reservation->artwork) }}">
+                    @endif
+                </div>
+                
+                <div class="name col-md-6 col-md-pull-3">
                     <h3>{{ $event->reservation->name }}</h3>
                     
                     <ul class="info">
@@ -18,10 +21,18 @@
                         <li><i class="fa fa-user" aria-hidden="true"></i> {{ $event->reservation->facilitator_name }}</li>
                         <li><i class="fa fa-envelope" aria-hidden="true"></i><a href="mailto:{{ $event->reservation->facilitator_email }}"> {{ $event->reservation->facilitator_email }}</a></li>
                         <li><i class="fa fa-phone" aria-hidden="true"></i> {{ $event->reservation->facilitator_phone }}</li>
+                        <li>
+                            @php($settings = include base_path('./resources/settings.php'))
+                            @if ($event->reservation->event_tags)
+                                @foreach ($event->reservation->event_tags as $tag)
+                                    <a href="{{ route('spaces', ['event_tags' => $tag]) }}" class="space_type_tag btn btn-default">{{ $settings['event_tags'][$tag] }}</a>
+                                @endforeach
+                            @endif
+                        </li>
                     </ul>
                 </div>
                 @if($event->reservation->apply)
-                <div class="pull-left">
+                <div class="col-md-3 col-md-pull-3 pull-left">
                         @if(Auth::check())
                             @if(count($event->apply) == 0)
                                 @if(\Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::createFromFormat('d/m/Y', $event->reservation->apply_deadline), false) >= 0)
@@ -111,7 +122,11 @@
                         </div>
                     @endif
             </header>
-            <p>{{ $event->reservation->description }}</p>
+            <div class="row">
+                <div class="col-lg-12 pull-right">
+                    <p>{{ $event->reservation->description }}</p>
+                </div>
+            </div>
             <h4>الجلسات</h4>
             <ul class="spaces-list sessions-list">
             @foreach($event->reservation->sessions as $session)
