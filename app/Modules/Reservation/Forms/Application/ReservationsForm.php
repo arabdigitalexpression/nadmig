@@ -138,8 +138,9 @@ class ReservationsForm extends AdminForm
     protected function getGroupAge(){
         return array(
             'null' => 'غير معيّن',
-            '3_11' => 'سن من ٣ إلى ١١',
-            '12_17' => 'من سن ١٢ إلى ١٧',
+            '7_11' => 'من ٧ إلى ١١',
+            '12_15' => 'من ١٢ إلى ١٥',
+            '12_17' => 'من ١٢ إلى ١٧',
             '18_up' => 'من ١٨ فيما فوق'
             );
     }
