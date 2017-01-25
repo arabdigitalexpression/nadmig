@@ -28,7 +28,7 @@
             <ul class="spaces-list-small">
                 @foreach (array_slice($reservations->toArray(), 4, null, true) as $index => $reservation)
                     {{-- @if ($index > 3)  --}}
-                    {{-- @if (isset($reservation))  --}}
+                    @if (isset($reservation)) 
                         <li class="panel panel-default panel-orange">
                             <a href="{{ route('event.page', ['event_slug' => $reservation->event->slug ]) }}">
                                 <div class="panel-heading">{{ str_limit($reservation->name, $limit = 30, $end = '...') }}</div>
@@ -39,7 +39,7 @@
                                 <li><i class="fa fa-clock-o" aria-hidden="true"></i> من {{ ArabicTime($reservation->start_session['start_time']) }}
                             </ul>
                         </li>
-                    {{-- @endif --}}
+                    @endif
                 @endforeach
             </ul>
         @endif    
