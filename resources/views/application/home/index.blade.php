@@ -27,8 +27,8 @@
             <h3>على مد الشوف <a class="pull-left btn btn-default" href="{{ route('events')}}">{{ trans('application.more') }} >></a></h3>
             <ul class="spaces-list-small">
                 @foreach ($reservations as $index => $reservation)
-                    {{-- @if (isset($reservation) && $index > 3)  --}}
-                    @if (isset($reservation)) 
+                    @if (isset($reservation) && $index > 3) 
+                    {{-- @if (isset($reservation))  --}}
                         <li class="panel panel-default panel-orange">
                             <a href="{{ route('event.page', ['event_slug' => $reservation->event->slug ]) }}">
                                 <div class="panel-heading">{{ str_limit($reservation->name, $limit = 30, $end = '...') }}</div>
