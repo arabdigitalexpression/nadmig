@@ -8,7 +8,7 @@
             <header class="post-header">
                 <div class="post-title">
                     <h2>{{ $page->title }}
-                    @if (Auth::user()->hasRole('admin'))
+                    @if (Auth::user() && Auth::user()->hasRole('admin'))
                         <a href="{{ route('dashboard.page.edit', ['page' => $page->id])}}" class="pull-left">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </a>
