@@ -42,7 +42,7 @@
                                         @endforeach
                                     </li>
                                 @endif
-                                @php($settings = include base_path('./resources/settings.php'))
+                                @php($settings = unserialize(file_get_contents(base_path('./resources/settings.bin'))))
                                 <li>
                                     @foreach($space->space_type as $type)
                                             <a href="{{ route('spaces', ['space_type' => $type]) }}" class="space_type_tag btn btn-default">{{ $settings['space_type'][$type] }}</a>

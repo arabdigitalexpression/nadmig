@@ -6,7 +6,7 @@ class ReservationsForm extends AdminForm
 {
     public function buildForm()
     {
-        $settings = include base_path('./resources/settings.php');
+        $settings = unserialize(file_get_contents(base_path('./resources/settings.bin')));
         $this
             ->add('name', 'text', [
                 'label' => trans('Reservation::application.fields.reservation.name')

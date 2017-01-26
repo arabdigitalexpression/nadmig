@@ -8,7 +8,7 @@ class SettingsForm extends AdminForm
 {
     public function buildForm()
     {
-        $settings = include base_path('./resources/settings.php');
+        $settings = unserialize(file_get_contents(base_path('./resources/settings.bin')));
         $this
             ->add('email', 'text', [
                 'label' => trans('dashboard.fields.setting.email')
@@ -28,25 +28,36 @@ class SettingsForm extends AdminForm
             ->add('logo', 'file', [
                 'label' => trans('dashboard.fields.setting.logo'),
                 'attr' => ['class' => '']
+            ])
+            ->add('space', 'static', [
+                'label' => false,
+                'tag' => 'div',
+                'attr' => ['class' => 'page-header'],
+                'value' => trans('dashboard.fields.setting.space')
+            ])
+            ->add('space_equipment', 'textarea', [
+                'label' => trans('dashboard.fields.setting.space_equipment'),
+                'attr' => ['style' => 'direction: ltr'],
+                'value' => $this->print_arr($settings['space_equipment'])
+            ])
+            ->add('space_type', 'textarea', [
+                'label' => trans('dashboard.fields.setting.space_type'),
+                'attr' => ['style' => 'direction: ltr'],
+                'value' => $this->print_arr($settings['space_type'])
+            ])
+            ->add('event_tags', 'textarea', [
+                'label' => trans('dashboard.fields.setting.event_tags'),
+                'attr' => ['style' => 'direction: ltr'],
+                'value' => $this->print_arr($settings['event_tags'])
             ]);
-            // ->add('space', 'static', [
-            //     'label' => false,
-            //     'tag' => 'div',
-            //     'attr' => ['class' => 'page-header'],
-            //     'value' => trans('dashboard.fields.setting.space')
-            // ])
-            // ->add('space_equipment', 'textarea', [
-            //     'label' => trans('dashboard.fields.setting.space_equipment'),
-            //     'value' => implode(" ",$settings['space_equipment'])
-            // ])
-            // ->add('space_type', 'textarea', [
-            //     'label' => trans('dashboard.fields.setting.space_type'),
-            //     'value' => implode("\n",$settings['space_type'])
-            // ])
-            // ->add('event_tags', 'textarea', [
-            //     'label' => trans('dashboard.fields.setting.event_tags'),
-            //     'value' => implode(" ",$settings['event_tags'])
-            // ]);
         parent::buildForm();
+    }
+    private function print_arr($array){
+        
+        $text = "";
+        foreach ($array as $key => $value) {
+            $text = $text  . "\n" . $key . ' => ' . $value;
+         }
+        return $text;
     }
 }

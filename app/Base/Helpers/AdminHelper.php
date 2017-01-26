@@ -255,7 +255,7 @@ if (!function_exists('getWeekdays')) {
 }
 if (!function_exists('getSpaceEquipment')) {
     function getSpaceEquipment($equipment){
-        $settings = include base_path('./resources/settings.php');
+        $settings = unserialize(file_get_contents(base_path('./resources/settings.bin')));
         return $settings['space_equipment'][$equipment];
     }
 }

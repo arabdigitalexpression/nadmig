@@ -2,6 +2,7 @@
 
 use Auth;
 use Hash;
+use Mail;
 use Carbon\Carbon;
 use Laracasts\Flash\Flash;
 use App\Base\Controllers\ApplicationController;
@@ -104,6 +105,11 @@ public function store(ReservationRequest $request, $organization_slug)
             LogController::Log($session, 'created', $reservation);
             $reservation->sessions()->save($session);
         }
+        // send email to who created the reservation 
+        Mail::send('Reservation::email.created', ['reservation_url' => $reservation->url_id], function($message) use ($reservation) {
+            $message->to($reservation->organization->manager->email, $reservation->organization->manager->name)
+                    ->subject(trans('Reservation::email.created'));
+        });
         return $this->redirectRoutePath("index", null, $reservation);
     }
     return redirect()->route('auth.login');
@@ -197,6 +203,11 @@ public function accept($reservation_url_id)
             LogController::Log($session, 'accepted', $reservation);
             $session->save();
         }
+        // send email to who created the reservation 
+        Mail::send('Reservation::email.accepted', ['reservation_url' => $reservation->url_id], function($message) use ($reservation) {
+            $message->to($reservation->user->email, $reservation->user->name)
+                    ->subject(trans('Reservation::email.accepted'));
+        });
         if($reservation->event_type == 'public'){
             if(!Event::where('reservation_id', $reservation->id)->exists()){
                 $event = Event::create(['name' => $reservation->name, 'reservation_id' => $reservation->id]);

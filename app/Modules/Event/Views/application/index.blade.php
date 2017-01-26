@@ -22,7 +22,7 @@
                         <li><i class="fa fa-envelope" aria-hidden="true"></i><a href="mailto:{{ $event->reservation->facilitator_email }}"> {{ $event->reservation->facilitator_email }}</a></li>
                         <li><i class="fa fa-phone" aria-hidden="true"></i> {{ $event->reservation->facilitator_phone }}</li>
                         <li>
-                            @php($settings = include base_path('./resources/settings.php'))
+                            @php($settings = unserialize(file_get_contents(base_path('./resources/settings.bin'))))
                             @if ($event->reservation->event_tags)
                                 @foreach ($event->reservation->event_tags as $tag)
                                     <a href="{{ route('spaces', ['event_tags' => $tag]) }}" class="space_type_tag btn btn-default">{{ $settings['event_tags'][$tag] }}</a>

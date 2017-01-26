@@ -9,7 +9,7 @@ class SpacesForm extends AdminForm
 {
     public function buildForm()
     {
-        $settings = include base_path('./resources/settings.php');
+        $settings = unserialize(file_get_contents(base_path('./resources/settings.bin')));
         $this
             ->add('space_info', 'static', [
 
@@ -227,7 +227,7 @@ class SpacesForm extends AdminForm
         return $array;
     }
     protected function getSpaceEquipment(){
-        $settings = include base_path('./resources/settings.php');
+        $settings = unserialize(file_get_contents(base_path('./resources/settings.bin')));
         return $settings['space_equipment'];
     }
     protected function WeekDaysForm()

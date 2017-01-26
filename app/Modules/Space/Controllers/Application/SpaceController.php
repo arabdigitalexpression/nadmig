@@ -9,7 +9,7 @@ class SpaceController extends ApplicationController {
 
 	public function index()
 	{	
-		$settings = include base_path('./resources/settings.php');
+		$settings = unserialize(file_get_contents(base_path('./resources/settings.bin')));
 		$params = Input::get();
 		if(array_key_exists('space_equipment', Input::get())){
 			unset($params['space_equipment']);

@@ -30,7 +30,7 @@ class EventController extends ApplicationController {
   }
   public function all()
   {  	
-    $settings = include base_path('./resources/settings.php');
+    $settings = unserialize(file_get_contents(base_path('./resources/settings.bin')));
     $params = Input::get();
     if(isset($params['event_tags']) && $params['event_tags'] != ''){
       $organizations = [];

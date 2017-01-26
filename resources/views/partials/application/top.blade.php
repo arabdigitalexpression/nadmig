@@ -45,6 +45,15 @@
                                 <li><a href="{{ url('/trainer') }}">{{ trans('application.menu.trainer') }}</a>
                             @endif
                             <li><a href="{{ route('application.user.index') }}">{{ trans('application.menu.user') }}</a></li>
+                            @if(!is_null(Auth::user()->manageOrganization))
+                                <li><a href="{{ route('reservation.create', ['organization_slug' => Auth::user()->manageOrganization->slug]) }}">
+                                    {{trans('Reservation::dashboard.menu.reservation.add')}}
+                                </a></li>
+                            @elseif(!is_null(Auth::user()->manageSpace))
+                                <li><a href="{{ route('reservation.create', ['organization_slug' => Auth::user()->manageSpace->organization->slug]) }}">
+                                    {{trans('Reservation::dashboard.menu.reservation.add')}}
+                                </a></li>
+                            @endif
                             <li><a href="{{ route('reservation') }}">{{ trans('application.menu.reservation') }}</a></li>
                             <li><a href="{{ url('/auth/logout') }}">{{ trans('application.menu.logout') }}</a></li>
                         </ul>
