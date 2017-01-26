@@ -25,7 +25,6 @@ class PageRequest extends Request
     {
         return [
             'content'     => 'required',
-            'description' => 'required|max:160',
             'title'       => 'required|min:3',
         ];
     }
