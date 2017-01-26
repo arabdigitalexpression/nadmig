@@ -229,7 +229,7 @@
                 $newPanel.find("#period_type").attr("id", "period_type_" + hash);
                 $newPanel.find("#period_period").attr("id", "period_period_" + hash);
                 $newPanel.find("#fees").attr("id", "fees_" + hash);
-                $newPanel.find('.agreement').attr("class", "agreement_text_"+hash);
+                $newPanel.find('.agreement').attr("class", "agreement_text_"+hash+" agreement_text_action");
                 $("#accordion").append($newPanel.fadeIn());
                 getSpaceData($("#space_select_" + hash ).val(), hash, true);
                 $("#space_select_" + hash ).change(function() {
@@ -284,8 +284,12 @@
             }
             function agreement(json){
                 $('.agreement_text_'+hash).attr("data-content", json.agreement_text);
-                $('.agreement_text_'+hash).popover();
             }
+            $(document).on('click', '.agreement_text_action', function () {
+                var content = $(this).attr("data-content");
+                $('#text_agreement .content').text(content);
+                $('#text_agreement').modal('toggle');
+            });
             function date(){
                 var $input = $('#start_date_' + hash).pickadate({
                     firstDay: 0,
@@ -423,4 +427,13 @@
     </div>
   </div>
 </div>
-
+<div class="modal fade" tabindex="-1" role="dialog" id="text_agreement" aria-labelledby="text_agreement">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header"> <button class="pull-left" style="background: none; border: none;" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button> <h4 class="modal-title">قواعد إستخدام المساحة</h4> </div>
+      <div class="content" style="padding: 0 15px;">
+        
+      </div>
+    </div>
+  </div>
+</div>
