@@ -15,12 +15,24 @@
                 @endif
             </header>
             <div class="post-header pull-right">
-                <p>{{ $program->description }}</p>
+                <p>{!! $program->description !!}</p>
             </div>    
             <ul class="spaces-list">
 
                 @foreach($program->events as $event)
-                <li class="panel panel-default panel-orange">
+                   <li class="panel panel-default panel-orange">
+                        <a href="{{ route('event.page', ['event_slug' => $event->slug ]) }}">
+                            <div class="panel-heading">{{ str_limit($event->reservation->name, $limit = 30, $end = '...') }}</div>
+                        </a>   
+                        <div style="background-image: url({{ url($event->reservation->artwork) }});" class="space-icon"> 
+                        </div>
+                        <ul class="space-info">
+                            <li><i class="fa fa-calendar" aria-hidden="true"></i> {{ ArabicDate($event->reservation->start_session['start_date']) }} </li>
+                            <li><i class="fa fa-clock-o" aria-hidden="true"></i> من {{ ArabicTime($event->reservation->start_session['start_time']) }}</li>
+                            <li>{{ str_limit($event->reservation->description, $limit = 85, $end = '...') }}</li>
+                        </ul>
+                    </li>
+                {{-- <li class="panel panel-default panel-orange">
                     <a href="{{ route('event.page', ['event_slug' => $event->slug ]) }}">
                         <div class="panel-heading">{{ str_limit($event->reservation->name, $limit = 30, $end = '...') }}</div>
                     </a>   
@@ -38,7 +50,7 @@
                         <li>{{ str_limit($event->reservation->description, $limit = 85, $end = '...') }}</li>
                     </ul>
                     
-                </li>
+                </li> --}}
             @endforeach
         </ul>
     @endif
