@@ -14,24 +14,24 @@ class SessionsForm extends AdminForm
                 'choices' => $this->getSpaces(),
                 'selected' => $this->space_id,
                 'attr' => ['id' => 'space_select'],
-                'label' => trans('Session::application.fields.session.where') . ' | <a class="agreement" href="#" data-toggle="popover" title=" قواعد و شروط و توجيهات الاستغلال" data-content="">قواعد إستخدام المساحة<i class="fa fa-info-circle" aria-hidden="true"></i></a><i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw" style="font-size:12px; display:none;"></i>'
+                'label' => trans('Reservation::application.fields.session.where') . ' | <a class="agreement" href="#" data-toggle="popover" title=" قواعد و شروط و توجيهات الاستغلال" data-content="">قواعد إستخدام المساحة<i class="fa fa-info-circle" aria-hidden="true"></i></a><i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw" style="font-size:12px; display:none;"></i>'
             ])
             ->add('name', 'text', [
-                'label' => trans('Session::application.fields.session.name'),
+                'label' => trans('Reservation::application.fields.session.name'),
                 'attr' => ['id' => 'name'],
                 'value' => function ($name) {
                     return $name;
                 }
             ])
             ->add('start_date', 'text', [
-                'label' => trans('Session::application.fields.session.start_time_date'),
+                'label' => trans('Reservation::application.fields.session.start_time_date'),
                 'attr' => ['id' => 'start_date'],
                 'value' => function ($name) {
                     return $name;
                 }
             ])
             ->add('start_time', 'text', [
-                'label' => trans('Session::application.fields.session.start_time_time'),
+                'label' => trans('Reservation::application.fields.session.start_time_time'),
                 'attr' => ['id' => 'start_time'],
                 'value' => function ($start_time) {
                     return $start_time;
@@ -39,16 +39,12 @@ class SessionsForm extends AdminForm
             ])
             ->add('fees', 'number', [
                 'attr' => ['id' => 'fees'],
-                'label' => trans('Reservation::application.fields.reservation.fees') . '<span class="fees"></span>'
+                'label' => trans('Reservation::application.fields.session.fees') . '<span class="fees"></span>'
             ]);
-            $this->OptionAndPeriod('period', trans('Session::dashboard.fields.session.period'), false, true, true, false, false);
-            $this->add('excerpt', 'textarea', [
-                'label' => trans('Reservation::application.fields.reservation.excerpt'),
+            $this->OptionAndPeriod('period', trans('Reservation::dashboard.fields.session.period'), false, true, true, false, false);
+            $this->add('description', 'textarea', [
+                'label' => trans('Reservation::application.fields.session.description'),
                 'attr' => ['id' => 'excerpt']
-            ])
-            ->add('description', 'textarea', [
-                'label' => trans('Reservation::application.fields.reservation.description'),
-                'attr' => ['id' => 'description']
             ]);
     }
     protected function getSpaces(){

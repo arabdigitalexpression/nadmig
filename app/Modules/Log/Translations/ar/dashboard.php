@@ -8,24 +8,18 @@ return [
     */
 
     "log" => [
-        "create"                    => "Create log",
-        "edit"                      => "Edit log",
-        "index"                     => "log",
-        "show"                      => "Show log"
+        "index"                     => "السجلات",
     ],
     "fields" => [
         "log" => [
-            "language_id"           => "Language",
-            "content"               => "Content",
-            "description"           => "Description",
-            "title"                 => "Title"
+            "text"           => "السجل",
+            "ip_address"               => "عنوان ال IP"
         ]
     ],
     "menu" => [
         "log" => [
-            "add"                   => "Add an log",
-            "all"                   => "All log",
-            "root"                  => "Logs"
+            "all"                   => "كل السجلات",
+            "root"                  => "السجلات"
         ]
     ]
 ];

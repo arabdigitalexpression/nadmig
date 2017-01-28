@@ -10,22 +10,24 @@ return [
     "reservation" => [
         "create"                    => "أنشئ طلب حجز",
         "edit"                      => "حرّر طلب الحجز",
-        "index"                     => "reservation",
+        "index"                     => "الاحجوزات",
         "show"                      => "أظهر طلبات الحجز"
     ],
     "fields" => [
         "reservation" => [
-            "language_id"           => "Language",
-            "content"               => "Content",
+            "name"           => "الاسم",
+            "status"               => "الحالة",
             "description"           => "الوصف",
-            "title"                 => "العنوان"
+            "title"                 => "العنوان",
+            "organization_id" => "المؤسسة",
+            "user_id" => "طالب الحجز"
         ]
     ],
     "menu" => [
         "reservation" => [
-            "add"                   => "Add an reservation",
-            "all"                   => "All reservation",
-            "root"                  => "Reservations"
+            "add"                   => "أضف حجز",
+            "all"                   => "كل الحجوزات",
+            "root"                  => "الحجوزات"
         ]
     ]
 ];

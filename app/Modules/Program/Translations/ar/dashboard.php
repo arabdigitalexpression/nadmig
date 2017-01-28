@@ -10,22 +10,22 @@ return [
     "program" => [
         "create"                    => "أنشئ برنامجًا",
         "edit"                      => "حرّر البرنامج",
-        "index"                     => "program",
+        "index"                     => "البرامج",
         "show"                      => "أظهر البرنامج"
     ],
     "fields" => [
         "program" => [
-            "language_id"           => "Language",
-            "content"               => "Content",
-            "description"           => "الوصف",
-            "title"                 => "العنوان"
+            "name"           => "أسم البرامج",
+            "picture"               => "عمل فني",
+            "events"           => "أختر الفاعليات المنتمية لهذا البرنامج",
+            "description" => "الوصف"
         ]
     ],
     "menu" => [
         "program" => [
             "add"                   => "أضِف برنامجا",
             "all"                   => "كلّ البرامج",
-            "root"                  => "Programs"
+            "root"                  => "البرامج"
         ]
     ]
 ];

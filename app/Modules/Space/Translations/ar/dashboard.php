@@ -10,7 +10,7 @@ return [
     "space" => [
         "create"                    => "أنشئ مساحة",
         "edit"                      => "حرّر المساحة",
-        "index"                     => "space",
+        "index"                     => "المساحة",
         "show"                      => "أظهر المساحة"
     ],
     "fields" => [
@@ -78,14 +78,15 @@ return [
             "change_fees" => "تكاليف تغير الحجز",
             "usage_period_key" => "فترة الاستخدام مقابل الدنيا",
             "hours" => "ساعات", 
-            "days" => "الايام"
+            "days" => "الايام",
+            "governorate" => "المحافظة"
         ]
     ],
     "menu" => [
         "space" => [
-            "add"                   => "Add an space",
-            "all"                   => "All space",
-            "root"                  => "Spaces"
+            "add"                   => "أضف مساحة",
+            "all"                   => "كل المساحات",
+            "root"                  => "المساحات"
         ]
     ]
 ];

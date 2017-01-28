@@ -10,13 +10,13 @@ return [
     "event" => [
         "create"                    => "أنشئ فعالية",
         "edit"                      => "حرّر الفعالية",
-        "index"                     => "event",
+        "index"                     => "الفاعليات",
         "show"                      => "أظهر الفعالية"
     ],
     "fields" => [
         "event" => [
-            "language_id"           => "Language",
-            "content"               => "Content",
+            "status"           => "الحالة",
+            "reservation_id"               => "الأسم",
             "description"           => "الوصف",
             "title"                 => "العنوان"
         ]

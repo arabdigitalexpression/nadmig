@@ -10,22 +10,23 @@ return [
     "session" => [
         "create"                    => "أنشئ جلسة",
         "edit"                      => "حرّر جلسة",
-        "index"                     => "session",
+        "index"                     => "الجلسات",
         "show"                      => "أظهر الجلسات"
     ],
     "fields" => [
         "session" => [
-            "language_id"           => "اللغة",
-            "content"               => "المحتوى",
-            "description"           => "الوصف",
-            "title"                 => "العنوان"
+            "start_date"           => "تاريخ البداية",
+            "start_time"           => "وقت البداية",
+            "status"               => "الحالة",
+            "space_id"                 => "المساحة",
+            "reservation_id"                 => "الحجز"
         ]
     ],
     "menu" => [
         "session" => [
             "add"                   => "أضِف جلسة",
             "all"                   => "كل الجلسات",
-            "root"                  => "Sessions"
+            "root"                  => "الجلسات"
         ]
     ]
 ];
