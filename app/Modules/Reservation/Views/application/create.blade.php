@@ -220,13 +220,13 @@
                 editor_init("#description_" + hash);
                 getSpaceData($("#space_select_" + hash ).val(), true);
                 $("#space_select_" + hash ).change(function() {
-                    getSpaceData($(this).val());
+                    getSpaceData($(this).val(), null, hash);
                 });
                 
             }
-            function getSpaceData(space_id,  is_data) {
-                var picker = date();
-                var picker_time = time();
+            function getSpaceData(space_id,  is_data, session) {
+                var picker = date(session);
+                var picker_time = time(session);
                 $(".panel-body").find(".fa-spin").show();
                 $.getJSON('/api/space/' + space_id , function( json ) {
                     agreement(json);
@@ -286,8 +286,8 @@
                 $('#text_agreement .content').text(content);
                 $('#text_agreement').modal('toggle');
             });
-            function date(){
-                var $input = $('#start_date_' + hash).pickadate({
+            function date(session){
+                var $input = $('#start_date_' + session).pickadate({
                     firstDay: 0,
                     format: 'yyyy/mm/dd',
                 });
@@ -327,8 +327,8 @@
                 }
                 return Atype;
             }
-            function time(){
-                var $input = $('#start_time_' + hash).pickatime();
+            function time(session){
+                var $input = $('#start_time_' + session).pickatime();
                 return $input.pickatime( 'picker' );
             }
             function getNotWorkingDays(difference){
