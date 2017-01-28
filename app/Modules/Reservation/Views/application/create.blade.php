@@ -265,10 +265,8 @@
                        @if(Auth::user()->hasRole('user') || is_null(Auth::user()->manageOrganization) || is_null(Auth::user()->manageSpace) || ( Auth::user()->hasRole('organization_manager') && Auth::user()->manageOrganization && Auth::user()->manageOrganization->id !== $extra->id ) || ( Auth::user()->hasRole('space_manager') && Auth::user()->manageSpace && Auth::user()->manageSpace->organization->id != $extra->id) )
                             
                         @endif
-                             
-                        
-                        var date = moment(context.select).format("YYYY/MM/DD");
-                        $.getJSON('/api/space/' + space_id + '/' + date, function( data ) {
+                        console.log(space_id);
+                        $.getJSON('/api/space/' + space_id + '/' + moment(context.select).format("YYYY/MM/DD"), function( data ) {
                             $.each(data, function( index, value ) {
                               picker_time.set('disable', [{ from: getTime(value.start_time), to: getTime(moment(value.start_time, "hh:mm a").add(value.period.period, value.period.type).format("h:mm A"))}]);
                             }); 
