@@ -33,7 +33,6 @@
                 </div>
                 @if($event->reservation->apply)
                 <div class="col-md-3 col-md-pull-3 pull-left">
-                        @if(Auth::check())
                             @if(count($event->apply) == 0)
                                 @if(\Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::createFromFormat('d/m/Y', $event->reservation->apply_deadline), false) >= 0)
                                     <p class="text-muted" data-toggle="tooltip" data-placement="right" title="{{  ArabicDate(\Carbon\Carbon::createFromFormat('d/m/Y', $event->reservation->apply_deadline)->format('Y/m/d')) }}">
@@ -88,42 +87,6 @@
                                     {{  ArabicTime($event->apply[0]->created_at->format('h:i A')) }}
                                 </p>
                             @endif
-                        @else
-                            <p class="text-muted">
-                                {{ 'أخر موعد للتقديم ' }}
-                                </br>
-                                {{  ArabicDate(\Carbon\Carbon::createFromFormat('d/m/Y', $event->reservation->apply_deadline)->format('Y/m/d')) }}
-                                </br>
-                                
-
-                            </p>
-                            </br>
-                            <button type="button" class="btn btn-primary btn-green" data-toggle="modal" data-target=".bs-example-modal-lg">{{ trans('Event::application.apply.text') }} </button>  
-                            @if($event->reservation->apply_cost > 0)
-                                <i style="font-size: 13px;" class="fa fa-money" aria-hidden="true"></i>  {{ $event->reservation->apply_cost . ' جنيه' }}
-                            @else
-                                {{ 'مجانًا' }}
-                            @endif
-                             <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-                              <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close pull-left" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="myModalLabel">{{ trans('Event::application.apply.text') }}</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                       <h4>{{ trans('Event::application.apply.agreement') }}</h4>
-                                       <p> {!! nl2br(e($event->reservation->apply_agreement)) !!} </p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <a role="button" href="{{ route('auth.login')}}" class="btn btn-default btn-primary reserve">{{ trans('Event::application.apply.login.must') }}</a>
-                                      </div>
-                                </div>
-                              </div>
-                            </div>
-                        @endif
-                        </div>
-                    @endif
             </header>
             <div class="row">
                 <div class="col-lg-12 pull-right">
