@@ -259,7 +259,7 @@
                             day = 0;
                         }
                         
-                       @if(Auth::user()->hasRole('user') || is_null(Auth::user()->manageOrganization) || is_null(Auth::user()->manageSpace) || ( Auth::user()->hasRole('organization_manager') && Auth::user()->manageOrganization && Auth::user()->manageOrganization->id !== $extra->id ) || ( Auth::user()->hasRole('space_manager') && Auth::user()->manageSpace && Auth::user()->manageSpace->organization->id != $extra->id) )
+                       @if(Auth::user()->hasRole('user'))
                             picker_time.set('disable', false);
                             if(working_hours[week_days[day]]['from'] != "" && working_hours[week_days[day]]['to'] != ""){
                                 picker_time.set('disable', [{ from: [00, 0], to: getTime(moment(working_hours[week_days[day]].from, "hh:mm a").subtract(30, 'minutes').format("h:mm A"))},{ from: getTime(moment(working_hours[week_days[day]].to, "hh:mm a").add(30, 'minutes').format("h:mm A")) , to:[23, 30]}]);
