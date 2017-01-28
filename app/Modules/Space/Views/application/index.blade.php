@@ -44,14 +44,18 @@
                                 @endif
                                 @php($settings = unserialize(file_get_contents(base_path('./resources/settings.bin'))))
                                 <li>
-                                    @foreach($space->space_type as $type)
-                                            <a href="{{ route('spaces', ['space_type' => $type]) }}" class="space_type_tag btn btn-default">{{ $settings['space_type'][$type] }}</a>
-                                    @endforeach
+                                    @if(is_array($space->space_type))
+                                        @foreach($space->space_type as $type)
+                                                <a href="{{ route('spaces', ['space_type' => $type]) }}" class="space_type_tag btn btn-default">{{ $settings['space_type'][$type] }}</a>
+                                        @endforeach
+                                    @endif
                                 </li>
                                 <li>
-                                    @foreach($space->space_equipment as $equipment)
-                                            <a href="{{ route('spaces', ['space_equipment' => $equipment]) }}" class="space_equipment_tag btn btn-default">{{ $settings['space_equipment'][$equipment] }}</a>
-                                    @endforeach
+                                    @if(is_array($space->space_equipment))
+                                        @foreach($space->space_equipment as $equipment)
+                                                <a href="{{ route('spaces', ['space_equipment' => $equipment]) }}" class="space_equipment_tag btn btn-default">{{ $settings['space_equipment'][$equipment] }}</a>
+                                        @endforeach
+                                    @endif
                                 </li>
                             </ul>
                    
