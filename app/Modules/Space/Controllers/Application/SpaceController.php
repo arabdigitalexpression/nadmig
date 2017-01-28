@@ -64,7 +64,7 @@ class SpaceController extends ApplicationController {
 	            $sessions['start_timestamp'] = strtotime($sessions['start_date']);
 	            foreach ($sessions as $key_2 => $session) {
 	                if ($this->isJson($session)) {
-	                  $space->organization->reservations[$key]['sessions'][$key_1][$key_2] = json_decode($session);
+	                  $reservations[$key]['sessions'][$key_1][$key_2] = json_decode($session);
 	                }     
 	            }  
 	        }
