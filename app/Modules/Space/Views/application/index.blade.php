@@ -73,10 +73,10 @@
                 {!! $space->description !!}
             </div>
             <button type="button" class="btn btn-default more"><i class="fa fa-caret-down pull-left" aria-hidden="true"></i>{{trans('application.button.know_more')}}</button>
-            @if($space->organization->reservations)
+            @if($space->reservations)
             <h3>{{ trans('Space::application.page.events') }}</h3>
             <ul class="spaces-list">
-                @foreach($space->organization->reservations->sortBy('start_date')->reverse() as $reservation)
+                @foreach($space->reservations->sortBy('start_date')->reverse() as $reservation)
                     @if($reservation->start_session)
                         <li class="panel panel-default panel-orange">
                             <a href="{{ route('event.page', ['event_slug' => $reservation->event->slug ]) }}">

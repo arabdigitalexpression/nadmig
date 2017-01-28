@@ -75,7 +75,6 @@ class SpaceController extends ApplicationController {
 	        }
         }
         $space->reservations = $reservations;
-        dd($space);
 		return view('Space::application.index', compact('space'));
 	}
 }
