@@ -87,7 +87,7 @@
                             <ul class="space-info">
                                 <li><i class="fa fa-calendar" aria-hidden="true"></i> {{ ArabicDate($reservation->start_session['start_date']) }} </li>
                                 <li><i class="fa fa-clock-o" aria-hidden="true"></i> من {{ ArabicTime($reservation->start_session['start_time']) }}</li>
-                                <li>{{ str_limit($reservation->description, $limit = 85, $end = '...') }}</li>
+                                <li>{!! str_limit($reservation->description, $limit = 85, $end = '...') !!}</li>
                             </ul>
                         </li>
                     @endif
