@@ -71,7 +71,7 @@ class SpaceController extends ApplicationController {
 	        $sessions = $reservation->sessions()->where('space_id', $space->id)->get()->toArray();
 	        if($sessions){
 	        	$this->sortBy("start_date",$sessions);
-	        	$space->organization->reservations[$key]['start_session'] = $sessions[0];
+	        	$reservations[$key]['start_session'] = $sessions[0];
 	        }
         }
         $space->reservations = $reservations;
