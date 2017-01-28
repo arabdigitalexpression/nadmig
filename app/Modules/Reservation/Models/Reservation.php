@@ -8,7 +8,7 @@ class Reservation extends Model{
 
 
 
-	protected $fillable = ['url_id', 'space_id', 'name','artwork', 'user_id', 'facilitator_name', 'facilitator_email', 'facilitator_phone', 'group_name', 'apply_agreement', 'group_age', 'max_attendees', 'expected_attendees', 'reserved_attendees', 'event_type', 'dooropen_time', 'dooropen_period', 'links', 'apply','apply_cost', 'apply_deadline', 'status', 'description', 'actions', 'event_tags'];
+	protected $fillable = ['url_id', 'space_id', 'name','artwork', 'user_id', 'facilitator_name', 'facilitator_email', 'facilitator_phone', 'group_name', 'apply_agreement', 'group_age', 'max_attendees', 'expected_attendees', 'reserved_attendees', 'event_type', 'dooropen_time', 'dooropen_period', 'links', 'apply','apply_cost', 'apply_deadline', 'status', 'description', 'actions', 'event_tags', 'apply_link'];
 
 	public function sessions()
     {

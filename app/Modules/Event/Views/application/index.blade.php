@@ -38,6 +38,13 @@
                                 @if(\Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::createFromFormat('d/m/Y', $event->reservation->apply_deadline), false) >= 0)
                                     <p class="text-muted" data-toggle="tooltip" data-placement="right" title="{{  ArabicDate(\Carbon\Carbon::createFromFormat('d/m/Y', $event->reservation->apply_deadline)->format('Y/m/d')) }}">
                                         {{ 'أخر موعد للتقديم بعد ' . \Carbon\Carbon::createFromFormat('d/m/Y', $event->reservation->apply_deadline)->diffForHumans(null, true) }}
+                                        </br>
+                                        <button type="button" class="btn btn-primary btn-green" data-toggle="modal" data-target=".bs-example-modal-lg">{{ trans('Event::application.apply.text') }} </button>  
+                                        @if($event->reservation->apply_cost > 0)
+                                            <i style="font-size: 13px; color: #000;" class="fa fa-money" aria-hidden="true"></i>  <span style="color:#000;">{{ $event->reservation->apply_cost . ' جنيه' }}</span>
+                                        @else
+                                            <span style="color:#000;">{{ 'مجانًا' }}</span>
+                                        @endif
                                     </p>
                                     <script type="text/javascript">
                                         $(function () {
@@ -49,25 +56,21 @@
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <button type="button" class="close pull-left" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                <h4 class="modal-title" id="myModalLabel">{{ trans('Event::application.apply.text') }}</h4>
+                                                <h4 class="modal-title" id="myModalLabel">{{ trans('Event::application.apply.text') }} <span class="apply_deadline"> أخر موعد للتقديم {{  ArabicDate(\Carbon\Carbon::createFromFormat('d/m/Y', $event->reservation->apply_deadline)->format('Y/m/d')) }}</span></h4>
                                             </div>
                                             <div class="modal-body">
                                                <h4>{{ trans('Event::application.apply.agreement') }}</h4>
                                                <p> {!! nl2br(e($event->reservation->apply_agreement)) !!} </p>
+                                               @if($event->reservation->apply_link)
+                                                    <iframe class="apply_link_frame" src="{{$event->reservation->apply_link}}"></iframe>
+                                               @endif
                                             </div>
-                                            <div class="modal-footer">
+                                            {{-- <div class="modal-footer">
                                                 <a role="button" href="{{ route('event.apply', ['event_slug' => $event->slug ])}}" class="btn btn-default btn-primary reserve">{{ trans('Event::application.apply.text') }}</a>
-                                              </div>
+                                              </div> --}}
                                         </div>
                                       </div>
                                     </div>
-                                    </br>
-                                    <button type="button" class="btn btn-primary btn-green" data-toggle="modal" data-target=".bs-example-modal-lg">{{ trans('Event::application.apply.text') }} </button>  
-                                    @if($event->reservation->apply_cost > 0)
-                                        <i style="font-size: 13px;" class="fa fa-money" aria-hidden="true"></i>  {{ $event->reservation->apply_cost . ' جنيه' }}
-                                    @else
-                                        {{ 'مجانًا' }}
-                                    @endif
                                 @else
                                     <p class="text-muted">
                                         {{ 'إنتهى التقديم' }}

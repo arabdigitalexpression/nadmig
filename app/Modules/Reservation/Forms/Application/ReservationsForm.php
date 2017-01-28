@@ -118,6 +118,9 @@ class ReservationsForm extends AdminForm
                 'label' => trans('Reservation::application.fields.reservation.apply_deadline'),
                 'attr' => ['id' => 'apply_deadline']
             ])
+            ->add('apply_link', 'text', [
+                'label' => trans('Reservation::application.fields.reservation.apply_link')
+            ])
             ->add('apply_agreement', 'textarea', [
                 'label' => trans('Reservation::application.fields.reservation.apply_agreement')
             ]);

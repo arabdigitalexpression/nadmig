@@ -31,6 +31,7 @@ class ReservationRequest extends Request {
             'apply_cost' => 'sometimes',
             'apply_deadline' => 'sometimes|date_format:d/m/Y',
             'apply_agreement' => 'sometimes', 
+            'apply_link' => 'sometimes', 
             'description' => 'sometimes'
         ];
     }

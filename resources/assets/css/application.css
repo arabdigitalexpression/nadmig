@@ -413,3 +413,16 @@ body{
 .sessions-list li{
 	height: auto;
 }
+.apply_link_frame {
+	width: 100%;
+	height: 500px;
+	border: none;
+}
+.apply_deadline {
+	font-size: 12px;
+    margin-right: 10px;
+    border-radius: 5px;
+    background: #D0021B;
+    padding: 5px;
+    color: #fff; 
+}
