@@ -46,27 +46,9 @@ class ReservationsForm extends AdminForm
             ])
             ->add('facilitator_name', 'text', [
                 'label' => trans('Reservation::application.fields.reservation.facilitator_name'),  
-                'value' => function ($facilitator_name) {
-                            if($this->facilitator_name){
-                                return $this->facilitator_name;
-                            }
-                            else if(Auth::check()){
-                                return Auth::user()->name;
-                            }
-                            return $facilitator_name;
-                        }
             ])
             ->add('facilitator_email', 'email', [
                 'label' => trans('Reservation::application.fields.reservation.facilitator_email'),  
-                'value' => function ($facilitator_email) {
-                            if($this->facilitator_email){
-                                return $this->facilitator_email;
-                            }
-                            else if(Auth::check()){
-                                return Auth::user()->email;
-                            }
-                            return $facilitator_email;
-                        }
             ])
             ->add('facilitator_phone', 'text', [
                 'label' => trans('Reservation::application.fields.reservation.facilitator_phone')
