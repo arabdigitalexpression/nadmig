@@ -8,10 +8,10 @@ return [
     */
 
     "permission" => [
-        "create"                    => "Create permission",
-        "edit"                      => "Edit permission",
+        "create"                    => "أنشئ صلحية",
+        "edit"                      => "عدل صلحية",
         "index"                     => "الصلاحيات",
-        "show"                      => "Show permission"
+        "show"                      => "أظهر صلحية"
     ],
     "fields" => [
         "permission" => [
@@ -22,9 +22,9 @@ return [
     ],
     "menu" => [
         "permission" => [
-            "add"                   => "Add an permission",
-            "all"                   => "All permission",
-            "root"                  => "Permissions"
+            "add"                   => "أضف الصلاحيات",
+            "all"                   => "كل الصلاحيات",
+            "root"                  => "الصلاحيات"
         ]
     ]
 ];

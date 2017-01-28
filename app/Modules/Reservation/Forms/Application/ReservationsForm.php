@@ -91,7 +91,7 @@ class ReservationsForm extends AdminForm
             $this->add('event_tags', 'choice', [
                 'choices' => $settings['event_tags'],
                 'selected' => $this->event_tags,
-                'label' => trans('Reservation::dashboard.fields.reservation.event_tags'),
+                'label' => trans('Reservation::application.fields.reservation.event_tags'),
                 'attr' => ['class' => 'chosen-select chosen-rtl'],
                 'multiple' => true
             ]);
