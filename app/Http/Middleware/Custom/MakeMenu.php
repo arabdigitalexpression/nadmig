@@ -54,7 +54,7 @@ class MakeMenu
                     Events::AddMenus($menu);
                     Reservation::AddMenus($menu);
                     Sessions::AddMenus($menu);
-                    Apply::AddMenus($menu);
+                    // Apply::AddMenus($menu);
                     // School::AddMenus($menu);
                     // Attendees::AddMenus($menu);
                     // Trainer::AddMenus($menu);
@@ -75,7 +75,7 @@ class MakeMenu
                 Events::AddMenus($menu);
                 Reservation::AddMenus($menu);
                 Sessions::AddMenus($menu);
-                Apply::AddMenus($menu);
+                // Apply::AddMenus($menu);
                 // Attendees::AddMenus($menu);
                 // Report::AddMenus($menu);
              }
@@ -84,7 +84,7 @@ class MakeMenu
                 Events::AddMenus($menu);
                 Reservation::AddMenus($menu);
                 Sessions::AddMenus($menu);
-                Apply::AddMenus($menu);
+                // Apply::AddMenus($menu);
                 // Report::AddMenus($menu);
              }
             
