@@ -211,22 +211,29 @@
                 $newPanel.find("#name").attr("id", "name_" + hash);
                 $newPanel.find("#start_time").attr("id", "start_time_" + hash);
                 $newPanel.find("#description").attr("id", "description_" + hash);
-                $newPanel.find("#space_select").attr("id", "space_select_" + hash);
+                $newPanel.find("#space_select").attr("data-session", hash);
                 $newPanel.find("#period_type").attr("id", "period_type_" + hash);
                 $newPanel.find("#period_period").attr("id", "period_period_" + hash);
                 $newPanel.find("#fees").attr("id", "fees_" + hash);
                 $newPanel.find('.agreement').attr("class", "agreement_text_"+hash+" agreement_text_action");
                 $("#accordion").append($newPanel.fadeIn());
                 editor_init("#description_" + hash);
-                getSpaceData($("#space_select_" + hash ).val(), true);
-                $("#space_select_" + hash ).change(function() {
-                    getSpaceData($(this).val());
-                });
-                
+                date(hash);
+                time(hash);
+                getSpaceData($("#space_select").val(), true, hash);
+                $newPanel.find('#space_select').on('change', function(){
+                    var space = $(this).val();
+                    var session = $(this).attr('data-session');
+                    getSpaceData(space, null, session);
+                    $newPanel.find("#start_date_"+hash).pickadate('picker').on({ set: function(context) {
+                        set_time(context.select, session, space);
+                        }
+                    })
+                })
             }
-            function getSpaceData(space_id,  is_data) {
-                var picker = date();
-                var picker_time = time();
+            function getSpaceData(space_id,  is_data, session) {
+                var picker = $("#start_date_"+session).pickadate('picker');
+                var picker_time = $("#start_time_"+session).pickatime('picker');
                 $(".panel-body").find(".fa-spin").show();
                 $.getJSON('/api/space/' + space_id , function( json ) {
                     agreement(json);
@@ -249,33 +256,25 @@
                         picker.set('enable', true);
                         picker_time.clear();
                     }
-
-                    
-                    picker.on({ set: function(context) {
-                        var day = null;
-                        if(moment(context.select).weekday() < 6){
-                            day = moment(context.select).weekday();
-                        }else{
-                            day = 0;
-                        }
-                       
-                       @if(Auth::user()->hasRole('user') || is_null(Auth::user()->manageOrganization) || is_null(Auth::user()->manageSpace) || ( Auth::user()->hasRole('organization_manager') && Auth::user()->manageOrganization && Auth::user()->manageOrganization->id !== $extra->id ) || ( Auth::user()->hasRole('space_manager') && Auth::user()->manageSpace && Auth::user()->manageSpace->organization->id != $extra->id) )
-                            picker_time.set('disable', false);
-                            if(working_hours[week_days[day]]['from'] != "" && working_hours[week_days[day]]['to'] != ""){
-                                    picker_time.set('disable', [{ from: [00, 0], to: getTime(moment(working_hours[week_days[day]].from, "hh:mm a").subtract(30, 'minutes').format("h:mm A"))},{ from: getTime(moment(working_hours[week_days[day]].to, "hh:mm a").add(30, 'minutes').format("h:mm A")) , to:[23, 30]}]);
-                                }
-                        @endif
-                        // console.log(space_id);
-                        $.getJSON('/api/space/' + space_id + '/' + moment(context.select).format("YYYY/MM/DD"), function( data ) {
-                            $.each(data, function( index, value ) {
-                              picker_time.set('disable', [{ from: getTime(value.start_time), to: getTime(moment(value.start_time, "hh:mm a").add(value.period.period, value.period.type).format("h:mm A"))}]);
-                            }); 
-                        });
-                      }
-                    })
                 })
                 .done(function() {
                     $(".panel-body").find(".fa-spin").hide();
+                });
+            }
+            function set_time(date,session, space_id){
+                var picker_time = $("#start_time_"+session).pickatime('picker');
+                var day = moment(date).weekday();
+                picker_time.set('disable', false);
+                @if(Auth::user()->hasRole('user') || is_null(Auth::user()->manageOrganization) || is_null(Auth::user()->manageSpace) || ( Auth::user()->hasRole('organization_manager') && Auth::user()->manageOrganization && Auth::user()->manageOrganization->id !== $extra->id ) || ( Auth::user()->hasRole('space_manager') && Auth::user()->manageSpace && Auth::user()->manageSpace->organization->id != $extra->id) )
+                    if(working_hours[week_days[day]]['from'] != "" && working_hours[week_days[day]]['to'] != ""){
+                        picker_time.set('disable', [{ from: [00, 0], to: getTime(moment(working_hours[week_days[day]].from, "hh:mm a").subtract(30, 'minutes').format("h:mm A"))},{ from: getTime(moment(working_hours[week_days[day]].to, "hh:mm a").add(30, 'minutes').format("h:mm A")) , to:[23, 30]}]);
+                    }
+                @endif
+                $.getJSON('/api/space/' + space_id + '/' + moment(date).format("YYYY/MM/DD"), function( data ) {
+                    $.each(data, function( index, value ) {
+                      picker_time.set('disable', [{ from: getTime(value.start_time), to: getTime(moment(value.start_time, "hh:mm a").add(value.period.period, value.period.type).format("h:mm A"))}]);
+                    }); 
+                    return;
                 });
             }
             function agreement(json){
@@ -286,9 +285,8 @@
                 $('#text_agreement .content').text(content);
                 $('#text_agreement').modal('toggle');
             });
-            function date(){
-                console.log(hash);
-                var $input = $('#start_date_' + hash).pickadate({
+            function date(session){
+                var $input = $('#start_date_' + session).pickadate({
                     firstDay: 0,
                     format: 'yyyy/mm/dd',
                 });
@@ -328,8 +326,8 @@
                 }
                 return Atype;
             }
-            function time(){
-                var $input = $('#start_time_' + hash).pickatime();
+            function time(session){
+                var $input = $('#start_time_' + session).pickatime();
                 return $input.pickatime( 'picker' );
             }
             function getNotWorkingDays(difference){
