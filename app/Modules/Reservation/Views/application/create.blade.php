@@ -220,13 +220,13 @@
                 editor_init("#description_" + hash);
                 getSpaceData($("#space_select_" + hash ).val(), true);
                 $("#space_select_" + hash ).change(function() {
-                    getSpaceData($(this).val(), null, hash);
+                    getSpaceData($(this).val());
                 });
                 
             }
-            function getSpaceData(space_id,  is_data, session) {
-                var picker = date(session);
-                var picker_time = time(session);
+            function getSpaceData(space_id,  is_data) {
+                var picker = date();
+                var picker_time = time();
                 $(".panel-body").find(".fa-spin").show();
                 $.getJSON('/api/space/' + space_id , function( json ) {
                     agreement(json);
@@ -262,8 +262,8 @@
                        @if(Auth::user()->hasRole('user') || is_null(Auth::user()->manageOrganization) || is_null(Auth::user()->manageSpace) || ( Auth::user()->hasRole('organization_manager') && Auth::user()->manageOrganization && Auth::user()->manageOrganization->id !== $extra->id ) || ( Auth::user()->hasRole('space_manager') && Auth::user()->manageSpace && Auth::user()->manageSpace->organization->id != $extra->id) )
                             picker_time.set('disable', false);
                             if(working_hours[week_days[day]]['from'] != "" && working_hours[week_days[day]]['to'] != ""){
-                                picker_time.set('disable', [{ from: [00, 0], to: getTime(moment(working_hours[week_days[day]].from, "hh:mm a").subtract(30, 'minutes').format("h:mm A"))},{ from: getTime(moment(working_hours[week_days[day]].to, "hh:mm a").add(30, 'minutes').format("h:mm A")) , to:[23, 30]}]);
-                            }
+                                    picker_time.set('disable', [{ from: [00, 0], to: getTime(moment(working_hours[week_days[day]].from, "hh:mm a").subtract(30, 'minutes').format("h:mm A"))},{ from: getTime(moment(working_hours[week_days[day]].to, "hh:mm a").add(30, 'minutes').format("h:mm A")) , to:[23, 30]}]);
+                                }
                         @endif
                         console.log(space_id);
                         $.getJSON('/api/space/' + space_id + '/' + moment(context.select).format("YYYY/MM/DD"), function( data ) {
@@ -286,8 +286,9 @@
                 $('#text_agreement .content').text(content);
                 $('#text_agreement').modal('toggle');
             });
-            function date(session){
-                var $input = $('#start_date_' + session).pickadate({
+            function date(){
+                console.log(hash);
+                var $input = $('#start_date_' + hash).pickadate({
                     firstDay: 0,
                     format: 'yyyy/mm/dd',
                 });
@@ -327,8 +328,8 @@
                 }
                 return Atype;
             }
-            function time(session){
-                var $input = $('#start_time_' + session).pickatime();
+            function time(){
+                var $input = $('#start_time_' + hash).pickatime();
                 return $input.pickatime( 'picker' );
             }
             function getNotWorkingDays(difference){
