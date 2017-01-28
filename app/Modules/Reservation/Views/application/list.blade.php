@@ -20,7 +20,7 @@
                         <td scope="row">{{ $key+1 }}</th>
                         <td>{{ $reservation->name }}</td>
                         <td>{{ $reservation->status }}</td>
-                        <td>{{ $reservation->created_at }}</td>
+                        <td>{{ $reservation->created_at }}{{ $reservation->user->name }}</td>
                         <td>
                         <a class="edit" href="{{ route('application.reservation.index', ['reservation_url_id' => $reservation->url_id])}}"><i class="fa fa-eye" aria-hidden="true"></i></a>
                         @if(\Carbon\Carbon::now()->subDay()->diffInDays(\Carbon\Carbon::createFromTimeStamp($reservation->sessions[0]['start_date']), false) > intval($reservation->organization->min_time_before_usage_to_edit->period) || ( Auth::user()->hasRole('organization_manager') && Auth::user()->manageOrganization && Auth::user()->manageOrganization->id == $reservation->organization->id ))
