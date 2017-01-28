@@ -252,7 +252,7 @@
                 $.getJSON('/api/space/' + space_id , function( json ) {
                     agreement(json);
                     fees(json);
-                    min_res(json);
+                    min_res(json, hash);
                     var working_hours = json.working_hours_days;
                     var working_week_days = json.working_week_days;
                     var difference = $(week_days).not(working_week_days).get();
