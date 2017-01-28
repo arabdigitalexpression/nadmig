@@ -124,7 +124,7 @@
             </header>
             <div class="row">
                 <div class="col-lg-12 pull-right">
-                    <p>{{ $event->reservation->description }}</p>
+                    <p>{!! $event->reservation->description !!}</p>
                 </div>
             </div>
             <h4>الجلسات</h4>

@@ -35,7 +35,7 @@
                 @endif
                 </div>
             </header>
-            <p>{{ $reservation->description }}</p>
+            <p>{!! $reservation->description !!}</p>
             <div class="row">
 
               <div class="col-md-4">
