@@ -265,7 +265,7 @@
                                     picker_time.set('disable', [{ from: [00, 0], to: getTime(moment(working_hours[week_days[day]].from, "hh:mm a").subtract(30, 'minutes').format("h:mm A"))},{ from: getTime(moment(working_hours[week_days[day]].to, "hh:mm a").add(30, 'minutes').format("h:mm A")) , to:[23, 30]}]);
                                 }
                         @endif
-                        console.log(space_id);
+                        // console.log(space_id);
                         $.getJSON('/api/space/' + space_id + '/' + moment(context.select).format("YYYY/MM/DD"), function( data ) {
                             $.each(data, function( index, value ) {
                               picker_time.set('disable', [{ from: getTime(value.start_time), to: getTime(moment(value.start_time, "hh:mm a").add(value.period.period, value.period.type).format("h:mm A"))}]);
