@@ -260,13 +260,13 @@
                         }
                         
                        @if(Auth::user()->hasRole('user'))
-                            picker_time.set('disable', false);
-                            if(working_hours[week_days[day]]['from'] != "" && working_hours[week_days[day]]['to'] != ""){
-                                picker_time.set('disable', [{ from: [00, 0], to: getTime(moment(working_hours[week_days[day]].from, "hh:mm a").subtract(30, 'minutes').format("h:mm A"))},{ from: getTime(moment(working_hours[week_days[day]].to, "hh:mm a").add(30, 'minutes').format("h:mm A")) , to:[23, 30]}]);
-                            }
+                           
                         @endif
-                             
-                        
+                        picker_time.set('disable', false);
+                        if(working_hours[week_days[day]]['from'] != "" && working_hours[week_days[day]]['to'] != ""){
+                            picker_time.set('disable', [{ from: [00, 0], to: getTime(moment(working_hours[week_days[day]].from, "hh:mm a").subtract(30, 'minutes').format("h:mm A"))},{ from: getTime(moment(working_hours[week_days[day]].to, "hh:mm a").add(30, 'minutes').format("h:mm A")) , to:[23, 30]}]);
+                        }    
+                        // getting the old reservation time
                         var date = moment(context.select).format("YYYY/MM/DD");
                         $.getJSON('/api/space/' + space_id + '/' + date, function( data ) {
                             $.each(data, function( index, value ) {
