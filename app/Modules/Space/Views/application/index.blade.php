@@ -79,20 +79,14 @@
                 @foreach($space->organization->reservations->sortBy('start_date')->reverse() as $reservation)
                     @if($reservation->start_session)
                         <li class="panel panel-default panel-orange">
-                            <a href="{{ route('event.page', ['event_slug' => $reservation->event->toArray()['slug'] ]) }}">
+                            <a href="{{ route('event.page', ['event_slug' => $reservation->event->slug ]) }}">
                                 <div class="panel-heading">{{ str_limit($reservation->name, $limit = 30, $end = '...') }}</div>
                             </a>   
-                                <img src="{{ url($reservation->artwork) }}" class="space-icon img-responsive">
+                            <div style="background-image: url({{ url($reservation->artwork) }});" class="space-icon"> 
+                            </div>
                             <ul class="space-info">
-
                                 <li><i class="fa fa-calendar" aria-hidden="true"></i> {{ ArabicDate($reservation->start_session['start_date']) }} </li>
-                                <li><i class="fa fa-clock-o" aria-hidden="true"></i> من {{ ArabicTime($reservation->start_session['start_time']) }} إلى 
-                                @if($reservation->start_session['period']->type == 'mins')
-                                    {{ ArabicTime(\Carbon\Carbon::createFromFormat('h:i a', $reservation->start_session['start_time'])->addMinutes(intval($reservation->start_session['period']->period))->format('h:i A')) }}</li>
-                                @elseif($reservation->start_session['period']->type == 'hours')
-                                    {{ ArabicTime(\Carbon\Carbon::createFromFormat('h:i a', $reservation->start_session['start_time'])->addHours(intval($reservation->start_session['period']->period))->format('h:i A')) }}</li>
-                                @endif
-                                
+                                <li><i class="fa fa-clock-o" aria-hidden="true"></i> من {{ ArabicTime($reservation->start_session['start_time']) }}</li>
                                 <li>{{ str_limit($reservation->description, $limit = 85, $end = '...') }}</li>
                             </ul>
                         </li>
