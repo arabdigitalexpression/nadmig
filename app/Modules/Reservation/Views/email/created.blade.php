@@ -1,18 +1,16 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="ar">
     <head>
         <meta charset="utf-8">
     </head>
     <body>
-        <h2>Verify Your Email Address</h2>
+        <h2>وكّد عنوان بريدك</h2>
 
         <div>
-            Thanks for creating an account with the verification demo app.
-            Please follow the link below to verify your email address
-            {{ URL::to('reservation/' . $reservation_url) }}.<br/>
-
+		الخطوة الأخيرة لإتمام فتح الحساب:
+		<br />
+		اتّبع الرابط التالي لتوكيد عنوان بريدك الإلكتروني            {{ URL::to('reservation/' . $reservation_url) }}.<br/>
         </div>
 
     </body>
 </html>
-
