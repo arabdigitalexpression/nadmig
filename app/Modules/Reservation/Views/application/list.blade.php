@@ -15,7 +15,7 @@
                 </tr>
                 </thead>
             <tbody>
-                @foreach($reservations as $key => $reservation)
+                @foreach($reservations->sortBy('created_at')->reverse() as $key => $reservation)
                     <tr>
                         <td scope="row">{{ $key+1 }}</th>
                         <td>{{ $reservation->name }}</td>
