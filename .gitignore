@@ -10,3 +10,4 @@ public/packages
 resources/assets/vendor
 vendor
 _ide_helper.php
+resources/settings.bin
