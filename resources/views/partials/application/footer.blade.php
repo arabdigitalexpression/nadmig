@@ -1,3 +1,4 @@
+<script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-58de70416f2cd9c8"></script> 
 <script>
     @if(!empty(Config::get('settings')->analytics_id))
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
