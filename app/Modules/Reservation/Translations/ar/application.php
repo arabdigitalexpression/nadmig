@@ -56,5 +56,9 @@ return [
             "all"                   => "كل طلبات الحجز",
             "root"                  => "Reservations"
         ]
+    ],
+    "email" => [
+        "accepted" => "تم الموافقة على حجزك",
+        "created" => "تم إنشاء حجز"
     ]
 ];
