@@ -23,11 +23,14 @@ public function all()
         foreach ($reservations as $reservation) {
             $reservation->organization;
             foreach ($reservation->sessions->toArray() as $key => $session) {
-                $reservation->sessions[$key]['start_date'] = strtotime($session['start_date']);
+                $reservation->sessions[$key]['start_date'] = $session['start_date'];
+
             }
             $sessions = $reservation->sessions->toArray();
             $this->sortBy("start_date",$sessions);
             $reservation['sessions'] = $sessions;
+            $reservation['start_date'] = strtotime($sessions[0]['start_date']);
+            $reservation['start_time'] = $sessions[0]['start_time'];
         }
         
         return view('Reservation::application.list', compact('reservations'));
