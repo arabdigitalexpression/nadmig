@@ -14,7 +14,7 @@ class HomeController extends ApplicationController
      */
     public function index()
     {
-     	$reservations = Reservation::Where('event_type', 'public')->where('status', 'accepted')->limit(16)->get();
+     	$reservations = Reservation::Where('event_type', 'public')->where('status', 'accepted')->limit(15)->get();
      	foreach ($reservations as $reservation) {
      	    $reservation['start_date'] = $reservation->sessions[0]['start_date'];
      	    $reservation['start_session'] = $reservation->sessions[0];
