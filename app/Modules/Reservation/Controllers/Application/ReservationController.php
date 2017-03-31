@@ -109,7 +109,7 @@ public function store(ReservationRequest $request, $organization_slug)
             $reservation->sessions()->save($session);
         }
         // send email to who created the reservation 
-        Mail::send('Reservation::email.created', ['reservation_url' => $reservation->url_id], function($message) use ($reservation) {
+        Mail::send('Reservation::email.created', ['reservation' => $reservation], function($message) use ($reservation) {
             $message->to($reservation->organization->manager->email, $reservation->organization->manager->name)
                     ->subject(trans('Reservation::email.created'));
         });
