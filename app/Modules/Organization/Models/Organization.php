@@ -35,7 +35,7 @@ class Organization extends Model {
     }
     public function manager()
     {
-        return $this->hasOne('App\Modules\User\Models\User', 'id');
+        return $this->hasOne('App\Modules\User\Models\User', 'id', 'manager_id');
     }
     public function school(){
 		return $this->belongsTo('App\Modules\School\Models\School');
