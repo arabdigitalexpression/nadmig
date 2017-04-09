@@ -163,10 +163,10 @@ if (!function_exists('getGroupAge')) {
 
         $group_age = array(
             'null' => 'غير معيّن',
-            '7_11' => 'من ٧ إلى ١١',
-            '12_15' => 'من ١٢ إلى ١٥',
-            '12_17' => 'من ١٢ إلى ١٧',
-            '18_up' => 'من ١٨ فيما فوق'
+            '7_11' => 'من 7 إلى 11',
+            '12_15' => 'من 12 إلى 15',
+            '12_17' => 'من 12 إلى 17',
+            '18_up' => 'من 18 فما فوق'
             );
 
         return $group_age[$key];
@@ -175,8 +175,8 @@ if (!function_exists('getGroupAge')) {
 if (!function_exists('getEventtype')) {
     function getEventtype($key){
         $type = array(
-            'private' => 'خاص',
-            'public' => 'عام'
+            'private' => 'خاصة',
+            'public' => 'عامة'
             );
         return $type[$key];
     }
@@ -195,7 +195,7 @@ if (!function_exists('ArabicPeriod')) {
 }
 if (!function_exists('ArabicCancelFees')) {
     function ArabicCancelFees($cancel){
-        $change_fees_type = array("null" => "لا يوجد","percentage" => "نسبة من قيمة الحجز الكلى للمساحات","value" => "قيمة");
+        $change_fees_type = array("null" => "لا يوجد","percentage" => "نسبة من قيمة الحجز الكلي للمساحات","value" => "قيمة");
         if ($cancel->type == 'percentage') {
             return $change_fees_type[$cancel->type] . " " . $cancel->amount . "%";
         }
@@ -233,7 +233,7 @@ if (!function_exists('GovArabic')) {
                 'monufia' => 'المنوفية',
                 'minya' => 'المنيا',
                 'new_valley' => 'الوادي الجديد',
-                'cyber_land' => 'أرض الفضاء'
+                'cyber_land' => 'الفضاء السبراني'
             );
             return $governorate[$key];
         }
@@ -269,7 +269,7 @@ if (!function_exists('GetGovArabic')) {
                 'monufia' => 'المنوفية',
                 'minya' => 'المنيا',
                 'new_valley' => 'الوادي الجديد',
-                'cyber_land' => 'أرض الفضاء'
+                'cyber_land' => 'الفضاء السبراني'
             );
             return $governorate;
         }

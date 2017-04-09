@@ -7,7 +7,7 @@ return [
     */
     "create" => [
         "fail"                      => "فشل إنشاء المَورِد.",
-        "success"                   => "تمّ بنجاح إنشاء المورِد"
+        "success"                   => "تمّ بنجاح إنشاء المَورِد"
     ],
     "datatables" => [               // DataTables, files can be found @ https://datatables.net/plug-ins/i18n/
         "sInfo"                     => "تُعرَض المدخلات من _START_ إلى _END_ من بين _TOTAL_",
@@ -51,7 +51,7 @@ return [
                 'text' => 'نشاطات',
                 'created_at' => 'أَنشئ في'
             ],
-            'more' => 'المزيد',
+            'more'                  => 'المزيد',
             'bounce_rate'           => "Bounce rate",
             'browsers'              => "Browser",
             'chart_country'         => "Country",
@@ -105,7 +105,7 @@ return [
         "index"                     => "Languages",
         "show"                      => "Show language"
     ],
-    "last_login"                    => "آخر ولوج في",
+    "last_login"                    => "آخر ولوج كان في",
     "menu" => [
         "article" => [
             "add"                   => "Add an Article",
