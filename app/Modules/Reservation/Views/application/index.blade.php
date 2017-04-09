@@ -17,6 +17,9 @@
                         @if($reservation->status == "accepted")
                             <i style="color:#39b54a; font-size: 20px;" class="fa fa-check" aria-hidden="true"></i>
                         @endif
+                        @if($reservation->status == "deleted")
+                            <i style="color:#D0021B; font-size: 20px;" class="fa fa-trash" aria-hidden="true"></i>
+                        @endif
                     </h3>
                     <ul class="info">
                         <li><i class="fa fa-building" aria-hidden="true"></i><a href="{{ route('organization.page', ['organization_slug' => $reservation->organization->slug ])}}">{{ $reservation->organization->name }}</a></li>
@@ -32,6 +35,9 @@
                 @endif
                 @if(Auth::check() && (Auth::user()->hasRole('admin') || (Auth::user()->id == $reservation->user_id)))
                     <a href="{{ route('application.reservation.edit', ['reservation_url_id' => $reservation->url_id ])}}"> <i style="color:#898989; font-size: 16px;" class="fa fa-pencil" aria-hidden="true"> تعديل </i></a>
+                @endif
+                @if(Auth::check() && $reservation->status == 'accepted' && ((Auth::user()->hasRole('admin') || (Auth::user()->manageOrganization['id'] == $reservation->organization_id))) )
+                    <a href="{{ route('application.reservation.del', ['reservation_url_id' => $reservation->url_id ])}}"> <i style="color:#D0021B; font-size: 16px;" class="fa fa-trash" aria-hidden="true"></i></a>
                 @endif
                 </div>
             </header>

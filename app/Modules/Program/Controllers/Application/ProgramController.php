@@ -8,16 +8,14 @@ class ProgramController extends ApplicationController {
   public function index(Program $program)
   {
   	foreach ($program->events as $event) {
-		$event->reservation->sessions;
-		$event_sessions = $event->reservation->sessions->toArray();
-		foreach ($event_sessions as $key => $session) {
-			$event_sessions[$key]['start_timestamp'] = strtotime($session['start_date']);
-		}
-			// dd($event_sessions);
-        $this->sortBy("start_timestamp",$event_sessions);
-        $event['start_session'] = $event_sessions[0];
+  		$event->reservation->sessions;
+  		$event_sessions = $event->reservation->sessions->toArray();
+  		foreach ($event_sessions as $key => $session) {
+  			$event_sessions[$key]['start_timestamp'] = strtotime($session['start_date']);
+  		}
+          $this->sortBy("start_timestamp",$event_sessions);
+          $event->reservation->sessions = $event_sessions;
   	};
-  	// dd($program->toArray());
     return view('Program::application.index', compact('program'));
   }
   public function programs()

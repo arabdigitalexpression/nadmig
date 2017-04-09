@@ -31,8 +31,10 @@
                         </li>
                     </ul>
                 </div>
-                @if($event->reservation->apply)
+                
                 <div class="col-md-3 col-md-pull-3 pull-left">
+                    <div class="addthis_inline_share_toolbox"></div>
+                    @if($event->reservation->apply)
                         @if(\Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::createFromFormat('d/m/Y', $event->reservation->apply_deadline), false) >= 0)
                             <p class="text-muted" data-toggle="tooltip" data-placement="right" title="{{  ArabicDate(\Carbon\Carbon::createFromFormat('d/m/Y', $event->reservation->apply_deadline)->format('Y/m/d')) }}">
                                 {{ 'أخر موعد للتقديم بعد ' . \Carbon\Carbon::createFromFormat('d/m/Y', $event->reservation->apply_deadline)->diffForHumans(null, true) }}
@@ -66,9 +68,10 @@
                                     {{-- <div class="modal-footer">
                                         <a role="button" href="{{ route('event.apply', ['event_slug' => $event->slug ])}}" class="btn btn-default btn-primary reserve">{{ trans('Event::application.apply.text') }}</a>
                                       </div> --}}
+
                                 </div>
                               </div>
-                            </div>
+                            
                         @else
                             <p class="text-muted">
                                 {{ 'إنتهى التقديم' }}
@@ -77,6 +80,7 @@
                             </p>
                         @endif
                   @endif  
+                  </div>
             </header>
             <div class="row">
                 <div class="col-lg-12 pull-right">
@@ -107,4 +111,6 @@
             </ul>
         </div>
     @endif
+    
 @endsection
+

@@ -19,15 +19,18 @@ private $imageColumn = "artwork";
 public function all()
 {
     if(Auth::check()){
-        $reservations = Auth::user()->reservations()->where("status", "!=" ,"deleted")->get();
+        $reservations = Auth::user()->reservations()->get();
         foreach ($reservations as $reservation) {
             $reservation->organization;
             foreach ($reservation->sessions->toArray() as $key => $session) {
-                $reservation->sessions[$key]['start_date'] = strtotime($session['start_date']);
+                $reservation->sessions[$key]['start_date'] = $session['start_date'];
+
             }
             $sessions = $reservation->sessions->toArray();
             $this->sortBy("start_date",$sessions);
             $reservation['sessions'] = $sessions;
+            $reservation['start_date'] = strtotime($sessions[0]['start_date']);
+            $reservation['start_time'] = $sessions[0]['start_time'];
         }
         
         return view('Reservation::application.list', compact('reservations'));
@@ -40,7 +43,7 @@ public function index($reservation_url_id)
         abort(404);
     }
     if(Auth::check() && (Auth::user()->hasRole('admin') || (Auth::user()->hasRole('organization_manager') && Auth::user()->manageOrganization['id'] == $reservation->organization_id) ||  (Auth::user()->hasRole('space_manager') && Auth::user()->manageSpace->organization['id'] == $reservation->organization_id) || (Auth::user()->id == $reservation->user_id))){
-        $sessions = $reservation->sessions()->where("status", "!=" ,"deleted")->get();
+        $sessions = $reservation->sessions()->get();
         foreach ($sessions->toArray() as $key => $session) {
             $session['start_date'] = strtotime($session['start_date']);
         }
@@ -55,14 +58,14 @@ public function delete($reservation_url_id)
     if(!$reservation = Reservation::where('url_id', $reservation_url_id)->first()){
         abort(404);
     }
-    if(Auth::check() && (Auth::user()->hasRole('admin') || (Auth::user()->hasRole('organization_manager') && Auth::user()->manageOrganization['id'] == $reservation->organization_id) || (Auth::user()->id == $reservation->user_id))){
-        
+    if((Auth::check() && Auth::user()->hasRole('admin')) || (Auth::check() && Auth::user()->hasRole('organization_manager') && Auth::user()->manageOrganization['id'] == $reservation->organization_id) || (Auth::check() && Auth::user()->id == $reservation->user_id)){
+    
         foreach ($reservation->sessions->toArray() as $key => $session) {
                 $reservation->sessions[$key]['start_timestamp'] = strtotime($session['start_date']);
         }
         $sessions = $reservation->sessions->toArray();
         $this->sortBy("start_timestamp",$sessions);
-        if(Carbon::now()->subDay()->diffInDays(Carbon::createFromTimeStamp($sessions[0]['start_timestamp']), false) > intval($reservation->organization->min_to_cancel->period)){
+        if((Carbon::now()->subDay()->diffInDays(Carbon::createFromTimeStamp($sessions[0]['start_timestamp']), false) > intval($reservation->organization->min_to_cancel->period)) || (Auth::check() && Auth::user()->hasRole('admin')) || (Auth::check() && Auth::user()->hasRole('organization_manager') && Auth::user()->manageOrganization['id'] == $reservation->organization_id)){
             $reservation['status'] = 'deleted';
             LogController::Log($reservation, 'deleted');
             $reservation->update();
@@ -76,8 +79,10 @@ public function delete($reservation_url_id)
         }else{
             abort(403);
         }
+    }else{
+        abort(403);
     }
-    abort(401);
+    // abort(401);
 
 }
 public function create($organization_slug){
@@ -106,9 +111,9 @@ public function store(ReservationRequest $request, $organization_slug)
             $reservation->sessions()->save($session);
         }
         // send email to who created the reservation 
-        Mail::send('Reservation::email.created', ['reservation_url' => $reservation->url_id], function($message) use ($reservation) {
+        Mail::send('Reservation::email.created', ['reservation' => $reservation], function($message) use ($reservation) {
             $message->to($reservation->organization->manager->email, $reservation->organization->manager->name)
-                    ->subject(trans('Reservation::email.created'));
+                    ->subject(trans('Reservation::application.email.created') . " " . $reservation->name);
         });
         return $this->redirectRoutePath("index", null, $reservation);
     }
@@ -204,9 +209,14 @@ public function accept($reservation_url_id)
             $session->save();
         }
         // send email to who created the reservation 
-        Mail::send('Reservation::email.accepted', ['reservation_url' => $reservation->url_id], function($message) use ($reservation) {
+        Mail::send('Reservation::email.accepted', ['reservation' => $reservation], function($message) use ($reservation) {
             $message->to($reservation->user->email, $reservation->user->name)
-                    ->subject(trans('Reservation::email.accepted'));
+                    ->subject(trans('Reservation::application.email.accepted') . " " . $reservation->name);
+        });
+        // send email to facilitator
+        Mail::send('Reservation::email.accepted', ['reservation' => $reservation], function($message) use ($reservation) {
+            $message->to($reservation->facilitator_email, $reservation->facilitator_name)
+                    ->subject(trans('Reservation::application.email.accepted') . " " . $reservation->name);
         });
         if($reservation->event_type == 'public'){
             if(!Event::where('reservation_id', $reservation->id)->exists()){

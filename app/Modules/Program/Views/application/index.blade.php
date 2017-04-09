@@ -27,12 +27,12 @@
                         <div style="background-image: url({{ url($event->reservation->artwork) }});" class="space-icon"> 
                         </div>
                         <ul class="space-info">
-                            <li><i class="fa fa-calendar" aria-hidden="true"></i> {{ ArabicDate($event->reservation->start_session['start_date']) }} </li>
-                            <li><i class="fa fa-clock-o" aria-hidden="true"></i> من {{ ArabicTime($event->start_session['start_time']) }} إلى 
-                            @if($event->start_session['period']->type == 'mins')
-                                {{ ArabicTime(\Carbon\Carbon::createFromFormat('h:i a', $event->start_session['start_time'])->addMinutes(intval($event->start_session['period'])->period)->format('h:i A')) }}</li>
-                            @elseif($event->start_session['period']->type == 'hours')
-                                {{ ArabicTime(\Carbon\Carbon::createFromFormat('h:i a', $event->start_session['start_time'])->addHours(intval($event->start_session['period']->period))->format('h:i A')) }}</li>
+                            <li><i class="fa fa-calendar" aria-hidden="true"></i> {{ ArabicDate($event->reservation->sessions[0]['start_date']) }} </li>
+                            <li><i class="fa fa-clock-o" aria-hidden="true"></i> من {{ ArabicTime($event->reservation->sessions[0]['start_time']) }} إلى 
+                            @if($event->reservation->sessions[0]['period']->type == 'mins')
+                                {{ ArabicTime(\Carbon\Carbon::createFromFormat('h:i a', $event->reservation->sessions[0]['start_time'])->addMinutes(intval($event->reservation->sessions[0]['period'])->period)->format('h:i A')) }}</li>
+                            @elseif($event->reservation->sessions[0]['period']->type == 'hours')
+                                {{ ArabicTime(\Carbon\Carbon::createFromFormat('h:i a', $event->reservation->sessions[0]['start_time'])->addHours(intval($event->reservation->sessions[0]['period']->period))->format('h:i A')) }}</li>
                             @endif
                             <li>{{ str_limit($event->reservation->description, $limit = 85, $end = '...') }}</li>
                         </ul>

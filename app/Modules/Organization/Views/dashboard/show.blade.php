@@ -4,7 +4,11 @@
     <div class="col-xs-12 no-padding">
         <div class="post-title">
             <h2> {{ $object->name }} <a style="float: left;" href="{{ route('dashboard.organization.edit', ['organization' => $object->id ])}}"><i class="fa fa-pencil" aria-hidden="true"></i></a> </h2>
-            
+            <h4>مدير المنظمة</h4>
+            <ul class="info">
+                <li>{{ $object->manager->name }}</li>
+                <li>{{ $object->manager->email }}</li>
+            </ul>
             <ul class="info">
                 <li><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $object->address }}</li>
                 <li><i class="fa fa-phone" aria-hidden="true"></i> {{ $object->phone_number }}</li>
