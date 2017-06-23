@@ -10,7 +10,7 @@ class ProgramDataTable extends ModuleDataTableController {
   protected $common_columns = ['created_at', 'updated_at'];
 
   protected $image_columns = ['artwork'];
-  protected $options = ['show', 'edit'];
+  protected $options = ['show', 'edit', 'delete'];
   public function query()
   {
       if(Auth::user()->hasRole('admin')){

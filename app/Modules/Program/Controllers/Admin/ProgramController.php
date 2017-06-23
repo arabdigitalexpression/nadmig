@@ -45,6 +45,10 @@ class ProgramController extends ModuleController {
 
   public function destroy(Program $program)
   {
+      // remove schole entry 
+      if ($program->school) {
+        $program->school->delete();
+      }
       return $this->destroyFlashRedirect($program);
   }
 
